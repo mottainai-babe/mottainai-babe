@@ -1,175 +1,468 @@
 <!doctype html>
 <html lang="ja">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>もったいないベビー</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>もったいないベビー｜大阪のベビー用品ゆずりあい</title>
+
 
 <style>
+
 body{
+
 font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Hiragino Sans","Noto Sans JP",sans-serif;
+
 background:#fafafa;
-margin:24px;
+
+padding:24px;
+
+margin:0;
+
 }
+
+
 .card{
+
 max-width:720px;
+
 margin:auto;
+
 background:white;
-padding:20px;
+
+padding:24px;
+
 border-radius:16px;
+
 border:1px solid #e5e7eb;
+
 }
+
+
+h1{
+
+margin-bottom:8px;
+
+}
+
+
+.muted{
+
+color:#6b7280;
+
+font-size:14px;
+
+}
+
+
 button{
-padding:10px 14px;
-border-radius:12px;
-border:1px solid #ddd;
-cursor:pointer;
-}
-.primary{
-background:#2563eb;
-color:white;
+
+padding:10px 16px;
+
+border-radius:10px;
+
 border:none;
+
+cursor:pointer;
+
+font-size:14px;
+
 }
-input,textarea{
-width:100%;
-padding:8px;
-margin-top:6px;
-margin-bottom:12px;
-border-radius:8px;
+
+
+.primary{
+
+background:#2563eb;
+
+color:white;
+
+}
+
+
+img{
+
+max-width:200px;
+
+border-radius:12px;
+
+margin-top:8px;
+
+}
+
+
+input{
+
+padding:10px;
+
+border-radius:10px;
+
 border:1px solid #ddd;
+
+width:100%;
+
 }
+
+
 .item{
-border:1px solid #eee;
-padding:12px;
-border-radius:12px;
-margin-bottom:12px;
+
+margin-top:20px;
+
+padding-top:10px;
+
+border-top:1px solid #eee;
+
 }
-pre{
-background:#f3f4f6;
-padding:12px;
-border-radius:12px;
-font-size:12px;
-}
+
+
 </style>
+
 </head>
 
+
 <body>
+
+
+
 <div class="card">
 
+
 <h1>もったいないベビー</h1>
-<p>大阪エリア限定｜ベビー用品ゆずりあいサービス</p>
 
 
-  <p class="muted">
-使わなくなったベビー用品を、必要なご家庭へ。
-「もったいない」を「ありがとう」に変えましょう。
+<p class="muted">
+
+大阪エリア限定｜ベビー用品のゆずりあいサービス
+
 </p>
 
-<button id="btnLogin" class="primary">Googleでログイン</button>
-<button id="btnLogout">ログアウト</button>
 
-<hr>
+<p class="muted">
 
-<h3>物品を登録</h3>
+使わなくなったベビー用品を、必要なご家庭へ。<br>
 
-<input id="title" placeholder="例：ベビーカー">
-<textarea id="description" placeholder="状態・使用期間など"></textarea>
-<button id="btnAdd" class="primary">登録する</button>
+「もったいない」を「ありがとう」に変えましょう。
 
-<hr>
+</p>
+
+
+<br>
+
+
+<button id="loginBtn" class="primary">
+
+Googleでログイン
+
+</button>
+
+
+<button id="logoutBtn">
+
+ログアウト
+
+</button>
+
+
+<br><br><br>
+
+
+
+<h3>出品する</h3>
+
+
+<input type="file" id="file">
+
+<br><br>
+
+
+<input id="title" placeholder="例：ベビーカー 無料">
+
+<br><br>
+
+
+<button id="uploadBtn" class="primary">
+
+出品する
+
+</button>
+
+
+<br><br><br>
+
 
 <h3>出品一覧</h3>
-<div id="itemList"></div>
 
-<h3>システムログ</h3>
-<pre id="log"></pre>
+
+<div id="list"></div>
+
+
 
 </div>
 
+
+
+
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-import { getAuth,GoogleAuthProvider,signInWithPopup,signOut,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
-import { getFirestore,collection,addDoc,serverTimestamp,onSnapshot,query,orderBy } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+
+
+import { initializeApp }
+
+from
+
+"https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+
+
+
+import {
+
+getAuth,
+
+GoogleAuthProvider,
+
+signInWithPopup,
+
+signOut,
+
+onAuthStateChanged
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+
+
+import {
+
+getFirestore,
+
+collection,
+
+addDoc,
+
+getDocs
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+
+
+
+import {
+
+getStorage,
+
+ref,
+
+uploadBytes,
+
+getDownloadURL
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/12.9.0/firebase-storage.js";
+
+
+
+
 
 const firebaseConfig={
+
+
 apiKey:"AIzaSyAEk6aDtbuXU9K2bUnygYBqHMh75MeOlFU",
+
 authDomain:"mottainai-babe.firebaseapp.com",
+
 projectId:"mottainai-babe",
+
 storageBucket:"mottainai-babe.firebasestorage.app",
-messagingSenderId:"752649559489",
+
 appId:"1:752649559489:web:1288d8adeef7280eb7a340"
+
+
 };
 
-const app=initializeApp(firebaseConfig);
-const auth=getAuth(app);
-const db=getFirestore(app);
-const provider=new GoogleAuthProvider();
 
-const log=(m)=>{document.getElementById("log").textContent=m+"\n"+document.getElementById("log").textContent;}
+
+const app=initializeApp(firebaseConfig);
+
+
+const auth=getAuth(app);
+
+
+const db=getFirestore(app);
+
+
+const storage=getStorage(app);
+
+
 
 let currentUser=null;
 
-document.getElementById("btnLogin").onclick=async()=>{
+
+
+loginBtn.onclick=async()=>{
+
+
+const provider=new GoogleAuthProvider();
+
+
 await signInWithPopup(auth,provider);
+
+
 };
 
-document.getElementById("btnLogout").onclick=async()=>{
-await signOut(auth);
-log("ログアウトしました");
+
+
+logoutBtn.onclick=()=>{
+
+
+signOut(auth);
+
+
 };
 
-onAuthStateChanged(auth,(user)=>{
-if(user){
+
+
+onAuthStateChanged(auth,user=>{
+
+
 currentUser=user;
-log("ログイン成功："+user.email);
-}else{
-currentUser=null;
-}
+
+
+loadList();
+
+
 });
 
-document.getElementById("btnAdd").onclick=async()=>{
-if(!currentUser){alert("ログインしてください");return;}
+
+
+uploadBtn.onclick=async()=>{
+
+
+if(!currentUser){
+
+alert("ログインしてください");
+
+return;
+
+}
+
+
+
+const file=document.getElementById("file").files[0];
+
+
 const title=document.getElementById("title").value;
-const description=document.getElementById("description").value;
-if(!title){alert("タイトル必須");return;}
+
+
+
+if(!file||!title){
+
+alert("画像とタイトルを入力してください");
+
+return;
+
+}
+
+
+
+const storageRef=ref(storage,"items/"+Date.now());
+
+
+
+await uploadBytes(storageRef,file);
+
+
+
+const url=await getDownloadURL(storageRef);
+
+
 
 await addDoc(collection(db,"items"),{
-title,
-description,
-ownerName:currentUser.displayName,
-ownerEmail:currentUser.email,
-createdAt:serverTimestamp()
+
+
+title:title,
+
+
+image:url,
+
+
+user:currentUser.email
+
+
 });
 
-document.getElementById("title").value="";
-document.getElementById("description").value="";
-log("登録完了");
+
+
+alert("出品完了しました");
+
+
+
+loadList();
+
+
 };
 
-const q=query(collection(db,"items"),orderBy("createdAt","desc"));
 
-onSnapshot(q,(snapshot)=>{
-const list=document.getElementById("itemList");
+
+
+async function loadList(){
+
+
+
+const snap=await getDocs(collection(db,"items"));
+
+
+
 list.innerHTML="";
-snapshot.forEach(doc=>{
+
+
+
+snap.forEach(doc=>{
+
+
 const data=doc.data();
-const div=document.createElement("div");
-div.className="item";
-div.innerHTML=`
-<b>${data.title}</b><br>
-${data.description||""}<br><br>
-<button onclick="contact('${data.ownerEmail}','${data.title}')">問い合わせ</button>
+
+
+
+list.innerHTML+=`
+
+
+<div class="item">
+
+
+<h4>${data.title}</h4>
+
+
+<img src="${data.image}">
+
+
+<p class="muted">${data.user}</p>
+
+
+</div>
+
+
 `;
-list.appendChild(div);
-});
+
+
 });
 
-window.contact=(email,title)=>{
-const message=`こんにちは。\n「${title}」についてお問い合わせします。\nまだ募集していますか？`;
-navigator.clipboard.writeText(message);
-alert("問い合わせ文をコピーしました。\nメールやLINEで送ってください。");
-};
+
+}
+
+
+
 </script>
 
+
+
 </body>
+
 </html>
