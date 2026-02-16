@@ -14,7 +14,7 @@
     }
 
     .card{
-      max-width:720px;
+      max-width:860px;
       margin:auto;
       background:white;
       padding:24px;
@@ -22,12 +22,10 @@
       border:1px solid #e5e7eb;
     }
 
-    h1{ margin-bottom:8px; }
+    h1{ margin:0 0 8px; }
+    h3{ margin:18px 0 10px; }
 
-    .muted{
-      color:#6b7280;
-      font-size:14px;
-    }
+    .muted{ color:#6b7280; font-size:14px; }
 
     button{
       padding:10px 16px;
@@ -36,11 +34,10 @@
       cursor:pointer;
       font-size:14px;
     }
-
-    .primary{
-      background:#2563eb;
-      color:white;
-    }
+    .primary{ background:#2563eb; color:white; }
+    .danger{ background:#ef4444; color:white; }
+    .ghost{ background:#f3f4f6; color:#111827; }
+    .row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
 
     .tabs{
       display:flex;
@@ -48,7 +45,6 @@
       flex-wrap:wrap;
       margin:10px 0 6px;
     }
-
     .tab{
       padding:10px 12px;
       border-radius:999px;
@@ -58,39 +54,83 @@
       cursor:pointer;
       font-size:14px;
     }
-
     .tab.active{
       background:#2563eb;
       color:#fff;
       border-color:#2563eb;
     }
 
-    img{
-      max-width:200px;
-      border-radius:12px;
-      margin-top:8px;
-      display:block;
-    }
-
-    input{
+    input, textarea{
       padding:10px;
       border-radius:10px;
       border:1px solid #ddd;
       width:100%;
       box-sizing:border-box;
+      font-size:14px;
+    }
+    textarea{ min-height:70px; }
+
+    img.thumb{
+      width:160px;
+      max-width:100%;
+      border-radius:12px;
+      margin-top:8px;
+      display:block;
+      border:1px solid #eee;
+      background:#fafafa;
     }
 
-    .item{
-      margin-top:20px;
-      padding-top:10px;
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+      margin-top:14px;
+    }
+    @media (max-width: 900px){
+      .grid{ grid-template-columns:1fr; }
+    }
+
+    .itemCard{
       border-top:1px solid #eee;
+      padding-top:14px;
+      margin-top:14px;
+    }
+    .pill{
+      display:inline-block;
+      padding:3px 10px;
+      border-radius:999px;
+      font-size:12px;
+      border:1px solid #e5e7eb;
+      background:#f9fafb;
+      color:#111827;
+      margin-right:6px;
+    }
+    .pill.blue{ background:#eff6ff; border-color:#bfdbfe; color:#1d4ed8; }
+    .pill.green{ background:#ecfdf5; border-color:#a7f3d0; color:#047857; }
+    .pill.gray{ background:#f3f4f6; border-color:#e5e7eb; color:#374151; }
+
+    .hr{ height:1px; background:#eee; margin:18px 0; }
+    .twoBtns{ display:flex; gap:10px; flex-wrap:wrap; }
+    .small{ font-size:12px; }
+    .hidden{ display:none; }
+
+    .offerBox{
+      border:1px solid #eee;
+      border-radius:14px;
+      padding:12px;
+      margin-top:12px;
+      background:#fff;
+    }
+    .offerTop{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      justify-content:space-between;
+      flex-wrap:wrap;
     }
 
-    .row{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
+    .right{
+      text-align:right;
     }
   </style>
 </head>
@@ -108,35 +148,101 @@
 
     <div class="row" style="margin-top:14px;">
       <button id="loginBtn" class="primary">Googleでログイン</button>
-      <button id="logoutBtn">ログアウト</button>
+      <button id="logoutBtn" class="ghost">ログアウト</button>
       <span class="muted" id="loginState"></span>
     </div>
 
-    <br><br>
+    <div class="hr"></div>
 
-    <h3>出品する</h3>
+    <div class="grid">
+      <!-- LEFT: 出品 -->
+      <div>
+        <h3>出品する</h3>
 
-    <div class="tabs" id="conditionTabs">
-      <button type="button" class="tab active" data-value="新品に近い">新品に近い</button>
-      <button type="button" class="tab" data-value="きれい">きれい</button>
-      <button type="button" class="tab" data-value="使用感あり">使用感あり</button>
+        <div class="tabs" id="conditionTabs">
+          <button type="button" class="tab active" data-value="新品に近い">新品に近い</button>
+          <button type="button" class="tab" data-value="きれい">きれい</button>
+          <button type="button" class="tab" data-value="使用感あり">使用感あり</button>
+        </div>
+
+        <p class="muted" style="margin-top:8px;">
+          状態：<span id="conditionLabel">新品に近い</span>
+        </p>
+
+        <input type="file" id="fileItem" accept="image/*">
+        <div class="small muted" style="margin-top:6px;">※画像は1枚だけ（MVP）</div>
+        <br>
+
+        <input id="titleItem" placeholder="例：ベビーカー（無料）">
+        <br><br>
+
+        <textarea id="descItem" placeholder="説明（任意）例：受け渡し希望エリア、使用期間など"></textarea>
+        <br><br>
+
+        <button id="uploadItemBtn" class="primary">出品する</button>
+
+        <div class="small muted" style="margin-top:10px;">
+          出品すると「交換提案」を受け取れます。
+        </div>
+      </div>
+
+      <!-- RIGHT: Detail -->
+      <div>
+        <h3>選択した出品（詳細）</h3>
+        <div id="detailEmpty" class="muted">左の「出品一覧」から商品を選んでください。</div>
+
+        <div id="detailBox" class="hidden">
+          <div class="row" style="justify-content:space-between;">
+            <div>
+              <div class="pill gray" id="detailStatusPill">出品中</div>
+              <div class="pill blue" id="detailOffersPill">提案 0件</div>
+            </div>
+            <button id="closeDetailBtn" class="ghost">閉じる</button>
+          </div>
+
+          <h3 id="detailTitle" style="margin:12px 0 6px;"></h3>
+          <p class="muted">状態：<span id="detailCondition"></span></p>
+          <img id="detailImage" class="thumb" alt="">
+          <p class="muted" id="detailDesc" style="margin-top:10px;"></p>
+
+          <div class="hr"></div>
+
+          <h3>この商品に交換提案する</h3>
+
+          <div class="tabs" id="offerConditionTabs">
+            <button type="button" class="tab active" data-value="新品に近い">新品に近い</button>
+            <button type="button" class="tab" data-value="きれい">きれい</button>
+            <button type="button" class="tab" data-value="使用感あり">使用感あり</button>
+          </div>
+
+          <p class="muted" style="margin-top:8px;">
+            提案アイテムの状態：<span id="offerConditionLabel">新品に近い</span>
+          </p>
+
+          <input type="file" id="fileOffer" accept="image/*">
+          <div class="small muted" style="margin-top:6px;">※提案アイテム画像は1枚だけ（MVP）</div>
+          <br>
+
+          <input id="titleOffer" placeholder="例：ベビーゲート（きれい）">
+          <br><br>
+
+          <textarea id="msgOffer" placeholder="ひとこと（任意）例：こちらと交換いかがですか？"></textarea>
+          <br><br>
+
+          <button id="submitOfferBtn" class="primary">交換提案を送る</button>
+
+          <div class="hr"></div>
+
+          <h3>交換提案一覧（公開）</h3>
+          <div class="muted small">※提案内容（写真/状態/タイトル/進行状況）は一覧で公開。連絡先は「成立(accepted)」後に当事者のみ表示。</div>
+          <div id="offersList"></div>
+        </div>
+      </div>
     </div>
 
-    <p class="muted" style="margin-top:8px;">
-      状態：<span id="conditionLabel">新品に近い</span>
-    </p>
+    <div class="hr"></div>
 
-    <input type="file" id="file" accept="image/*">
-    <br><br>
-
-    <input id="title" placeholder="例：ベビーカー 無料">
-    <br><br>
-
-    <button id="uploadBtn" class="primary">出品する</button>
-
-    <br><br><br>
-
-    <h3>出品一覧</h3>
+    <h3>出品一覧（全体）</h3>
     <div id="list"></div>
   </div>
 
@@ -154,10 +260,16 @@
     import {
       getFirestore,
       collection,
+      doc,
       addDoc,
+      setDoc,
+      getDoc,
       getDocs,
       query,
-      orderBy
+      orderBy,
+      updateDoc,
+      increment,
+      serverTimestamp
     } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
 
     import {
@@ -182,14 +294,74 @@
     const db = getFirestore(app);
     const storage = getStorage(app);
 
+    // ===== elements =====
     const loginBtn = document.getElementById("loginBtn");
     const logoutBtn = document.getElementById("logoutBtn");
-    const uploadBtn = document.getElementById("uploadBtn");
-    const listEl = document.getElementById("list");
     const loginState = document.getElementById("loginState");
 
+    const uploadItemBtn = document.getElementById("uploadItemBtn");
+    const fileItem = document.getElementById("fileItem");
+    const titleItem = document.getElementById("titleItem");
+    const descItem = document.getElementById("descItem");
+
+    const listEl = document.getElementById("list");
+
+    const detailEmpty = document.getElementById("detailEmpty");
+    const detailBox = document.getElementById("detailBox");
+    const closeDetailBtn = document.getElementById("closeDetailBtn");
+
+    const detailTitle = document.getElementById("detailTitle");
+    const detailCondition = document.getElementById("detailCondition");
+    const detailImage = document.getElementById("detailImage");
+    const detailDesc = document.getElementById("detailDesc");
+    const detailStatusPill = document.getElementById("detailStatusPill");
+    const detailOffersPill = document.getElementById("detailOffersPill");
+
+    const offersList = document.getElementById("offersList");
+
+    const fileOffer = document.getElementById("fileOffer");
+    const titleOffer = document.getElementById("titleOffer");
+    const msgOffer = document.getElementById("msgOffer");
+    const submitOfferBtn = document.getElementById("submitOfferBtn");
+
+    // ===== state =====
     let currentUser = null;
+
     let selectedCondition = "新品に近い";
+    let selectedOfferCondition = "新品に近い";
+
+    let selectedItemId = null;
+    let selectedItemData = null;
+
+    // ===== helpers =====
+    function escapeHtml(str){
+      return String(str ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function statusLabel(status){
+      if(status === "done") return {text:"成立", cls:"green"};
+      if(status === "dealing") return {text:"交渉中", cls:"blue"};
+      return {text:"出品中", cls:"gray"};
+    }
+
+    function openGmailCompose({ to, subject, body }) {
+      const url =
+        "https://mail.google.com/mail/?view=cm&fs=1" +
+        `&to=${encodeURIComponent(to)}` +
+        `&su=${encodeURIComponent(subject)}` +
+        `&body=${encodeURIComponent(body)}`;
+      window.open(url, "_blank");
+    }
+
+    function openLineShare({ text }) {
+      const url = `https://social-plugins.line.me/lineit/share?text=${encodeURIComponent(text)}`;
+      window.open(url, "_blank");
+    }
 
     // ===== login / logout =====
     loginBtn.onclick = async () => {
@@ -206,17 +378,6 @@
       await signOut(auth);
     };
 
-    // ===== 상태 탭 =====
-    document.querySelectorAll("#conditionTabs .tab").forEach(btn => {
-      btn.onclick = () => {
-        document.querySelectorAll("#conditionTabs .tab").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        selectedCondition = btn.dataset.value;
-        document.getElementById("conditionLabel").textContent = selectedCondition;
-      };
-    });
-
-    // ===== auth state =====
     onAuthStateChanged(auth, async (user) => {
       currentUser = user;
 
@@ -230,59 +391,94 @@
         loginState.textContent = "未ログイン";
       }
 
-      await loadList();
+      await loadItems();
+      if(selectedItemId){
+        await openDetail(selectedItemId);
+      }
     });
 
-    // ===== upload =====
-    uploadBtn.onclick = async () => {
+    closeDetailBtn.onclick = () => {
+      selectedItemId = null;
+      selectedItemData = null;
+      detailBox.classList.add("hidden");
+      detailEmpty.classList.remove("hidden");
+    };
+
+    // ===== tabs (item condition) =====
+    document.querySelectorAll("#conditionTabs .tab").forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll("#conditionTabs .tab").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        selectedCondition = btn.dataset.value;
+        document.getElementById("conditionLabel").textContent = selectedCondition;
+      };
+    });
+
+    // ===== tabs (offer condition) =====
+    document.querySelectorAll("#offerConditionTabs .tab").forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll("#offerConditionTabs .tab").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        selectedOfferCondition = btn.dataset.value;
+        document.getElementById("offerConditionLabel").textContent = selectedOfferCondition;
+      };
+    });
+
+    // ===== create item =====
+    uploadItemBtn.onclick = async () => {
       if(!currentUser){
         alert("先にログインしてください。");
         return;
       }
 
-      const file = document.getElementById("file").files[0];
-      const titleText = document.getElementById("title").value.trim();
+      const f = fileItem.files[0];
+      const titleText = titleItem.value.trim();
+      const descText = descItem.value.trim();
 
-      if(!file || !titleText){
+      if(!f || !titleText){
         alert("画像とタイトルを入力してください。");
         return;
       }
 
       try{
-        // 1) upload to Storage
-        const path = `items/${currentUser.uid}/${Date.now()}-${file.name}`;
+        // upload image
+        const path = `items/${currentUser.uid}/${Date.now()}-${f.name}`;
         const storageRef = ref(storage, path);
-        await uploadBytes(storageRef, file);
+        await uploadBytes(storageRef, f);
         const url = await getDownloadURL(storageRef);
 
-        // 2) save to Firestore
-        await addDoc(collection(db, "items"), {
+        // create item doc
+        const itemRef = await addDoc(collection(db, "items"), {
           title: titleText,
+          description: descText,
           image: url,
           condition: selectedCondition,
-          user: currentUser.email ?? "",
-          uid: currentUser.uid,
-          createdAt: new Date() // 간단 MVP: 서버시간이 필요하면 serverTimestamp로 변경 가능
+          ownerUid: currentUser.uid,
+          ownerEmail: currentUser.email ?? "",     // ※当事者のみ表示に使う
+          status: "active",                        // active | dealing | done
+          offersCount: 0,
+          acceptedOfferId: null,
+          acceptedAt: null,
+          createdAt: serverTimestamp()
         });
 
         alert("出品完了しました。");
+        fileItem.value = "";
+        titleItem.value = "";
+        descItem.value = "";
 
-        // reset UI
-        document.getElementById("file").value = "";
-        document.getElementById("title").value = "";
-
-        await loadList();
+        await loadItems();
+        await openDetail(itemRef.id);
       }catch(e){
         alert("出品に失敗しました。Storage / Firestore ルールをご確認ください。");
         console.error(e);
       }
     };
 
-    // ===== list =====
-    async function loadList(){
+    // ===== load items list =====
+    async function loadItems(){
       listEl.innerHTML = "";
 
-      // createdAt 정렬(없을 수도 있으니 try-catch)
       let snap;
       try{
         const q = query(collection(db, "items"), orderBy("createdAt", "desc"));
@@ -297,26 +493,291 @@
       }
 
       snap.forEach(docSnap => {
+        const id = docSnap.id;
         const data = docSnap.data();
+
+        const st = statusLabel(data.status);
+        const offersCount = Number(data.offersCount ?? 0);
+
         listEl.innerHTML += `
-          <div class="item">
-            <h4>${escapeHtml(data.title ?? "")}</h4>
+          <div class="itemCard">
+            <div class="row" style="justify-content:space-between;">
+              <div>
+                <span class="pill ${st.cls}">${st.text}</span>
+                <span class="pill blue">提案 ${offersCount}件</span>
+              </div>
+              <button class="ghost" data-open="${id}">詳細を見る</button>
+            </div>
+
+            <h3 style="margin:10px 0 6px;">${escapeHtml(data.title)}</h3>
             <p class="muted">状態：${escapeHtml(data.condition ?? "未設定")}</p>
-            ${data.image ? `<img src="${data.image}" alt="">` : ""}
-            <p class="muted">${escapeHtml(data.user ?? "")}</p>
+            ${data.image ? `<img class="thumb" src="${data.image}" alt="">` : ""}
           </div>
         `;
       });
+
+      document.querySelectorAll('button[data-open]').forEach(btn => {
+        btn.onclick = () => openDetail(btn.dataset.open);
+      });
     }
 
-    // XSS 최소 방지
-    function escapeHtml(str){
-      return String(str)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
+    // ===== open detail =====
+    async function openDetail(itemId){
+      selectedItemId = itemId;
+
+      const itemDoc = await getDoc(doc(db, "items", itemId));
+      if(!itemDoc.exists()){
+        alert("この出品が見つかりませんでした。");
+        return;
+      }
+
+      selectedItemData = itemDoc.data();
+
+      detailEmpty.classList.add("hidden");
+      detailBox.classList.remove("hidden");
+
+      detailTitle.textContent = selectedItemData.title ?? "";
+      detailCondition.textContent = selectedItemData.condition ?? "未設定";
+      detailImage.src = selectedItemData.image ?? "";
+      detailDesc.textContent = selectedItemData.description ? selectedItemData.description : "（説明なし）";
+
+      const st = statusLabel(selectedItemData.status);
+      detailStatusPill.className = `pill ${st.cls}`;
+      detailStatusPill.textContent = st.text;
+
+      detailOffersPill.textContent = `提案 ${Number(selectedItemData.offersCount ?? 0)}件`;
+
+      // offers list
+      await loadOffers();
+    }
+
+    // ===== submit offer =====
+    submitOfferBtn.onclick = async () => {
+      if(!currentUser){
+        alert("先にログインしてください。");
+        return;
+      }
+      if(!selectedItemId){
+        alert("出品を選択してください。");
+        return;
+      }
+
+      // cannot offer to own item (optional)
+      if(selectedItemData?.ownerUid && selectedItemData.ownerUid === currentUser.uid){
+        alert("自分の出品には提案できません。");
+        return;
+      }
+
+      const f = fileOffer.files[0];
+      const offerTitleText = titleOffer.value.trim();
+      const offerMsgText = msgOffer.value.trim();
+
+      if(!f || !offerTitleText){
+        alert("提案アイテムの画像とタイトルを入力してください。");
+        return;
+      }
+
+      try{
+        // upload offer image
+        const path = `offers/${currentUser.uid}/${Date.now()}-${f.name}`;
+        const storageRef = ref(storage, path);
+        await uploadBytes(storageRef, f);
+        const url = await getDownloadURL(storageRef);
+
+        // create public offer doc (公開情報)
+        const offerRef = await addDoc(collection(db, "items", selectedItemId, "offers"), {
+          proposerUid: currentUser.uid,
+          offerTitle: offerTitleText,
+          offerCondition: selectedOfferCondition,
+          offerImage: url,
+          status: "pending", // pending | accepted | rejected
+          createdAt: serverTimestamp()
+        });
+
+        // create private offer doc (当事者のみ用：連絡先やメッセージ)
+        // ※ルールで ownerUid と proposerUid のみ read できるようにする想定
+        await setDoc(doc(db, "items", selectedItemId, "offersPrivate", offerRef.id), {
+          proposerEmail: currentUser.email ?? "",
+          message: offerMsgText,
+          createdAt: serverTimestamp()
+        });
+
+        // update item summary
+        await updateDoc(doc(db, "items", selectedItemId), {
+          offersCount: increment(1),
+          status: "dealing"
+        });
+
+        alert("交換提案を送信しました。");
+
+        fileOffer.value = "";
+        titleOffer.value = "";
+        msgOffer.value = "";
+
+        // refresh
+        await openDetail(selectedItemId);
+        await loadItems();
+      }catch(e){
+        alert("提案に失敗しました。Storage / Firestore ルールをご確認ください。");
+        console.error(e);
+      }
+    };
+
+    // ===== accept offer (owner only) =====
+    async function acceptOffer(offerId){
+      if(!currentUser || !selectedItemData) return;
+
+      if(selectedItemData.ownerUid !== currentUser.uid){
+        alert("出品者のみ操作できます。");
+        return;
+      }
+
+      try{
+        // accept chosen offer
+        await updateDoc(doc(db, "items", selectedItemId, "offers", offerId), {
+          status: "accepted"
+        });
+
+        // mark item done
+        await updateDoc(doc(db, "items", selectedItemId), {
+          status: "done",
+          acceptedOfferId: offerId,
+          acceptedAt: serverTimestamp()
+        });
+
+        alert("この提案を受諾しました。連絡ボタンが表示されます。");
+        await openDetail(selectedItemId);
+        await loadItems();
+      }catch(e){
+        alert("受諾に失敗しました。ルールをご確認ください。");
+        console.error(e);
+      }
+    }
+
+    // ===== load offers list (公開一覧) =====
+    async function loadOffers(){
+      offersList.innerHTML = "";
+
+      let snap;
+      try{
+        const q = query(collection(db, "items", selectedItemId, "offers"), orderBy("createdAt", "desc"));
+        snap = await getDocs(q);
+      }catch{
+        snap = await getDocs(collection(db, "items", selectedItemId, "offers"));
+      }
+
+      if(snap.empty){
+        offersList.innerHTML = `<p class="muted">まだ提案がありません。</p>`;
+        return;
+      }
+
+      const isOwner = !!(currentUser && selectedItemData && currentUser.uid === selectedItemData.ownerUid);
+      const acceptedOfferId = selectedItemData.acceptedOfferId;
+
+      for(const docSnap of snap.docs){
+        const offerId = docSnap.id;
+        const d = docSnap.data();
+
+        const offerStatus = d.status ?? "pending";
+        const statusPill =
+          offerStatus === "accepted" ? `<span class="pill green">accepted</span>` :
+          offerStatus === "rejected" ? `<span class="pill gray">rejected</span>` :
+          `<span class="pill blue">pending</span>`;
+
+        // 당사자만 연락 가능(accepted AND (owner OR proposer))
+        const isProposer = !!(currentUser && d.proposerUid === currentUser.uid);
+        const canContact = (offerStatus === "accepted") && (isOwner || isProposer);
+
+        // private doc try fetch (if allowed)
+        let privateData = null;
+        if(canContact){
+          try{
+            const priv = await getDoc(doc(db, "items", selectedItemId, "offersPrivate", offerId));
+            if(priv.exists()) privateData = priv.data();
+          }catch{
+            privateData = null;
+          }
+        }
+
+        const contactToOwnerEmail = selectedItemData.ownerEmail ?? "";
+        const proposerEmail = privateData?.proposerEmail ?? "";
+
+        // contact message template
+        const baseMsg =
+`【もったいないベビー】交換が成立しました
+出品：${selectedItemData.title}
+提案：${d.offerTitle}
+状態：出品(${selectedItemData.condition}) / 提案(${d.offerCondition})
+
+受け渡し場所・日時の希望を教えてください。`;
+
+        const contactButtons = canContact ? `
+          <div class="twoBtns" style="margin-top:10px;">
+            <button class="primary" data-mail="${offerId}">メールで連絡</button>
+            <button class="ghost" data-line="${offerId}">LINEで連絡</button>
+          </div>
+          <div class="muted small" style="margin-top:6px;">
+            ※自動送信ではなく、作成画面（Gmail/LINE共有）を開きます
+          </div>
+        ` : "";
+
+        const acceptBtn = (isOwner && selectedItemData.status !== "done" && offerStatus === "pending") ? `
+          <button class="primary" data-accept="${offerId}">この提案を受諾</button>
+        ` : "";
+
+        offersList.innerHTML += `
+          <div class="offerBox">
+            <div class="offerTop">
+              <div>
+                ${statusPill}
+                <h4 style="margin:8px 0 6px;">${escapeHtml(d.offerTitle ?? "")}</h4>
+                <p class="muted">提案アイテム状態：${escapeHtml(d.offerCondition ?? "未設定")}</p>
+              </div>
+              <div class="right">
+                ${acceptBtn}
+              </div>
+            </div>
+            ${d.offerImage ? `<img class="thumb" src="${d.offerImage}" alt="">` : ""}
+            ${contactButtons}
+          </div>
+        `;
+
+        // wire buttons after render (later)
+        setTimeout(() => {
+          const acceptEl = document.querySelector(`button[data-accept="${offerId}"]`);
+          if(acceptEl) acceptEl.onclick = () => acceptOffer(offerId);
+
+          const mailEl = document.querySelector(`button[data-mail="${offerId}"]`);
+          if(mailEl){
+            mailEl.onclick = () => {
+              // who to email?
+              // - proposer contacts owner: to ownerEmail
+              // - owner contacts proposer: to proposerEmail
+              const to = isOwner ? proposerEmail : contactToOwnerEmail;
+              if(!to){
+                alert("連絡先が取得できませんでした（ルール設定をご確認ください）。");
+                return;
+              }
+              openGmailCompose({
+                to,
+                subject: `【もったいないベビー】交換成立：${selectedItemData.title}`,
+                body: baseMsg
+              });
+            };
+          }
+
+          const lineEl = document.querySelector(`button[data-line="${offerId}"]`);
+          if(lineEl){
+            lineEl.onclick = () => {
+              openLineShare({ text: baseMsg });
+            };
+          }
+        }, 0);
+      }
+
+      // update pills
+      const offersCount = snap.size;
+      detailOffersPill.textContent = `提案 ${offersCount}件`;
     }
   </script>
 </body>
