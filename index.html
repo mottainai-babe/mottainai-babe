@@ -12,7 +12,6 @@
       padding:24px;
       margin:0;
     }
-
     .card{
       max-width:860px;
       margin:auto;
@@ -21,10 +20,8 @@
       border-radius:16px;
       border:1px solid #e5e7eb;
     }
-
     h1{ margin:0 0 8px; }
     h3{ margin:18px 0 10px; }
-
     .muted{ color:#6b7280; font-size:14px; }
 
     button{
@@ -39,12 +36,7 @@
     .ghost{ background:#f3f4f6; color:#111827; }
     .row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
 
-    .tabs{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin:10px 0 6px;
-    }
+    .tabs{ display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 6px; }
     .tab{
       padding:10px 12px;
       border-radius:999px;
@@ -54,11 +46,7 @@
       cursor:pointer;
       font-size:14px;
     }
-    .tab.active{
-      background:#2563eb;
-      color:#fff;
-      border-color:#2563eb;
-    }
+    .tab.active{ background:#2563eb; color:#fff; border-color:#2563eb; }
 
     input, textarea{
       padding:10px;
@@ -95,6 +83,7 @@
       padding-top:14px;
       margin-top:14px;
     }
+
     .pill{
       display:inline-block;
       padding:3px 10px;
@@ -128,10 +117,7 @@
       justify-content:space-between;
       flex-wrap:wrap;
     }
-
-    .right{
-      text-align:right;
-    }
+    .right{ text-align:right; }
   </style>
 </head>
 
@@ -189,7 +175,7 @@
       <!-- RIGHT: Detail -->
       <div>
         <h3>選択した出品（詳細）</h3>
-        <div id="detailEmpty" class="muted">左の「出品一覧」から商品を選んでください。</div>
+        <div id="detailEmpty" class="muted">下の「出品一覧」から商品を選んでください。</div>
 
         <div id="detailBox" class="hidden">
           <div class="row" style="justify-content:space-between;">
@@ -268,6 +254,7 @@
       query,
       orderBy,
       updateDoc,
+      deleteDoc,
       increment,
       serverTimestamp
     } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
@@ -424,6 +411,54 @@
       };
     });
 
+    // ===== delete / edit (owner only UI) =====
+    async function deleteItem(itemId){
+      if(!currentUser){
+        alert("ログインしてください。");
+        return;
+      }
+      if(!confirm("本当に削除しますか？（提案も一緒に消える可能性があります）")){
+        return;
+      }
+
+      try{
+        await deleteDoc(doc(db, "items", itemId));
+        alert("削除しました。");
+        if(selectedItemId === itemId){
+          selectedItemId = null;
+          selectedItemData = null;
+          detailBox.classList.add("hidden");
+          detailEmpty.classList.remove("hidden");
+        }
+        await loadItems();
+      }catch(e){
+        alert("削除に失敗しました。権限をご確認ください。");
+        console.error(e);
+      }
+    }
+
+    async function editItemTitle(itemId, currentTitle){
+      if(!currentUser){
+        alert("ログインしてください。");
+        return;
+      }
+
+      const newTitle = prompt("新しいタイトルを入力してください", currentTitle ?? "");
+      if(!newTitle) return;
+
+      try{
+        await updateDoc(doc(db, "items", itemId), { title: newTitle.trim() });
+        alert("更新しました。");
+        await loadItems();
+        if(selectedItemId === itemId){
+          await openDetail(itemId);
+        }
+      }catch(e){
+        alert("更新に失敗しました。権限をご確認ください。");
+        console.error(e);
+      }
+    }
+
     // ===== create item =====
     uploadItemBtn.onclick = async () => {
       if(!currentUser){
@@ -441,21 +476,19 @@
       }
 
       try{
-        // upload image
         const path = `items/${currentUser.uid}/${Date.now()}-${f.name}`;
         const storageRef = ref(storage, path);
         await uploadBytes(storageRef, f);
         const url = await getDownloadURL(storageRef);
 
-        // create item doc
         const itemRef = await addDoc(collection(db, "items"), {
           title: titleText,
           description: descText,
           image: url,
           condition: selectedCondition,
           ownerUid: currentUser.uid,
-          ownerEmail: currentUser.email ?? "",     // ※当事者のみ表示に使う
-          status: "active",                        // active | dealing | done
+          ownerEmail: currentUser.email ?? "",
+          status: "active",
           offersCount: 0,
           acceptedOfferId: null,
           acceptedAt: null,
@@ -498,95 +531,22 @@
 
         const st = statusLabel(data.status);
         const offersCount = Number(data.offersCount ?? 0);
+        const isOwner = currentUser && currentUser.uid === data.ownerUid;
 
-       const isOwner = currentUser && currentUser.uid === data.ownerUid;
-
-listEl.innerHTML += `
-  <div class="itemCard">
-
-    <div class="row" style="justify-content:space-between;">
-      <div>
-        <span class="pill ${st.cls}">${st.text}</span>
-        <span class="pill blue">提案 ${offersCount}件</span>
-      </div>
-
-      <div class="row">
-
-        <button class="ghost" data-open="${id}">
-        詳細
-        </button>
-
-        ${isOwner ? `
-        <button class="ghost" data-edit="${id}">
-        編集
-        </button>
-
-        <button class="danger" data-delete="${id}">
-        削除
-        </button>
-        ` : ``}
-
-      </div>
-import {
-  deleteDoc
-} from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
-async function deleteItem(itemId){
-
-  if(!confirm("本当に削除しますか？")){
-    return;
-  }
-
-  await deleteDoc(doc(db,"items",itemId));
-
-  alert("削除しました");
-
-  loadItems();
-document.querySelectorAll("[data-delete]").forEach(btn=>{
-  btn.onclick=()=>{
-    deleteItem(btn.dataset.delete);
-  };
-
-  async function editItem(itemId){
-
-  const newTitle = prompt("新しいタイトルを入力");
-
-  if(!newTitle) return;
-
-  await updateDoc(doc(db,"items",itemId),{
-
-    title:newTitle
-
-  });
-
-  alert("更新しました");
-
-  loadItems();
-document.querySelectorAll("[data-edit]").forEach(btn=>{
-  btn.onclick=()=>{
-    editItem(btn.dataset.edit);
-  };
-});
-}
-});
-}
-    </div>
-
-    <h3>${escapeHtml(data.title)}</h3>
-
-    <p class="muted">状態：${escapeHtml(data.condition)}</p>
-
-    <img class="thumb" src="${data.image}">
-
-  </div>
-`;
-
+        listEl.innerHTML += `
           <div class="itemCard">
             <div class="row" style="justify-content:space-between;">
               <div>
                 <span class="pill ${st.cls}">${st.text}</span>
                 <span class="pill blue">提案 ${offersCount}件</span>
               </div>
-              <button class="ghost" data-open="${id}">詳細を見る</button>
+              <div class="row">
+                <button class="ghost" data-open="${id}">詳細</button>
+                ${isOwner ? `
+                  <button class="ghost" data-edit="${id}">編集</button>
+                  <button class="danger" data-delete="${id}">削除</button>
+                ` : ``}
+              </div>
             </div>
 
             <h3 style="margin:10px 0 6px;">${escapeHtml(data.title)}</h3>
@@ -596,8 +556,22 @@ document.querySelectorAll("[data-edit]").forEach(btn=>{
         `;
       });
 
+      // wire buttons
       document.querySelectorAll('button[data-open]').forEach(btn => {
         btn.onclick = () => openDetail(btn.dataset.open);
+      });
+      document.querySelectorAll('button[data-delete]').forEach(btn => {
+        btn.onclick = () => deleteItem(btn.dataset.delete);
+      });
+      document.querySelectorAll('button[data-edit]').forEach(btn => {
+        const itemId = btn.dataset.edit;
+        // 현재 제목을 DOM에서 얻기보다, 다시 읽어서 prompt에 넣는 것이 안전
+        btn.onclick = async () => {
+          const docSnap = await getDoc(doc(db, "items", itemId));
+          if(!docSnap.exists()) return;
+          const d = docSnap.data();
+          await editItemTitle(itemId, d.title ?? "");
+        };
       });
     }
 
@@ -627,7 +601,6 @@ document.querySelectorAll("[data-edit]").forEach(btn=>{
 
       detailOffersPill.textContent = `提案 ${Number(selectedItemData.offersCount ?? 0)}件`;
 
-      // offers list
       await loadOffers();
     }
 
@@ -641,8 +614,6 @@ document.querySelectorAll("[data-edit]").forEach(btn=>{
         alert("出品を選択してください。");
         return;
       }
-
-      // cannot offer to own item (optional)
       if(selectedItemData?.ownerUid && selectedItemData.ownerUid === currentUser.uid){
         alert("自分の出品には提案できません。");
         return;
@@ -658,31 +629,26 @@ document.querySelectorAll("[data-edit]").forEach(btn=>{
       }
 
       try{
-        // upload offer image
         const path = `offers/${currentUser.uid}/${Date.now()}-${f.name}`;
         const storageRef = ref(storage, path);
         await uploadBytes(storageRef, f);
         const url = await getDownloadURL(storageRef);
 
-        // create public offer doc (公開情報)
         const offerRef = await addDoc(collection(db, "items", selectedItemId, "offers"), {
           proposerUid: currentUser.uid,
           offerTitle: offerTitleText,
           offerCondition: selectedOfferCondition,
           offerImage: url,
-          status: "pending", // pending | accepted | rejected
+          status: "pending",
           createdAt: serverTimestamp()
         });
 
-        // create private offer doc (当事者のみ用：連絡先やメッセージ)
-        // ※ルールで ownerUid と proposerUid のみ read できるようにする想定
         await setDoc(doc(db, "items", selectedItemId, "offersPrivate", offerRef.id), {
           proposerEmail: currentUser.email ?? "",
           message: offerMsgText,
           createdAt: serverTimestamp()
         });
 
-        // update item summary
         await updateDoc(doc(db, "items", selectedItemId), {
           offersCount: increment(1),
           status: "dealing"
@@ -694,7 +660,6 @@ document.querySelectorAll("[data-edit]").forEach(btn=>{
         titleOffer.value = "";
         msgOffer.value = "";
 
-        // refresh
         await openDetail(selectedItemId);
         await loadItems();
       }catch(e){
@@ -706,19 +671,13 @@ document.querySelectorAll("[data-edit]").forEach(btn=>{
     // ===== accept offer (owner only) =====
     async function acceptOffer(offerId){
       if(!currentUser || !selectedItemData) return;
-
       if(selectedItemData.ownerUid !== currentUser.uid){
         alert("出品者のみ操作できます。");
         return;
       }
 
       try{
-        // accept chosen offer
-        await updateDoc(doc(db, "items", selectedItemId, "offers", offerId), {
-          status: "accepted"
-        });
-
-        // mark item done
+        await updateDoc(doc(db, "items", selectedItemId, "offers", offerId), { status: "accepted" });
         await updateDoc(doc(db, "items", selectedItemId), {
           status: "done",
           acceptedOfferId: offerId,
@@ -734,7 +693,7 @@ document.querySelectorAll("[data-edit]").forEach(btn=>{
       }
     }
 
-    // ===== load offers list (公開一覧) =====
+    // ===== load offers list =====
     async function loadOffers(){
       offersList.innerHTML = "";
 
@@ -752,7 +711,6 @@ document.querySelectorAll("[data-edit]").forEach(btn=>{
       }
 
       const isOwner = !!(currentUser && selectedItemData && currentUser.uid === selectedItemData.ownerUid);
-      const acceptedOfferId = selectedItemData.acceptedOfferId;
 
       for(const docSnap of snap.docs){
         const offerId = docSnap.id;
@@ -764,11 +722,9 @@ document.querySelectorAll("[data-edit]").forEach(btn=>{
           offerStatus === "rejected" ? `<span class="pill gray">rejected</span>` :
           `<span class="pill blue">pending</span>`;
 
-        // 당사자만 연락 가능(accepted AND (owner OR proposer))
         const isProposer = !!(currentUser && d.proposerUid === currentUser.uid);
         const canContact = (offerStatus === "accepted") && (isOwner || isProposer);
 
-        // private doc try fetch (if allowed)
         let privateData = null;
         if(canContact){
           try{
@@ -779,10 +735,9 @@ document.querySelectorAll("[data-edit]").forEach(btn=>{
           }
         }
 
-        const contactToOwnerEmail = selectedItemData.ownerEmail ?? "";
+        const ownerEmail = selectedItemData.ownerEmail ?? "";
         const proposerEmail = privateData?.proposerEmail ?? "";
 
-        // contact message template
         const baseMsg =
 `【もったいないベビー】交換が成立しました
 出品：${selectedItemData.title}
@@ -822,7 +777,6 @@ document.querySelectorAll("[data-edit]").forEach(btn=>{
           </div>
         `;
 
-        // wire buttons after render (later)
         setTimeout(() => {
           const acceptEl = document.querySelector(`button[data-accept="${offerId}"]`);
           if(acceptEl) acceptEl.onclick = () => acceptOffer(offerId);
@@ -830,10 +784,7 @@ document.querySelectorAll("[data-edit]").forEach(btn=>{
           const mailEl = document.querySelector(`button[data-mail="${offerId}"]`);
           if(mailEl){
             mailEl.onclick = () => {
-              // who to email?
-              // - proposer contacts owner: to ownerEmail
-              // - owner contacts proposer: to proposerEmail
-              const to = isOwner ? proposerEmail : contactToOwnerEmail;
+              const to = isOwner ? proposerEmail : ownerEmail;
               if(!to){
                 alert("連絡先が取得できませんでした（ルール設定をご確認ください）。");
                 return;
@@ -848,16 +799,12 @@ document.querySelectorAll("[data-edit]").forEach(btn=>{
 
           const lineEl = document.querySelector(`button[data-line="${offerId}"]`);
           if(lineEl){
-            lineEl.onclick = () => {
-              openLineShare({ text: baseMsg });
-            };
+            lineEl.onclick = () => openLineShare({ text: baseMsg });
           }
         }, 0);
       }
 
-      // update pills
-      const offersCount = snap.size;
-      detailOffersPill.textContent = `提案 ${offersCount}件`;
+      detailOffersPill.textContent = `提案 ${snap.size}件`;
     }
   </script>
 </body>
