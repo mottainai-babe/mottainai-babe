@@ -1,329 +1,91 @@
 <!doctype html>
 <html lang="ja">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-
-<title>もったいないベビー｜大阪のベビー用品ゆずりあい</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>もったいないベビー</title>
 
 <style>
-
 body{
 font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Hiragino Sans","Noto Sans JP",sans-serif;
-margin:24px;
 background:#fafafa;
+margin:24px;
 }
-
 .card{
 max-width:720px;
 margin:auto;
-border:1px solid #e5e7eb;
-border-radius:16px;
-padding:20px;
 background:white;
+padding:20px;
+border-radius:16px;
+border:1px solid #e5e7eb;
 }
-
-h1{
-margin-bottom:8px;
-}
-
-.muted{
-color:#6b7280;
-font-size:14px;
-}
-
 button{
 padding:10px 14px;
 border-radius:12px;
-border:1px solid #d1d5db;
-background:white;
+border:1px solid #ddd;
 cursor:pointer;
-font-size:14px;
 }
-
-button.primary{
+.primary{
 background:#2563eb;
 color:white;
 border:none;
 }
-
-.row{
-display:flex;
-gap:12px;
-align-items:center;
-margin-top:12px;
-flex-wrap:wrap;
+input,textarea{
+width:100%;
+padding:8px;
+margin-top:6px;
+margin-bottom:12px;
+border-radius:8px;
+border:1px solid #ddd;
 }
-
-img{
-width:48px;
-height:48px;
-border-radius:999px;
+.item{
+border:1px solid #eee;
+padding:12px;
+border-radius:12px;
+margin-bottom:12px;
 }
-
 pre{
-background:#f9fafb;
+background:#f3f4f6;
 padding:12px;
 border-radius:12px;
 font-size:12px;
 }
-
 </style>
-
 </head>
+
 <body>
-
-
 <div class="card">
 
-
 <h1>もったいないベビー</h1>
+<p>大阪エリア限定｜ベビー用品ゆずりあいサービス</p>
 
+<button id="btnLogin" class="primary">Googleでログイン</button>
+<button id="btnLogout">ログアウト</button>
 
-<p class="muted">
-大阪エリア限定｜ベビー用品のゆずりあいサービス
-</p>
+<hr>
 
+<h3>物品を登録</h3>
 
-<p class="muted">
-使わなくなったベビー用品を、必要なご家庭へ。
-「もったいない」を「ありがとう」に変えましょう。
-</p>
+<input id="title" placeholder="例：ベビーカー">
+<textarea id="description" placeholder="状態・使用期間など"></textarea>
+<button id="btnAdd" class="primary">登録する</button>
 
+<hr>
 
+<h3>出品一覧</h3>
+<div id="itemList"></div>
 
-<div class="row">
-
-<button id="btnGoogle" class="primary">
-Googleでログイン
-</button>
-
-
-<button id="btnLogout">
-ログアウト
-</button>
-
-</div>
-
-
-
-<div id="userBox" class="row" style="display:none">
-
-<img id="photo">
-
-<div>
-
-<div id="name"></div>
-
-<div class="muted" id="email"></div>
-
-</div>
-
-</div>
-
-
-
-<p class="muted">システムログ</p>
-
+<h3>システムログ</h3>
 <pre id="log"></pre>
 
-
 </div>
 
-
-
-
-
 <script type="module">
-
-
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-
-import { getAnalytics }
-from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
-
-
-import {
-
-getAuth,
-GoogleAuthProvider,
-signInWithPopup,
-onAuthStateChanged,
-signOut
-
-}
-from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
-
-
-
-import {
-
-getFirestore,
-doc,
-setDoc,
-serverTimestamp
-
-}
-from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
-
-
-
-
-
-const firebaseConfig = {
-
-apiKey: "AIzaSyAEk6aDtbuXU9K2bUnygYBqHMh75MeOlFU",
-
-authDomain: "mottainai-babe.firebaseapp.com",
-
-projectId: "mottainai-babe",
-
-storageBucket: "mottainai-babe.firebasestorage.app",
-
-messagingSenderId: "752649559489",
-
-appId: "1:752649559489:web:1288d8adeef7280eb7a340",
-
-measurementId: "G-9HNDHB2G1Q"
-
-};
-
-
-
-
-const app = initializeApp(firebaseConfig);
-
-getAnalytics(app);
-
-
-
-
-const auth = getAuth(app);
-
-const db = getFirestore(app);
-
-const provider = new GoogleAuthProvider();
-
-
-
-
-const log = (msg)=>{
-
-document.getElementById("log").textContent
-
-= msg + "\n" + document.getElementById("log").textContent;
-
-};
-
-
-
-
-
-// Google 로그인 버튼
-
-document.getElementById("btnGoogle")
-
-.onclick = async ()=>{
-
-try{
-
-await signInWithPopup(auth,provider);
-
-log("ログイン成功");
-
-}
-
-catch(e){
-
-log("ログイン失敗");
-
-}
-
-};
-
-
-
-
-
-// 로그아웃
-
-document.getElementById("btnLogout")
-
-.onclick = async ()=>{
-
-await signOut(auth);
-
-log("ログアウトしました");
-
-};
-
-
-
-
-
-
-// 로그인 상태 감지
-
-onAuthStateChanged(auth, async(user)=>{
-
-
-if(user){
-
-
-document.getElementById("userBox").style.display="flex";
-
-document.getElementById("name").textContent=user.displayName;
-
-document.getElementById("email").textContent=user.email;
-
-document.getElementById("photo").src=user.photoURL;
-
-
-
-
-
-await setDoc(
-
-doc(db,"users",user.uid),
-
-{
-
-name:user.displayName,
-
-email:user.email,
-
-lastLogin:serverTimestamp()
-
-},
-
-{merge:true}
-
-);
-
-
-
-log("ユーザーデータ保存完了");
-
-
-
-}
-
-else{
-
-document.getElementById("userBox").style.display="none";
-
-}
-
-});
-
-
-
-
-</script>
-
-
-
-</body>
-
-</html>
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+import { getAuth,GoogleAuthProvider,signInWithPopup,signOut,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+import { getFirestore,collection,addDoc,serverTimestamp,onSnapshot,query,orderBy } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+
+const firebaseConfig={
+apiKey:"AIzaSyAEk6aDtbuXU9K2bUnygYBqHMh75MeOlFU",
+authDomain:"mottainai-babe.firebaseapp.com",
+projec
