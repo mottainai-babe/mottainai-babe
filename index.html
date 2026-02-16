@@ -1,524 +1,323 @@
 <!doctype html>
 <html lang="ja">
 <head>
-
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
-<title>もったいないベビー｜大阪のベビー用品ゆずりあい</title>
-
-
-<style>
-
-body{
-
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Hiragino Sans","Noto Sans JP",sans-serif;
-
-background:#fafafa;
-
-padding:24px;
-
-margin:0;
-
-}
-
-
-.card{
-
-max-width:720px;
-
-margin:auto;
-
-background:white;
-
-padding:24px;
-
-border-radius:16px;
-
-border:1px solid #e5e7eb;
-
-}
-
-
-h1{
-
-margin-bottom:8px;
-
-}
-
-
-.muted{
-
-color:#6b7280;
-
-font-size:14px;
-
-}
-
-
-button{
-
-padding:10px 16px;
-
-border-radius:10px;
-
-border:none;
-
-cursor:pointer;
-
-font-size:14px;
-
-}
-.tabs{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin:10px 0 6px;
-}
-
-.tab{
-  padding:10px 12px;
-  border-radius:999px;
-  border:1px solid #d1d5db;
-  background:#fff;
-  color:#111827;
-  cursor:pointer;
-  font-size:14px;
-}
-
-.tab.active{
-  background:#2563eb;
-  color:#fff;
-  border-color:#2563eb;
-}
-
-
-.primary{
-
-background:#2563eb;
-
-color:white;
-
-}
-
-
-img{
-
-max-width:200px;
-
-border-radius:12px;
-
-margin-top:8px;
-
-}
-
-
-input{
-
-padding:10px;
-
-border-radius:10px;
-
-border:1px solid #ddd;
-
-width:100%;
-
-}
-
-
-.item{
-
-margin-top:20px;
-
-padding-top:10px;
-
-border-top:1px solid #eee;
-
-}
-
-
-</style>
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>もったいないベビー｜大阪のベビー用品ゆずりあい</title>
+
+  <style>
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Hiragino Sans","Noto Sans JP",sans-serif;
+      background:#fafafa;
+      padding:24px;
+      margin:0;
+    }
+
+    .card{
+      max-width:720px;
+      margin:auto;
+      background:white;
+      padding:24px;
+      border-radius:16px;
+      border:1px solid #e5e7eb;
+    }
+
+    h1{ margin-bottom:8px; }
+
+    .muted{
+      color:#6b7280;
+      font-size:14px;
+    }
+
+    button{
+      padding:10px 16px;
+      border-radius:10px;
+      border:none;
+      cursor:pointer;
+      font-size:14px;
+    }
+
+    .primary{
+      background:#2563eb;
+      color:white;
+    }
+
+    .tabs{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin:10px 0 6px;
+    }
+
+    .tab{
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid #d1d5db;
+      background:#fff;
+      color:#111827;
+      cursor:pointer;
+      font-size:14px;
+    }
+
+    .tab.active{
+      background:#2563eb;
+      color:#fff;
+      border-color:#2563eb;
+    }
+
+    img{
+      max-width:200px;
+      border-radius:12px;
+      margin-top:8px;
+      display:block;
+    }
+
+    input{
+      padding:10px;
+      border-radius:10px;
+      border:1px solid #ddd;
+      width:100%;
+      box-sizing:border-box;
+    }
+
+    .item{
+      margin-top:20px;
+      padding-top:10px;
+      border-top:1px solid #eee;
+    }
+
+    .row{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+  </style>
 </head>
 
-
 <body>
-
-
-
-<div class="card">
-
-
-<h1>もったいないベビー</h1>
-
-
-<p class="muted">
-
-大阪エリア限定｜ベビー用品のゆずりあいサービス
-
-</p>
-
-
-<p class="muted">
-
-使わなくなったベビー用品を、必要なご家庭へ。<br>
-
-「もったいない」を「ありがとう」に変えましょう。
-
-</p>
-
-
-<br>
-
-
-<button id="loginBtn" class="primary">
-
-Googleでログイン
-
-</button>
-
-
-<button id="logoutBtn">
-
-ログアウト
-
-</button>
-
-
-<br><br><br>
-
-
-
-<h3>出品する</h3>
-<div class="tabs" id="conditionTabs">
-  <button type="button" class="tab active" data-value="新品に近い">新品に近い</button>
-  <button type="button" class="tab" data-value="きれい">きれい</button>
-  <button type="button" class="tab" data-value="使用感あり">使用感あり</button>
-</div>
-
-<p class="muted" style="margin-top:8px;">
-状態：<span id="conditionLabel">新品に近い</span>
-</p>
-
-
-<input type="file" id="file">
-
-<br><br>
-
-
-<input id="title" placeholder="例：ベビーカー 無料">
-
-<br><br>
-
-
-<button id="uploadBtn" class="primary">
-
-出品する
-
-</button>
-
-
-<br><br><br>
-
-
-<h3>出品一覧</h3>
-
-
-<div id="list"></div>
-
-
-
-</div>
-
-
-
-
-<script type="module">
-
-
-import { initializeApp }
-
-from
-
-"https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-
-
-
-import {
-
-getAuth,
-
-GoogleAuthProvider,
-
-signInWithPopup,
-
-signOut,
-
-onAuthStateChanged
-
-}
-
-from
-
-"https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
-
-
-
-import {
-
-getFirestore,
-
-collection,
-
-addDoc,
-
-getDocs
-
-}
-
-from
-
-"https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
-
-
-
-import {
-
-getStorage,
-
-ref,
-
-uploadBytes,
-
-getDownloadURL
-
-}
-
-from
-
-"https://www.gstatic.com/firebasejs/12.9.0/firebase-storage.js";
-
-
-
-
-
-const firebaseConfig={
-
-
-apiKey:"AIzaSyAEk6aDtbuXU9K2bUnygYBqHMh75MeOlFU",
-
-authDomain:"mottainai-babe.firebaseapp.com",
-
-projectId:"mottainai-babe",
-
-storageBucket:"mottainai-babe.firebasestorage.app",
-
-appId:"1:752649559489:web:1288d8adeef7280eb7a340"
-
-
-};
-
-
-
-const app=initializeApp(firebaseConfig);
-
-
-const auth=getAuth(app);
-
-
-const db=getFirestore(app);
-
-
-const storage=getStorage(app);
-
-
-
-let currentUser=null;
-let selectedCondition = "新品に近い";
-
-
-
-loginBtn.onclick=async()=>{
-
-
-const provider=new GoogleAuthProvider();
-
-
-await signInWithPopup(auth,provider);
-
-
-};
-
-
-
-logoutBtn.onclick=()=>{
-
-
-signOut(auth);
-
-
-};
-
-
-
-// 状態タブ
-document.querySelectorAll("#conditionTabs .tab").forEach(btn=>{
-  btn.onclick=()=>{
-    document.querySelectorAll("#conditionTabs .tab").forEach(b=>b.classList.remove("active"));
-    btn.classList.add("active");
-    selectedCondition = btn.dataset.value;
-    document.getElementById("conditionLabel").textContent = selectedCondition;
-  };
-});
-
-  onAuthStateChanged(auth,user=>{
-
-
-currentUser=user;
-
-
-loadList();
-list.innerHTML+=`
-<div class="item">
-  <h4>${data.title}</h4>
-  <p class="muted">状態：${data.condition ?? "未設定"}</p>
-  <img src="${data.image}">
-  <p class="muted">${data.user}</p>
-</div>
-`;
-
-
-});
-
-
-
-uploadBtn.onclick=async()=>{await addDoc(collection(db,"items"),{
-  title:title,
-  image:url,
-  condition: selectedCondition,
-  user:currentUser.email
-});
-
-
-
-if(!currentUser){
-
-alert("ログインしてください");
-
-return;
-
-}
-
-
-
-const file=document.getElementById("file").files[0];
-
-
-const title=document.getElementById("title").value;
-
-
-
-if(!file||!title){
-
-alert("画像とタイトルを入力してください");
-
-return;
-
-}
-
-
-
-const storageRef=ref(storage,"items/"+Date.now());
-
-
-
-await uploadBytes(storageRef,file);
-
-
-
-const url=await getDownloadURL(storageRef);
-
-
-
-await addDoc(collection(db,"items"),{
-
-
-title:title,
-
-
-image:url,
-
-
-user:currentUser.email
-
-
-});
-
-
-
-alert("出品完了しました");
-
-
-
-loadList();
-
-
-};
-
-
-
-
-async function loadList(){
-
-
-
-const snap=await getDocs(collection(db,"items"));
-
-
-
-list.innerHTML="";
-
-
-
-snap.forEach(doc=>{
-
-
-const data=doc.data();
-
-
-
-list.innerHTML+=`
-
-
-<div class="item">
-
-
-<h4>${data.title}</h4>
-
-
-<img src="${data.image}">
-
-
-<p class="muted">${data.user}</p>
-
-
-</div>
-
-
-`;
-
-
-});
-
-
-}
-
-
-
-</script>
-
-
-
+  <div class="card">
+    <h1>もったいないベビー</h1>
+
+    <p class="muted">大阪エリア限定｜ベビー用品のゆずりあいサービス</p>
+
+    <p class="muted">
+      使わなくなったベビー用品を、必要なご家庭へ。<br>
+      「もったいない」を「ありがとう」に変えましょう。
+    </p>
+
+    <div class="row" style="margin-top:14px;">
+      <button id="loginBtn" class="primary">Googleでログイン</button>
+      <button id="logoutBtn">ログアウト</button>
+      <span class="muted" id="loginState"></span>
+    </div>
+
+    <br><br>
+
+    <h3>出品する</h3>
+
+    <div class="tabs" id="conditionTabs">
+      <button type="button" class="tab active" data-value="新品に近い">新品に近い</button>
+      <button type="button" class="tab" data-value="きれい">きれい</button>
+      <button type="button" class="tab" data-value="使用感あり">使用感あり</button>
+    </div>
+
+    <p class="muted" style="margin-top:8px;">
+      状態：<span id="conditionLabel">新品に近い</span>
+    </p>
+
+    <input type="file" id="file" accept="image/*">
+    <br><br>
+
+    <input id="title" placeholder="例：ベビーカー 無料">
+    <br><br>
+
+    <button id="uploadBtn" class="primary">出品する</button>
+
+    <br><br><br>
+
+    <h3>出品一覧</h3>
+    <div id="list"></div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+
+    import {
+      getAuth,
+      GoogleAuthProvider,
+      signInWithPopup,
+      signOut,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      getDocs,
+      query,
+      orderBy
+    } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+
+    import {
+      getStorage,
+      ref,
+      uploadBytes,
+      getDownloadURL
+    } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-storage.js";
+
+    // ===== Firebase config =====
+    const firebaseConfig = {
+      apiKey: "AIzaSyAEk6aDtbuXU9K2bUnygYBqHMh75MeOlFU",
+      authDomain: "mottainai-babe.firebaseapp.com",
+      projectId: "mottainai-babe",
+      storageBucket: "mottainai-babe.firebasestorage.app",
+      appId: "1:752649559489:web:1288d8adeef7280eb7a340"
+    };
+
+    // ===== init =====
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
+
+    const loginBtn = document.getElementById("loginBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const uploadBtn = document.getElementById("uploadBtn");
+    const listEl = document.getElementById("list");
+    const loginState = document.getElementById("loginState");
+
+    let currentUser = null;
+    let selectedCondition = "新品に近い";
+
+    // ===== login / logout =====
+    loginBtn.onclick = async () => {
+      const provider = new GoogleAuthProvider();
+      try{
+        await signInWithPopup(auth, provider);
+      }catch(e){
+        alert("ログインに失敗しました。ポップアップブロック等をご確認ください。");
+        console.error(e);
+      }
+    };
+
+    logoutBtn.onclick = async () => {
+      await signOut(auth);
+    };
+
+    // ===== 상태 탭 =====
+    document.querySelectorAll("#conditionTabs .tab").forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll("#conditionTabs .tab").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        selectedCondition = btn.dataset.value;
+        document.getElementById("conditionLabel").textContent = selectedCondition;
+      };
+    });
+
+    // ===== auth state =====
+    onAuthStateChanged(auth, async (user) => {
+      currentUser = user;
+
+      if(user){
+        loginBtn.style.display = "none";
+        logoutBtn.style.display = "inline-block";
+        loginState.textContent = `ログイン中：${user.email ?? ""}`;
+      }else{
+        loginBtn.style.display = "inline-block";
+        logoutBtn.style.display = "none";
+        loginState.textContent = "未ログイン";
+      }
+
+      await loadList();
+    });
+
+    // ===== upload =====
+    uploadBtn.onclick = async () => {
+      if(!currentUser){
+        alert("先にログインしてください。");
+        return;
+      }
+
+      const file = document.getElementById("file").files[0];
+      const titleText = document.getElementById("title").value.trim();
+
+      if(!file || !titleText){
+        alert("画像とタイトルを入力してください。");
+        return;
+      }
+
+      try{
+        // 1) upload to Storage
+        const path = `items/${currentUser.uid}/${Date.now()}-${file.name}`;
+        const storageRef = ref(storage, path);
+        await uploadBytes(storageRef, file);
+        const url = await getDownloadURL(storageRef);
+
+        // 2) save to Firestore
+        await addDoc(collection(db, "items"), {
+          title: titleText,
+          image: url,
+          condition: selectedCondition,
+          user: currentUser.email ?? "",
+          uid: currentUser.uid,
+          createdAt: new Date() // 간단 MVP: 서버시간이 필요하면 serverTimestamp로 변경 가능
+        });
+
+        alert("出品完了しました。");
+
+        // reset UI
+        document.getElementById("file").value = "";
+        document.getElementById("title").value = "";
+
+        await loadList();
+      }catch(e){
+        alert("出品に失敗しました。Storage / Firestore ルールをご確認ください。");
+        console.error(e);
+      }
+    };
+
+    // ===== list =====
+    async function loadList(){
+      listEl.innerHTML = "";
+
+      // createdAt 정렬(없을 수도 있으니 try-catch)
+      let snap;
+      try{
+        const q = query(collection(db, "items"), orderBy("createdAt", "desc"));
+        snap = await getDocs(q);
+      }catch{
+        snap = await getDocs(collection(db, "items"));
+      }
+
+      if(snap.empty){
+        listEl.innerHTML = `<p class="muted">まだ出品がありません。</p>`;
+        return;
+      }
+
+      snap.forEach(docSnap => {
+        const data = docSnap.data();
+        listEl.innerHTML += `
+          <div class="item">
+            <h4>${escapeHtml(data.title ?? "")}</h4>
+            <p class="muted">状態：${escapeHtml(data.condition ?? "未設定")}</p>
+            ${data.image ? `<img src="${data.image}" alt="">` : ""}
+            <p class="muted">${escapeHtml(data.user ?? "")}</p>
+          </div>
+        `;
+      });
+    }
+
+    // XSS 최소 방지
+    function escapeHtml(str){
+      return String(str)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+  </script>
 </body>
-
 </html>
