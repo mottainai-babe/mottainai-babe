@@ -334,6 +334,7 @@ const storage=getStorage(app);
 
 
 let currentUser=null;
+let selectedCondition = "新品に近い";
 
 
 
@@ -360,20 +361,44 @@ signOut(auth);
 
 
 
-onAuthStateChanged(auth,user=>{
+// 状態タブ
+document.querySelectorAll("#conditionTabs .tab").forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll("#conditionTabs .tab").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    selectedCondition = btn.dataset.value;
+    document.getElementById("conditionLabel").textContent = selectedCondition;
+  };
+});
+
+  onAuthStateChanged(auth,user=>{
 
 
 currentUser=user;
 
 
 loadList();
+list.innerHTML+=`
+<div class="item">
+  <h4>${data.title}</h4>
+  <p class="muted">状態：${data.condition ?? "未設定"}</p>
+  <img src="${data.image}">
+  <p class="muted">${data.user}</p>
+</div>
+`;
 
 
 });
 
 
 
-uploadBtn.onclick=async()=>{
+uploadBtn.onclick=async()=>{await addDoc(collection(db,"items"),{
+  title:title,
+  image:url,
+  condition: selectedCondition,
+  user:currentUser.email
+});
+
 
 
 if(!currentUser){
