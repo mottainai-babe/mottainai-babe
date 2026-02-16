@@ -499,7 +499,87 @@
         const st = statusLabel(data.status);
         const offersCount = Number(data.offersCount ?? 0);
 
-        listEl.innerHTML += `
+       const isOwner = currentUser && currentUser.uid === data.ownerUid;
+
+listEl.innerHTML += `
+  <div class="itemCard">
+
+    <div class="row" style="justify-content:space-between;">
+      <div>
+        <span class="pill ${st.cls}">${st.text}</span>
+        <span class="pill blue">提案 ${offersCount}件</span>
+      </div>
+
+      <div class="row">
+
+        <button class="ghost" data-open="${id}">
+        詳細
+        </button>
+
+        ${isOwner ? `
+        <button class="ghost" data-edit="${id}">
+        編集
+        </button>
+
+        <button class="danger" data-delete="${id}">
+        削除
+        </button>
+        ` : ``}
+
+      </div>
+import {
+  deleteDoc
+} from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+async function deleteItem(itemId){
+
+  if(!confirm("本当に削除しますか？")){
+    return;
+  }
+
+  await deleteDoc(doc(db,"items",itemId));
+
+  alert("削除しました");
+
+  loadItems();
+document.querySelectorAll("[data-delete]").forEach(btn=>{
+  btn.onclick=()=>{
+    deleteItem(btn.dataset.delete);
+  };
+
+  async function editItem(itemId){
+
+  const newTitle = prompt("新しいタイトルを入力");
+
+  if(!newTitle) return;
+
+  await updateDoc(doc(db,"items",itemId),{
+
+    title:newTitle
+
+  });
+
+  alert("更新しました");
+
+  loadItems();
+document.querySelectorAll("[data-edit]").forEach(btn=>{
+  btn.onclick=()=>{
+    editItem(btn.dataset.edit);
+  };
+});
+}
+});
+}
+    </div>
+
+    <h3>${escapeHtml(data.title)}</h3>
+
+    <p class="muted">状態：${escapeHtml(data.condition)}</p>
+
+    <img class="thumb" src="${data.image}">
+
+  </div>
+`;
+
           <div class="itemCard">
             <div class="row" style="justify-content:space-between;">
               <div>
