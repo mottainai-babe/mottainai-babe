@@ -1,82 +1,89 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>もったいないベビー｜大阪のベビー用品ゆずりあい</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", sans-serif;
-      margin: 24px;
-      background: #fafafa;
-    }
+<title>もったいないベビー｜大阪のベビー用品ゆずりあい</title>
 
-    .card {
-      max-width: 720px;
-      margin: auto;
-      border: 1px solid #e5e7eb;
-      border-radius: 16px;
-      padding: 20px;
-      background: white;
-    }
+<style>
 
-    h1 {
-      margin-bottom: 8px;
-    }
+body{
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Hiragino Sans","Noto Sans JP",sans-serif;
+margin:24px;
+background:#fafafa;
+}
 
-    .muted {
-      color: #6b7280;
-      font-size: 14px;
-    }
+.card{
+max-width:720px;
+margin:auto;
+border:1px solid #e5e7eb;
+border-radius:16px;
+padding:20px;
+background:white;
+}
 
-    button {
-      padding: 10px 14px;
-      border-radius: 12px;
-      border: 1px solid #d1d5db;
-      background: white;
-      cursor: pointer;
-      font-size: 14px;
-    }
+h1{
+margin-bottom:8px;
+}
 
-    button.primary {
-      background: #2563eb;
-      color: white;
-      border: none;
-    }
+.muted{
+color:#6b7280;
+font-size:14px;
+}
 
-    .row {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      margin-top: 12px;
-      flex-wrap: wrap;
-    }
+button{
+padding:10px 14px;
+border-radius:12px;
+border:1px solid #d1d5db;
+background:white;
+cursor:pointer;
+font-size:14px;
+}
 
-    img {
-      width: 48px;
-      height: 48px;
-      border-radius: 999px;
-    }
+button.primary{
+background:#2563eb;
+color:white;
+border:none;
+}
 
-    pre {
-      background: #f9fafb;
-      padding: 12px;
-      border-radius: 12px;
-      font-size: 12px;
-    }
-  </style>
+.row{
+display:flex;
+gap:12px;
+align-items:center;
+margin-top:12px;
+flex-wrap:wrap;
+}
+
+img{
+width:48px;
+height:48px;
+border-radius:999px;
+}
+
+pre{
+background:#f9fafb;
+padding:12px;
+border-radius:12px;
+font-size:12px;
+}
+
+</style>
 
 </head>
 <body>
 
+
 <div class="card">
 
+
 <h1>もったいないベビー</h1>
+
 
 <p class="muted">
 大阪エリア限定｜ベビー用品のゆずりあいサービス
 </p>
+
 
 <p class="muted">
 使わなくなったベビー用品を、必要なご家庭へ。
@@ -84,13 +91,20 @@
 </p>
 
 
+
 <div class="row">
+
+<button id="btnGoogle" class="primary">
+Googleでログイン
+</button>
+
 
 <button id="btnLogout">
 ログアウト
 </button>
 
 </div>
+
 
 
 <div id="userBox" class="row" style="display:none">
@@ -108,45 +122,52 @@
 </div>
 
 
+
 <p class="muted">システムログ</p>
 
 <pre id="log"></pre>
+
 
 </div>
 
 
 
+
+
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
 
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+
+import { getAnalytics }
+from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
+
 
 import {
 
 getAuth,
-
 GoogleAuthProvider,
-
 signInWithPopup,
-
 onAuthStateChanged,
-
 signOut
 
-} from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+}
+from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+
 
 import {
 
 getFirestore,
-
 doc,
-
 setDoc,
-
 serverTimestamp
 
-} from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+}
+from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+
+
 
 
 
@@ -170,9 +191,11 @@ measurementId: "G-9HNDHB2G1Q"
 
 
 
+
 const app = initializeApp(firebaseConfig);
 
 getAnalytics(app);
+
 
 
 
@@ -184,7 +207,8 @@ const provider = new GoogleAuthProvider();
 
 
 
-const log = (msg) => {
+
+const log = (msg)=>{
 
 document.getElementById("log").textContent
 
@@ -194,13 +218,17 @@ document.getElementById("log").textContent
 
 
 
+
+
+// Google 로그인 버튼
+
 document.getElementById("btnGoogle")
 
-.onclick = async () => {
+.onclick = async ()=>{
 
-try {
+try{
 
-const result = await signInWithPopup(auth, provider);
+await signInWithPopup(auth,provider);
 
 log("ログイン成功");
 
@@ -216,9 +244,13 @@ log("ログイン失敗");
 
 
 
+
+
+// 로그아웃
+
 document.getElementById("btnLogout")
 
-.onclick = async () => {
+.onclick = async ()=>{
 
 await signOut(auth);
 
@@ -228,9 +260,16 @@ log("ログアウトしました");
 
 
 
-onAuthStateChanged(auth, async (user)=>{
+
+
+
+// 로그인 상태 감지
+
+onAuthStateChanged(auth, async(user)=>{
+
 
 if(user){
+
 
 document.getElementById("userBox").style.display="flex";
 
@@ -239,6 +278,8 @@ document.getElementById("name").textContent=user.displayName;
 document.getElementById("email").textContent=user.email;
 
 document.getElementById("photo").src=user.photoURL;
+
+
 
 
 
@@ -264,90 +305,25 @@ lastLogin:serverTimestamp()
 
 log("ユーザーデータ保存完了");
 
+
+
+}
+
+else{
+
+document.getElementById("userBox").style.display="none";
+
 }
 
 });
 
 
 
-</script>
-
-    <!-- 기존 내용 -->
-  </div>
-
-  <!-- Firebase 시작 -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyAEk6aDtbuXU9K2bUnygYBqHMh75MeOlFU",
-      authDomain: "mottainai-babe.firebaseapp.com",
-      projectId: "mottainai-babe",
-      storageBucket: "mottainai-babe.firebasestorage.app",
-      messagingSenderId: "752649559489",
-      appId: "1:752649559489:web:1288d8adeef7280eb7a340",
-      measurementId: "G-9HNDHB2G1Q"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-
-    console.log("Firebase 初期化成功");
-  </script>
-<button id="google-login" style="padding:12px 20px;font-size:16px;border-radius:8px;border:none;background:#4285F4;color:white;cursor:pointer;">
-Googleでログイン
-</button>
-
-<script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider
-} from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
-
-
-const firebaseConfig = {
-apiKey: "AIzaSyAEk6aDtbuXU9K2bUnygYBqHMh75MeOlFU",
-authDomain: "mottainai-babe.firebaseapp.com",
-projectId: "mottainai-babe",
-storageBucket: "mottainai-babe.firebasestorage.app",
-messagingSenderId: "752649559489",
-appId: "1:752649559489:web:1288d8adeef7280eb7a340"
-};
-
-
-const app = initializeApp(firebaseConfig);
-
-const auth = getAuth(app);
-
-const provider = new GoogleAuthProvider();
-
-
-document.getElementById("google-login").onclick = () => {
-
-signInWithPopup(auth, provider)
-
-.then((result) => {
-
-const user = result.user;
-
-alert("ログイン成功: " + user.email);
-
-})
-
-.catch((error) => {
-
-alert("ログイン失敗");
-
-});
-
-};
 
 </script>
+
+
 
 </body>
+
 </html>
