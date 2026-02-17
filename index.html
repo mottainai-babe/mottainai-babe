@@ -473,6 +473,17 @@
       }
 
       const f = fileItem.files[0];
+      // ===== 파일 용량 체크（2MB）=====
+const MAX = 2 * 1024 * 1024;
+
+if(f.size > MAX){
+
+  alert("画像サイズは2MB以下にしてください");
+
+  return;
+
+}
+
       const titleText = titleItem.value.trim();
       const descText = descItem.value.trim();
 
@@ -509,7 +520,7 @@
         await loadItems();
         await openDetail(itemRef.id);
       }catch(e){
-        alert("出品に失敗しました。Storage / Firestore ルールをご確認ください。");
+        alert("出品に失敗しました。画像サイズは2MB以下にしてください。");
         console.error(e);
       }
     };
