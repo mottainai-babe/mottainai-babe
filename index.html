@@ -520,9 +520,21 @@ if(f.size > MAX){
         await loadItems();
         await openDetail(itemRef.id);
       }catch(e){
-        alert("出品に失敗しました。画像サイズは2MB以下にしてください。");
-        console.error(e);
-      }
+
+  console.error("UPLOAD ERROR:", e);
+
+  alert(
+`出品に失敗しました
+
+code:
+${e.code ?? "unknown"}
+
+message:
+${e.message ?? ""}`
+  );
+
+}
+
     };
 
     // ===== load items list =====
