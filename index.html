@@ -638,22 +638,18 @@ async function editItem(itemId){
       });
 
       // wire buttons
-      document.querySelectorAll('button[data-open]').forEach(btn => {
-        btn.onclick = () => openDetail(btn.dataset.open);
-      });
-      document.querySelectorAll('button[data-delete]').forEach(btn => {
-        btn.onclick = () => deleteItem(btn.dataset.delete);
-      });
-      document.querySelectorAll('button[data-edit]').forEach(btn => {
-        const itemId = btn.dataset.edit;
-        // 현재 제목을 DOM에서 얻기보다, 다시 읽어서 prompt에 넣는 것이 안전
-        btn.onclick = async () => {
-          const docSnap = await getDoc(doc(db, "items", itemId));
-          if(!docSnap.exists()) return;
-          const d = docSnap.data();
-          await editItemTitle(itemId, d.title ?? "");
-        };
-      });
+    document.querySelectorAll("[data-open]").forEach(btn=>{
+  btn.onclick = () => openDetail(btn.dataset.open);
+});
+
+document.querySelectorAll("[data-delete]").forEach(btn=>{
+  btn.onclick = () => deleteItem(btn.dataset.delete);
+});
+
+document.querySelectorAll("[data-edit]").forEach(btn=>{
+  btn.onclick = () => editItemTitle(btn.dataset.edit);
+});
+
     }
 
     // ===== open detail =====
