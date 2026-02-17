@@ -603,34 +603,38 @@ async function editItem(itemId){
       }
 
       snap.forEach(docSnap => {
-        const id = docSnap.id;
-        const data = docSnap.data();
+  const id = docSnap.id;
+  const data = docSnap.data();
 
-        const st = statusLabel(data.status);
-        const offersCount = Number(data.offersCount ?? 0);
-        const isOwner = currentUser && currentUser.uid === data.ownerUid;
+  const st = statusLabel(data.status);
+  const offersCount = Number(data.offersCount ?? 0);
+  const isOwner = currentUser && currentUser.uid === data.ownerUid;
 
-        listEl.innerHTML += `
-          <div class="itemCard">
-            <div class="row" style="justify-content:space-between;">
-              <div>
-                <span class="pill ${st.cls}">${st.text}</span>
-                <span class="pill blue">提案 ${offersCount}件</span>
-              </div>
-              <div class="row">
-                <button class="ghost" data-open="${id}">詳細</button>
-                ${isOwner ? `
-                  <button class="ghost" data-edit="${id}">編集</button>
-                  <button class="danger" data-delete="${id}">削除</button>
-                ` : ``}
-              </div>
-            </div>
+  listEl.innerHTML += `
+    <div class="itemCard">
+      <div class="row" style="justify-content:space-between;">
+        <div>
+          <span class="pill ${st.cls}">${st.text}</span>
+          <span class="pill blue">提案 ${offersCount}件</span>
+        </div>
 
-            <h3 style="margin:10px 0 6px;">${escapeHtml(data.title)}</h3>
-            <p class="muted">状態：${escapeHtml(data.condition ?? "未設定")}</p>
-            ${data.image ? `<img class="thumb" src="${data.image}" alt="">` : ""}
-          </div>
-        `;
+        <div class="row">
+          <button class="ghost" data-open="${id}">詳細</button>
+
+          ${isOwner ? `
+            <button class="ghost" data-edit="${id}">編集</button>
+            <button class="danger" data-delete="${id}">削除</button>
+          ` : ``}
+        </div>
+      </div>
+
+      <h3 style="margin:10px 0 6px;">${escapeHtml(data.title ?? "")}</h3>
+      <p class="muted">状態：${escapeHtml(data.condition ?? "未設定")}</p>
+      ${data.image ? `<img class="thumb" src="${data.image}" alt="">` : ""}
+    </div>
+  `;
+});
+
       });
 
       // wire buttons
