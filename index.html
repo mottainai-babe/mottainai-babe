@@ -663,53 +663,57 @@
     };
 
     // ===== load offers (公開一覧) =====
-    async function loadOffers(){
-      offersList.innerHTML = "";
+async function loadOffers(){
+  offersList.innerHTML = "";
 
-      let snap;
+  let snap;
+  try{
+    snap = await getDocs(query(collection(db, "items", selectedItemId, "offers"), orderBy("createdAt", "desc")));
+  }catch(e){
+    console.error("LOAD_OFFERS_FALLBACK", e);
+    snap = await getDocs(collection(db, "items", selectedItemId, "offers"));
+  }
+
+  if(snap.empty){
+    offersList.innerHTML = `<p class="muted">まだ提案がありません。</p>`;
+    detailOffersPill.textContent = `提案 0件`;
+    return;
+  }
+
+  const isOwner = !!(currentUser && selectedItemData && currentUser.uid === selectedItemData.ownerUid);
+
+  // ✅ 버튼 클릭에 필요한 데이터 저장용
+  const mailMap = {};
+
+  for(const docSnap of snap.docs){
+    const offerId = docSnap.id;
+    const d = docSnap.data();
+
+    const offerStatus = d.status ?? "pending";
+    const statusPill =
+      offerStatus === "accepted" ? `<span class="pill green">accepted</span>` :
+      offerStatus === "rejected" ? `<span class="pill gray">rejected</span>` :
+      `<span class="pill blue">pending</span>`;
+
+    const isProposer = !!(currentUser && d.proposerUid === currentUser.uid);
+    const canContact = (offerStatus === "accepted") && (isOwner || isProposer);
+
+    // accepted 당사자만 offersPrivate 읽기
+    let proposerEmail = "";
+    let ownerEmail = "";
+    if(canContact){
       try{
-        snap = await getDocs(query(collection(db, "items", selectedItemId, "offers"), orderBy("createdAt", "desc")));
-      }catch(e){
-        console.error("LOAD_OFFERS_FALLBACK", e);
-        snap = await getDocs(collection(db, "items", selectedItemId, "offers"));
-      }
-
-      if(snap.empty){
-        offersList.innerHTML = `<p class="muted">まだ提案がありません。</p>`;
-        return;
-      }
-
-      const isOwner = !!(currentUser && selectedItemData && currentUser.uid === selectedItemData.ownerUid);
-
-      for(const docSnap of snap.docs){
-        const offerId = docSnap.id;
-        const d = docSnap.data();
-
-        const offerStatus = d.status ?? "pending";
-        const statusPill =
-          offerStatus === "accepted" ? `<span class="pill green">accepted</span>` :
-          offerStatus === "rejected" ? `<span class="pill gray">rejected</span>` :
-          `<span class="pill blue">pending</span>`;
-
-        const isProposer = !!(currentUser && d.proposerUid === currentUser.uid);
-        const canContact = (offerStatus === "accepted") && (isOwner || isProposer);
-
-        // accepted 당사자만 offersPrivate 읽기
-        let proposerEmail = "";
-        let ownerEmail = "";
-        if(canContact){
-          try{
-            const priv = await getDoc(doc(db, "items", selectedItemId, "offersPrivate", offerId));
-            if(priv.exists()){
-              proposerEmail = priv.data().proposerEmail ?? "";
-              ownerEmail = priv.data().ownerEmail ?? "";
-            }
-          }catch(e){
-            console.error("READ_OFFERS_PRIVATE_ERROR", e);
-          }
+        const priv = await getDoc(doc(db, "items", selectedItemId, "offersPrivate", offerId));
+        if(priv.exists()){
+          proposerEmail = priv.data().proposerEmail ?? "";
+          ownerEmail = priv.data().ownerEmail ?? "";
         }
+      }catch(e){
+        console.error("READ_OFFERS_PRIVATE_ERROR", e);
+      }
+    }
 
-        const baseMsg =
+    const baseMsg =
 `【もったいないベビー】交換が成立しました
 出品：${selectedItemData.title}
 提案：${d.offerTitle}
@@ -717,40 +721,67 @@
 
 受け渡し場所・日時の希望を教えてください。`;
 
-        const acceptBtn = (isOwner && selectedItemData.status !== "done" && offerStatus === "pending") ? `
-          <button class="primary" data-accept="${offerId}">この提案を受諾</button>
-        ` : "";
+    // ✅ owner가 pending 제안을 승인할 수 있게
+    const acceptBtn = (isOwner && selectedItemData.status !== "done" && offerStatus === "pending") ? `
+      <button class="primary" data-accept="${offerId}">この提案を受諾</button>
+    ` : "";
 
-        const contactButtons = canContact ? `
-          <div class="twoBtns" style="margin-top:10px;">
-            <button class="primary" data-mail="${offerId}">Gmailで連絡</button>
-          </div>
-          <div class="muted small" style="margin-top:6px;">
-            ※Gmailの作成画面が開きます。内容をご確認のうえ送信してください。
-          </div>
-        ` : "";
+    // ✅ accepted일 때만 Gmail 버튼 표시
+    const contactButtons = canContact ? `
+      <div class="twoBtns" style="margin-top:10px;">
+        <button class="primary" data-mail="${offerId}">Gmailで連絡</button>
+      </div>
+      <div class="muted small" style="margin-top:6px;">
+        ※Gmailの作成画面が開きます。内容をご確認のうえ送信してください。
+      </div>
+    ` : "";
 
-        offersList.innerHTML += `
-          <div class="offerBox">
-            <div class="offerTop">
-              <div>
-                ${statusPill}
-                <h4 style="margin:8px 0 6px;">${escapeHtml(d.offerTitle ?? "")}</h4>
-                <p class="muted">提案アイテム状態：${escapeHtml(d.offerCondition ?? "未設定")}</p>
-              </div>
-              <div class="right">${acceptBtn}</div>
-            </div>
-            ${d.offerImage ? `<img class="thumb" src="${d.offerImage}" alt="">` : ""}
-            ${contactButtons}
-          </div>
-        `;
-
-        
-        }, 0);
-      }
-
-      detailOffersPill.textContent = `提案 ${snap.size}件`;
+    // ✅ Gmail 보낼 대상 결정 (owner면 proposer에게, proposer면 owner에게)
+    if(canContact){
+      const to = isOwner ? proposerEmail : ownerEmail;
+      mailMap[offerId] = {
+        to,
+        subject: `【もったいないベビー】交換成立：${selectedItemData.title}`,
+        body: baseMsg
+      };
     }
+
+    offersList.innerHTML += `
+      <div class="offerBox">
+        <div class="offerTop">
+          <div>
+            ${statusPill}
+            <h4 style="margin:8px 0 6px;">${escapeHtml(d.offerTitle ?? "")}</h4>
+            <p class="muted">提案アイテム状態：${escapeHtml(d.offerCondition ?? "未設定")}</p>
+          </div>
+          <div class="right">${acceptBtn}</div>
+        </div>
+        ${d.offerImage ? `<img class="thumb" src="${d.offerImage}" alt="">` : ""}
+        ${contactButtons}
+      </div>
+    `;
+  }
+
+  // ✅ 여기서 버튼 이벤트 연결 (setTimeout 필요 없음)
+  document.querySelectorAll('button[data-accept]').forEach(btn => {
+    btn.onclick = () => acceptOffer(btn.dataset.accept);
+  });
+
+  document.querySelectorAll('button[data-mail]').forEach(btn => {
+    btn.onclick = () => {
+      const offerId = btn.dataset.mail;
+      const m = mailMap[offerId];
+      if(!m || !m.to){
+        alert("連絡先が取得できませんでした（accepted後・当事者のみ表示）。");
+        return;
+      }
+      openGmailCompose(m);
+    };
+  });
+
+  detailOffersPill.textContent = `提案 ${snap.size}件`;
+}
+
   </script>
 </body>
 </html>
