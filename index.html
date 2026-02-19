@@ -146,10 +146,12 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
     import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
     import {
       getFirestore, collection, doc, addDoc, setDoc, getDoc, getDocs, query, orderBy,
-      updateDoc, deleteDoc, increment, serverTimestamp
+      updateDoc, deleteDoc, serverTimestamp, writeBatch
     } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+
     import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-storage.js";
 
     const firebaseConfig = {
@@ -197,12 +199,7 @@
     let selectedItemId = null;
     let selectedItemData = null;
 
-    // ✅ 5MB 기준 (원하면 다시 바꿀 수 있음)
     const MAX_BYTES = 5 * 1024 * 1024;
-
-    // ownerEmail private cache
-    let cachedOwnerEmail = null;
-    let cachedOwnerEmailItemId = null;
 
     function escapeHtml(str){
       return String(str ?? "")
@@ -233,11 +230,8 @@
       window.open(url, "_blank");
     }
 
-    // ✅ 무료 브라우저 자동 리사이즈 (Canvas)
-    // - maxSide: 최대 변 길이(px)
-    // - quality: JPEG 품질(0~1)
+    // ===== 무료 브라우저 자동 리사이즈(Canvas) =====
     async function compressImage(file, { maxSide = 1600, quality = 0.78 } = {}){
-      // SVG 등은 그대로 통과
       if(file.type === "image/svg+xml") return file;
 
       const bitmap = await createImageBitmap(file);
@@ -254,24 +248,17 @@
       const ctx = canvas.getContext("2d");
       ctx.drawImage(bitmap, 0, 0, w, h);
 
-      const blob = await new Promise(resolve => {
-        canvas.toBlob(resolve, "image/jpeg", quality);
-      });
-
+      const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/jpeg", quality));
       if(!blob) return file;
 
-      // 파일명 유지하되 확장자 jpg로
       const newName = (file.name.replace(/\.[^/.]+$/, "")) + ".jpg";
       return new File([blob], newName, { type: "image/jpeg" });
     }
 
     async function ensureUnderLimit(file){
       if(!file) throw new Error("no-file");
-
-      // 1차: 그대로 OK면 그대로
       if(file.size <= MAX_BYTES) return file;
 
-      // 2차: 압축 시도(점진적으로 품질 낮춤)
       let quality = 0.82;
       let maxSide = 1800;
 
@@ -279,19 +266,15 @@
       for(let i=0; i<5; i++){
         current = await compressImage(current, { maxSide, quality });
         if(current.size <= MAX_BYTES) return current;
-
-        // 더 줄이기
         quality -= 0.12;
         maxSide -= 250;
         if(quality < 0.35) quality = 0.35;
         if(maxSide < 900) maxSide = 900;
       }
-
-      // 그래도 크면 실패
       throw new Error("too-large-after-compress");
     }
 
-    // Tabs
+    // ===== Tabs =====
     document.querySelectorAll("#conditionTabs .tab").forEach(btn => {
       btn.onclick = () => {
         document.querySelectorAll("#conditionTabs .tab").forEach(b => b.classList.remove("active"));
@@ -310,7 +293,7 @@
       };
     });
 
-    // Auth
+    // ===== Auth =====
     loginBtn.onclick = async () => {
       const provider = new GoogleAuthProvider();
       try{
@@ -322,16 +305,11 @@
     };
 
     logoutBtn.onclick = async () => {
-      try{
-        await signOut(auth);
-      }catch(e){
-        console.error("LOGOUT_ERROR", e);
-      }
+      try{ await signOut(auth); } catch(e){ console.error("LOGOUT_ERROR", e); }
     };
 
     onAuthStateChanged(auth, async (user) => {
       currentUser = user;
-
       if(user){
         loginBtn.classList.add("hidden");
         logoutBtn.classList.remove("hidden");
@@ -349,29 +327,21 @@
     closeDetailBtn.onclick = () => {
       selectedItemId = null;
       selectedItemData = null;
-      cachedOwnerEmail = null;
-      cachedOwnerEmailItemId = null;
       detailBox.classList.add("hidden");
       detailEmpty.classList.remove("hidden");
     };
 
-    async function getOwnerEmailPrivate(itemId){
-      if(cachedOwnerEmailItemId === itemId && cachedOwnerEmail) return cachedOwnerEmail;
+    // ===== helpers: offer count (MVP) =====
+    async function countOffers(itemId){
       try{
-        const priv = await getDoc(doc(db, "itemsPrivate", itemId));
-        if(priv.exists()){
-          const email = priv.data().ownerEmail ?? "";
-          cachedOwnerEmail = email;
-          cachedOwnerEmailItemId = itemId;
-          return email;
-        }
-      }catch(e){
-        console.error("READ_ITEMS_PRIVATE_ERROR", e);
+        const snap = await getDocs(collection(db, "items", itemId, "offers"));
+        return snap.size;
+      }catch{
+        return 0;
       }
-      return "";
     }
 
-    // Delete/Edit
+    // ===== Delete/Edit =====
     async function deleteItem(itemId){
       if(!currentUser){ alert("ログインしてください。"); return; }
       if(!confirm("本当に削除しますか？（画像も削除します）")) return;
@@ -392,14 +362,15 @@
 
         alert("削除しました。");
         if(selectedItemId === itemId){
-          selectedItemId = null; selectedItemData = null;
-          cachedOwnerEmail = null; cachedOwnerEmailItemId = null;
-          detailBox.classList.add("hidden"); detailEmpty.classList.remove("hidden");
+          selectedItemId = null;
+          selectedItemData = null;
+          detailBox.classList.add("hidden");
+          detailEmpty.classList.remove("hidden");
         }
         await loadItems();
       }catch(e){
         console.error("DELETE_ITEM_ERROR", e);
-        alert(`削除に失敗しました\ncode: ${e.code ?? "unknown"}\nmessage: ${e.message ?? ""}`);
+        alert("削除に失敗しました。Rulesをご確認ください。");
       }
     }
 
@@ -426,11 +397,11 @@
         if(selectedItemId === itemId) await openDetail(itemId);
       }catch(e){
         console.error("EDIT_ITEM_ERROR", e);
-        alert(`更新に失敗しました\ncode: ${e.code ?? "unknown"}\nmessage: ${e.message ?? ""}`);
+        alert("更新に失敗しました。Rulesをご確認ください。");
       }
     }
 
-    // Create item (ownerEmail -> itemsPrivate)
+    // ===== Create item (ownerEmail -> itemsPrivate) =====
     uploadItemBtn.onclick = async () => {
       if(!currentUser){ alert("先にログインしてください。"); return; }
 
@@ -446,23 +417,17 @@
       let f;
       try{
         f = await ensureUnderLimit(file);
-      }catch(err){
-        if(String(err?.message ?? err) === "too-large-after-compress"){
-          alert("画像が大きすぎます。別の画像でお試しください（目安：スマホ撮影のままでもOK）。");
-        }else{
-          alert("画像処理に失敗しました。別の画像でお試しください。");
-        }
-        console.error("IMAGE_PROCESS_ERROR", err);
+      }catch(e){
+        alert("画像が大きすぎます。別の画像でお試しください。");
+        console.error("IMAGE_PROCESS_ERROR", e);
         return;
       }
 
       try{
         const imagePath = `items/${currentUser.uid}/${Date.now()}-${f.name}`;
         const storageRef = ref(storage, imagePath);
-
-        // 정확히 어디서 실패하는지 분리
-        await uploadBytes(storageRef, f).catch(e => { throw { step:"Storage upload", e }; });
-        const url = await getDownloadURL(storageRef).catch(e => { throw { step:"Storage getDownloadURL", e }; });
+        await uploadBytes(storageRef, f);
+        const url = await getDownloadURL(storageRef);
 
         const itemRef = await addDoc(collection(db, "items"), {
           title: titleText,
@@ -472,31 +437,29 @@
           condition: selectedCondition,
           ownerUid: currentUser.uid,
           status: "active",
-          offersCount: 0,
           acceptedOfferId: null,
           acceptedAt: null,
           createdAt: serverTimestamp()
-        }).catch(e => { throw { step:"Firestore addDoc(items)", e }; });
+        });
 
         await setDoc(doc(db, "itemsPrivate", itemRef.id), {
           ownerUid: currentUser.uid,
           ownerEmail: currentUser.email ?? "",
           createdAt: serverTimestamp()
-        }).catch(e => { throw { step:"Firestore setDoc(itemsPrivate)", e }; });
+        });
 
         alert("出品が完了しました。");
         fileItem.value = ""; titleItem.value = ""; descItem.value = "";
 
         await loadItems();
         await openDetail(itemRef.id);
-      }catch(pack){
-        const step = pack?.step ?? "unknown";
-        const e = pack?.e ?? pack;
-        console.error("CREATE_ITEM_ERROR", step, e);
-        alert(`出品に失敗しました（${step}）\ncode: ${e.code ?? "unknown"}\nmessage: ${e.message ?? ""}`);
+      }catch(e){
+        console.error("CREATE_ITEM_ERROR", e);
+        alert("出品に失敗しました。Storage / Firestore ルールをご確認ください。");
       }
     };
 
+    // ===== load items =====
     async function loadItems(){
       listEl.innerHTML = "";
 
@@ -513,12 +476,14 @@
         return;
       }
 
-      snap.forEach(docSnap => {
+      // MVP: 각 item의 offers 수를 서브컬렉션에서 계산(정확)
+      for(const docSnap of snap.docs){
         const id = docSnap.id;
         const data = docSnap.data();
         const st = statusLabel(data.status);
-        const offersCount = Number(data.offersCount ?? 0);
         const isOwner = currentUser && currentUser.uid === data.ownerUid;
+
+        const offersCount = await countOffers(id);
 
         listEl.innerHTML += `
           <div class="itemCard">
@@ -541,17 +506,16 @@
             ${data.image ? `<img class="thumb" src="${data.image}" alt="">` : ""}
           </div>
         `;
-      });
+      }
 
       document.querySelectorAll("[data-open]").forEach(btn => btn.onclick = () => openDetail(btn.dataset.open));
       document.querySelectorAll("[data-delete]").forEach(btn => btn.onclick = () => deleteItem(btn.dataset.delete));
       document.querySelectorAll("[data-edit]").forEach(btn => btn.onclick = () => editItem(btn.dataset.edit));
     }
 
+    // ===== open detail =====
     async function openDetail(itemId){
       selectedItemId = itemId;
-      cachedOwnerEmail = null;
-      cachedOwnerEmailItemId = null;
 
       try{
         const itemDoc = await getDoc(doc(db, "items", itemId));
@@ -574,106 +538,134 @@
         detailStatusPill.className = `pill ${st.cls}`;
         detailStatusPill.textContent = st.text;
 
-        detailOffersPill.textContent = `提案 ${Number(selectedItemData.offersCount ?? 0)}件`;
+        const offersCount = await countOffers(itemId);
+        detailOffersPill.textContent = `提案 ${offersCount}件`;
 
         await loadOffers();
       }catch(e){
         console.error("OPEN_DETAIL_ERROR", e);
-        alert(`詳細の取得に失敗しました\ncode: ${e.code ?? "unknown"}\nmessage: ${e.message ?? ""}`);
+        alert("詳細の取得に失敗しました。");
+      }
+    }
+
+    // ===== accept offer (OWNER ONLY) ✅ 여기 추가된 핵심 =====
+    async function acceptOffer(offerId){
+      if(!currentUser || !selectedItemId || !selectedItemData){
+        alert("ログイン状態または選択状態を確認してください。");
+        return;
+      }
+
+      if(selectedItemData.ownerUid !== currentUser.uid){
+        alert("出品者のみ操作できます。");
+        return;
+      }
+
+      try{
+        const offerRef = doc(db, "items", selectedItemId, "offers", offerId);
+        const itemRef  = doc(db, "items", selectedItemId);
+
+        const batch = writeBatch(db);
+
+        batch.update(offerRef, { status: "accepted" });
+        batch.update(itemRef, {
+          status: "done",
+          acceptedOfferId: offerId,
+          acceptedAt: serverTimestamp()
+        });
+
+        await batch.commit();
+
+        alert("この提案を受諾しました。");
+        await openDetail(selectedItemId);
+        await loadItems();
+      }catch(e){
+        console.error("ACCEPT_OFFER_ERROR", e);
+        alert("受諾に失敗しました。Rulesをご確認ください。");
       }
     }
 
     // ===== submit offer =====
-submitOfferBtn.onclick = async () => {
-  if (!currentUser) {
-    alert("先にログインしてください。");
-    return;
-  }
-  if (!selectedItemId || !selectedItemData) {
-    alert("出品を選択してください。");
-    return;
-  }
-  if (selectedItemData.ownerUid && selectedItemData.ownerUid === currentUser.uid) {
-    alert("自分の出品には提案できません。");
-    return;
-  }
+    submitOfferBtn.onclick = async () => {
+      if (!currentUser) {
+        alert("先にログインしてください。");
+        return;
+      }
+      if (!selectedItemId || !selectedItemData) {
+        alert("出品を選択してください。");
+        return;
+      }
+      if (selectedItemData.ownerUid && selectedItemData.ownerUid === currentUser.uid) {
+        alert("自分の出品には提案できません。");
+        return;
+      }
 
-  const f = fileOffer.files[0];
-  const offerTitleText = titleOffer.value.trim();
-  const offerMsgText = msgOffer.value.trim();
+      const raw = fileOffer.files[0];
+      const offerTitleText = titleOffer.value.trim();
+      const offerMsgText = msgOffer.value.trim();
 
-  if (!f || !offerTitleText) {
-    alert("提案アイテムの画像とタイトルを入力してください。");
-    return;
-  }
+      if (!raw || !offerTitleText) {
+        alert("提案アイテムの画像とタイトルを入力してください。");
+        return;
+      }
 
-  // ✅ 용량 제한(원하면 5MB로 완화) — 필요 없으면 삭제 가능
-  const MAX = 5 * 1024 * 1024; // 5MB
-  if (f.size > MAX) {
-    alert("※画像サイズは5MB以下でアップロードしてください");
-    return;
-  }
+      let f;
+      try{
+        f = await ensureUnderLimit(raw);
+      }catch(e){
+        alert("画像が大きすぎます。別の画像でお試しください。");
+        console.error("OFFER_IMAGE_PROCESS_ERROR", e);
+        return;
+      }
 
-  // ✅ ownerEmail 확보: (1) itemsPrivate에서 가져오기 시도 → (2) 공개 items의 ownerEmail fallback
-  let ownerEmail = "";
-  try {
-    // 당신이 items/{itemId}/itemPrivate/main 구조를 쓰는 경우에만 성공함
-    const privSnap = await getDoc(doc(db, "items", selectedItemId, "itemPrivate", "main"));
-    if (privSnap.exists()) ownerEmail = privSnap.data().ownerEmail ?? "";
-  } catch (e) {
-    ownerEmail = "";
-  }
-  if (!ownerEmail) ownerEmail = selectedItemData.ownerEmail ?? "";
+      // ownerEmail을 itemsPrivate/{itemId}에서 가져오기 (rules와 일치)
+      let ownerEmail = "";
+      try{
+        const privSnap = await getDoc(doc(db, "itemsPrivate", selectedItemId));
+        if(privSnap.exists()) ownerEmail = privSnap.data().ownerEmail ?? "";
+      }catch(e){
+        ownerEmail = "";
+      }
 
-  try {
-    // 1) upload offer image
-    const path = `offers/${currentUser.uid}/${Date.now()}-${f.name}`;
-    const storageRef = ref(storage, path);
-    await uploadBytes(storageRef, f);
-    const url = await getDownloadURL(storageRef);
+      try {
+        // 1) upload offer image
+        const path = `offers/${currentUser.uid}/${Date.now()}-${f.name}`;
+        const storageRef = ref(storage, path);
+        await uploadBytes(storageRef, f);
+        const url = await getDownloadURL(storageRef);
 
-    // 2) 공개 offer doc
-    const offerRef = await addDoc(collection(db, "items", selectedItemId, "offers"), {
-      proposerUid: currentUser.uid,
-      offerTitle: offerTitleText,
-      offerCondition: selectedOfferCondition,
-      offerImage: url,
-      status: "pending", // pending | accepted | rejected
-      createdAt: serverTimestamp()
-    });
+        // 2) public offer doc
+        const offerRef = await addDoc(collection(db, "items", selectedItemId, "offers"), {
+          proposerUid: currentUser.uid,
+          offerTitle: offerTitleText,
+          offerCondition: selectedOfferCondition,
+          offerImage: url,
+          status: "pending",
+          createdAt: serverTimestamp()
+        });
 
-    // 3) 비공개 offer doc (연락처/메시지)
-    await setDoc(doc(db, "items", selectedItemId, "offersPrivate", offerRef.id), {
-      proposerEmail: currentUser.email ?? "",
-      ownerEmail: ownerEmail,                 // ✅ 추가 (상대방 To 채우기용)
-      message: offerMsgText,
-      createdAt: serverTimestamp()
-    });
+        // 3) private offer doc (accepted 후에만 당사자 read)
+        await setDoc(doc(db, "items", selectedItemId, "offersPrivate", offerRef.id), {
+          proposerEmail: currentUser.email ?? "",
+          ownerEmail: ownerEmail,
+          message: offerMsgText,
+          createdAt: serverTimestamp()
+        });
 
-    // 4) 아이템 요약 업데이트
-    await updateDoc(doc(db, "items", selectedItemId), {
-      offersCount: increment(1),
-      status: "dealing"
-    });
+        alert("交換提案の出品が完了しました。");
 
-    // ✅ 완료 메시지 수정
-    alert("交換提案の出品が完了しました。");
+        fileOffer.value = "";
+        titleOffer.value = "";
+        msgOffer.value = "";
 
-    // reset UI
-    fileOffer.value = "";
-    titleOffer.value = "";
-    msgOffer.value = "";
+        await openDetail(selectedItemId);
+        await loadItems();
+      } catch (e) {
+        console.error("SUBMIT_OFFER_ERROR", e);
+        alert("提案に失敗しました。Storage / Firestore ルールをご確認ください。");
+      }
+    };
 
-    // refresh
-    await openDetail(selectedItemId);
-    await loadItems();
-  } catch (e) {
-    alert("提案に失敗しました。Storage / Firestore ルールをご確認ください。");
-    console.error(e);
-  }
-};
-
-
+    // ===== load offers (公開一覧) =====
     async function loadOffers(){
       offersList.innerHTML = "";
 
@@ -705,19 +697,19 @@ submitOfferBtn.onclick = async () => {
         const isProposer = !!(currentUser && d.proposerUid === currentUser.uid);
         const canContact = (offerStatus === "accepted") && (isOwner || isProposer);
 
+        // accepted 당사자만 offersPrivate 읽기
         let proposerEmail = "";
+        let ownerEmail = "";
         if(canContact){
           try{
             const priv = await getDoc(doc(db, "items", selectedItemId, "offersPrivate", offerId));
-            if(priv.exists()) proposerEmail = priv.data().proposerEmail ?? "";
+            if(priv.exists()){
+              proposerEmail = priv.data().proposerEmail ?? "";
+              ownerEmail = priv.data().ownerEmail ?? "";
+            }
           }catch(e){
             console.error("READ_OFFERS_PRIVATE_ERROR", e);
           }
-        }
-
-        let ownerEmail = "";
-        if(canContact){
-          ownerEmail = await getOwnerEmailPrivate(selectedItemId);
         }
 
         const baseMsg =
