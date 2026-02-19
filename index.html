@@ -225,10 +225,7 @@
       window.open(url, "_blank");
     }
 
-    function openLineShare({ text }) {
-      const url = `https://social-plugins.line.me/lineit/share?text=${encodeURIComponent(text)}`;
-      window.open(url, "_blank");
-    }
+    
 
     // ===== 무료 브라우저 자동 리사이즈(Canvas) =====
     async function compressImage(file, { maxSide = 1600, quality = 0.78 } = {}){
@@ -727,7 +724,6 @@
         const contactButtons = canContact ? `
           <div class="twoBtns" style="margin-top:10px;">
             <button class="primary" data-mail="${offerId}">Gmailで連絡</button>
-            <button class="ghost" data-line="${offerId}">LINEで連絡</button>
           </div>
           <div class="muted small" style="margin-top:6px;">
             ※Gmailの作成画面が開きます。内容をご確認のうえ送信してください。
@@ -769,9 +765,7 @@
             };
           }
 
-          const lineEl = document.querySelector(`button[data-line="${offerId}"]`);
-          if(lineEl){
-            lineEl.onclick = () => openLineShare({ text: baseMsg });
+          
           }
         }, 0);
       }
