@@ -745,28 +745,7 @@
           </div>
         `;
 
-        setTimeout(() => {
-          const acceptEl = document.querySelector(`button[data-accept="${offerId}"]`);
-          if(acceptEl) acceptEl.onclick = () => acceptOffer(offerId);
-
-          const mailEl = document.querySelector(`button[data-mail="${offerId}"]`);
-          if(mailEl){
-            mailEl.onclick = () => {
-              const to = isOwner ? proposerEmail : ownerEmail;
-              if(!to){
-                alert("連絡先が取得できません（Rules設定をご確認ください）");
-                return;
-              }
-              openGmailCompose({
-                to,
-                subject: `【もったいないベビー】交換成立：${selectedItemData.title}`,
-                body: baseMsg
-              });
-            };
-          }
-
-          
-          }
+        √
         }, 0);
       }
 
@@ -775,4 +754,3 @@
   </script>
 </body>
 </html>
-HELLO
