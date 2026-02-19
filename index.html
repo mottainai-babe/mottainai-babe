@@ -221,6 +221,11 @@
       color:#b91c1c;
       font-size:12px;
       margin-top:6px;
+      .detailInline{
+        margin-top: 12px;
+        border-top: 1px solid #eee;
+        padding-top: 12px;
+      }
     }
 
     /* List cards */
@@ -466,6 +471,8 @@
 
     const detailEmpty = document.getElementById("detailEmpty");
     const detailBox = document.getElementById("detailBox");
+    const detailHome = detailBox.parentElement;
+    let openedInlineId = null;
     const closeDetailBtn = document.getElementById("closeDetailBtn");
     const detailTitle = document.getElementById("detailTitle");
     const detailCondition = document.getElementById("detailCondition");
@@ -606,12 +613,23 @@
       if(selectedItemId) await openDetail(selectedItemId);
     });
 
-    closeDetailBtn.onclick = () => {
-      selectedItemId = null;
-      selectedItemData = null;
-      detailBox.classList.add("hidden");
-      detailEmpty.classList.remove("hidden");
-    };
+  closeDetailBtn.onclick = () => {
+  selectedItemId = null;
+  selectedItemData = null;
+
+  // 인라인 영역 숨김
+  if(openedInlineId){
+    const inline = document.getElementById(`detail-${openedInlineId}`);
+    if(inline) inline.classList.add("hidden");
+  }
+  openedInlineId = null;
+
+  // detailBox를 원래 자리로 복귀 + 숨김 처리
+  detailHome.appendChild(detailBox);
+  detailBox.classList.add("hidden");
+  detailEmpty.classList.remove("hidden");
+};
+
 
     // ===== helpers: offer count (MVP) =====
     async function countOffers(itemId){
@@ -743,6 +761,13 @@
 
     // ===== load items =====
     async function loadItems(){
+
+        // ✅ 리스트 다시 그리기 전에 detailBox가 list 안에 있으면 사라지므로, 무조건 홈으로 복귀
+  if(detailBox.parentElement !== detailHome){
+    detailHome.appendChild(detailBox);
+  }
+  openedInlineId = null;
+
       listEl.innerHTML = "";
 
       let snap;
@@ -780,7 +805,10 @@
                   <button class="btn btnDanger" data-delete="${id}">削除</button>
                 ` : ``}
               </div>
+ 
             </div>
+            <div id="detail-${id}" class="detailInline hidden"></div>
+
 
             <h3 class="itemTitle">${escapeHtml(data.title ?? "")}</h3>
             <p class="muted" style="margin:0;">状態：<b>${escapeHtml(data.condition ?? "未設定")}</b></p>
@@ -823,6 +851,25 @@
         detailOffersPill.textContent = `提案 ${offersCount}件`;
 
         await loadOffers();
+                // ✅ 인라인 상세 영역(해당 글 바로 아래)로 detailBox 이동 + 스크롤
+        const inline = document.getElementById(`detail-${itemId}`);
+        if(inline){
+          // 다른 인라인 열려있으면 닫기
+          if(openedInlineId && openedInlineId !== itemId){
+            const prev = document.getElementById(`detail-${openedInlineId}`);
+            if(prev) prev.classList.add("hidden");
+          }
+
+          inline.classList.remove("hidden");
+          inline.appendChild(detailBox);
+          openedInlineId = itemId;
+
+          // 사용자가 바로 보게 이동
+          inline.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+
+        
       }catch(e){
         console.error("OPEN_DETAIL_ERROR", e);
         alert("詳細の取得に失敗しました。");
