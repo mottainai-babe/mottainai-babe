@@ -687,14 +687,34 @@
       return {text:"出品中", cls:"gray"};
     }
 
-    function openGmailCompose({ to, subject, body }) {
-      const url =
-        "https://mail.google.com/mail/?view=cm&fs=1" +
-        `&to=${encodeURIComponent(to)}` +
-        `&su=${encodeURIComponent(subject)}` +
-        `&body=${encodeURIComponent(body)}`;
-      window.open(url, "_blank");
-    }
+   function isMobileDevice(){
+  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+}
+
+function openGmailCompose({ to, subject, body }) {
+  // 1) 모바일: mailto 가 제일 안정적 (Gmail 앱/메일 앱 둘 중 하나로 연결됨)
+  if (isMobileDevice()) {
+    const mailto =
+      `mailto:${encodeURIComponent(to)}` +
+      `?subject=${encodeURIComponent(subject)}` +
+      `&body=${encodeURIComponent(body)}`;
+
+    // iOS에서 window.open은 막히는 경우가 많아서 location으로 이동이 더 안정적
+    window.location.href = mailto;
+    return;
+  }
+
+  // 2) 데스크탑: Gmail 웹 작성 화면
+  const url =
+    "https://mail.google.com/mail/?view=cm&fs=1" +
+    `&to=${encodeURIComponent(to)}` +
+    `&su=${encodeURIComponent(subject)}` +
+    `&body=${encodeURIComponent(body)}`;
+
+  // 팝업 차단 우회: 새 탭이 막히면 현재 탭으로라도 이동
+  const w = window.open(url, "_blank");
+  if (!w) window.location.href = url;
+}
 
     // ===== 무료 브라우저 자동 리사이즈(Canvas) =====
     async function compressImage(file, { maxSide = 1600, quality = 0.78 } = {}){
