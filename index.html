@@ -473,7 +473,7 @@ gtag('config', 'G-QVWCBQZP1T');
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-    import { getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+   import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
     import {
       getFirestore, collection, doc, addDoc, setDoc, getDoc, getDocs, query, orderBy,
       updateDoc, deleteDoc, serverTimestamp, writeBatch
@@ -490,7 +490,6 @@ gtag('config', 'G-QVWCBQZP1T');
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    getRedirectResult(auth).catch(console.error);
     const db = getFirestore(app);
     const storage = getStorage(app);
 
@@ -629,14 +628,14 @@ gtag('config', 'G-QVWCBQZP1T');
 
     // ===== Auth =====
     loginBtn.onclick = async () => {
-      const provider = new GoogleAuthProvider();
-      try{
-        await signInWithRedirect(auth, provider);
-      }catch(e){
-        console.error("LOGIN_ERROR", e);
-        alert("ログインに失敗しました。ポップアップブロック等をご確認ください。");
-      }
-    };
+  const provider = new GoogleAuthProvider();
+  try{
+    await signInWithPopup(auth, provider);
+  }catch(e){
+    console.error("LOGIN_ERROR", e);
+    alert("ログインに失敗しました。ポップアップブロックをご確認ください。");
+  }
+};
 
     logoutBtn.onclick = async () => {
       try{ await signOut(auth); } catch(e){ console.error("LOGOUT_ERROR", e); }
