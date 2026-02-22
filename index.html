@@ -3,11 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>もったいないベビー｜ベビー用品ゆずりあい</title>
 
-  <!-- Google AdSense (site ownership / ads) -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5865479939175622"
-     crossorigin="anonymous"></script>
+  <title>もったいないベビー｜ベビー用品ゆずりあい</title>
 
   <style>
     :root{
@@ -17,22 +14,13 @@
       --muted:#6b7280;
       --line:#e5e7eb;
 
-      /* Brand (Green) */
       --primary:#1f8f5a;
       --primary-2:#167247;
       --primary-soft:#e8f6ef;
 
-      --danger:#ef4444;
-      --ghost:#f3f4f6;
-
       --radius:18px;
-      --radius-sm:14px;
       --shadow:0 8px 24px rgba(17,24,39,.08);
-
-      /* ✅ 스티키 헤더(로고/로그인)가 스크롤을 가리는 문제 보정 */
-      --sticky-offset: 120px; /* 필요하면 100~160 사이로 조절 */
     }
-
     *{box-sizing:border-box}
     body{
       margin:0;
@@ -40,14 +28,16 @@
       color:var(--text);
       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Hiragino Sans","Noto Sans JP",sans-serif;
     }
-
-    a{color:inherit}
-
-    /* Layout */
     .wrap{max-width:1040px;margin:0 auto;padding:18px 14px 40px}
-    @media (min-width:860px){ .wrap{padding:24px 18px 60px} }
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .cardPad{padding:16px}
+    @media (min-width:860px){ .cardPad{padding:20px} }
 
-    /* Header */
     .topbar{
       position:sticky;top:0;z-index:5;
       background:rgba(246,247,248,.86);
@@ -59,31 +49,18 @@
       padding:10px 14px;
       display:flex;align-items:center;justify-content:space-between;gap:10px;
     }
-    .brand{
-      display:flex;align-items:center;gap:10px;min-width:0;
-      text-decoration:none;
-    }
+    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
     .logo{
       width:38px;height:38px;border-radius:12px;
       background:var(--primary-soft);
       border:1px solid rgba(31,143,90,.18);
-      display:flex;align-items:center;justify-content:center;
       overflow:hidden;flex:0 0 auto;
+      display:flex;align-items:center;justify-content:center;
     }
     .logo img{width:100%;height:100%;object-fit:cover;display:block}
-    .brandText{min-width:0}
-    .brandName{
-      font-weight:900;letter-spacing:.2px;
-      line-height:1.1;
-      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-    }
-    .brandTag{
-      font-size:12px;color:var(--muted);
-      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-    }
+    .brandName{font-weight:900;line-height:1.1}
+    .brandTag{font-size:12px;color:var(--muted)}
 
-    /* Buttons */
-    button{font-family:inherit}
     .btn{
       border:none;cursor:pointer;
       border-radius:999px;
@@ -97,1093 +74,249 @@
     .btn:active{transform:translateY(1px)}
     .btnPrimary{background:var(--primary);color:#fff}
     .btnPrimary:hover{background:var(--primary-2)}
-    .btnGhost{background:var(--ghost);color:var(--text)}
+    .btnGhost{background:#f3f4f6;color:var(--text)}
     .btnGhost:hover{filter:brightness(.97)}
-    .btnDanger{background:var(--danger);color:#fff}
-    .btnDanger:hover{filter:brightness(.95)}
-
-    .pill{
-      display:inline-flex;align-items:center;gap:6px;
-      padding:4px 10px;border-radius:999px;
-      font-size:12px;border:1px solid var(--line);
-      background:#fff;color:var(--text);
-    }
-    .pill.gray{background:#f3f4f6;border-color:#e5e7eb;color:#374151}
-    .pill.blue{background:#eff6ff;border-color:#bfdbfe;color:#1d4ed8}
-    .pill.green{background:#ecfdf5;border-color:#a7f3d0;color:#047857}
-
-    .muted{color:var(--muted)}
-    .small{font-size:12px}
-
-    /* Cards */
-    .card{
-      background:var(--card);
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-    }
-    .cardPad{padding:16px}
-    @media (min-width:860px){ .cardPad{padding:20px} }
-
-    /* Hero */
-    .hero{
-      margin-top:14px;
-      display:grid;gap:12px;
-    }
-    .heroTop{
-      display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;
-    }
-    .heroTitle{
-      margin:0;
-      font-size:20px;
-      line-height:1.15;
-      letter-spacing:.2px;
-    }
-    @media (min-width:860px){ .heroTitle{font-size:26px} }
-
-    .heroDesc{margin:8px 0 0;color:var(--muted);line-height:1.5}
-
-    /* Auth row */
-    .authRow{
-      margin-top:12px;
-      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
-    }
-    .authState{
-      font-size:13px;color:var(--muted);
-      padding:6px 10px;border-radius:999px;border:1px dashed rgba(107,114,128,.35);
-      background:#fff;
-    }
-
-    /* Main grid */
-    .grid{
-      margin-top:14px;
-      display:grid;
-      gap:14px;
-    }
-    @media (min-width:980px){
-      .grid{
-        grid-template-columns: 1.05fr .95fr;
-        align-items:start;
-      }
-    }
-
-    /* Section titles */
-    .secTitle{
-      margin:0 0 10px;
-      font-size:16px;
-    }
-    .divider{height:1px;background:var(--line);margin:14px 0}
-
-    /* Tabs */
-    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 8px}
-    .tab{
-      border:1px solid var(--line);
-      background:#fff;
-      color:var(--text);
-      border-radius:999px;
-      padding:9px 12px;
-      font-size:13px;
-      cursor:pointer;
-      transition:.15s ease;
-    }
-    .tab:hover{filter:brightness(.98)}
-    .tab.active{
-      background:var(--primary-soft);
-      border-color:rgba(31,143,90,.35);
-      color:var(--primary-2);
-      font-weight:700;
-    }
-
-    /* Inputs */
-    input,textarea{
-      width:100%;
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:11px 12px;
-      font-size:14px;
-      background:#fff;
-      outline:none;
-    }
-    input:focus,textarea:focus{
-      border-color:rgba(31,143,90,.45);
-      box-shadow:0 0 0 4px rgba(31,143,90,.12);
-    }
-    textarea{min-height:84px;resize:vertical}
-
-    .helpBox{
-      margin-top:8px;
-      padding:10px 12px;
-      border-radius:14px;
-      background:var(--primary-soft);
-      border:1px solid rgba(31,143,90,.22);
-      color:#065f46;
-      font-size:12px;
-      line-height:1.45;
-    }
-    .warn{
-      color:#b91c1c;
-      font-size:12px;
-      margin-top:6px;
-    }
-
-    /* List cards */
-    .itemsWrap{margin-top:12px}
-    .itemCard{
-      border-top:1px solid var(--line);
-      padding-top:14px;
-      margin-top:14px;
-    }
-    .itemHead{
-      display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
-    }
-    .itemTitle{
-      margin:10px 0 6px;
-      font-size:16px;
-      line-height:1.25;
-    }
-    .thumb{
-      width:180px;max-width:100%;
-      border-radius:16px;
-      margin-top:10px;
-      display:block;
-      border:1px solid rgba(229,231,235,.8);
-      background:#fafafa;
-      overflow:hidden;
-    }
-
-    /* Detail box */
-    .detailTitle{
-      margin:10px 0 6px;
-      font-size:18px;
-      line-height:1.25;
-    }
-
-    .offerBox{
-      border:1px solid rgba(229,231,235,.9);
-      border-radius:16px;
-      padding:12px;
-      margin-top:12px;
-      background:#fff;
-    }
-    .offerTop{
-      display:flex;gap:12px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;
-    }
-    .twoBtns{display:flex;gap:10px;flex-wrap:wrap}
-    .right{text-align:right}
-
     .hidden{display:none}
 
-    /* Footer */
-    footer{
-      margin-top:28px;
-      padding:26px 16px;
+    .intro{
+      margin-top:14px;
+      display:grid;gap:12px;
       text-align:center;
-      color:var(--muted);
-      font-size:14px;
-      border-top:1px solid rgba(229,231,235,.85);
+    }
+    .introHero{
+      padding:26px 18px;
+      background:linear-gradient(180deg, rgba(31,143,90,.18), rgba(255,255,255,0));
+      border:1px solid rgba(31,143,90,.18);
+      border-radius:20px;
+    }
+    .introLogo{
+      width:120px;height:120px;border-radius:24px;
+      overflow:hidden;margin:0 auto 14px;
+      border:1px solid rgba(229,231,235,.8);
       background:#fff;
     }
-    .footerLinks a{
-      color:var(--primary);
-      text-decoration:none;
-      margin:0 10px;
-    }
-    .footerLinks a:hover{text-decoration:underline}
+    .introLogo img{width:100%;height:100%;object-fit:cover;display:block}
+    .introTitle{margin:0;font-size:22px;line-height:1.25}
+    .introDesc{margin:10px 0 0;color:var(--muted);line-height:1.6}
+    .introBtns{margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 
-    /* ✅ scrollIntoView가 너무 위로 붙지 않도록 */
-    #detailBox, .inlineDetailMount{
-      scroll-margin-top: var(--sticky-offset);
+    .state{
+      margin-top:10px;
+      font-size:13px;
+      color:var(--muted);
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px dashed rgba(107,114,128,.35);
+      background:#fff;
+      text-align:left;
+      white-space:pre-wrap;
     }
+    .err{color:#b91c1c}
 
-    /* ✅ 상세 상단(성립/제안/닫기) 줄 레이아웃 */
-    .detailTopBar{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      justify-content:space-between;
-      flex-wrap:wrap;
-    }
-    .detailTopLeft{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-
-    /* ✅ 모바일에서 닫기 버튼 아래로 */
-    @media (max-width: 900px){
-      #closeDetailBtn{ width:100%; }
-    }
-
-    /* ✅ 클릭한 글 아래에 상세가 붙는 영역(모바일용) */
-    .inlineDetailMount{
-      margin-top: 12px;
-      border: 1px solid #e5e7eb;
-      border-radius: 16px;
-      padding: 14px;
-      background: #fff;
+    .mainGrid{
+      margin-top:14px;
+      display:grid;gap:14px;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Sticky Header -->
   <header class="topbar">
     <div class="topbarInner">
       <a class="brand" href="./">
-        <div class="logo" aria-hidden="true">
+        <div class="logo">
           <img src="./logo.png" alt="Mottainai Babe">
         </div>
-        <div class="brandText">
+        <div>
           <div class="brandName">もったいないベビー</div>
           <div class="brandTag">ベビー用品ゆずりあい</div>
         </div>
       </a>
 
-      <div class="authRow" style="margin:0;">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
         <button id="loginBtn" class="btn btnPrimary">Googleでログイン</button>
         <button id="logoutBtn" class="btn btnGhost hidden">ログアウト</button>
-        <span class="authState" id="loginState">未ログイン</span>
       </div>
     </div>
   </header>
 
   <main class="wrap">
-    <!-- Hero -->
-    <section class="card cardPad hero">
-      <div class="heroTop">
-        <div style="min-width:0;">
-          <h1 class="heroTitle">ベビー用品を、<span style="color:var(--primary-2);">“もったいない”から“ありがとう”へ</span></h1>
-          <p class="heroDesc">
-            使わなくなったベビー用品を、必要なご家庭へ。<br>
-            出品 → 交換提案 → 成立後に当事者のみ連絡先表示（Gmail作成画面を開きます）
-          </p>
-        </div>
 
-        <div class="pill green" title="Beta">BETA</div>
-      </div>
-
-      <div class="helpBox">
-        ✅ 画像は自動で軽量化してアップロード（上限 5MB）<br>
-        ✅ 提案は公開、連絡先は <b>accepted</b> 後に当事者のみ表示
-      </div>
-    </section>
-
-    <!-- Main grid -->
-    <section class="grid">
-      <!-- LEFT: 出品 -->
-      <div class="card cardPad">
-        <h2 class="secTitle">出品する</h2>
-
-        <div class="tabs" id="conditionTabs">
-          <button type="button" class="tab active" data-value="新品に近い">新品に近い</button>
-          <button type="button" class="tab" data-value="きれい">きれい</button>
-          <button type="button" class="tab" data-value="使用感あり">使用感あり</button>
-        </div>
-
-        <p class="muted" style="margin:0 0 10px;">状態：<b id="conditionLabel">新品に近い</b></p>
-
-        <input type="file" id="fileItem" accept="image/*" />
-        <div class="warn">※上限は5MB（それ以上は失敗する可能性があります）</div>
-
-        <div style="height:10px"></div>
-
-        <input id="titleItem" placeholder="例：ベビーカー（無料）" />
-        <div style="height:10px"></div>
-        <textarea id="descItem" placeholder="説明（任意）例：受け渡し希望エリア、使用期間など"></textarea>
-
-        <div style="height:12px"></div>
-        <button id="uploadItemBtn" class="btn btnPrimary" style="width:100%;">出品する</button>
-
-        <p class="small muted" style="margin:10px 0 0;">
-          出品すると「交換提案」を受け取れます。
+    <!-- Intro (로그인 전) -->
+    <section id="intro" class="intro">
+      <div class="introHero">
+        <div class="introLogo"><img src="./logo.png" alt=""></div>
+        <h1 class="introTitle">“もったいない”から “ありがとう”へ</h1>
+        <p class="introDesc">
+          出品一覧はログインなしでも見られます。<br>
+          出品・提案などの操作はログイン後に使えます。
         </p>
-
-        <div class="divider"></div>
-
-        <h2 class="secTitle" style="margin-bottom:6px;">出品一覧（全体）</h2>
-        <div id="list" class="itemsWrap"></div>
-      </div>
-
-      <!-- RIGHT: Detail (PC에서는 여기 고정, 모바일에서는 mount로 이동됨) -->
-      <div class="card cardPad">
-        <h2 class="secTitle">選択した出品（詳細）</h2>
-        <div id="detailEmpty" class="muted">左の「出品一覧」から商品を選んでください。</div>
-
-        <div id="detailBox" class="hidden">
-          <div class="detailTopBar">
-            <div class="detailTopLeft">
-              <div class="pill gray" id="detailStatusPill">出品中</div>
-              <div class="pill blue" id="detailOffersPill">提案 0件</div>
-            </div>
-            <button id="closeDetailBtn" class="btn btnGhost">閉じる</button>
-          </div>
-
-          <h3 id="detailTitle" class="detailTitle"></h3>
-          <p class="muted" style="margin:0;">状態：<b id="detailCondition"></b></p>
-          <img id="detailImage" class="thumb" alt="" />
-          <p class="muted" id="detailDesc" style="margin-top:10px;line-height:1.6;"></p>
-
-          <div class="divider"></div>
-
-          <h2 class="secTitle">この商品に交換提案する</h2>
-
-          <div class="tabs" id="offerConditionTabs">
-            <button type="button" class="tab active" data-value="新品に近い">新品に近い</button>
-            <button type="button" class="tab" data-value="きれい">きれい</button>
-            <button type="button" class="tab" data-value="使用感あり">使用感あり</button>
-          </div>
-
-          <p class="muted" style="margin:0 0 10px;">提案アイテムの状態：<b id="offerConditionLabel">新品に近い</b></p>
-
-          <input type="file" id="fileOffer" accept="image/*" />
-          <div class="warn">※上限は5MB（それ以上は失敗する可能性があります）</div>
-
-          <div style="height:10px"></div>
-          <input id="titleOffer" placeholder="例：ベビーゲート（きれい）" />
-          <div style="height:10px"></div>
-          <textarea id="msgOffer" placeholder="ひとこと（任意）例：こちらと交換いかがですか？"></textarea>
-
-          <div style="height:12px"></div>
-          <button id="submitOfferBtn" class="btn btnPrimary" style="width:100%;">交換提案を送る</button>
-
-          <div class="divider"></div>
-
-          <h2 class="secTitle" style="margin-bottom:6px;">交換提案一覧（公開）</h2>
-          <div class="muted small" style="line-height:1.5;margin-bottom:10px;">
-            ※提案内容（写真/状態/タイトル/進行状況）は公開。<br>
-            ※連絡先は「accepted」後に当事者のみ表示（Gmail作成画面を開きます）
-          </div>
-          <div id="offersList"></div>
+        <div class="introBtns">
+          <button id="introLoginBtn" class="btn btnPrimary">Googleでログイン</button>
+          <button id="enterBtn" class="btn btnGhost">ログインせずに見る</button>
         </div>
+
+        <div id="debugBox" class="state">状態: 初期化中...</div>
       </div>
     </section>
+
+    <!-- Main (로그인 후/또는 둘러보기) -->
+    <section id="main" class="mainGrid hidden">
+      <div class="card cardPad">
+        <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;">
+          <h2 style="margin:0;">出品一覧</h2>
+          <div style="color:var(--muted);font-size:13px;">
+            ユーザー: <b id="userLabel">未ログイン</b>
+          </div>
+        </div>
+        <div style="margin-top:12px;color:var(--muted);line-height:1.6">
+          ✅ 여기부터는 원래 당신 코드(리스트/상세/업로드)를 다시 붙여 넣으면 됩니다.<br>
+          지금은 로그인 문제 해결을 위해 최소 구조로 둔 상태입니다.
+        </div>
+      </div>
+
+      <div class="card cardPad">
+        <h3 style="margin:0 0 10px;">디버그</h3>
+        <div id="debugBox2" class="state">...</div>
+      </div>
+    </section>
+
   </main>
 
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-    import { getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import {
-      getFirestore, collection, doc, addDoc, setDoc, getDoc, getDocs, query, orderBy,
-      updateDoc, deleteDoc, serverTimestamp, writeBatch
-    } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
-    import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-storage.js";
+      getAuth,
+      GoogleAuthProvider,
+      signInWithPopup,
+      signInWithRedirect,
+      getRedirectResult,
+      onAuthStateChanged,
+      signOut,
+      browserLocalPersistence,
+      setPersistence
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
+    // ✅ 당신이 올린 설정값 기반 (필요하면 Firebase 콘솔 값과 1글자라도 다르면 안됨)
     const firebaseConfig = {
       apiKey: "AIzaSyAEk6aDtbuXU9K2bUnygYBqHMh75MeOlFU",
-      authDomain: "mottainai-babe.web.app",
+      authDomain: "mottainai-babe.firebaseapp.com",
       projectId: "mottainai-babe",
+      // 아래는 Storage용. 로그인만이면 큰 영향 없지만, 나중에 업로드를 위해 둘 중 하나로 통일 권장:
+      // storageBucket: "mottainai-babe.appspot.com",
       storageBucket: "mottainai-babe.firebasestorage.app",
       appId: "1:752649559489:web:1288d8adeef7280eb7a340"
     };
 
+    const intro = document.getElementById("intro");
+    const main = document.getElementById("main");
+    const loginBtn = document.getElementById("loginBtn");
+    const introLoginBtn = document.getElementById("introLoginBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const enterBtn = document.getElementById("enterBtn");
+    const userLabel = document.getElementById("userLabel");
+    const debugBox = document.getElementById("debugBox");
+    const debugBox2 = document.getElementById("debugBox2");
+
+    function logDebug(msg, isError=false){
+      const line = (isError ? "❌ " : "✅ ") + msg;
+      debugBox.textContent = debugBox.textContent + "\n" + line;
+      debugBox2.textContent = debugBox2.textContent + "\n" + line;
+      if(isError){
+        debugBox.classList.add("err");
+      }
+      console.log(line);
+    }
+
+    // init
+    debugBox.textContent = `状態: Firebase初期化中...
+host: ${location.host}
+origin: ${location.origin}
+`;
+
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    getRedirectResult(auth)
-  .then((result) => {
-    if (result && result.user) {
-      console.log("LOGIN SUCCESS", result.user);
-    }
-  })
-  .catch((error) => {
-    console.error("REDIRECT ERROR", error);
-  });
-    getRedirectResult(auth).catch(console.error);
-    const db = getFirestore(app);
-    const storage = getStorage(app);
-
-    const loginBtn = document.getElementById("loginBtn");
-    const logoutBtn = document.getElementById("logoutBtn");
-    const loginState = document.getElementById("loginState");
-
-    const uploadItemBtn = document.getElementById("uploadItemBtn");
-    const fileItem = document.getElementById("fileItem");
-    const titleItem = document.getElementById("titleItem");
-    const descItem = document.getElementById("descItem");
-    const listEl = document.getElementById("list");
-
-    const detailEmpty = document.getElementById("detailEmpty");
-    const detailBox = document.getElementById("detailBox");
-
-    // ✅ detailBox 원래 자리(PC 오른쪽)를 기억하는 마커
-    const detailHomeMarker = document.createElement("div");
-    detailHomeMarker.id = "detailHomeMarker";
-    detailBox.parentElement.insertBefore(detailHomeMarker, detailBox);
-
-    function moveDetailHome(){
-      if(detailHomeMarker && detailHomeMarker.parentElement){
-        detailHomeMarker.parentElement.insertBefore(detailBox, detailHomeMarker.nextSibling);
-      }
-    }
-
-    const closeDetailBtn = document.getElementById("closeDetailBtn");
-    const detailTitle = document.getElementById("detailTitle");
-    const detailCondition = document.getElementById("detailCondition");
-    const detailImage = document.getElementById("detailImage");
-    const detailDesc = document.getElementById("detailDesc");
-    const detailStatusPill = document.getElementById("detailStatusPill");
-    const detailOffersPill = document.getElementById("detailOffersPill");
-
-    const offersList = document.getElementById("offersList");
-    const fileOffer = document.getElementById("fileOffer");
-    const titleOffer = document.getElementById("titleOffer");
-    const msgOffer = document.getElementById("msgOffer");
-    const submitOfferBtn = document.getElementById("submitOfferBtn");
-
-    let currentUser = null;
-    let selectedCondition = "新品に近い";
-    let selectedOfferCondition = "新品に近い";
-    let selectedItemId = null;
-    let selectedItemData = null;
-
-    const MAX_BYTES = 5 * 1024 * 1024;
-
-    function escapeHtml(str){
-      return String(str ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-    }
-
-    function statusLabel(status){
-      if(status === "done") return {text:"成立", cls:"green"};
-      if(status === "dealing") return {text:"交渉中", cls:"blue"};
-      return {text:"出品中", cls:"gray"};
-    }
-
-    function openGmailCompose({ to, subject, body }) {
-      const url =
-        "https://mail.google.com/mail/?view=cm&fs=1" +
-        `&to=${encodeURIComponent(to)}` +
-        `&su=${encodeURIComponent(subject)}` +
-        `&body=${encodeURIComponent(body)}`;
-      window.open(url, "_blank");
-    }
-
-    // ===== 무료 브라우저 자동 리사이즈(Canvas) =====
-    async function compressImage(file, { maxSide = 1600, quality = 0.78 } = {}){
-      if(file.type === "image/svg+xml") return file;
-
-      const bitmap = await createImageBitmap(file);
-      let { width, height } = bitmap;
-
-      const scale = Math.min(1, maxSide / Math.max(width, height));
-      const w = Math.round(width * scale);
-      const h = Math.round(height * scale);
-
-      const canvas = document.createElement("canvas");
-      canvas.width = w;
-      canvas.height = h;
-
-      const ctx = canvas.getContext("2d");
-      ctx.drawImage(bitmap, 0, 0, w, h);
-
-      const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/jpeg", quality));
-      if(!blob) return file;
-
-      const newName = (file.name.replace(/\.[^/.]+$/, "")) + ".jpg";
-      return new File([blob], newName, { type: "image/jpeg" });
-    }
-
-    async function ensureUnderLimit(file){
-      if(!file) throw new Error("no-file");
-      if(file.size <= MAX_BYTES) return file;
-
-      let quality = 0.82;
-      let maxSide = 1800;
-
-      let current = file;
-      for(let i=0; i<5; i++){
-        current = await compressImage(current, { maxSide, quality });
-        if(current.size <= MAX_BYTES) return current;
-        quality -= 0.12;
-        maxSide -= 250;
-        if(quality < 0.35) quality = 0.35;
-        if(maxSide < 900) maxSide = 900;
-      }
-      throw new Error("too-large-after-compress");
-    }
-
-    // ===== Tabs =====
-    document.querySelectorAll("#conditionTabs .tab").forEach(btn => {
-      btn.onclick = () => {
-        document.querySelectorAll("#conditionTabs .tab").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        selectedCondition = btn.dataset.value;
-        document.getElementById("conditionLabel").textContent = selectedCondition;
-      };
+    // ✅ 로그인 상태 유지 (새로고침해도 유지)
+    await setPersistence(auth, browserLocalPersistence).catch((e)=>{
+      logDebug("setPersistence error: " + (e?.code || e?.message), true);
     });
 
-    document.querySelectorAll("#offerConditionTabs .tab").forEach(btn => {
-      btn.onclick = () => {
-        document.querySelectorAll("#offerConditionTabs .tab").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        selectedOfferCondition = btn.dataset.value;
-        document.getElementById("offerConditionLabel").textContent = selectedOfferCondition;
-      };
-    });
+    const provider = new GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: "select_account" });
 
-    // ===== Auth =====
-    loginBtn.onclick = async () => {
-      const provider = new GoogleAuthProvider();
+    async function doLogin(){
+      logDebug("ログイン開始...");
+      // 1) popup 먼저 시도 (Cloudflare Pages에서 가장 안정)
       try{
-        await signInWithRedirect(auth, provider);
-      }catch(e){
-        console.error("LOGIN_ERROR", e);
-        alert("ログインに失敗しました。ポップアップブロック等をご確認ください。");
-      }
-    };
-
-    logoutBtn.onclick = async () => {
-      try{ await signOut(auth); } catch(e){ console.error("LOGOUT_ERROR", e); }
-    };
-
-    onAuthStateChanged(auth, async (user) => {
-      currentUser = user;
-      if(user){
-        loginBtn.classList.add("hidden");
-        logoutBtn.classList.remove("hidden");
-        loginState.textContent = `ログイン中：${user.email ?? ""}`;
-      }else{
-        loginBtn.classList.remove("hidden");
-        logoutBtn.classList.add("hidden");
-        loginState.textContent = "未ログイン";
-      }
-
-      await loadItems();
-      if(selectedItemId) await openDetail(selectedItemId);
-    });
-
-    closeDetailBtn.onclick = () => {
-      selectedItemId = null;
-      selectedItemData = null;
-
-      // 모바일 mount 숨김 + 비우기(안전)
-      document.querySelectorAll(".inlineDetailMount").forEach(el => {
-        el.classList.add("hidden");
-        el.innerHTML = "";
-      });
-
-      // detailBox를 PC 자리로 복귀
-      moveDetailHome();
-
-      detailBox.classList.add("hidden");
-      detailEmpty.classList.remove("hidden");
-    };
-
-    // ===== helpers: offer count (MVP) =====
-    async function countOffers(itemId){
-      try{
-        const snap = await getDocs(collection(db, "items", itemId, "offers"));
-        return snap.size;
-      }catch{
-        return 0;
-      }
-    }
-
-    // ===== Delete/Edit =====
-    async function deleteItem(itemId){
-      if(!currentUser){ alert("ログインしてください。"); return; }
-      if(!confirm("本当に削除しますか？（画像も削除します）")) return;
-
-      try{
-        const snap = await getDoc(doc(db, "items", itemId));
-        if(!snap.exists()){ alert("対象が見つかりません"); return; }
-        const data = snap.data();
-        if(data.ownerUid !== currentUser.uid){ alert("権限がありません（出品者のみ）"); return; }
-
-        await deleteDoc(doc(db, "items", itemId));
-
-        if(data.imagePath){
-          try{ await deleteObject(ref(storage, data.imagePath)); }catch(e){ console.error("DELETE_STORAGE_WARNING", e); }
-        }
-
-        try{ await deleteDoc(doc(db, "itemsPrivate", itemId)); }catch(e){ console.error("DELETE_ITEMS_PRIVATE_WARNING", e); }
-
-        alert("削除しました。");
-        if(selectedItemId === itemId){
-          selectedItemId = null;
-          selectedItemData = null;
-          detailBox.classList.add("hidden");
-          detailEmpty.classList.remove("hidden");
-        }
-        await loadItems();
-      }catch(e){
-        console.error("DELETE_ITEM_ERROR", e);
-        alert("削除に失敗しました。Rulesをご確認ください。");
-      }
-    }
-
-    async function editItem(itemId){
-      if(!currentUser){ alert("ログインしてください。"); return; }
-      const snap = await getDoc(doc(db, "items", itemId));
-      if(!snap.exists()){ alert("対象が見つかりません"); return; }
-      const data = snap.data();
-      if(data.ownerUid !== currentUser.uid){ alert("権限がありません（出品者のみ）"); return; }
-
-      const newTitle = prompt("新しいタイトル", data.title ?? "");
-      if(newTitle == null) return;
-      const t = newTitle.trim();
-      if(!t){ alert("タイトルは空にできません"); return; }
-
-      const newDesc = prompt("新しい説明（空OK）", data.description ?? "");
-      if(newDesc == null) return;
-      const d = newDesc.trim();
-
-      try{
-        await updateDoc(doc(db, "items", itemId), { title: t, description: d });
-        alert("更新しました。");
-        await loadItems();
-        if(selectedItemId === itemId) await openDetail(itemId);
-      }catch(e){
-        console.error("EDIT_ITEM_ERROR", e);
-        alert("更新に失敗しました。Rulesをご確認ください。");
-      }
-    }
-
-    // ===== Create item (ownerEmail -> itemsPrivate) =====
-    uploadItemBtn.onclick = async () => {
-      if(!currentUser){ alert("先にログインしてください。"); return; }
-
-      const file = fileItem.files[0];
-      const titleText = titleItem.value.trim();
-      const descText = descItem.value.trim();
-
-      if(!file || !titleText){
-        alert("画像とタイトルを入力してください。");
+        const r = await signInWithPopup(auth, provider);
+        logDebug("Popupログイン成功: " + (r.user?.email || ""));
         return;
-      }
-
-      let f;
-      try{
-        f = await ensureUnderLimit(file);
       }catch(e){
-        alert("画像が大きすぎます。別の画像でお試しください。");
-        console.error("IMAGE_PROCESS_ERROR", e);
-        return;
-      }
+        logDebug("Popup失敗: " + (e?.code || e?.message), true);
 
-      try{
-        const imagePath = `items/${currentUser.uid}/${Date.now()}-${f.name}`;
-        const storageRef = ref(storage, imagePath);
-        await uploadBytes(storageRef, f);
-        const url = await getDownloadURL(storageRef);
-
-        const itemRef = await addDoc(collection(db, "items"), {
-          title: titleText,
-          description: descText,
-          image: url,
-          imagePath,
-          condition: selectedCondition,
-          ownerUid: currentUser.uid,
-          status: "active",
-          acceptedOfferId: null,
-          acceptedAt: null,
-          createdAt: serverTimestamp()
-        });
-
-        await setDoc(doc(db, "itemsPrivate", itemRef.id), {
-          ownerUid: currentUser.uid,
-          ownerEmail: currentUser.email ?? "",
-          createdAt: serverTimestamp()
-        });
-
-        alert("出品が完了しました。");
-        fileItem.value = ""; titleItem.value = ""; descItem.value = "";
-
-        await loadItems();
-        await openDetail(itemRef.id);
-      }catch(e){
-        console.error("CREATE_ITEM_ERROR", e);
-        alert("出品に失敗しました。Storage / Firestore ルールをご確認ください。");
-      }
-    };
-
-    // ===== load items =====
-    async function loadItems(){
-      // 리스트 다시 그리기 전에 detailBox가 list 쪽에 붙어있으면 안전하게 home으로 복귀
-      moveDetailHome();
-
-      listEl.innerHTML = "";
-
-      let snap;
-      try{
-        snap = await getDocs(query(collection(db, "items"), orderBy("createdAt", "desc")));
-      }catch(e){
-        console.error("LOAD_ITEMS_FALLBACK", e);
-        snap = await getDocs(collection(db, "items"));
-      }
-
-      if(snap.empty){
-        listEl.innerHTML = `<p class="muted">まだ出品がありません。</p>`;
-        return;
-      }
-
-      for(const docSnap of snap.docs){
-        const id = docSnap.id;
-        const data = docSnap.data();
-        const st = statusLabel(data.status);
-        const isOwner = currentUser && currentUser.uid === data.ownerUid;
-
-        const offersCount = await countOffers(id);
-
-        listEl.innerHTML += `
-          <div class="itemCard">
-            <div class="itemHead">
-              <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-                <span class="pill ${st.cls}">${st.text}</span>
-                <span class="pill blue">提案 ${offersCount}件</span>
-              </div>
-              <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                <button class="btn btnGhost" data-open="${id}">詳細</button>
-                ${isOwner ? `
-                  <button class="btn btnGhost" data-edit="${id}">編集</button>
-                  <button class="btn btnDanger" data-delete="${id}">削除</button>
-                ` : ``}
-              </div>
-            </div>
-
-            <!-- ✅ 모바일용: 클릭한 글 바로 아래 상세가 붙는 자리 -->
-            <div class="inlineDetailMount hidden" id="mount-${id}"></div>
-
-            <h3 class="itemTitle">${escapeHtml(data.title ?? "")}</h3>
-            <p class="muted" style="margin:0;">状態：<b>${escapeHtml(data.condition ?? "未設定")}</b></p>
-            ${data.image ? `<img class="thumb" src="${data.image}" alt="">` : ""}
-          </div>
-        `;
-      }
-
-      document.querySelectorAll("[data-open]").forEach(btn => btn.onclick = () => openDetail(btn.dataset.open));
-      document.querySelectorAll("[data-delete]").forEach(btn => btn.onclick = () => deleteItem(btn.dataset.delete));
-      document.querySelectorAll("[data-edit]").forEach(btn => btn.onclick = () => editItem(btn.dataset.edit));
-    }
-
-    // ===== open detail =====
-    async function openDetail(itemId){
-      selectedItemId = itemId;
-
-      try{
-        const itemDoc = await getDoc(doc(db, "items", itemId));
-        if(!itemDoc.exists()){
-          alert("この出品が見つかりませんでした。");
+        // 팝업이 막힌 경우 redirect로 fallback
+        const code = e?.code || "";
+        if(code.includes("popup-blocked") || code.includes("operation-not-supported-in-this-environment")){
+          logDebug("Redirectに切り替えます...");
+          await signInWithRedirect(auth, provider);
           return;
         }
 
-        selectedItemData = itemDoc.data();
-
-        // ✅ 우측(PC)에서 잠깐 보이는 플래시 방지: 일단 숨겨둔 채로 데이터 채움
-        detailBox.classList.add("hidden");
-        detailEmpty.classList.add("hidden");
-
-        detailTitle.textContent = selectedItemData.title ?? "";
-        detailCondition.textContent = selectedItemData.condition ?? "未設定";
-        detailImage.src = selectedItemData.image ?? "";
-        detailDesc.textContent = selectedItemData.description ? selectedItemData.description : "（説明なし）";
-
-        const st = statusLabel(selectedItemData.status);
-        detailStatusPill.className = `pill ${st.cls}`;
-        detailStatusPill.textContent = st.text;
-
-        const offersCount = await countOffers(itemId);
-        detailOffersPill.textContent = `提案 ${offersCount}件`;
-
-        await loadOffers();
-
-        const isMobile = window.matchMedia("(max-width: 900px)").matches;
-
-        if(isMobile){
-          // 다른 mount 숨김 + 비우기
-          document.querySelectorAll(".inlineDetailMount").forEach(el => {
-            el.classList.add("hidden");
-            el.innerHTML = "";
-          });
-
-          const mount = document.getElementById(`mount-${itemId}`);
-          if(mount){
-            mount.classList.remove("hidden");
-            mount.appendChild(detailBox);
-
-            // ✅ 이동 후 표시
-            detailBox.classList.remove("hidden");
-
-            requestAnimationFrame(() => {
-              // 交換提案一覧가 바로 보이도록 유도
-              offersList.scrollIntoView({ behavior: "smooth", block: "start" });
-              window.scrollBy({ top: -20, left: 0, behavior: "smooth" });
-            });
-          }
-        }else{
-          // PC: 우측 패널로 복귀 후 표시
-          moveDetailHome();
-          detailBox.classList.remove("hidden");
-
-          requestAnimationFrame(() => {
-            detailBox.scrollIntoView({ behavior: "smooth", block: "start" });
-          });
-        }
-
-      }catch(e){
-        console.error("OPEN_DETAIL_ERROR", e);
-        alert("詳細の取得に失敗しました。");
+        alert("ログインに失敗しました: " + (e?.code || e?.message));
       }
     }
 
-    // ===== accept offer (OWNER ONLY) =====
-    async function acceptOffer(offerId){
-      if(!currentUser || !selectedItemId || !selectedItemData){
-        alert("ログイン状態または選択状態を確認してください。");
-        return;
-      }
+    loginBtn.onclick = doLogin;
+    introLoginBtn.onclick = doLogin;
 
-      if(selectedItemData.ownerUid !== currentUser.uid){
-        alert("出品者のみ操作できます。");
-        return;
-      }
-
-      try{
-        const offerRef = doc(db, "items", selectedItemId, "offers", offerId);
-        const itemRef  = doc(db, "items", selectedItemId);
-
-        const batch = writeBatch(db);
-
-        batch.update(offerRef, { status: "accepted" });
-        batch.update(itemRef, {
-          status: "done",
-          acceptedOfferId: offerId,
-          acceptedAt: serverTimestamp()
-        });
-
-        await batch.commit();
-
-        alert("この提案を受諾しました。");
-        await openDetail(selectedItemId);
-        await loadItems();
-      }catch(e){
-        console.error("ACCEPT_OFFER_ERROR", e);
-        alert("受諾に失敗しました。Rulesをご確認ください。");
-      }
-    }
-
-    // ===== submit offer =====
-    submitOfferBtn.onclick = async () => {
-      if (!currentUser) {
-        alert("先にログインしてください。");
-        return;
-      }
-      if (!selectedItemId || !selectedItemData) {
-        alert("出品を選択してください。");
-        return;
-      }
-      if (selectedItemData.ownerUid && selectedItemData.ownerUid === currentUser.uid) {
-        alert("自分の出品には提案できません。");
-        return;
-      }
-
-      const raw = fileOffer.files[0];
-      const offerTitleText = titleOffer.value.trim();
-      const offerMsgText = msgOffer.value.trim();
-
-      if (!raw || !offerTitleText) {
-        alert("提案アイテムの画像とタイトルを入力してください。");
-        return;
-      }
-
-      let f;
-      try{
-        f = await ensureUnderLimit(raw);
-      }catch(e){
-        alert("画像が大きすぎます。別の画像でお試しください。");
-        console.error("OFFER_IMAGE_PROCESS_ERROR", e);
-        return;
-      }
-
-      // ownerEmail을 itemsPrivate/{itemId}에서 가져오기
-      let ownerEmail = "";
-      try{
-        const privSnap = await getDoc(doc(db, "itemsPrivate", selectedItemId));
-        if(privSnap.exists()) ownerEmail = privSnap.data().ownerEmail ?? "";
-      }catch(e){
-        ownerEmail = "";
-      }
-
-      try {
-        const path = `offers/${currentUser.uid}/${Date.now()}-${f.name}`;
-        const storageRef = ref(storage, path);
-        await uploadBytes(storageRef, f);
-        const url = await getDownloadURL(storageRef);
-
-        const offerRef = await addDoc(collection(db, "items", selectedItemId, "offers"), {
-          proposerUid: currentUser.uid,
-          offerTitle: offerTitleText,
-          offerCondition: selectedOfferCondition,
-          offerImage: url,
-          status: "pending",
-          createdAt: serverTimestamp()
-        });
-
-        await setDoc(doc(db, "items", selectedItemId, "offersPrivate", offerRef.id), {
-          proposerEmail: currentUser.email ?? "",
-          ownerEmail: ownerEmail,
-          message: offerMsgText,
-          createdAt: serverTimestamp()
-        });
-
-        alert("交換提案の出品が完了しました。");
-
-        fileOffer.value = "";
-        titleOffer.value = "";
-        msgOffer.value = "";
-
-        await openDetail(selectedItemId);
-        await loadItems();
-      } catch (e) {
-        console.error("SUBMIT_OFFER_ERROR", e);
-        alert("提案に失敗しました。Storage / Firestore ルールをご確認ください。");
-      }
+    logoutBtn.onclick = async () => {
+      await signOut(auth).catch(e => logDebug("logout error: " + (e?.code || e?.message), true));
     };
 
-    // ===== load offers =====
-    async function loadOffers(){
-      offersList.innerHTML = "";
+    enterBtn.onclick = () => {
+      intro.classList.add("hidden");
+      main.classList.remove("hidden");
+      logDebug("ログインせずに閲覧モード");
+    };
 
-      let snap;
-      try{
-        snap = await getDocs(query(collection(db, "items", selectedItemId, "offers"), orderBy("createdAt", "desc")));
-      }catch(e){
-        console.error("LOAD_OFFERS_FALLBACK", e);
-        snap = await getDocs(collection(db, "items", selectedItemId, "offers"));
+    // ✅ redirect 결과 처리 (redirect를 썼을 경우에만 의미)
+    try{
+      const rr = await getRedirectResult(auth);
+      if(rr && rr.user){
+        logDebug("Redirectログイン成功: " + (rr.user.email || ""));
+      }else{
+        logDebug("RedirectResult: none (通常)");
       }
-
-      if(snap.empty){
-        offersList.innerHTML = `<p class="muted">まだ提案がありません。</p>`;
-        detailOffersPill.textContent = `提案 0件`;
-        return;
-      }
-
-      const isOwner = !!(currentUser && selectedItemData && currentUser.uid === selectedItemData.ownerUid);
-      const mailMap = {};
-
-      for(const docSnap of snap.docs){
-        const offerId = docSnap.id;
-        const d = docSnap.data();
-
-        const offerStatus = d.status ?? "pending";
-        const statusPill =
-          offerStatus === "accepted" ? `<span class="pill green">accepted</span>` :
-          offerStatus === "rejected" ? `<span class="pill gray">rejected</span>` :
-          `<span class="pill blue">pending</span>`;
-
-        const isProposer = !!(currentUser && d.proposerUid === currentUser.uid);
-        const canContact = (offerStatus === "accepted") && (isOwner || isProposer);
-
-        let proposerEmail = "";
-        let ownerEmail = "";
-        if(canContact){
-          try{
-            const priv = await getDoc(doc(db, "items", selectedItemId, "offersPrivate", offerId));
-            if(priv.exists()){
-              proposerEmail = priv.data().proposerEmail ?? "";
-              ownerEmail = priv.data().ownerEmail ?? "";
-            }
-          }catch(e){
-            console.error("READ_OFFERS_PRIVATE_ERROR", e);
-          }
-        }
-
-        const baseMsg =
-`【もったいないベビー】交換が成立しました
-出品：${selectedItemData.title}
-提案：${d.offerTitle}
-状態：出品(${selectedItemData.condition}) / 提案(${d.offerCondition})
-
-受け渡し場所・日時の希望を教えてください。`;
-
-        const acceptBtn = (isOwner && selectedItemData.status !== "done" && offerStatus === "pending") ? `
-          <button class="btn btnPrimary" data-accept="${offerId}">この提案を受諾</button>
-        ` : "";
-
-        const contactButtons = canContact ? `
-          <div class="twoBtns" style="margin-top:10px;">
-            <button class="btn btnPrimary" data-mail="${offerId}">Gmailで連絡</button>
-          </div>
-          <div class="muted small" style="margin-top:6px;">
-            ※Gmailの作成画面が開きます。内容をご確認のうえ送信してください。
-          </div>
-        ` : "";
-
-        if(canContact){
-          const to = isOwner ? proposerEmail : ownerEmail;
-          mailMap[offerId] = {
-            to,
-            subject: `【もったいないベビー】交換成立：${selectedItemData.title}`,
-            body: baseMsg
-          };
-        }
-
-        offersList.innerHTML += `
-          <div class="offerBox">
-            <div class="offerTop">
-              <div>
-                ${statusPill}
-                <h4 style="margin:8px 0 6px;">${escapeHtml(d.offerTitle ?? "")}</h4>
-                <p class="muted" style="margin:0;">提案アイテム状態：<b>${escapeHtml(d.offerCondition ?? "未設定")}</b></p>
-              </div>
-              <div class="right">${acceptBtn}</div>
-            </div>
-            ${d.offerImage ? `<img class="thumb" src="${d.offerImage}" alt="">` : ""}
-            ${contactButtons}
-          </div>
-        `;
-      }
-
-      document.querySelectorAll('button[data-accept]').forEach(btn => {
-        btn.onclick = () => acceptOffer(btn.dataset.accept);
-      });
-
-      document.querySelectorAll('button[data-mail]').forEach(btn => {
-        btn.onclick = () => {
-          const offerId = btn.dataset.mail;
-          const m = mailMap[offerId];
-          if(!m || !m.to){
-            alert("連絡先が取得できませんでした（accepted後・当事者のみ表示）。");
-            return;
-          }
-          openGmailCompose(m);
-        };
-      });
-
-      detailOffersPill.textContent = `提案 ${snap.size}件`;
+    }catch(e){
+      // 여기서 에러가 뜨면 거의 설정/도메인/핸들러 문제
+      logDebug("getRedirectResult error: " + (e?.code || e?.message), true);
     }
+
+    // ✅ 로그인 상태 변화 UI 반영
+    onAuthStateChanged(auth, (user) => {
+      if(user){
+        userLabel.textContent = user.email || user.uid;
+        loginBtn.classList.add("hidden");
+        introLoginBtn.classList.add("hidden");
+        logoutBtn.classList.remove("hidden");
+
+        intro.classList.add("hidden");
+        main.classList.remove("hidden");
+
+        logDebug("onAuthStateChanged: logged in ✅ " + (user.email || ""));
+      }else{
+        userLabel.textContent = "未ログイン";
+        loginBtn.classList.remove("hidden");
+        introLoginBtn.classList.remove("hidden");
+        logoutBtn.classList.add("hidden");
+
+        // intro는 유지 (유저가 enterBtn으로 들어갈 수 있음)
+        logDebug("onAuthStateChanged: logged out");
+      }
+    });
+
   </script>
-
-  <!-- Footer -->
-  <footer>
-    <div style="font-weight:900;color:var(--text);margin-bottom:8px;">もったいないベビー</div>
-    <div style="margin-bottom:12px;">ベビー用品ゆずりあいサービス</div>
-
-    <div class="footerLinks" style="margin-bottom:14px;">
-      <a href="./about.html">運営者情報</a> |
-      <a href="./privacy.html">プライバシーポリシー</a> |
-      <a href="./terms.html">利用規約</a>
-    </div>
-
-    <div style="margin-bottom:12px;">
-      運営者：<b>Haejin Kishishita</b>
-    </div>
-
-    <div style="margin-bottom:10px;">
-      お問い合わせ：
-      <a href="mailto:ainazmum2624@gmail.com" style="color:var(--primary);text-decoration:none;">
-        ainazmum2624@gmail.com
-      </a>
-    </div>
-
-    <div class="small">© 2026 Mottainai Babe. All rights reserved.</div>
-  </footer>
-
 </body>
 </html>
