@@ -480,6 +480,16 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+
+    getRedirectResult(auth)
+  .then((result) => {
+    if (result && result.user) {
+      console.log("LOGIN SUCCESS", result.user);
+    }
+  })
+  .catch((error) => {
+    console.error("REDIRECT ERROR", error);
+  });
     getRedirectResult(auth).catch(console.error);
     const db = getFirestore(app);
     const storage = getStorage(app);
