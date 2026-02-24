@@ -1,10 +1,8 @@
-
 // firebase-config.js
-// 반드시 이 형태로
+// ✅ index.html / app.html 과 같은 폴더(루트)에 있어야 합니다.
 
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyAEk6aDtbuXU9K2bUnygYBqHMh75MeOlFU",
+window.FIREBASE_CONFIG = {
+  apiKey: "AIzaSyAEk6aDtbUXU9k2bUnygYBqHMh75Me0lFU",
   authDomain: "mottainai-babe.firebaseapp.com",
   projectId: "mottainai-babe",
   storageBucket: "mottainai-babe.firebasestorage.app",
