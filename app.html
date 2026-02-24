@@ -134,26 +134,6 @@
     .cardPad{padding:16px}
     @media (min-width:860px){ .cardPad{padding:20px} }
 
-    /* ✅ Intro / Landing */
-    .introWrap{margin-top:14px}
-    .introHero{
-      text-align:center;
-      padding:26px 18px;
-      background:linear-gradient(180deg, rgba(31,143,90,.18), rgba(255,255,255,0));
-      border:1px solid rgba(31,143,90,.18);
-      border-radius:20px;
-    }
-    .introLogo{
-      width:120px;height:120px;border-radius:24px;
-      overflow:hidden;margin:0 auto 14px;
-      border:1px solid rgba(229,231,235,.8);
-      background:#fff;
-    }
-    .introLogo img{width:100%;height:100%;object-fit:cover;display:block}
-    .introTitle{margin:0;font-size:22px;line-height:1.25;letter-spacing:.2px}
-    .introDesc{margin:10px 0 0;color:var(--muted);line-height:1.6}
-    .introBtns{margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-
     /* Hero (앱 본문 상단) */
     .hero{
       margin-top:14px;
@@ -349,18 +329,6 @@
       padding: 14px;
       background: #fff;
     }
-
-    /* 작은 디버그(선택) */
-    .debugBox{
-      margin-top:14px;
-      font-size:12px;
-      color:var(--muted);
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px dashed rgba(107,114,128,.35);
-      background:#fff;
-      white-space:pre-wrap;
-    }
   </style>
 </head>
 
@@ -389,28 +357,8 @@
 
   <main class="wrap">
 
-    <!-- ✅ Intro / Landing (처음엔 여기만 보여줌) -->
-    <section id="introSection" class="introWrap card cardPad">
-      <div class="introHero">
-        <div class="introLogo"><img src="./logo.png" alt=""></div>
-        <h1 class="introTitle">“もったいない”から “ありがとう”へ</h1>
-        <p class="introDesc">
-          出品一覧はログインなしでも見られます。<br>
-          出品・提案などの操作はログイン後に使えます。
-        </p>
-
-        <div class="introBtns">
-          <button id="introLoginBtn" class="btn btnPrimary">Googleでログイン</button>
-          <button id="enterBtn" class="btn btnGhost">ログインせずに見る</button>
-        </div>
-
-        <!-- 필요하면 확인용 (지워도 됨) -->
-        <div id="debugBox" class="debugBox hidden"></div>
-      </div>
-    </section>
-
-    <!-- ✅ App (원래 큰 코드 UI) -->
-    <section id="appSection" class="hidden">
+    <!-- ✅ 게이트 제거: app.html에 들어오면 무조건 아래 앱 화면 -->
+    <section id="appSection">
 
       <!-- Hero -->
       <section class="card cardPad hero">
@@ -427,8 +375,9 @@
         </div>
 
         <div class="helpBox">
-          ✅ 画像は自動で軽量化してアップロード（上限 5MB）<br>
-          ✅ 提案は公開、連絡先は <b>accepted</b> 後に当事者のみ表示
+          ✅ 出品一覧はログインなしでも見られます。<br>
+          ✅ 出品・提案・削除・受諾などの操作はログイン後に使えます。<br>
+          ✅ 画像は自動で軽量化してアップロード（上限 5MB）
         </div>
       </section>
 
@@ -555,28 +504,6 @@
       appId: "1:752649559489:web:1288d8adeef7280eb7a340"
     };
 
-    // ===== Landing / App sections =====
-    const introSection = document.getElementById("introSection");
-    const appSection = document.getElementById("appSection");
-    const enterBtn = document.getElementById("enterBtn");
-    const introLoginBtn = document.getElementById("introLoginBtn");
-    const debugBox = document.getElementById("debugBox");
-
-    function showIntro(){
-      introSection.classList.remove("hidden");
-      appSection.classList.add("hidden");
-    }
-    function showApp(){
-      introSection.classList.add("hidden");
-      appSection.classList.remove("hidden");
-    }
-
-    // “로그인 없이 보기”
-    enterBtn.onclick = () => {
-      showApp();
-      // 비로그인 상태여도 리스트는 로드되게 되어있음
-    };
-
     // ===== Init Firebase =====
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
@@ -585,9 +512,6 @@
 
     // ✅ 로그인 유지
     await setPersistence(auth, browserLocalPersistence).catch((e)=>{
-      // 필요하면 debugBox 보여서 확인 가능
-      // debugBox.classList.remove("hidden");
-      // debugBox.textContent = "setPersistence error: " + (e?.code || e?.message);
       console.error("setPersistence error", e);
     });
 
@@ -596,14 +520,12 @@
     const logoutBtn = document.getElementById("logoutBtn");
     const loginState = document.getElementById("loginState");
 
-    // ✅ 안정 로그인(팝업 우선 + redirect fallback)
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: "select_account" });
 
     async function doLogin(){
       try{
         await signInWithPopup(auth, provider);
-        // 성공하면 onAuthStateChanged가 처리
       }catch(e){
         console.error("Popup login failed", e);
         const code = e?.code || "";
@@ -616,20 +538,15 @@
     }
 
     loginBtn.onclick = doLogin;
-    introLoginBtn.onclick = doLogin;
 
     logoutBtn.onclick = async () => {
       try{ await signOut(auth); } catch(e){ console.error("LOGOUT_ERROR", e); }
     };
 
-    // redirect 결과 처리 (redirect 사용했을 경우)
-    try{
-      await getRedirectResult(auth);
-    }catch(e){
-      console.error("getRedirectResult error", e);
-    }
+    // redirect 결과 처리
+    try{ await getRedirectResult(auth); }catch(e){ console.error("getRedirectResult error", e); }
 
-    // ===== 앱 요소들(원래 큰 코드) =====
+    // ===== 앱 요소들 =====
     const uploadItemBtn = document.getElementById("uploadItemBtn");
     const fileItem = document.getElementById("fileItem");
     const titleItem = document.getElementById("titleItem");
@@ -687,34 +604,29 @@
       return {text:"出品中", cls:"gray"};
     }
 
-   function isMobileDevice(){
-  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-}
+    function isMobileDevice(){
+      return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    }
 
-function openGmailCompose({ to, subject, body }) {
-  // 1) 모바일: mailto 가 제일 안정적 (Gmail 앱/메일 앱 둘 중 하나로 연결됨)
-  if (isMobileDevice()) {
-    const mailto =
-      `mailto:${encodeURIComponent(to)}` +
-      `?subject=${encodeURIComponent(subject)}` +
-      `&body=${encodeURIComponent(body)}`;
+    function openGmailCompose({ to, subject, body }) {
+      if (isMobileDevice()) {
+        const mailto =
+          `mailto:${encodeURIComponent(to)}` +
+          `?subject=${encodeURIComponent(subject)}` +
+          `&body=${encodeURIComponent(body)}`;
+        window.location.href = mailto;
+        return;
+      }
 
-    // iOS에서 window.open은 막히는 경우가 많아서 location으로 이동이 더 안정적
-    window.location.href = mailto;
-    return;
-  }
+      const url =
+        "https://mail.google.com/mail/?view=cm&fs=1" +
+        `&to=${encodeURIComponent(to)}` +
+        `&su=${encodeURIComponent(subject)}` +
+        `&body=${encodeURIComponent(body)}`;
 
-  // 2) 데스크탑: Gmail 웹 작성 화면
-  const url =
-    "https://mail.google.com/mail/?view=cm&fs=1" +
-    `&to=${encodeURIComponent(to)}` +
-    `&su=${encodeURIComponent(subject)}` +
-    `&body=${encodeURIComponent(body)}`;
-
-  // 팝업 차단 우회: 새 탭이 막히면 현재 탭으로라도 이동
-  const w = window.open(url, "_blank");
-  if (!w) window.location.href = url;
-}
+      const w = window.open(url, "_blank");
+      if (!w) window.location.href = url;
+    }
 
     // ===== 무료 브라우저 자동 리사이즈(Canvas) =====
     async function compressImage(file, { maxSide = 1600, quality = 0.78 } = {}){
@@ -1273,20 +1185,12 @@ function openGmailCompose({ to, subject, body }) {
 
       if(user){
         loginBtn.classList.add("hidden");
-        introLoginBtn.classList.add("hidden");
         logoutBtn.classList.remove("hidden");
         loginState.textContent = `ログイン中：${user.email ?? ""}`;
-
-        // 로그인하면 인트로를 자동으로 닫고 앱으로 진입
-        showApp();
       }else{
         loginBtn.classList.remove("hidden");
-        introLoginBtn.classList.remove("hidden");
         logoutBtn.classList.add("hidden");
         loginState.textContent = "未ログイン";
-
-        // 로그아웃 상태에서는 intro를 보여주고, 필요시 “로그인 없이 보기”로 들어갈 수 있음
-        showIntro();
       }
 
       // 로그인/비로그인 모두 리스트는 로드
