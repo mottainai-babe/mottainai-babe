@@ -1,256 +1,211 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Mottainai Babe</title>
 
 <style>
+  body{
+    margin:0;
+    padding:0;
+    background:#377649;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+    color:#fff;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+  }
 
-body{
-margin:0;
-padding:0;
-background:#377649;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial;
-color:white;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-text-align:center;
-}
+  .wrap{
+    width:min(980px, 92vw);
+    padding:48px 0 70px;
+    position:relative;
+  }
 
+  .logo{
+    width:min(520px, 78vw);   /* ✅ 로고 크게 */
+    height:auto;
+    filter:none;              /* ✅ 그림자 제거 */
+    box-shadow:none;
+    margin:0 auto 18px;
+    display:block;
+  }
 
-.container{
-max-width:420px;
-width:90%;
-}
+  .jp-title{
+    font-size:18px;
+    font-weight:600;
+    margin:6px 0 6px;
+    opacity:.95;
+  }
 
+  .jp-sub{
+    font-size:15px;
+    margin:0 0 22px;
+    opacity:.85;
+  }
 
-.logo{
-width:260px;
-margin-bottom:30px;
+  .btns{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    align-items:center;
+    justify-content:center;
+    margin-top:8px;
+  }
 
-/* 그림자 제거 */
-filter:none;
-box-shadow:none;
-}
+  button{
+    width:min(340px, 86vw);
+    padding:14px 18px;
+    border-radius:999px;
+    font-size:16px;
+    cursor:pointer;
+    transition:.15s;
+  }
 
+  .primary{
+    border:none;
+    background:#fff;
+    color:#377649;
+    font-weight:600;
+  }
 
-.title{
-font-size:18px;
-margin-bottom:8px;
-opacity:0.95;
-}
+  .secondary{
+    background:transparent;
+    border:2px solid rgba(255,255,255,.9);
+    color:#fff;
+    font-weight:600;
+  }
 
+  button:hover{ opacity:.9; }
+  button:active{ transform:translateY(1px); }
 
-.subtitle{
-font-size:15px;
-margin-bottom:30px;
-opacity:0.85;
-}
+  .chips{
+    margin-top:26px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
 
+  .chip{
+    padding:8px 14px;
+    border-radius:999px;
+    background:rgba(255,255,255,.18);
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.02em;
+  }
 
-button{
-width:220px;
-padding:14px;
-margin:10px;
-border-radius:30px;
-font-size:16px;
-cursor:pointer;
-border:none;
-transition:0.2s;
-}
+  .footer{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:18px;
+    font-size:12px;
+    opacity:.78;
+    line-height:1.5;
+  }
 
+  .footer a{
+    color:#fff;
+    text-decoration:none;
+    opacity:.95;
+  }
+  .footer a:hover{ text-decoration:underline; }
 
-.primary{
-background:white;
-color:#377649;
-}
-
-
-.secondary{
-background:transparent;
-border:2px solid white;
-color:white;
-}
-
-
-button:hover{
-opacity:0.85;
-}
-
-
-.features{
-margin-top:30px;
-}
-
-
-.feature{
-display:inline-block;
-background:rgba(255,255,255,0.2);
-padding:8px 14px;
-border-radius:20px;
-margin:4px;
-font-size:13px;
-}
-
-
-.footer{
-position:absolute;
-bottom:15px;
-font-size:12px;
-opacity:0.7;
-width:100%;
-text-align:center;
-}
-
+  .footer .links{
+    margin-top:6px;
+    display:flex;
+    gap:14px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
 </style>
-
 </head>
 
 <body>
-
-
-<div class="container">
-
-
-<img src="logo1.png" class="logo">
-
-
-<div class="title">
-もったいないベビー
-</div>
-
-
-<div class="subtitle">
-ベビー用品交換プラットフォーム
-</div>
-
-
-
-<button id="btnPost" class="primary">
-出品する
-</button>
-
-
-<button id="btnView" class="secondary">
-アイテムを見る
-</button>
-
-
-
-<div class="features">
-
-<span class="feature">
-簡単出品
-</span>
-
-<span class="feature">
-安心交換
-</span>
-
-<span class="feature">
-利用無料
-</span>
-
-</div>
-
-
-</div>
-
-
-
-<div class="footer">
-
-© 2026 Mottainai Babe
-
-</div>
-
-
-
-
-<!-- firebase config -->
-<script src="./firebase-config.js"></script>
-
-
-
-<!-- firebase login script -->
-<script type="module">
-
-
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-
-
-import {
-getAuth,
-GoogleAuthProvider,
-signInWithRedirect,
-getRedirectResult
-}
-from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
-
-
-
-
-const app = initializeApp(window.FIREBASE_CONFIG);
-
-const auth = getAuth(app);
-
-const provider = new GoogleAuthProvider();
-
-
-
-
-/* 아이템 보기 */
-document
-.getElementById("btnView")
-.onclick = () => {
-
-window.location.href = "./app.html";
-
-};
-
-
-
-
-/* 출품하기 → Google login */
-document
-.getElementById("btnPost")
-.onclick = () => {
-
-signInWithRedirect(auth, provider);
-
-};
-
-
-
-
-/* 로그인 완료 후 이동 */
-
-getRedirectResult(auth)
-.then(result => {
-
-if(result && result.user){
-
-window.location.href = "./app.html";
-
-}
-
-})
-.catch(e => {
-
-console.error(e);
-
-});
-
-
-
-</script>
-
-
+  <div class="wrap">
+
+    <!-- ✅ logo1.png -->
+    <img src="logo1.png" class="logo" alt="Mottainai Babe" />
+
+    <div class="jp-title">もったいないベビー</div>
+    <div class="jp-sub">ベビー用品交換プラットフォーム</div>
+
+    <div class="btns">
+      <button id="btnPost" class="primary">出品する</button>
+      <button id="btnView" class="secondary">アイテムを見る</button>
+    </div>
+
+    <div class="chips">
+      <span class="chip">簡単出品</span>
+      <span class="chip">安心交換</span>
+      <span class="chip">利用無料</span>
+    </div>
+
+    <div class="footer">
+      Mottainai Babeは、ベビー用品を必要な人へつなぐ交換プラットフォームです。<br/>
+      <div class="links">
+        <a href="./terms.html">利用規約</a>
+        <a href="./privacy.html">プライバシーポリシー</a>
+        <a href="./about.html">お問い合わせ</a>
+      </div>
+      <div style="margin-top:6px;">© 2026 Mottainai Babe. All rights reserved.</div>
+    </div>
+
+  </div>
+
+  <!-- ✅ 반드시: index.html/app.html과 같은 폴더에 firebase-config.js -->
+  <script src="./firebase-config.js"></script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import {
+      getAuth,
+      GoogleAuthProvider,
+      signInWithRedirect,
+      getRedirectResult
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+    // ✅ 여기서 에러 나면 버튼이 “무반응”이 되기 때문에, 바로 알림 띄우게 함
+    try{
+      if(!window.FIREBASE_CONFIG){
+        alert("firebase-config.js の読み込みに失敗しました。index.html と同じフォルダに置いてください。");
+        throw new Error("FIREBASE_CONFIG missing");
+      }
+
+      const app = initializeApp(window.FIREBASE_CONFIG);
+      const auth = getAuth(app);
+      const provider = new GoogleAuthProvider();
+
+      document.getElementById("btnView").addEventListener("click", () => {
+        window.location.href = "./app.html";
+      });
+
+      document.getElementById("btnPost").addEventListener("click", () => {
+        // ✅ 클릭 즉시 반응 확인용 (필요없으면 지워도 됨)
+        // console.log("login start");
+        signInWithRedirect(auth, provider);
+      });
+
+      getRedirectResult(auth)
+        .then((result) => {
+          if(result && result.user){
+            window.location.href = "./app.html";
+          }
+        })
+        .catch((e) => {
+          console.error(e);
+          alert("Googleログインエラー: " + (e?.message || e));
+        });
+
+    }catch(e){
+      console.error(e);
+      // 여기서 죽으면 버튼 이벤트 자체가 안 붙어서 “무반응”이 됨
+    }
+  </script>
 </body>
-
 </html>
