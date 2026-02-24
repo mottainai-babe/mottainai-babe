@@ -2,8 +2,9 @@
 // firebase-config.js
 // 반드시 이 형태로
 
-window.FIREBASE_CONFIG = {
-  apiKey: "AIzaSyAEk6aDtbuXU9k2bUnygVBqHMh75Me0IFU",
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAEk6aDtbuXU9K2bUnygYBqHMh75MeOlFU",
   authDomain: "mottainai-babe.firebaseapp.com",
   projectId: "mottainai-babe",
   storageBucket: "mottainai-babe.firebasestorage.app",
