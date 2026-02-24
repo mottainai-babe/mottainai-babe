@@ -1,319 +1,222 @@
 <!doctype html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Mottainai Babe｜ベビー用品交換プラットフォーム</title>
-
-<style>
-
-:root{
-  --green:#1f8f5a;
-  --green-dark:#167247;
-  --green-soft:#e8f6ef;
-
-  --text:#111;
-  --muted:#6b7280;
-  --line:#e5e7eb;
-}
-
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans JP",sans-serif;
-  background:#f6f7f8;
-  color:var(--text);
-}
-
-
-.wrap{
-
-  min-height:100vh;
-
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-
-  text-align:center;
-
-  padding:40px 20px;
-}
-
-
-
-.logo{
-
-  width:140px;
-  height:140px;
-
-  border-radius:32px;
-
-  margin-bottom:24px;
-
-  box-shadow:0 8px 30px rgba(0,0,0,.08);
-
-}
-
-
-
-.title{
-
-  font-size:32px;
-  font-weight:800;
-
-  margin-bottom:8px;
-
-}
-
-
-
-.subtitle{
-
-  font-size:16px;
-
-  color:var(--muted);
-
-  margin-bottom:40px;
-
-}
-
-
-
-.actions{
-
-  display:flex;
-  flex-direction:column;
-
-  gap:16px;
-
-  width:100%;
-  max-width:280px;
-
-  margin-bottom:36px;
-
-}
-
-
-
-.btn{
-
-  padding:16px;
-
-  border-radius:14px;
-
-  font-size:16px;
-
-  font-weight:700;
-
-  text-decoration:none;
-
-  display:block;
-
-}
-
-
-
-.btn.primary{
-
-  background:var(--green);
-  color:white;
-
-}
-
-
-
-.btn.primary:hover{
-
-  background:var(--green-dark);
-
-}
-
-
-
-.btn.outline{
-
-  border:2px solid var(--green);
-
-  color:var(--green);
-
-  background:white;
-
-}
-
-
-
-.btn.outline:hover{
-
-  background:var(--green-soft);
-
-}
-
-
-
-.features{
-
-  display:flex;
-
-  gap:12px;
-
-  margin-bottom:40px;
-
-}
-
-
-
-.feature{
-
-  background:white;
-
-  border:1px solid var(--line);
-
-  padding:8px 14px;
-
-  border-radius:999px;
-
-  font-size:13px;
-
-}
-
-
-
-footer{
-
-  font-size:13px;
-
-  color:var(--muted);
-
-}
-
-
-
-footer a{
-
-  color:var(--green);
-
-  text-decoration:none;
-
-}
-
-
-
-footer a:hover{
-
-  text-decoration:underline;
-
-}
-
-
-</style>
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mottainai Babe</title>
+  <meta name="description" content="ベビー用品交換プラットフォーム" />
+
+  <style>
+    :root{
+      --bgA:#1f5a33;
+      --bgB:#2f7343;
+      --bgC:#174427;
+      --white:#ffffff;
+      --white80:rgba(255,255,255,.8);
+      --white60:rgba(255,255,255,.6);
+      --pill:rgba(255,255,255,.12);
+      --pill2:rgba(255,255,255,.18);
+      --btnFill:#ffffff;
+      --btnText:#1f5a33;
+      --btnLine:rgba(255,255,255,.45);
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--white);
+      font-family: system-ui, -apple-system, "Noto Sans JP", "Hiragino Kaku Gothic ProN",
+                   "Yu Gothic", "Meiryo", Arial, sans-serif;
+      background:
+        radial-gradient(900px 500px at 50% 35%, var(--bgB) 0%, var(--bgA) 48%, var(--bgC) 100%);
+    }
+
+    .frame{
+      width:min(980px, 92vw);
+      padding:56px 18px 26px;
+      text-align:center;
+    }
+
+    .logo{
+      width:min(520px, 82vw);
+      height:auto;
+      display:block;
+      margin:0 auto 14px;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.22));
+    }
+
+    .sub1{
+      font-size:14px;
+      letter-spacing:.08em;
+      margin:6px 0 8px;
+      color:var(--white80);
+      font-weight:600;
+    }
+
+    .sub2{
+      font-size:15px;
+      letter-spacing:.02em;
+      margin:0 0 18px;
+      color:var(--white80);
+    }
+
+    .buttons{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:center;
+      margin:0 0 18px;
+    }
+
+    .btn{
+      width:min(260px, 78vw);
+      border-radius:999px;
+      padding:12px 16px;
+      font-size:14px;
+      letter-spacing:.02em;
+      cursor:pointer;
+      border:1px solid var(--btnLine);
+      background:transparent;
+      color:var(--white);
+      transition: transform .08s ease, background .15s ease, opacity .15s ease;
+    }
+    .btn:active{ transform: translateY(1px); }
+    .btn.primary{
+      background:var(--btnFill);
+      color:var(--btnText);
+      border-color:transparent;
+      font-weight:700;
+    }
+    .btn:hover{ background:rgba(255,255,255,.06); }
+    .btn.primary:hover{ opacity:.92; }
+
+    .pills{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:10px;
+      margin:14px 0 16px;
+    }
+    .pill{
+      padding:8px 14px;
+      border-radius:999px;
+      background:var(--pill);
+      color:var(--pillText, var(--white));
+      font-size:13px;
+      letter-spacing:.02em;
+      border:1px solid rgba(255,255,255,.14);
+    }
+
+    .footer{
+      margin-top:10px;
+      padding-top:12px;
+      border-top:1px solid rgba(255,255,255,.18);
+      color:var(--white60);
+      font-size:12px;
+      line-height:1.6;
+    }
+    .footer a{
+      color:var(--white80);
+      text-decoration:none;
+      border-bottom:1px solid rgba(255,255,255,.35);
+    }
+
+    .note{
+      margin-top:10px;
+      font-size:12px;
+      color:rgba(255,255,255,.65);
+      display:none;
+    }
+    .note.show{ display:block; }
+  </style>
+
+  <!-- ✅ Firebase config 파일을 별도로 두는 방식 (추천)
+       같은 폴더에 firebase-config.js 업로드 필요 -->
+  <script defer src="./firebase-config.js"></script>
+
+  <!-- Firebase SDK (v10 모듈) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+    const $ = (id) => document.getElementById(id);
+
+    function showError(msg){
+      const el = $("note");
+      el.textContent = msg;
+      el.classList.add("show");
+    }
+
+    // Cloudflare Pages에서 버튼이 “아무 반응” 없는 가장 흔한 원인:
+    // - 스크립트 오류(콘솔 에러)
+    // - config 미로딩
+    // 그래서 config 로딩 체크를 넣음
+    function getFirebaseConfig(){
+      // firebase-config.js에서 window.FIREBASE_CONFIG 를 세팅해둬야 함
+      if (!window.FIREBASE_CONFIG) return null;
+      return window.FIREBASE_CONFIG;
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      $("btnView").addEventListener("click", () => {
+        // ✅ 기존 리스트 페이지로 이동
+        window.location.href = "./app.html";
+      });
+
+      $("btnSell").addEventListener("click", async () => {
+        try{
+          const cfg = getFirebaseConfig();
+          if(!cfg){
+            showError("firebase-config.js が読み込めていません。ファイル名と配置場所を確認してください。");
+            return;
+          }
+
+          const app = initializeApp(cfg);
+          const auth = getAuth(app);
+          const provider = new GoogleAuthProvider();
+
+          await signInWithPopup(auth, provider);
+
+          // ✅ 로그인 성공 → 앱 화면으로
+          window.location.href = "./app.html";
+        }catch(e){
+          console.error(e);
+          showError("ログインに失敗しました。ブラウザのポップアップブロック/設定を確認してください。");
+        }
+      });
+    });
+  </script>
 </head>
 
 <body>
-
-
-
-<div class="wrap">
-
-
-
-<img src="./logo1.png" class="logo">
-
-
-
-<div class="title">
-
-Mottainai Babe
-
-</div>
-
-
-
-<div class="subtitle">
-
-ベビー用品交換プラットフォーム
-
-</div>
-
-
-
-<button class="btn primary" onclick="location.href='app.html'">出品する</button>
-<button class="btn" onclick="location.href='app.html#items'">交換アイテムを見る</button>
-
-
-
-<div class="features">
-
-<div class="feature">簡単出品</div>
-
-<div class="feature">安心交換</div>
-
-<div class="feature">無料利用</div>
-
-</div>
-
-
-
-<footer>
-
-
-
-<div>
-
-© 2026 Mottainai Babe
-
-</div>
-
-
-
-<div style="margin-top:6px;">
-
-
-<a href="./about.html">運営者情報</a>
-
-|
-
-<a href="./privacy.html">プライバシーポリシー</a>
-
-|
-
-<a href="./terms.html">利用規約</a>
-
-
-</div>
-
-
-
-<div style="margin-top:6px;">
-
-運営者：Haejin Kishishita
-
-</div>
-
-
-
-<div style="margin-top:6px;">
-
-お問い合わせ：
-
-<a href="mailto:ainazmum2624@gmail.com">
-
-ainazmum2624@gmail.com
-
-</a>
-
-</div>
-
-
-
-</footer>
-
-
-
-</div>
-
-
-
+  <main class="frame">
+    <!-- ✅ 로고 파일명: logo1.png -->
+    <img class="logo" src="./logo1.png" alt="Mottainai Babe ロゴ" />
+
+    <div class="sub1">もったいないベビー</div>
+    <div class="sub2">ベビー用品交換プラットフォーム</div>
+
+    <div class="buttons">
+      <button class="btn primary" id="btnSell">出品する</button>
+      <button class="btn" id="btnView">アイテムを見る</button>
+    </div>
+
+    <div class="pills">
+      <div class="pill">簡単出品</div>
+      <div class="pill">安心交換</div>
+      <div class="pill">利用無料</div>
+    </div>
+
+    <div class="footer">
+      Mottainai Babeは、ベビー用品を必要な人へつなぐ交換プラットフォームです。<br/>
+      <a href="./terms.html">利用規約</a> ｜ <a href="./privacy.html">プライバシーポリシー</a> ｜ <a href="./about.html">お問い合わせ</a><br/>
+      © 2026 Mottainai Babe. All rights reserved.
+      <div id="note" class="note"></div>
+    </div>
+  </main>
 </body>
 </html>
