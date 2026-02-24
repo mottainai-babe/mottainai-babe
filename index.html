@@ -1,222 +1,256 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mottainai Babe</title>
-  <meta name="description" content="ベビー用品交換プラットフォーム" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    :root{
-      --bgA:#1f5a33;
-      --bgB:#2f7343;
-      --bgC:#174427;
-      --white:#ffffff;
-      --white80:rgba(255,255,255,.8);
-      --white60:rgba(255,255,255,.6);
-      --pill:rgba(255,255,255,.12);
-      --pill2:rgba(255,255,255,.18);
-      --btnFill:#ffffff;
-      --btnText:#1f5a33;
-      --btnLine:rgba(255,255,255,.45);
-    }
+<title>Mottainai Babe</title>
 
-    *{ box-sizing:border-box; }
-    body{
-      margin:0;
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:var(--white);
-      font-family: system-ui, -apple-system, "Noto Sans JP", "Hiragino Kaku Gothic ProN",
-                   "Yu Gothic", "Meiryo", Arial, sans-serif;
-      background:
-        radial-gradient(900px 500px at 50% 35%, var(--bgB) 0%, var(--bgA) 48%, var(--bgC) 100%);
-    }
+<style>
 
-    .frame{
-      width:min(980px, 92vw);
-      padding:56px 18px 26px;
-      text-align:center;
-    }
+body{
+margin:0;
+padding:0;
+background:#377649;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+text-align:center;
+}
 
-    .logo{
-      width:min(520px, 82vw);
-      height:auto;
-      display:block;
-      margin:0 auto 14px;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,.22));
-    }
 
-    .sub1{
-      font-size:14px;
-      letter-spacing:.08em;
-      margin:6px 0 8px;
-      color:var(--white80);
-      font-weight:600;
-    }
+.container{
+max-width:420px;
+width:90%;
+}
 
-    .sub2{
-      font-size:15px;
-      letter-spacing:.02em;
-      margin:0 0 18px;
-      color:var(--white80);
-    }
 
-    .buttons{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      align-items:center;
-      margin:0 0 18px;
-    }
+.logo{
+width:260px;
+margin-bottom:30px;
 
-    .btn{
-      width:min(260px, 78vw);
-      border-radius:999px;
-      padding:12px 16px;
-      font-size:14px;
-      letter-spacing:.02em;
-      cursor:pointer;
-      border:1px solid var(--btnLine);
-      background:transparent;
-      color:var(--white);
-      transition: transform .08s ease, background .15s ease, opacity .15s ease;
-    }
-    .btn:active{ transform: translateY(1px); }
-    .btn.primary{
-      background:var(--btnFill);
-      color:var(--btnText);
-      border-color:transparent;
-      font-weight:700;
-    }
-    .btn:hover{ background:rgba(255,255,255,.06); }
-    .btn.primary:hover{ opacity:.92; }
+/* 그림자 제거 */
+filter:none;
+box-shadow:none;
+}
 
-    .pills{
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-      gap:10px;
-      margin:14px 0 16px;
-    }
-    .pill{
-      padding:8px 14px;
-      border-radius:999px;
-      background:var(--pill);
-      color:var(--pillText, var(--white));
-      font-size:13px;
-      letter-spacing:.02em;
-      border:1px solid rgba(255,255,255,.14);
-    }
 
-    .footer{
-      margin-top:10px;
-      padding-top:12px;
-      border-top:1px solid rgba(255,255,255,.18);
-      color:var(--white60);
-      font-size:12px;
-      line-height:1.6;
-    }
-    .footer a{
-      color:var(--white80);
-      text-decoration:none;
-      border-bottom:1px solid rgba(255,255,255,.35);
-    }
+.title{
+font-size:18px;
+margin-bottom:8px;
+opacity:0.95;
+}
 
-    .note{
-      margin-top:10px;
-      font-size:12px;
-      color:rgba(255,255,255,.65);
-      display:none;
-    }
-    .note.show{ display:block; }
-  </style>
 
-  <!-- ✅ Firebase config 파일을 별도로 두는 방식 (추천)
-       같은 폴더에 firebase-config.js 업로드 필요 -->
-  <script defer src="./firebase-config.js"></script>
+.subtitle{
+font-size:15px;
+margin-bottom:30px;
+opacity:0.85;
+}
 
-  <!-- Firebase SDK (v10 모듈) -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-    import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
-    const $ = (id) => document.getElementById(id);
+button{
+width:220px;
+padding:14px;
+margin:10px;
+border-radius:30px;
+font-size:16px;
+cursor:pointer;
+border:none;
+transition:0.2s;
+}
 
-    function showError(msg){
-      const el = $("note");
-      el.textContent = msg;
-      el.classList.add("show");
-    }
 
-    // Cloudflare Pages에서 버튼이 “아무 반응” 없는 가장 흔한 원인:
-    // - 스크립트 오류(콘솔 에러)
-    // - config 미로딩
-    // 그래서 config 로딩 체크를 넣음
-    function getFirebaseConfig(){
-      // firebase-config.js에서 window.FIREBASE_CONFIG 를 세팅해둬야 함
-      if (!window.FIREBASE_CONFIG) return null;
-      return window.FIREBASE_CONFIG;
-    }
+.primary{
+background:white;
+color:#377649;
+}
 
-    window.addEventListener("DOMContentLoaded", () => {
-      $("btnView").addEventListener("click", () => {
-        // ✅ 기존 리스트 페이지로 이동
-        window.location.href = "./app.html";
-      });
 
-      $("btnSell").addEventListener("click", async () => {
-        try{
-          const cfg = getFirebaseConfig();
-          if(!cfg){
-            showError("firebase-config.js が読み込めていません。ファイル名と配置場所を確認してください。");
-            return;
-          }
+.secondary{
+background:transparent;
+border:2px solid white;
+color:white;
+}
 
-          const app = initializeApp(cfg);
-          const auth = getAuth(app);
-          const provider = new GoogleAuthProvider();
 
-          await signInWithPopup(auth, provider);
+button:hover{
+opacity:0.85;
+}
 
-          // ✅ 로그인 성공 → 앱 화면으로
-          window.location.href = "./app.html";
-        }catch(e){
-          console.error(e);
-          showError("ログインに失敗しました。ブラウザのポップアップブロック/設定を確認してください。");
-        }
-      });
-    });
-  </script>
+
+.features{
+margin-top:30px;
+}
+
+
+.feature{
+display:inline-block;
+background:rgba(255,255,255,0.2);
+padding:8px 14px;
+border-radius:20px;
+margin:4px;
+font-size:13px;
+}
+
+
+.footer{
+position:absolute;
+bottom:15px;
+font-size:12px;
+opacity:0.7;
+width:100%;
+text-align:center;
+}
+
+</style>
+
 </head>
 
 <body>
-  <main class="frame">
-    <!-- ✅ 로고 파일명: logo1.png -->
-    <img class="logo" src="./logo1.png" alt="Mottainai Babe ロゴ" />
 
-    <div class="sub1">もったいないベビー</div>
-    <div class="sub2">ベビー用品交換プラットフォーム</div>
 
-    <div class="buttons">
-      <button class="btn primary" id="btnSell">出品する</button>
-      <button class="btn" id="btnView">アイテムを見る</button>
-    </div>
+<div class="container">
 
-    <div class="pills">
-      <div class="pill">簡単出品</div>
-      <div class="pill">安心交換</div>
-      <div class="pill">利用無料</div>
-    </div>
 
-    <div class="footer">
-      Mottainai Babeは、ベビー用品を必要な人へつなぐ交換プラットフォームです。<br/>
-      <a href="./terms.html">利用規約</a> ｜ <a href="./privacy.html">プライバシーポリシー</a> ｜ <a href="./about.html">お問い合わせ</a><br/>
-      © 2026 Mottainai Babe. All rights reserved.
-      <div id="note" class="note"></div>
-    </div>
-  </main>
+<img src="logo1.png" class="logo">
+
+
+<div class="title">
+もったいないベビー
+</div>
+
+
+<div class="subtitle">
+ベビー用品交換プラットフォーム
+</div>
+
+
+
+<button id="btnPost" class="primary">
+出品する
+</button>
+
+
+<button id="btnView" class="secondary">
+アイテムを見る
+</button>
+
+
+
+<div class="features">
+
+<span class="feature">
+簡単出品
+</span>
+
+<span class="feature">
+安心交換
+</span>
+
+<span class="feature">
+利用無料
+</span>
+
+</div>
+
+
+</div>
+
+
+
+<div class="footer">
+
+© 2026 Mottainai Babe
+
+</div>
+
+
+
+
+<!-- firebase config -->
+<script src="./firebase-config.js"></script>
+
+
+
+<!-- firebase login script -->
+<script type="module">
+
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+
+
+import {
+getAuth,
+GoogleAuthProvider,
+signInWithRedirect,
+getRedirectResult
+}
+from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+
+
+
+const app = initializeApp(window.FIREBASE_CONFIG);
+
+const auth = getAuth(app);
+
+const provider = new GoogleAuthProvider();
+
+
+
+
+/* 아이템 보기 */
+document
+.getElementById("btnView")
+.onclick = () => {
+
+window.location.href = "./app.html";
+
+};
+
+
+
+
+/* 출품하기 → Google login */
+document
+.getElementById("btnPost")
+.onclick = () => {
+
+signInWithRedirect(auth, provider);
+
+};
+
+
+
+
+/* 로그인 완료 후 이동 */
+
+getRedirectResult(auth)
+.then(result => {
+
+if(result && result.user){
+
+window.location.href = "./app.html";
+
+}
+
+})
+.catch(e => {
+
+console.error(e);
+
+});
+
+
+
+</script>
+
+
 </body>
+
 </html>
