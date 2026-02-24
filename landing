@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Mottainai Babe｜ベビー用品交換プラットフォーム</title>
+
+<style>
+
+:root{
+  --green:#1f8f5a;
+  --green-dark:#167247;
+  --green-soft:#e8f6ef;
+
+  --text:#111;
+  --muted:#6b7280;
+  --line:#e5e7eb;
+}
+
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans JP",sans-serif;
+  background:#f6f7f8;
+  color:var(--text);
+}
+
+
+.wrap{
+
+  min-height:100vh;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  text-align:center;
+
+  padding:40px 20px;
+}
+
+
+
+.logo{
+
+  width:140px;
+  height:140px;
+
+  border-radius:32px;
+
+  margin-bottom:24px;
+
+  box-shadow:0 8px 30px rgba(0,0,0,.08);
+
+}
+
+
+
+.title{
+
+  font-size:32px;
+  font-weight:800;
+
+  margin-bottom:8px;
+
+}
+
+
+
+.subtitle{
+
+  font-size:16px;
+
+  color:var(--muted);
+
+  margin-bottom:40px;
+
+}
+
+
+
+.actions{
+
+  display:flex;
+  flex-direction:column;
+
+  gap:16px;
+
+  width:100%;
+  max-width:280px;
+
+  margin-bottom:36px;
+
+}
+
+
+
+.btn{
+
+  padding:16px;
+
+  border-radius:14px;
+
+  font-size:16px;
+
+  font-weight:700;
+
+  text-decoration:none;
+
+  display:block;
+
+}
+
+
+
+.btn.primary{
+
+  background:var(--green);
+  color:white;
+
+}
+
+
+
+.btn.primary:hover{
+
+  background:var(--green-dark);
+
+}
+
+
+
+.btn.outline{
+
+  border:2px solid var(--green);
+
+  color:var(--green);
+
+  background:white;
+
+}
+
+
+
+.btn.outline:hover{
+
+  background:var(--green-soft);
+
+}
+
+
+
+.features{
+
+  display:flex;
+
+  gap:12px;
+
+  margin-bottom:40px;
+
+}
+
+
+
+.feature{
+
+  background:white;
+
+  border:1px solid var(--line);
+
+  padding:8px 14px;
+
+  border-radius:999px;
+
+  font-size:13px;
+
+}
+
+
+
+footer{
+
+  font-size:13px;
+
+  color:var(--muted);
+
+}
+
+
+
+footer a{
+
+  color:var(--green);
+
+  text-decoration:none;
+
+}
+
+
+
+footer a:hover{
+
+  text-decoration:underline;
+
+}
+
+
+</style>
+
+</head>
+
+<body>
+
+
+
+<div class="wrap">
+
+
+
+<img src="./logo.png" class="logo">
+
+
+
+<div class="title">
+
+Mottainai Babe
+
+</div>
+
+
+
+<div class="subtitle">
+
+ベビー用品交換プラットフォーム
+
+</div>
+
+
+
+<div class="actions">
+
+
+<a href="./index.html#login" class="btn primary">
+
+出品する
+
+</a>
+
+
+<a href="./index.html#items" class="btn outline">
+
+交換アイテムを見る
+
+</a>
+
+
+</div>
+
+
+
+<div class="features">
+
+<div class="feature">簡単出品</div>
+
+<div class="feature">安心交換</div>
+
+<div class="feature">無料利用</div>
+
+</div>
+
+
+
+<footer>
+
+
+
+<div>
+
+© 2026 Mottainai Babe
+
+</div>
+
+
+
+<div style="margin-top:6px;">
+
+
+<a href="./about.html">運営者情報</a>
+
+|
+
+<a href="./privacy.html">プライバシーポリシー</a>
+
+|
+
+<a href="./terms.html">利用規約</a>
+
+
+</div>
+
+
+
+<div style="margin-top:6px;">
+
+運営者：Haejin Kishishita
+
+</div>
+
+
+
+<div style="margin-top:6px;">
+
+お問い合わせ：
+
+<a href="mailto:ainazmum2624@gmail.com">
+
+ainazmum2624@gmail.com
+
+</a>
+
+</div>
+
+
+
+</footer>
+
+
+
+</div>
+
+
+
+</body>
+</html>
