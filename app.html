@@ -524,18 +524,30 @@
     provider.setCustomParameters({ prompt: "select_account" });
 
     async function doLogin(){
-      try{
-        await signInWithPopup(auth, provider);
-      }catch(e){
-        console.error("Popup login failed", e);
-        const code = e?.code || "";
-        if(code.includes("popup-blocked") || code.includes("operation-not-supported-in-this-environment")){
-          await signInWithRedirect(auth, provider);
-          return;
-        }
-        alert("ログインに失敗しました: " + (e?.code || e?.message));
-      }
+
+  // LINE, Instagram 등 인앱브라우저 감지
+  const isInApp = /Line|LIFF|FBAN|FBAV|Instagram|KAKAOTALK/i.test(navigator.userAgent);
+
+  try{
+
+    if(isInApp){
+      // 인앱에서는 popup 거의 실패 → redirect 사용
+      await signInWithRedirect(auth, provider);
+      return;
     }
+
+    // 일반 브라우저는 popup 사용
+    await signInWithPopup(auth, provider);
+
+  }catch(e){
+
+    console.error("Login error", e);
+
+    // popup 실패시 redirect로 fallback
+    await signInWithRedirect(auth, provider);
+
+  }
+}
 
     loginBtn.onclick = doLogin;
 
