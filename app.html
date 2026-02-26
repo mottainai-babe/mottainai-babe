@@ -520,36 +520,57 @@
     const logoutBtn = document.getElementById("logoutBtn");
     const loginState = document.getElementById("loginState");
 
-    const provider = new GoogleAuthProvider();
-    provider.setCustomParameters({ prompt: "select_account" });
+   const provider = new GoogleAuthProvider();
+provider.setCustomParameters({ prompt: "select_account" });
 
-    async function doLogin(){
 
-  // LINE, Instagram 등 인앱브라우저 감지
-  const isInApp = /Line|LIFF|FBAN|FBAV|Instagram|KAKAOTALK/i.test(navigator.userAgent);
+// ✅ 인앱 브라우저 감지 함수 (추가)
+function isInAppBrowser() {
+  const ua = navigator.userAgent || "";
+  return /Line\/|LIFF|FBAN|FBAV|Instagram|KAKAOTALK|Twitter|WebView/i.test(ua);
+}
 
-  try{
 
-    if(isInApp){
-      // 인앱에서는 popup 거의 실패 → redirect 사용
+// ✅ 로그인 함수 (전체 교체)
+async function doLogin() {
+
+  try {
+
+    // LINE 등 인앱 브라우저 → redirect
+    if (isInAppBrowser()) {
+
       await signInWithRedirect(auth, provider);
+
       return;
     }
 
-    // 일반 브라우저는 popup 사용
+    // 일반 브라우저 → popup
     await signInWithPopup(auth, provider);
 
-  }catch(e){
+  } catch (e) {
 
     console.error("Login error", e);
 
-    // popup 실패시 redirect로 fallback
-    await signInWithRedirect(auth, provider);
+    const code = e?.code || "";
+
+    // popup 막힘 → redirect
+    if (
+      code.includes("popup-blocked") ||
+      code.includes("popup-closed") ||
+      code.includes("operation-not-supported")
+    ) {
+
+      await signInWithRedirect(auth, provider);
+
+      return;
+    }
+
+    alert("ログインに失敗しました: " + (e?.code || e?.message));
 
   }
 }
-
     loginBtn.onclick = doLogin;
+introLoginBtn.onclick = doLogin;
 
     logoutBtn.onclick = async () => {
       try{ await signOut(auth); } catch(e){ console.error("LOGOUT_ERROR", e); }
