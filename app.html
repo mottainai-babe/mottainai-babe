@@ -496,14 +496,13 @@
 
     import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
-    // ===== Firebase config (네 값 유지) =====
-    const firebaseConfig = {
-      apiKey: "AIzaSyAEk6aDtbuXU9K2bUnygYBqHMh75MeOlFU",
-      authDomain: "mottainai-babe.firebaseapp.com",
-      projectId: "mottainai-babe",
-      storageBucket: "mottainai-babe.firebasestorage.app",
-      appId: "1:752649559489:web:1288d8adeef7280eb7a340"
-    };
+    // ✅ firebase-config.js의 값을 그대로 사용 (index/app 통일)
+const firebaseConfig = window.FIREBASE_CONFIG;
+
+if (!firebaseConfig || !firebaseConfig.apiKey) {
+  alert("firebase-config.js 를 읽지 못했습니다. app.html과 같은 폴더(루트)에 있어야 합니다.");
+  throw new Error("Missing FIREBASE_CONFIG");
+}
 
     // ===== Init Firebase =====
     const app = initializeApp(firebaseConfig);
