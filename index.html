@@ -194,42 +194,91 @@
       location.href = "./app.html";
     });
 
-    // ✅ Firebase init & Google 로그인
+    // ✅ LINE/인앱 브라우저 판별 (팝업 거의 막힘)
+    function isInAppBrowser() {
+      const ua = navigator.userAgent || "";
+      return /Line\/|FBAN|FBAV|Instagram|KAKAOTALK|Twitter|WebView/i.test(ua);
+    }
+
+    // ✅ Firebase init
     (function init(){
       try{
         if(!window.FIREBASE_CONFIG || !window.FIREBASE_CONFIG.apiKey){
           alert("firebase-config.js の読み込みに失敗しました。index.html と同じフォルダ(ルート)に置いてください。");
           return;
         }
-        firebase.initializeApp(window.FIREBASE_CONFIG);
+        if (!firebase.apps.length) {
+          firebase.initializeApp(window.FIREBASE_CONFIG);
+        }
       }catch(e){
         console.error(e);
         alert("Firebase 初期化に失敗しました。firebase-config.js を確認してください。");
       }
     })();
 
+    // ✅ redirect 로그인 결과 처리 (redirect를 썼다면 여기서 세션 확정됨)
+    firebase.auth().getRedirectResult()
+      .then((result) => {
+        if (result && result.user) {
+          // redirect 로그인 성공 → app.html로 이동
+          location.href = "./app.html";
+        }
+      })
+      .catch((err) => {
+        // redirect 실패는 조용히 콘솔만 (사용자에겐 버튼 눌렀을 때 다시 안내)
+        console.error("getRedirectResult error", err);
+      });
+
+    // ✅ 出品する = 로그인 후 app 이동
     btnPost.addEventListener("click", async () => {
       try{
         btnPost.disabled = true;
         setStatus("Googleログイン中…");
 
         const provider = new firebase.auth.GoogleAuthProvider();
-        // ✅ ここでポップアップログイン
+        provider.setCustomParameters({ prompt: "select_account" });
+
+        // ✅ 인앱(특히 LINE)은 popup이 거의 막힘 → redirect 강제
+        if (isInAppBrowser()) {
+          await firebase.auth().signInWithRedirect(provider);
+          return; // redirect로 페이지 이동함
+        }
+
+        // ✅ 일반 브라우저는 popup 우선
         await firebase.auth().signInWithPopup(provider);
 
-        // ✅ 로그인 성공 → app.html로
+        // ✅ 로그인 성공 → app.html
         location.href = "./app.html";
+
       }catch(err){
         console.error(err);
 
-        // 사용자에게 이해되는 메시지로
+        const code = err?.code || "";
+        // ✅ popup 문제는 redirect로 fallback
+        if (
+          code === "auth/popup-blocked" ||
+          code === "auth/popup-closed-by-user" ||
+          code === "auth/operation-not-supported-in-this-environment"
+        ) {
+          try{
+            const provider = new firebase.auth.GoogleAuthProvider();
+            provider.setCustomParameters({ prompt: "select_account" });
+            await firebase.auth().signInWithRedirect(provider);
+            return;
+          }catch(e2){
+            console.error("redirect fallback failed", e2);
+          }
+        }
+
+        // 사용자용 메시지
         let msg = "ログインに失敗しました。";
-        if(err && err.code === "auth/popup-blocked") msg = "ポップアップがブロックされています。ブラウザ設定をご確認ください。";
-        if(err && err.code === "auth/unauthorized-domain") msg = "Firebaseの許可ドメインにこのURLが登録されていません。";
-        if(err && err.code === "auth/api-key-not-valid") msg = "Firebase設定(apiKeyなど)が正しく読み込めていません。firebase-config.jsを確認してください。";
+        if(code === "auth/popup-blocked") msg = "ポップアップがブロックされています（LINE/アプリ内ブラウザでは起きやすいです）。";
+        if(code === "auth/unauthorized-domain") msg = "Firebaseの許可ドメインにこのURLが登録されていません。";
+        if(code === "auth/api-key-not-valid") msg = "Firebase設定(apiKeyなど)が正しく読み込めていません。firebase-config.jsを確認してください。";
 
         alert(msg + "\n\n" + (err?.message || ""));
         setStatus("");
+
       }finally{
         btnPost.disabled = false;
       }
