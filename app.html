@@ -329,7 +329,40 @@
       padding: 14px;
       background: #fff;
     }
+
+    /* ===== In-app( LINE etc ) modal ===== */
+    .modalBack{
+      position:fixed;inset:0;
+      background:rgba(17,24,39,.55);
+      display:none;align-items:center;justify-content:center;
+      z-index:9999;
+      padding:16px;
+    }
+    .modal{
+      width:min(520px, 96vw);
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      box-shadow:0 10px 30px rgba(0,0,0,.2);
+      padding:16px;
+      color:var(--text);
+    }
+    .modal h3{margin:0 0 8px;font-size:16px}
+    .modal p{margin:0 0 12px;color:var(--muted);line-height:1.5;font-size:13px}
+    .modal .row{display:flex;gap:10px;flex-wrap:wrap}
+    .modal .url{
+      font-size:12px;
+      background:#f3f4f6;
+      border:1px solid #e5e7eb;
+      border-radius:12px;
+      padding:10px;
+      word-break:break-all;
+      margin:10px 0 12px;
+    }
+    .modal .btn{flex:1}
   </style>
+
+  <!-- ✅ config (window.FIREBASE_CONFIG) -->
   <script src="./firebase-config.js"></script>
 </head>
 
@@ -357,11 +390,8 @@
   </header>
 
   <main class="wrap">
-
-    <!-- ✅ 게이트 제거: app.html에 들어오면 무조건 아래 앱 화면 -->
     <section id="appSection">
 
-      <!-- Hero -->
       <section class="card cardPad hero">
         <div class="heroTop">
           <div style="min-width:0;">
@@ -371,7 +401,6 @@
               出品 → 交換提案 → 成立後に当事者のみ連絡先表示（Gmail作成画面を開きます）
             </p>
           </div>
-
           <div class="pill green" title="Beta">BETA</div>
         </div>
 
@@ -382,9 +411,8 @@
         </div>
       </section>
 
-      <!-- Main grid -->
       <section class="grid">
-        <!-- LEFT: 出品 -->
+        <!-- LEFT -->
         <div class="card cardPad">
           <h2 class="secTitle">出品する</h2>
 
@@ -418,7 +446,7 @@
           <div id="list" class="itemsWrap"></div>
         </div>
 
-        <!-- RIGHT: Detail -->
+        <!-- RIGHT -->
         <div class="card cardPad">
           <h2 class="secTitle">選択した出品（詳細）</h2>
           <div id="detailEmpty" class="muted">左の「出品一覧」から商品を選んでください。</div>
@@ -472,8 +500,32 @@
         </div>
       </section>
 
-    </section><!-- /appSection -->
+    </section>
   </main>
+
+  <!-- In-app modal -->
+  <div id="inAppModalBack" class="modalBack" role="dialog" aria-modal="true">
+    <div class="modal">
+      <h3>LINEなどのアプリ内ブラウザではログインできない場合があります</h3>
+      <p>
+        Googleログインは「安全なブラウザ」でのみ許可されることがあり、
+        LINE内ブラウザだとエラーになることがあります。<br>
+        下のURLを<b>Safari / Chrome</b>で開いてからログインしてください。
+      </p>
+      <div id="openUrlBox" class="url"></div>
+      <div class="row">
+        <button id="copyUrlBtn" class="btn btnGhost" type="button">URLをコピー</button>
+        <button id="closeModalBtn" class="btn btnGhost" type="button">閉じる</button>
+      </div>
+      <div style="height:10px"></div>
+      <div class="row">
+        <button id="tryOpenNewTabBtn" class="btn btnPrimary" type="button">外部ブラウザで開く（試す）</button>
+      </div>
+      <p class="small muted" style="margin-top:10px;">
+        ※うまく開けない場合：右上の「…」→「Safariで開く」を選択してください。
+      </p>
+    </div>
+  </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -496,13 +548,13 @@
 
     import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
-    // ✅ firebase-config.js의 값을 그대로 사용 (index/app 통일)
-const firebaseConfig = window.FIREBASE_CONFIG;
+    // ✅ firebase-config.js의 값을 그대로 사용
+    const firebaseConfig = window.FIREBASE_CONFIG;
 
-if (!firebaseConfig || !firebaseConfig.apiKey) {
-  alert("firebase-config.js 를 읽지 못했습니다. app.html과 같은 폴더(루트)에 있어야 합니다.");
-  throw new Error("Missing FIREBASE_CONFIG");
-}
+    if (!firebaseConfig || !firebaseConfig.apiKey) {
+      alert("firebase-config.js を読み込めませんでした。app.html と同じフォルダ(ルート)に置いてください。");
+      throw new Error("Missing FIREBASE_CONFIG");
+    }
 
     // ===== Init Firebase =====
     const app = initializeApp(firebaseConfig);
@@ -510,7 +562,6 @@ if (!firebaseConfig || !firebaseConfig.apiKey) {
     const db = getFirestore(app);
     const storage = getStorage(app);
 
-    // ✅ 로그인 유지
     await setPersistence(auth, browserLocalPersistence).catch((e)=>{
       console.error("setPersistence error", e);
     });
@@ -520,63 +571,93 @@ if (!firebaseConfig || !firebaseConfig.apiKey) {
     const logoutBtn = document.getElementById("logoutBtn");
     const loginState = document.getElementById("loginState");
 
-   const provider = new GoogleAuthProvider();
-provider.setCustomParameters({ prompt: "select_account" });
+    const provider = new GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: "select_account" });
 
-
-// ✅ 인앱 브라우저 감지 함수 (추가)
-function isInAppBrowser() {
-  const ua = navigator.userAgent || "";
-  return /Line\/|LIFF|FBAN|FBAV|Instagram|KAKAOTALK|Twitter|WebView/i.test(ua);
-}
-
-
-// ✅ 로그인 함수 (전체 교체)
-async function doLogin() {
-
-  try {
-
-    // LINE 등 인앱 브라우저 → redirect
-    if (isInAppBrowser()) {
-
-      await signInWithRedirect(auth, provider);
-
-      return;
+    // ✅ 인앱 브라우저 감지 (LINE/Instagram/Facebook 등)
+    function isInAppBrowser() {
+      const ua = navigator.userAgent || "";
+      return /Line\/|LIFF|FBAN|FBAV|Instagram|KAKAOTALK|Twitter|WebView/i.test(ua);
     }
 
-    // 일반 브라우저 → popup
-    await signInWithPopup(auth, provider);
+    // ===== in-app modal helpers =====
+    const modalBack = document.getElementById("inAppModalBack");
+    const openUrlBox = document.getElementById("openUrlBox");
+    const copyUrlBtn = document.getElementById("copyUrlBtn");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+    const tryOpenNewTabBtn = document.getElementById("tryOpenNewTabBtn");
 
-  } catch (e) {
-
-    console.error("Login error", e);
-
-    const code = e?.code || "";
-
-    // popup 막힘 → redirect
-    if (
-      code.includes("popup-blocked") ||
-      code.includes("popup-closed") ||
-      code.includes("operation-not-supported")
-    ) {
-
-      await signInWithRedirect(auth, provider);
-
-      return;
+    function canonicalUrl(){
+      // 현재 경로를 기준으로 절대 URL 생성
+      return new URL(location.pathname, location.origin).toString();
     }
 
-    alert("ログインに失敗しました: " + (e?.code || e?.message));
+    function openInAppModal(){
+      const url = canonicalUrl();
+      openUrlBox.textContent = url;
+      modalBack.style.display = "flex";
 
-  }
-}
+      copyUrlBtn.onclick = async () => {
+        try{
+          await navigator.clipboard.writeText(url);
+          alert("コピーしました。Safari / Chromeで開いてください。");
+        }catch{
+          // clipboard 실패 시 fallback
+          prompt("このURLをコピーしてください:", url);
+        }
+      };
+
+      tryOpenNewTabBtn.onclick = () => {
+        // 어떤 환경에서는 외부로 나가기도 하고, 안 되면 사용자가 메뉴에서 열기
+        const w = window.open(url, "_blank");
+        if(!w) location.href = url;
+      };
+
+      closeModalBtn.onclick = () => {
+        modalBack.style.display = "none";
+      };
+
+      modalBack.onclick = (e) => {
+        if(e.target === modalBack) modalBack.style.display = "none";
+      };
+    }
+
+    // ✅ 로그인 함수 (안전 버전)
+    async function doLogin(){
+      // LINE 등 인앱 브라우저에서는 Google 정책으로 disallowed_useragent가 잘 떠서
+      // 여기서 로그인 시도 자체를 막고 안내한다.
+      if(isInAppBrowser()){
+        openInAppModal();
+        return;
+      }
+
+      try{
+        await signInWithPopup(auth, provider);
+      }catch(e){
+        console.error("Login error", e);
+        const code = e?.code || "";
+
+        // popup이 막히면 redirect로 fallback
+        if(
+          code.includes("popup-blocked") ||
+          code.includes("popup-closed") ||
+          code.includes("operation-not-supported")
+        ){
+          await signInWithRedirect(auth, provider);
+          return;
+        }
+
+        alert("ログインに失敗しました: " + (e?.code || e?.message));
+      }
+    }
+
     loginBtn.onclick = doLogin;
-introLoginBtn.onclick = doLogin;
 
     logoutBtn.onclick = async () => {
       try{ await signOut(auth); } catch(e){ console.error("LOGOUT_ERROR", e); }
     };
 
-    // redirect 결과 처리
+    // redirect 결과 처리 (redirect 사용했을 경우)
     try{ await getRedirectResult(auth); }catch(e){ console.error("getRedirectResult error", e); }
 
     // ===== 앱 요소들 =====
@@ -589,7 +670,7 @@ introLoginBtn.onclick = doLogin;
     const detailEmpty = document.getElementById("detailEmpty");
     const detailBox = document.getElementById("detailBox");
 
-    // ✅ detailBox 원래 자리(PC 오른쪽)를 기억하는 마커
+    // detailBox 원래 자리 마커
     const detailHomeMarker = document.createElement("div");
     detailHomeMarker.id = "detailHomeMarker";
     detailBox.parentElement.insertBefore(detailHomeMarker, detailBox);
@@ -661,7 +742,6 @@ introLoginBtn.onclick = doLogin;
       if (!w) window.location.href = url;
     }
 
-    // ===== 무료 브라우저 자동 리사이즈(Canvas) =====
     async function compressImage(file, { maxSide = 1600, quality = 0.78 } = {}){
       if(file.type === "image/svg+xml") return file;
 
@@ -705,7 +785,7 @@ introLoginBtn.onclick = doLogin;
       throw new Error("too-large-after-compress");
     }
 
-    // ===== Tabs =====
+    // Tabs
     document.querySelectorAll("#conditionTabs .tab").forEach(btn => {
       btn.onclick = () => {
         document.querySelectorAll("#conditionTabs .tab").forEach(b => b.classList.remove("active"));
@@ -738,7 +818,6 @@ introLoginBtn.onclick = doLogin;
       detailEmpty.classList.remove("hidden");
     };
 
-    // ===== helpers: offer count =====
     async function countOffers(itemId){
       try{
         const snap = await getDocs(collection(db, "items", itemId, "offers"));
@@ -748,7 +827,6 @@ introLoginBtn.onclick = doLogin;
       }
     }
 
-    // ===== Delete/Edit =====
     async function deleteItem(itemId){
       if(!currentUser){ alert("ログインしてください。"); return; }
       if(!confirm("本当に削除しますか？（画像も削除します）")) return;
@@ -808,7 +886,6 @@ introLoginBtn.onclick = doLogin;
       }
     }
 
-    // ===== Create item =====
     uploadItemBtn.onclick = async () => {
       if(!currentUser){ alert("先にログインしてください。"); return; }
 
@@ -822,9 +899,8 @@ introLoginBtn.onclick = doLogin;
       }
 
       let f;
-      try{
-        f = await ensureUnderLimit(file);
-      }catch(e){
+      try{ f = await ensureUnderLimit(file); }
+      catch(e){
         alert("画像が大きすぎます。別の画像でお試しください。");
         console.error("IMAGE_PROCESS_ERROR", e);
         return;
@@ -866,7 +942,6 @@ introLoginBtn.onclick = doLogin;
       }
     };
 
-    // ===== load items =====
     async function loadItems(){
       moveDetailHome();
       listEl.innerHTML = "";
@@ -921,7 +996,6 @@ introLoginBtn.onclick = doLogin;
       document.querySelectorAll("[data-edit]").forEach(btn => btn.onclick = () => editItem(btn.dataset.edit));
     }
 
-    // ===== open detail =====
     async function openDetail(itemId){
       selectedItemId = itemId;
 
@@ -985,7 +1059,6 @@ introLoginBtn.onclick = doLogin;
       }
     }
 
-    // ===== accept offer (OWNER ONLY) =====
     async function acceptOffer(offerId){
       if(!currentUser || !selectedItemId || !selectedItemData){
         alert("ログイン状態または選択状態を確認してください。");
@@ -1021,16 +1094,9 @@ introLoginBtn.onclick = doLogin;
       }
     }
 
-    // ===== submit offer =====
     submitOfferBtn.onclick = async () => {
-      if (!currentUser) {
-        alert("先にログインしてください。");
-        return;
-      }
-      if (!selectedItemId || !selectedItemData) {
-        alert("出品を選択してください。");
-        return;
-      }
+      if (!currentUser) { alert("先にログインしてください。"); return; }
+      if (!selectedItemId || !selectedItemData) { alert("出品を選択してください。"); return; }
       if (selectedItemData.ownerUid && selectedItemData.ownerUid === currentUser.uid) {
         alert("自分の出品には提案できません。");
         return;
@@ -1046,15 +1112,13 @@ introLoginBtn.onclick = doLogin;
       }
 
       let f;
-      try{
-        f = await ensureUnderLimit(raw);
-      }catch(e){
+      try{ f = await ensureUnderLimit(raw); }
+      catch(e){
         alert("画像が大きすぎます。別の画像でお試しください。");
         console.error("OFFER_IMAGE_PROCESS_ERROR", e);
         return;
       }
 
-      // ownerEmail을 itemsPrivate/{itemId}에서 가져오기
       let ownerEmail = "";
       try{
         const privSnap = await getDoc(doc(db, "itemsPrivate", selectedItemId));
@@ -1099,7 +1163,6 @@ introLoginBtn.onclick = doLogin;
       }
     };
 
-    // ===== load offers =====
     async function loadOffers(){
       offersList.innerHTML = "";
 
@@ -1226,14 +1289,11 @@ introLoginBtn.onclick = doLogin;
         loginState.textContent = "未ログイン";
       }
 
-      // 로그인/비로그인 모두 리스트는 로드
       await loadItems();
       if(selectedItemId) await openDetail(selectedItemId);
     });
-
   </script>
 
-  <!-- Footer -->
   <footer>
     <div style="font-weight:900;color:var(--text);margin-bottom:8px;">もったいないベビー</div>
     <div style="margin-bottom:12px;">ベビー用品ゆずりあいサービス</div>
