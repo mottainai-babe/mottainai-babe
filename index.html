@@ -13,7 +13,14 @@
       --white-65: rgba(255,255,255,.65);
       --pill: rgba(255,255,255,.12);
       --stroke: rgba(255,255,255,.55);
-      --shadow: none; /* ✅ 로고 그림자 제거 */
+      --shadow: none;
+
+      /* modal */
+      --modalBack: rgba(0,0,0,.55);
+      --modalCard: #ffffff;
+      --modalText: #111827;
+      --modalMuted: #6b7280;
+      --modalLine: #e5e7eb;
     }
     *{box-sizing:border-box}
     body{
@@ -43,7 +50,6 @@
       padding:28px 0 10px;
     }
 
-    /* ✅ 로고 크게 */
     .logo{
       width:min(520px, 78vw);
       height:auto;
@@ -136,13 +142,56 @@
       .wrap{padding:34px 20px}
       .btn{height:54px}
     }
+
+    /* ===== In-app modal ===== */
+    .modalBack{
+      position:fixed; inset:0;
+      background:var(--modalBack);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:9999;
+      padding:16px;
+    }
+    .modal{
+      width:min(520px, 96vw);
+      background:var(--modalCard);
+      border:1px solid var(--modalLine);
+      border-radius:18px;
+      box-shadow:0 10px 30px rgba(0,0,0,.25);
+      padding:16px;
+      color:var(--modalText);
+      text-align:left;
+    }
+    .modal h3{margin:0 0 8px;font-size:16px}
+    .modal p{margin:0 0 12px;color:var(--modalMuted);line-height:1.5;font-size:13px}
+    .modal .url{
+      font-size:12px;
+      background:#f3f4f6;
+      border:1px solid #e5e7eb;
+      border-radius:12px;
+      padding:10px;
+      word-break:break-all;
+      margin:10px 0 12px;
+    }
+    .modal .row{display:flex;gap:10px;flex-wrap:wrap}
+    .modalBtn{
+      flex:1;
+      border:none;
+      cursor:pointer;
+      border-radius:999px;
+      padding:10px 14px;
+      font-size:14px;
+      font-weight:700;
+    }
+    .modalBtn.ghost{background:#f3f4f6;color:#111827}
+    .modalBtn.primary{background:#1f8f5a;color:#fff}
   </style>
 </head>
 
 <body>
   <main class="wrap">
     <section class="center">
-      <!-- ✅ logo.png가 아니라 logo1.png -->
       <img class="logo" src="./logo1.png" alt="Mottainai Babe" />
 
       <div class="jp-title">もったいないベビー</div>
@@ -175,10 +224,34 @@
     </footer>
   </main>
 
-  <!-- 1) ✅ config 먼저 로드 (window.FIREBASE_CONFIG 생성) -->
+  <!-- In-app modal -->
+  <div id="inAppModalBack" class="modalBack" role="dialog" aria-modal="true">
+    <div class="modal">
+      <h3>LINEなどのアプリ内ブラウザではログインできない場合があります</h3>
+      <p>
+        Googleログインは「安全なブラウザ」でのみ許可されることがあり、
+        LINE内ブラウザだとエラーになることがあります。<br>
+        下のURLを<b>Safari / Chrome</b>で開いてからログインしてください。
+      </p>
+      <div id="openUrlBox" class="url"></div>
+      <div class="row">
+        <button id="copyUrlBtn" class="modalBtn ghost" type="button">URLをコピー</button>
+        <button id="closeModalBtn" class="modalBtn ghost" type="button">閉じる</button>
+      </div>
+      <div style="height:10px"></div>
+      <div class="row">
+        <button id="tryOpenNewTabBtn" class="modalBtn primary" type="button">外部ブラウザで開く（試す）</button>
+      </div>
+      <p style="margin-top:10px;color:#6b7280;font-size:12px;line-height:1.5;">
+        ※うまく開けない場合：右上の「…」→「Safariで開く」を選択してください。
+      </p>
+    </div>
+  </div>
+
+  <!-- 1) config -->
   <script src="./firebase-config.js"></script>
 
-  <!-- 2) ✅ Firebase compat (정적 호스팅에서 제일 안정적) -->
+  <!-- 2) Firebase compat -->
   <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
 
@@ -189,15 +262,54 @@
 
     function setStatus(msg){ statusEl.textContent = msg || ""; }
 
-    // ✅ 아이템 보기: 바로 app.html 이동
+    // ✅ 아이템 보기: app.html 이동
     btnView.addEventListener("click", () => {
       location.href = "./app.html";
     });
 
-    // ✅ LINE/인앱 브라우저 판별 (팝업 거의 막힘)
+    // ✅ LINE/인앱 브라우저 판별
     function isInAppBrowser() {
       const ua = navigator.userAgent || "";
-      return /Line\/|FBAN|FBAV|Instagram|KAKAOTALK|Twitter|WebView/i.test(ua);
+      return /Line\/|LIFF|FBAN|FBAV|Instagram|KAKAOTALK|Twitter|WebView/i.test(ua);
+    }
+
+    // ===== modal helpers =====
+    const modalBack = document.getElementById("inAppModalBack");
+    const openUrlBox = document.getElementById("openUrlBox");
+    const copyUrlBtn = document.getElementById("copyUrlBtn");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+    const tryOpenNewTabBtn = document.getElementById("tryOpenNewTabBtn");
+
+    function canonicalUrl(){
+      return new URL(location.pathname, location.origin).toString();
+    }
+
+    function openInAppModal(){
+      const url = canonicalUrl();
+      openUrlBox.textContent = url;
+      modalBack.style.display = "flex";
+
+      copyUrlBtn.onclick = async () => {
+        try{
+          await navigator.clipboard.writeText(url);
+          alert("コピーしました。Safari / Chromeで開いてください。");
+        }catch{
+          prompt("このURLをコピーしてください:", url);
+        }
+      };
+
+      tryOpenNewTabBtn.onclick = () => {
+        const w = window.open(url, "_blank");
+        if(!w) location.href = url;
+      };
+
+      closeModalBtn.onclick = () => {
+        modalBack.style.display = "none";
+      };
+
+      modalBack.onclick = (e) => {
+        if(e.target === modalBack) modalBack.style.display = "none";
+      };
     }
 
     // ✅ Firebase init
@@ -216,21 +328,26 @@
       }
     })();
 
-    // ✅ redirect 로그인 결과 처리 (redirect를 썼다면 여기서 세션 확정됨)
+    // ✅ redirect 로그인 결과 처리
     firebase.auth().getRedirectResult()
       .then((result) => {
         if (result && result.user) {
-          // redirect 로그인 성공 → app.html로 이동
           location.href = "./app.html";
         }
       })
       .catch((err) => {
-        // redirect 실패는 조용히 콘솔만 (사용자에겐 버튼 눌렀을 때 다시 안내)
         console.error("getRedirectResult error", err);
       });
 
     // ✅ 出品する = 로그인 후 app 이동
     btnPost.addEventListener("click", async () => {
+      // LINE 등 인앱 브라우저는 Google 정책으로 disallowed_useragent가 잘 떠서
+      // 여기서 로그인 시도 자체를 막고 안내한다.
+      if (isInAppBrowser()) {
+        openInAppModal();
+        return;
+      }
+
       try{
         btnPost.disabled = true;
         setStatus("Googleログイン中…");
@@ -238,23 +355,18 @@
         const provider = new firebase.auth.GoogleAuthProvider();
         provider.setCustomParameters({ prompt: "select_account" });
 
-        // ✅ 인앱(특히 LINE)은 popup이 거의 막힘 → redirect 강제
-        if (isInAppBrowser()) {
-          await firebase.auth().signInWithRedirect(provider);
-          return; // redirect로 페이지 이동함
-        }
-
-        // ✅ 일반 브라우저는 popup 우선
+        // 일반 브라우저: popup 우선
         await firebase.auth().signInWithPopup(provider);
 
-        // ✅ 로그인 성공 → app.html
+        // 로그인 성공 → app.html
         location.href = "./app.html";
 
       }catch(err){
         console.error(err);
 
         const code = err?.code || "";
-        // ✅ popup 문제는 redirect로 fallback
+
+        // popup 문제는 redirect로 fallback
         if (
           code === "auth/popup-blocked" ||
           code === "auth/popup-closed-by-user" ||
@@ -270,9 +382,8 @@
           }
         }
 
-        // 사용자용 메시지
         let msg = "ログインに失敗しました。";
-        if(code === "auth/popup-blocked") msg = "ポップアップがブロックされています（LINE/アプリ内ブラウザでは起きやすいです）。";
+        if(code === "auth/popup-blocked") msg = "ポップアップがブロックされています。";
         if(code === "auth/unauthorized-domain") msg = "Firebaseの許可ドメインにこのURLが登録されていません。";
         if(code === "auth/api-key-not-valid") msg = "Firebase設定(apiKeyなど)が正しく読み込めていません。firebase-config.jsを確認してください。";
 
