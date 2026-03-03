@@ -3,72 +3,123 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>安全ガイド：安心して使えるベビー用品の選び方 | Mottainai Babe</title>
-  <meta name="description" content="リユースでも安心して使えるベビー用品の選び方。危険サイン、カテゴリ別の注意点、受け渡し時の確認、トラブル防止のポイントをまとめました。" />
+  <title>安全ガイド | Mottainai Babe</title>
+  <meta name="description" content="ベビー用品を安全にリユースするためのチェックポイントと、受け渡し・保管の注意点をまとめました。" />
 
-  <!-- AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5865479939175622" crossorigin="anonymous"></script>
+  <!-- AdSense (site ownership / Auto ads) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5865479939175622"
+    crossorigin="anonymous"></script>
 
   <style>
     :root{
-      --bg:#0f3b34;
+      /* indexと統一 */
+      --bg:#377649;
+      --bg-dark:#2e633d;
+      --bg-darker:#1f4b2e;
+
       --paper:#ffffff;
+      --soft:#f3f4f6;
+
       --ink:#111827;
       --muted:#6b7280;
       --line:#e5e7eb;
-      --soft:#f5f7f7;
-      --accent:#16a34a;
-      --warn:#f59e0b;
-      --danger:#ef4444;
-      --radius:18px;
-      --shadow: 0 10px 30px rgba(0,0,0,.10);
-      --w: 760px;
+
+      --white:#ffffff;
+      --white-80: rgba(255,255,255,.85);
+      --white-65: rgba(255,255,255,.65);
+
+      --radius:20px;
+      --shadow: 0 18px 40px rgba(0,0,0,.12);
+      --w: 940px;
+      --content: 820px;
     }
+
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", "Segoe UI", Roboto, Arial;
       color:var(--ink);
       background:
-        radial-gradient(1200px 600px at 20% 0%, rgba(22,163,74,.22), transparent 55%),
-        radial-gradient(900px 500px at 100% 10%, rgba(245,158,11,.18), transparent 55%),
-        linear-gradient(180deg, #0b2c27 0%, #0f3b34 40%, #f3f4f6 40%, #f3f4f6 100%);
+        radial-gradient(1200px 600px at 20% 0%, rgba(255,255,255,.08), transparent 55%),
+        radial-gradient(900px 500px at 100% 10%, rgba(0,0,0,.12), transparent 55%),
+        linear-gradient(180deg, var(--bg-darker) 0%, var(--bg) 46%, var(--soft) 46%, var(--soft) 100%);
       min-height:100vh;
     }
-    a{color:inherit}
+    a{color:inherit;text-decoration:none}
+
+    /* Topbar */
     .topbar{
       position:sticky; top:0;
-      backdrop-filter: blur(10px);
-      background: rgba(15,59,52,.72);
-      border-bottom: 1px solid rgba(255,255,255,.10);
-      z-index:10;
+      z-index:50;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(55,118,73,.66);
+      border-bottom: 1px solid rgba(255,255,255,.16);
     }
     .topbar .inner{
       max-width: var(--w);
       margin: 0 auto;
-      padding: 14px 18px;
+      padding: 12px 18px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      color:#fff;
+      gap:12px;
     }
     .brand{
-      display:flex; align-items:center; gap:10px;
-      text-decoration:none;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width: 220px;
     }
-    .dot{
-      width:10px;height:10px;border-radius:50%;
-      background: var(--accent);
-      box-shadow: 0 0 0 6px rgba(22,163,74,.18);
+    .brandMark{
+      width:40px;height:40px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.18);
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      box-shadow: 0 10px 22px rgba(0,0,0,.12);
     }
-    .brand strong{letter-spacing:.2px}
+    .brandMark img{
+      width:34px;height:34px;
+      object-fit:contain;
+      display:block;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,.18));
+    }
+    .brandText{
+      display:flex;
+      flex-direction:column;
+      line-height:1.1;
+      color:#fff;
+    }
+    .brandText strong{font-size:15px; letter-spacing:.2px}
+    .brandText span{
+      font-size:12px;
+      color: var(--white-80);
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
     .nav a{
-      text-decoration:none;
-      opacity:.9;
-      padding:8px 10px;
+      color:#fff;
+      font-size:13px;
+      padding:9px 12px;
       border-radius:999px;
+      border:1px solid transparent;
+      opacity:.92;
+      white-space:nowrap;
     }
-    .nav a:hover{background: rgba(255,255,255,.10)}
+    .nav a:hover{
+      background: rgba(255,255,255,.10);
+      border-color: rgba(255,255,255,.14);
+      opacity:1;
+    }
+
+    /* Layout */
     .wrap{
       max-width: var(--w);
       margin: 0 auto;
@@ -76,182 +127,146 @@
     }
     .hero{
       color:#fff;
-      padding: 26px 0 10px;
+      padding: 16px 0 14px;
     }
     .kicker{
       display:inline-flex;
       gap:8px; align-items:center;
       font-size:12px;
-      opacity:.92;
+      color: var(--white-80);
       background: rgba(255,255,255,.10);
       border: 1px solid rgba(255,255,255,.16);
-      padding: 6px 10px;
+      padding: 7px 12px;
       border-radius: 999px;
     }
     h1{
-      margin: 14px 0 10px;
-      font-size: 30px;
-      line-height: 1.2;
-      letter-spacing: -.3px;
+      margin: 14px 0 8px;
+      font-size: 32px;
+      line-height: 1.15;
+      letter-spacing: -.4px;
     }
     .lead{
       margin:0;
-      max-width: 60ch;
-      color: rgba(255,255,255,.88);
-      line-height:1.7;
+      max-width: 76ch;
+      color: var(--white-80);
+      line-height:1.75;
     }
-    .btnrow{
-      display:flex; gap:10px; flex-wrap:wrap;
+
+    /* Article Card */
+    .paper{
+      max-width: var(--content);
+      background: rgba(255,255,255,.94);
+      border: 1px solid rgba(255,255,255,.70);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px 20px;
+      margin-top: 18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .paper::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(680px 260px at 15% 0%, rgba(55,118,73,.14), transparent 55%),
+        radial-gradient(420px 220px at 110% 10%, rgba(0,0,0,.06), transparent 55%);
+      pointer-events:none;
+    }
+    .paper > *{position:relative}
+
+    .section{
+      margin: 0 0 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(17,24,39,.10);
+    }
+    .section:last-child{border-bottom:none;padding-bottom:0;margin-bottom:0}
+
+    h2{
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing: -.2px;
+    }
+    p{
+      margin: 0 0 12px;
+      line-height: 1.9;
+      color: rgba(17,24,39,.92);
+    }
+    .list{
+      margin: 10px 0 0;
+      padding: 0;
+      list-style: none;
+      display:grid;
+      gap:10px;
+    }
+    .list li{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding: 12px 12px;
+      border: 1px solid rgba(17,24,39,.10);
+      border-radius: 14px;
+      background: rgba(255,255,255,.70);
+    }
+    .badge{
+      flex: 0 0 auto;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(55,118,73,.12);
+      color: var(--bg-darker);
+      border: 1px solid rgba(55,118,73,.18);
+      margin-top: 1px;
+      white-space:nowrap;
+    }
+    .muted{color: rgba(17,24,39,.72)}
+    .tip{
+      margin-top: 10px;
+      padding: 14px 14px;
+      border-radius: 16px;
+      background: rgba(55,118,73,.10);
+      border: 1px solid rgba(55,118,73,.16);
+      color: rgba(17,24,39,.88);
+      line-height: 1.85;
+    }
+
+    .actionsRow{
+      max-width: var(--content);
       margin-top: 14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
     }
     .btn{
-      text-decoration:none;
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,.22);
-      color:#fff;
-      background: rgba(255,255,255,.10);
-    }
-    .btn:hover{background: rgba(255,255,255,.16)}
-
-    .grid{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:16px;
-      margin-top: 18px;
-    }
-    @media (max-width: 860px){
-      .grid{grid-template-columns:1fr}
-    }
-    .card{
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .card .hd{
-      padding: 16px 18px;
-      border-bottom: 1px solid var(--line);
-      background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-    }
-    .card .hd h2{
-      margin:0;
-      font-size:16px;
-    }
-    .pill{
-      font-size:12px;
-      color: var(--muted);
-      padding: 6px 10px;
+      gap:8px;
+      padding: 10px 16px;
       border-radius:999px;
-      border:1px solid var(--line);
-      background: #fff;
-      white-space: nowrap;
+      border:none;
+      background: var(--bg);
+      color:#fff;
+      font-weight:600;
+      letter-spacing:.1px;
+      box-shadow: 0 10px 18px rgba(55,118,73,.22);
+      transition: .2s ease;
     }
-    .card .bd{padding: 16px 18px}
-    .checklist{
-      list-style:none;
-      margin:0;
-      padding:0;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
+    .btn:hover{background: var(--bg-dark); transform: translateY(-1px)}
+    .btnGhost{
+      background: rgba(255,255,255,.88);
+      color: rgba(17,24,39,.92);
+      border: 1px solid rgba(17,24,39,.10);
+      box-shadow: none;
     }
-    .checklist li{
-      display:flex;
-      gap:10px;
-      padding: 12px 12px;
-      border:1px solid var(--line);
-      background: var(--soft);
-      border-radius: 14px;
-      line-height:1.6;
-    }
-    .check{
-      width:22px;height:22px;border-radius:8px;
-      background: rgba(22,163,74,.12);
-      border:1px solid rgba(22,163,74,.30);
-      display:grid; place-items:center;
-      flex:0 0 auto;
-      margin-top:2px;
-    }
-    .check:before{
-      content:"✓";
-      color: var(--accent);
-      font-weight:800;
-      font-size:13px;
-    }
-    .muted{color:var(--muted)}
-    .callouts{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin-top: 12px;
-    }
-    @media (max-width: 860px){
-      .callouts{grid-template-columns:1fr}
-    }
-    .callout{
-      padding: 14px 14px;
-      border-radius: 16px;
-      border:1px solid var(--line);
-      background: #fff;
-      line-height:1.7;
-    }
-    .callout b{display:block;margin-bottom:6px}
-    .warn{
-      border-color: rgba(245,158,11,.35);
-      background: rgba(245,158,11,.08);
-    }
-    .danger{
-      border-color: rgba(239,68,68,.30);
-      background: rgba(239,68,68,.06);
-    }
-    .table{
-      width:100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      overflow:hidden;
-      border-radius: 16px;
-      border:1px solid var(--line);
-      background:#fff;
-    }
-    .table th, .table td{
-      text-align:left;
-      padding: 12px 12px;
-      border-bottom:1px solid var(--line);
-      vertical-align:top;
-      line-height:1.6;
-    }
-    .table th{
-      font-size:12px;
-      letter-spacing:.2px;
-      color: var(--muted);
-      background: #fafafa;
-    }
-    .table tr:last-child td{border-bottom:none}
-    .note{
-      border-radius: 16px;
-      border: 1px dashed rgba(22,163,74,.40);
-      background: rgba(22,163,74,.08);
-      padding: 14px 14px;
-      line-height:1.7;
-      color:#0b2c27;
-    }
+    .btnGhost:hover{filter: brightness(.98); transform:none}
+
+    /* Footer */
     .footer{
       margin-top: 18px;
-      color: rgba(17,24,39,.88);
       text-align:center;
       font-size: 12px;
-      opacity:.95;
+      color: rgba(17,24,39,.80);
     }
-    .footer a{color:inherit}
     .footer .links{
       display:flex;
       gap:12px;
@@ -259,17 +274,33 @@
       flex-wrap:wrap;
       margin: 10px 0 0;
     }
+    .footer .links a{
+      color: rgba(17,24,39,.78);
+      padding: 6px 8px;
+      border-radius: 10px;
+    }
+    .footer .links a:hover{
+      background: rgba(55,118,73,.10);
+      color: rgba(17,24,39,.92);
+    }
   </style>
 </head>
 
 <body>
   <header class="topbar">
     <div class="inner">
-      <a class="brand" href="./index.html">
-        <span class="dot"></span>
-        <strong>Mottainai Babe</strong>
+      <a class="brand" href="./index.html" aria-label="Mottainai Babe トップへ">
+        <span class="brandMark" aria-hidden="true">
+          <img src="./logo1.png" alt="" />
+        </span>
+        <span class="brandText">
+          <strong>Mottainai Babe</strong>
+          <span>リユースでつなぐ、やさしい循環</span>
+        </span>
       </a>
-      <nav class="nav">
+
+      <nav class="nav" aria-label="ナビゲーション">
+        <a href="./guide.html">ガイド</a>
         <a href="./app.html">アプリ</a>
         <a href="./about.html">お問い合わせ</a>
       </nav>
@@ -278,110 +309,152 @@
 
   <main class="wrap">
     <section class="hero">
-      <span class="kicker">Safety • 安心して使うために</span>
-      <h1>安全ガイド：リユースでも“安心”を最優先に</h1>
+      <span class="kicker">Guide • Safety</span>
+      <h1>ベビー用品を安全にリユースする方法</h1>
       <p class="lead">
-        リユースは家計にも環境にもやさしい一方で、ベビー用品は安全性が最重要です。
-        ここでは「避けるべきサイン」「カテゴリ別の注意」「受け渡し時の確認」を、迷わない形で整理します。
+        ベビー用品は使用期間が短い一方で、安全面の確認がとても重要です。
+        ここでは「購入前・受け渡し・保管」の3つの場面に分けて、安心してリユースするためのポイントをまとめます。
       </p>
-      <div class="btnrow">
-        <a class="btn" href="./guide.html">← ガイドへ</a>
-        <a class="btn" href="./eco.html">次：エコの考え方 →</a>
-      </div>
     </section>
 
-    <section class="grid">
-      <article class="card">
-        <div class="hd">
-          <h2>まず見るべき「危険サイン」</h2>
-          <span class="pill">不明点が多い＝見送り</span>
-        </div>
-        <div class="bd">
-          <ul class="checklist">
-            <li><span class="check"></span><div><b>型番・メーカーが分からない</b><span class="muted">リコール確認ができないためリスクが上がります。写真でラベル確認ができると理想。</span></div></li>
-            <li><span class="check"></span><div><b>留め具・ベルトに違和感</b><span class="muted">緩い／硬い／戻らない等は要注意。安全機構が機能しない可能性があります。</span></div></li>
-            <li><span class="check"></span><div><b>強い割れ・歪み・ネジ欠品</b><span class="muted">見た目が軽微でも、荷重がかかると破損が進むケースがあります。</span></div></li>
-            <li><span class="check"></span><div><b>カビ臭・喫煙臭が強い</b><span class="muted">衛生面だけでなく、赤ちゃんの体調に影響する可能性。落とし切れない場合も多いです。</span></div></li>
-          </ul>
-
-          <div class="callouts">
-            <div class="callout warn">
-              <b>「安い」より「確かな履歴」</b>
-              使用期間・購入時期・保管環境（湿気/ペット/喫煙）を聞くだけで判断がラクになります。
+    <article class="paper" aria-label="安全ガイド本文">
+      <section class="section">
+        <h2>まず確認したい3つのチェックポイント</h2>
+        <p class="muted">
+          「見た目がきれい」だけでは判断できない項目があります。特に次の3点は、必ず確認しましょう。
+        </p>
+        <ul class="list">
+          <li>
+            <span class="badge">使用年数</span>
+            <div>
+              <p><strong>製造年・購入時期</strong>を確認し、古すぎる製品は避けましょう。</p>
+              <p class="muted">プラスチックの劣化、クッション材のへたり、ベルトの伸びなどが起こりやすくなります。</p>
             </div>
-            <div class="callout danger">
-              <b>特に慎重に：安全カテゴリ</b>
-              チャイルドシート／抱っこ紐／ベビーベッド／ベビーカーは、
-              目に見えない劣化や衝撃履歴がリスクになります。
+          </li>
+          <li>
+            <span class="badge">リコール</span>
+            <div>
+              <p><strong>メーカー名・型番</strong>でリコール情報をチェックします。</p>
+              <p class="muted">海外ブランドの場合もあるので、公式サイトや公的機関の情報が確実です。</p>
             </div>
-          </div>
-        </div>
-      </article>
+          </li>
+          <li>
+            <span class="badge">破損</span>
+            <div>
+              <p><strong>ロック・留め具・ネジ</strong>など可動部を重点的に確認します。</p>
+              <p class="muted">小さなヒビでも、荷重がかかると一気に割れることがあります。</p>
+            </div>
+          </li>
+        </ul>
 
-      <aside class="card">
-        <div class="hd">
-          <h2>受け渡し時のチェック</h2>
-          <span class="pill">“その場で”確認</span>
+        <div class="tip">
+          <strong>ワンポイント：</strong>
+          ベビーカー・チャイルドシート・抱っこ紐など「安全を支える製品」は、
+          写真だけでなく<strong>動作確認</strong>までできると安心です。
         </div>
-        <div class="bd">
-          <ul class="checklist">
-            <li><span class="check"></span><div><b>動作確認</b><span class="muted">ボタン、折りたたみ、ロック、バックルは実際に触って確認。</span></div></li>
-            <li><span class="check"></span><div><b>付属品の有無</b><span class="muted">説明書、クッション、ベルトパッド、工具など。欠品は安全性や使いやすさに影響します。</span></div></li>
-            <li><span class="check"></span><div><b>クリーニング状態</b><span class="muted">洗浄済みか、どの方法で洗ったか（洗剤/乾燥）を共有できると安心。</span></div></li>
-          </ul>
+      </section>
 
-          <div class="note" style="margin-top:12px;">
-            <b>小さなコツ</b><br/>
-            受け渡し前に「写真（ラベル・型番・留め具）」をもらうと、当日の確認がスムーズです。
-          </div>
+      <section class="section">
+        <h2>受け渡し時にチェックすると安心なこと</h2>
+        <p>
+          受け渡しの瞬間は、状態を確かめる最後のチャンスです。時間が限られていても、以下の点だけは確認しましょう。
+        </p>
+        <ul class="list">
+          <li>
+            <span class="badge">動作</span>
+            <div>
+              <p><strong>開閉・ロック・固定</strong>がスムーズに動くか。</p>
+              <p class="muted">例：ベビーカーの折りたたみ、ハイチェアの固定、ゲートのロック。</p>
+            </div>
+          </li>
+          <li>
+            <span class="badge">付属品</span>
+            <div>
+              <p><strong>説明書・アダプター・パーツ</strong>が揃っているか。</p>
+              <p class="muted">欠品があると安全に使えない場合があるため、事前にリスト化しておくのがおすすめ。</p>
+            </div>
+          </li>
+          <li>
+            <span class="badge">清潔</span>
+            <div>
+              <p><strong>におい・カビ・汚れ</strong>がないか。</p>
+              <p class="muted">洗える素材かどうかもセットで確認すると、持ち帰ってからの手間が減ります。</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>洗浄・消毒の基本（素材別の目安）</h2>
+        <p>
+          まずは「落とせる汚れを落とす」→「乾燥させる」→「必要なら消毒」の順番が基本です。
+        </p>
+        <ul class="list">
+          <li>
+            <span class="badge">布</span>
+            <div>
+              <p><strong>洗濯表示</strong>に従い、可能なら取り外して洗濯。</p>
+              <p class="muted">乾燥不足はにおい・カビの原因。風通しの良い場所でしっかり乾かします。</p>
+            </div>
+          </li>
+          <li>
+            <span class="badge">樹脂</span>
+            <div>
+              <p>中性洗剤で拭き取り、よくすすいで乾燥。</p>
+              <p class="muted">アルコールの使用は、素材によって白化・割れの原因になることがあります。</p>
+            </div>
+          </li>
+          <li>
+            <span class="badge">金属</span>
+            <div>
+              <p>水分が残るとサビの原因。<strong>最後に乾拭き</strong>。</p>
+              <p class="muted">ネジ周りは特に水分が残りやすいので注意。</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>保管方法（長持ちさせるコツ）</h2>
+        <p>
+          使わない期間があるなら、保管の仕方で状態が大きく変わります。
+        </p>
+        <ul class="list">
+          <li>
+            <span class="badge">湿気</span>
+            <div>
+              <p>湿気の少ない場所で保管し、<strong>床に直置きしない</strong>のが理想です。</p>
+              <p class="muted">収納箱に入れる場合は、乾燥剤を一緒に入れると安心。</p>
+            </div>
+          </li>
+          <li>
+            <span class="badge">日光</span>
+            <div>
+              <p>直射日光は色あせ・素材劣化の原因。<strong>遮光できる場所</strong>を選びます。</p>
+              <p class="muted">窓際やベランダ付近は避けるのが無難です。</p>
+            </div>
+          </li>
+          <li>
+            <span class="badge">形</span>
+            <div>
+              <p>変形しやすいものは、重ね置きせず<strong>形を保てる収納</strong>を。</p>
+              <p class="muted">例：ヘルメット、クッション類、ベルト付き製品。</p>
+            </div>
+          </li>
+        </ul>
+
+        <div class="tip">
+          <strong>安全の最終ルール：</strong>
+          少しでも不安がある場合は「使わない」判断も正解です。
+          Mottainai Babeでは、安心して循環できる取引を応援しています。
         </div>
-      </aside>
-    </section>
+      </section>
+    </article>
 
-    <section class="card" style="margin-top:16px;">
-      <div class="hd">
-        <h2>カテゴリ別：見落としやすい注意点</h2>
-        <span class="pill">迷ったらここを見る</span>
-      </div>
-      <div class="bd">
-        <table class="table">
-          <thead>
-            <tr>
-              <th style="width:22%;">カテゴリ</th>
-              <th>チェックポイント</th>
-              <th style="width:28%;">見送り推奨の例</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><b>チャイルドシート</b></td>
-              <td class="muted">製造年、事故歴、ベルトの状態、ロック機構、取付説明書の有無</td>
-              <td class="muted">製造年不明／強い日焼け・劣化／事故歴不明</td>
-            </tr>
-            <tr>
-              <td><b>抱っこ紐</b></td>
-              <td class="muted">バックルの硬さ、縫製のほつれ、ベルトの毛羽立ち、タグ情報</td>
-              <td class="muted">縫い目の裂け／バックルが戻らない</td>
-            </tr>
-            <tr>
-              <td><b>ベビーカー</b></td>
-              <td class="muted">折り畳み・ロック、タイヤの摩耗、ブレーキ、フレームの歪み</td>
-              <td class="muted">ブレーキ効かない／歪み／異音が大きい</td>
-            </tr>
-            <tr>
-              <td><b>口に入るもの</b></td>
-              <td class="muted">傷・変色・におい、耐熱、消毒方法、素材（BPA等）</td>
-              <td class="muted">深い傷／白濁・変形／強いにおい</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div class="note" style="margin-top:14px;">
-          <b>免責</b><br/>
-          本ページは一般的な目安です。製品の使用方法・安全基準はメーカーの取扱説明書および公的情報を優先してください。
-        </div>
-      </div>
-    </section>
+    <div class="actionsRow">
+      <a class="btn btnGhost" href="./guide.html">← ガイド一覧へ</a>
+      <a class="btn" href="./eco.html">次：エコの考え方 →</a>
+    </div>
 
     <footer class="footer">
       <div>© 2026 Mottainai Babe. All rights reserved.</div>
