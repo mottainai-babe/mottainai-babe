@@ -1,462 +1,232 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mottainai Babe</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Mottainai Babe</title>
 
-  <!-- AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5865479939175622"
-     crossorigin="anonymous"></script>
+<!-- AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5865479939175622"
+crossorigin="anonymous"></script>
 
-  <style>
-    :root{
-      --bg:#377649;
-      --white:#ffffff;
-      --white-80: rgba(255,255,255,.8);
-      --white-65: rgba(255,255,255,.65);
-      --pill: rgba(255,255,255,.12);
-      --stroke: rgba(255,255,255,.55);
-      --shadow: none;
+<style>
+:root{
+  --bg:#377649;
+  --white:#ffffff;
+  --white-80: rgba(255,255,255,.8);
+  --white-65: rgba(255,255,255,.65);
+  --pill: rgba(255,255,255,.12);
+  --stroke: rgba(255,255,255,.55);
 
-      /* modal */
-      --modalBack: rgba(0,0,0,.55);
-      --modalCard: #ffffff;
-      --modalText: #111827;
-      --modalMuted: #6b7280;
-      --modalLine: #e5e7eb;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--white);
-      font-family: ui-sans-serif, system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", "Segoe UI", Roboto, Arial;
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
+  --modalBack: rgba(0,0,0,.55);
+  --modalCard: #ffffff;
+  --modalText: #111827;
+  --modalMuted: #6b7280;
+  --modalLine: #e5e7eb;
+}
 
-    .wrap{
-      width:min(980px, 92vw);
-      padding:48px 70px;
-      position:relative;
-    }
+*{box-sizing:border-box}
 
-    .center{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      gap:18px;
-      text-align:center;
-      padding:28px 0 10px;
-    }
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--white);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Hiragino Sans","Noto Sans JP", Arial;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
-    .logo{
-      width:min(520px, 78vw);
-      height:auto;
-      display:block;
-      filter:none;
-      box-shadow:none;
-      text-shadow:none;
-    }
+.wrap{
+  width:min(980px,92vw);
+  padding:48px 70px;
+}
 
-    .jp-title{
-      font-size:18px;
-      letter-spacing:.06em;
-      font-weight:700;
-      margin-top:4px;
-    }
-    .jp-sub{
-      font-size:14px;
-      letter-spacing:.05em;
-      color:var(--white-80);
-    }
+.center{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:18px;
+}
 
-    .btns{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      margin-top:10px;
-      width:min(520px, 78vw);
-    }
-    .btn{
-      width:100%;
-      height:58px;
-      border-radius:999px;
-      font-size:16px;
-      font-weight:700;
-      letter-spacing:.02em;
-      cursor:pointer;
-      border:1px solid var(--stroke);
-      background:transparent;
-      color:var(--white);
-    }
-    .btn.primary{
-      background:rgba(255,255,255,.85);
-      border-color:rgba(255,255,255,.85);
-      color:#1f3d2b;
-    }
-    .btn:active{transform:translateY(1px)}
-    .btn[disabled]{opacity:.6; cursor:not-allowed}
+.logo{
+  width:min(520px,78vw);
+  height:auto;
+}
 
-    .badges{
-      margin-top:14px;
-      display:flex;
-      gap:14px;
-      flex-wrap:wrap;
-      justify-content:center;
-    }
-    .badge{
-      padding:10px 16px;
-      border-radius:999px;
-      background:var(--pill);
-      border:1px solid rgba(255,255,255,.12);
-      font-size:13px;
-      color:var(--white-80);
-      font-weight:700;
-    }
+.jp-title{
+  font-size:18px;
+  font-weight:700;
+}
 
-    .status{
-      margin-top:12px;
-      font-size:12px;
-      color:rgba(255,255,255,.85);
-      opacity:.95;
-      min-height:18px;
-    }
-/* ===== Guide CTA section (統一デザイン) ===== */
-.info{
-  margin-top:40px;
+.jp-sub{
+  font-size:14px;
+  color:var(--white-80);
+}
+
+.btns{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  width:min(520px,78vw);
+}
+
+.btn{
+  height:58px;
+  border-radius:999px;
+  font-size:16px;
+  font-weight:700;
+  border:1px solid var(--stroke);
+  background:transparent;
+  color:var(--white);
+  cursor:pointer;
+}
+
+.btn.primary{
+  background:rgba(255,255,255,.85);
+  border-color:rgba(255,255,255,.85);
+  color:#1f3d2b;
+}
+
+.badges{
+  margin-top:14px;
+  display:flex;
+  gap:14px;
+  justify-content:center;
+}
+
+.badge{
+  padding:10px 16px;
+  border-radius:999px;
+  background:var(--pill);
+  border:1px solid rgba(255,255,255,.12);
+  font-size:13px;
+  color:var(--white-80);
+  font-weight:700;
+}
+
+/* ===== Guide Section ===== */
+
+.infoSection{
+  width:100%;
+  margin-top:48px;
+  padding-top:34px;
+  border-top:1px solid rgba(255,255,255,.14); /* 구분선 */
   text-align:center;
 }
 
-.infoDivider{
-  width:min(520px, 92vw);
-  margin: 0 auto 22px;
-  border-top:1px solid rgba(255,255,255,.14);
+.infoInner{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center; /* 완전 중앙 */
+  gap:14px;
 }
 
 .infoTitle{
   font-size:18px;
   font-weight:800;
-  letter-spacing:.04em;
-  margin:0 0 12px;
 }
 
 .infoDesc{
-  margin:0 auto 12px;
   max-width:52ch;
   font-size:13px;
-  line-height:1.6;
+  line-height:1.7;
   color:var(--white-80);
 }
 
-/* ✅ iPhone에서도 확실히 중앙정렬되게 block + margin auto */
 .infoBtn{
   display:block;
-  width:min(520px, 92vw);
-  margin: 0 auto;
-  padding:12px 16px;
+  width:100%;
+  max-width:520px;
+  padding:14px 18px;
   border-radius:999px;
   border:1px solid rgba(255,255,255,.45);
   background:rgba(255,255,255,.12);
   color:#fff;
   text-decoration:none;
   font-weight:800;
-  letter-spacing:.02em;
   text-align:center;
-  transition: transform .08s ease, background .2s ease;
-  user-select:none;
+  transition:background .2s ease;
 }
 
-.infoBtn:hover{background:rgba(255,255,255,.18)}
-.infoBtn:active{transform:translateY(1px)}
+.infoBtn:hover{
+  background:rgba(255,255,255,.18);
+}
 
-    .footer{
-      margin-top:22px;
-      padding-top:14px;
-      border-top:1px solid rgba(255,255,255,.14);
-      color:var(--white-65);
-      font-size:12px;
-      line-height:1.55;
-      text-align:center;
-    }
-    .footer a{
-      color:var(--white-80);
-      text-decoration:none;
-    }
-    .footer a:hover{text-decoration:underline}
+/* ===== Footer ===== */
 
-    @media (max-width:520px){
-      .wrap{padding:34px 20px}
-      .btn{height:54px}
-    }
+.footer{
+  margin-top:30px;
+  padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.14);
+  font-size:12px;
+  color:var(--white-65);
+  text-align:center;
+  line-height:1.6;
+}
 
-    /* ===== In-app modal ===== */
-    .modalBack{
-      position:fixed; inset:0;
-      background:var(--modalBack);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:9999;
-      padding:16px;
-    }
-    .modal{
-      width:min(520px, 96vw);
-      background:var(--modalCard);
-      border:1px solid var(--modalLine);
-      border-radius:18px;
-      box-shadow:0 10px 30px rgba(0,0,0,.25);
-      padding:16px;
-      color:var(--modalText);
-      text-align:left;
-    }
-    .modal h3{margin:0 0 8px;font-size:16px}
-    .modal p{margin:0 0 12px;color:var(--modalMuted);line-height:1.5;font-size:13px}
-    .modal .url{
-      font-size:12px;
-      background:#f3f4f6;
-      border:1px solid #e5e7eb;
-      border-radius:12px;
-      padding:10px;
-      word-break:break-all;
-      margin:10px 0 12px;
-    }
-    .modal .row{display:flex;gap:10px;flex-wrap:wrap}
-    .modalBtn{
-      flex:1;
-      border:none;
-      cursor:pointer;
-      border-radius:999px;
-      padding:10px 14px;
-      font-size:14px;
-      font-weight:700;
-    }
-    .modalBtn.ghost{background:#f3f4f6;color:#111827}
-    .modalBtn.primary{background:#1f8f5a;color:#fff}
-  </style>
+.footer a{
+  color:var(--white-80);
+  text-decoration:none;
+}
+
+.footer a:hover{
+  text-decoration:underline;
+}
+
+@media (max-width:520px){
+  .wrap{padding:34px 20px}
+  .btn{height:54px}
+}
+</style>
 </head>
 
 <body>
-  <main class="wrap">
-    <section class="center">
-      <img class="logo" src="./logo1.png" alt="Mottainai Babe" />
+<main class="wrap">
 
-      <div class="jp-title">もったいないベビー</div>
-      <div class="jp-sub">ベビー用品交換プラットフォーム</div>
+<section class="center">
+  <img class="logo" src="./logo1.png" alt="Mottainai Babe" />
+  <div class="jp-title">もったいないベビー</div>
+  <div class="jp-sub">ベビー用品交換プラットフォーム</div>
 
-      <div class="btns">
-        <button id="btnPost" class="btn primary" type="button">出品する</button>
-        <button id="btnView" class="btn" type="button">アイテムを見る</button>
-      </div>
-
-      <div class="badges" aria-label="features">
-        <div class="badge">簡単出品</div>
-        <div class="badge">安心交換</div>
-        <div class="badge">利用無料</div>
-      </div>
-
-      <div id="status" class="status"></div>
-    </section>
-
-    <!-- ✅ 3개 버튼 삭제 → 1개 버튼으로 통합 -->
-<section class="info">
-  <div class="infoDivider" aria-hidden="true"></div>
-
-  <h2 class="infoTitle">子育てとリユース情報</h2>
-  <p class="infoDesc">
-    安全・エコ・リユースのヒントをガイドにまとめました。<br>
-    まずはガイド一覧からチェックできます。
-  </p>
-  <a class="infoBtn" href="./guide.html">ガイドを読む →</a>
-</section>
-
-    <footer class="footer">
-      <div>Mottainai Babeは、ベビー用品を必要な人へつなぐ交換プラットフォームです。</div>
-      <div>
-        <a href="./guide.html">ガイド</a>
-        &nbsp;|&nbsp;
-        <a href="./safety.html">安全ガイド</a>
-        &nbsp;|&nbsp;
-        <a href="./eco.html">エコ</a>
-        &nbsp;|&nbsp;
-        <a href="./terms.html">利用規約</a>
-        &nbsp;|&nbsp;
-        <a href="./privacy.html">プライバシーポリシー</a>
-        &nbsp;|&nbsp;
-        <a href="./about.html">お問い合わせ</a>
-      </div>
-      <div>© 2026 Mottainai Babe. All rights reserved.</div>
-    </footer>
-  </main>
-
-  <!-- In-app modal -->
-  <div id="inAppModalBack" class="modalBack" role="dialog" aria-modal="true">
-    <div class="modal">
-      <h3>LINEなどのアプリ内ブラウザではログインできない場合があります</h3>
-      <p>
-        Googleログインは「安全なブラウザ」でのみ許可されることがあり、
-        LINE内ブラウザだとエラーになることがあります。<br>
-        下のURLを<b>Safari / Chrome</b>で開いてからログインしてください。
-      </p>
-      <div id="openUrlBox" class="url"></div>
-      <div class="row">
-        <button id="copyUrlBtn" class="modalBtn ghost" type="button">URLをコピー</button>
-        <button id="closeModalBtn" class="modalBtn ghost" type="button">閉じる</button>
-      </div>
-      <div style="height:10px"></div>
-      <div class="row">
-        <button id="tryOpenNewTabBtn" class="modalBtn primary" type="button">外部ブラウザで開く（試す）</button>
-      </div>
-      <p style="margin-top:10px;color:#6b7280;font-size:12px;line-height:1.5;">
-        ※うまく開けない場合：右上の「…」→「Safariで開く」を選択してください。
-      </p>
-    </div>
+  <div class="btns">
+    <button id="btnPost" class="btn primary">出品する</button>
+    <button id="btnView" class="btn">アイテムを見る</button>
   </div>
 
-  <!-- 1) config -->
-  <script src="./firebase-config.js"></script>
+  <div class="badges">
+    <div class="badge">簡単出品</div>
+    <div class="badge">安心交換</div>
+    <div class="badge">利用無料</div>
+  </div>
+</section>
 
-  <!-- 2) Firebase compat -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+<!-- Guide Section -->
+<section class="infoSection">
+  <div class="infoInner">
+    <div class="infoTitle">子育てとリユース情報</div>
+    <div class="infoDesc">
+      安全・エコ・リユースのヒントをガイドにまとめました。<br>
+      まずはガイド一覧からチェックできます。
+    </div>
+    <a class="infoBtn" href="./guide.html">ガイドを読む →</a>
+  </div>
+</section>
 
-  <script>
-    const statusEl = document.getElementById("status");
-    const btnPost  = document.getElementById("btnPost");
-    const btnView  = document.getElementById("btnView");
+<footer class="footer">
+  <div>Mottainai Babeは、ベビー用品を必要な人へつなぐ交換プラットフォームです。</div>
+  <div>
+    <a href="./guide.html">ガイド</a> |
+    <a href="./terms.html">利用規約</a> |
+    <a href="./privacy.html">プライバシーポリシー</a> |
+    <a href="./about.html">お問い合わせ</a>
+  </div>
+  <div>© 2026 Mottainai Babe. All rights reserved.</div>
+</footer>
 
-    function setStatus(msg){ statusEl.textContent = msg || ""; }
-
-    // ✅ 아이템 보기: app.html 이동
-    btnView.addEventListener("click", () => {
-      location.href = "./app.html";
-    });
-
-    // ✅ LINE/인앱 브라우저 판별
-    function isInAppBrowser() {
-      const ua = navigator.userAgent || "";
-      return /Line\/|LIFF|FBAN|FBAV|Instagram|KAKAOTALK|Twitter|WebView/i.test(ua);
-    }
-
-    // ===== modal helpers =====
-    const modalBack = document.getElementById("inAppModalBack");
-    const openUrlBox = document.getElementById("openUrlBox");
-    const copyUrlBtn = document.getElementById("copyUrlBtn");
-    const closeModalBtn = document.getElementById("closeModalBtn");
-    const tryOpenNewTabBtn = document.getElementById("tryOpenNewTabBtn");
-
-    function canonicalUrl(){
-      return new URL(location.pathname, location.origin).toString();
-    }
-
-    function openInAppModal(){
-      const url = canonicalUrl();
-      openUrlBox.textContent = url;
-      modalBack.style.display = "flex";
-
-      copyUrlBtn.onclick = async () => {
-        try{
-          await navigator.clipboard.writeText(url);
-          alert("コピーしました。Safari / Chromeで開いてください。");
-        }catch{
-          prompt("このURLをコピーしてください:", url);
-        }
-      };
-
-      tryOpenNewTabBtn.onclick = () => {
-        const w = window.open(url, "_blank");
-        if(!w) location.href = url;
-      };
-
-      closeModalBtn.onclick = () => {
-        modalBack.style.display = "none";
-      };
-
-      modalBack.onclick = (e) => {
-        if(e.target === modalBack) modalBack.style.display = "none";
-      };
-    }
-
-    // ✅ Firebase init
-    (function init(){
-      try{
-        if(!window.FIREBASE_CONFIG || !window.FIREBASE_CONFIG.apiKey){
-          alert("firebase-config.js の読み込みに失敗しました。index.html と同じフォルダ(ルート)に置いてください。");
-          return;
-        }
-        if (!firebase.apps.length) {
-          firebase.initializeApp(window.FIREBASE_CONFIG);
-        }
-      }catch(e){
-        console.error(e);
-        alert("Firebase 初期化に失敗しました。firebase-config.js を確認してください。");
-      }
-    })();
-
-    // ✅ redirect 로그인 결과 처리
-    firebase.auth().getRedirectResult()
-      .then((result) => {
-        if (result && result.user) {
-          location.href = "./app.html";
-        }
-      })
-      .catch((err) => {
-        console.error("getRedirectResult error", err);
-      });
-
-    // ✅ 出品する = 로그인 후 app 이동
-    btnPost.addEventListener("click", async () => {
-      if (isInAppBrowser()) {
-        openInAppModal();
-        return;
-      }
-
-      try{
-        btnPost.disabled = true;
-        setStatus("Googleログイン中…");
-
-        const provider = new firebase.auth.GoogleAuthProvider();
-        provider.setCustomParameters({ prompt: "select_account" });
-
-        await firebase.auth().signInWithPopup(provider);
-        location.href = "./app.html";
-
-      }catch(err){
-        console.error(err);
-
-        const code = err?.code || "";
-
-        if (
-          code === "auth/popup-blocked" ||
-          code === "auth/popup-closed-by-user" ||
-          code === "auth/operation-not-supported-in-this-environment"
-        ) {
-          try{
-            const provider = new firebase.auth.GoogleAuthProvider();
-            provider.setCustomParameters({ prompt: "select_account" });
-            await firebase.auth().signInWithRedirect(provider);
-            return;
-          }catch(e2){
-            console.error("redirect fallback failed", e2);
-          }
-        }
-
-        let msg = "ログインに失敗しました。";
-        if(code === "auth/popup-blocked") msg = "ポップアップがブロックされています。";
-        if(code === "auth/unauthorized-domain") msg = "Firebaseの許可ドメインにこのURLが登録されていません。";
-        if(code === "auth/api-key-not-valid") msg = "Firebase設定(apiKeyなど)が正しく読み込めていません。firebase-config.jsを確認してください。";
-
-        alert(msg + "\n\n" + (err?.message || ""));
-        setStatus("");
-
-      }finally{
-        btnPost.disabled = false;
-      }
-    });
-  </script>
+</main>
 </body>
 </html>
