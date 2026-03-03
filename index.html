@@ -1,10 +1,11 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Mottainai Babe</title>
+
+  <!-- AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5865479939175622"
      crossorigin="anonymous"></script>
 
@@ -118,6 +119,51 @@
       font-weight:700;
     }
 
+    .status{
+      margin-top:12px;
+      font-size:12px;
+      color:rgba(255,255,255,.85);
+      opacity:.95;
+      min-height:18px;
+    }
+
+    /* ===== Guide CTA section (統一デザイン) ===== */
+    .info{
+      margin-top:40px;
+      text-align:center;
+    }
+    .infoTitle{
+      font-size:18px;
+      font-weight:800;
+      letter-spacing:.04em;
+      margin:0 0 12px;
+    }
+    .infoDesc{
+      margin:0 auto 12px;
+      max-width:52ch;
+      font-size:13px;
+      line-height:1.6;
+      color:var(--white-80);
+    }
+    .infoBtn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:min(520px,92vw);
+      padding:12px 16px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.55);
+      background:rgba(255,255,255,.12);
+      color:#fff;
+      text-decoration:none;
+      font-weight:800;
+      letter-spacing:.02em;
+      transition: transform .08s ease, background .2s ease;
+      user-select:none;
+    }
+    .infoBtn:hover{background:rgba(255,255,255,.18)}
+    .infoBtn:active{transform:translateY(1px)}
+
     .footer{
       margin-top:22px;
       padding-top:14px;
@@ -132,14 +178,6 @@
       text-decoration:none;
     }
     .footer a:hover{text-decoration:underline}
-
-    .status{
-      margin-top:12px;
-      font-size:12px;
-      color:rgba(255,255,255,.85);
-      opacity:.95;
-      min-height:18px;
-    }
 
     @media (max-width:520px){
       .wrap{padding:34px 20px}
@@ -213,38 +251,32 @@
 
       <div id="status" class="status"></div>
     </section>
-<div style="margin-top:40px;text-align:center;">
-  <h2 style="font-size:18px;margin-bottom:14px;">子育てとリユース情報</h2>
 
-  <div style="display:flex;flex-direction:column;gap:10px;max-width:520px;margin:0 auto;">
-    <a href="./guide.html" style="color:white;text-decoration:none;border:1px solid rgba(255,255,255,.4);padding:10px;border-radius:999px;">
-      ベビー用品を安全にリユースする方法
-    </a>
+    <!-- ✅ 3개 버튼 삭제 → 1개 버튼으로 통합 -->
+    <section class="info">
+      <h2 class="infoTitle">子育てとリユース情報</h2>
+      <p class="infoDesc">
+        安全・エコ・リユースのヒントをガイドにまとめました。<br>
+        まずはガイド一覧からチェックできます。
+      </p>
+      <a class="infoBtn" href="./guide.html">ガイドを読む →</a>
+    </section>
 
-    <a href="./safety.html" style="color:white;text-decoration:none;border:1px solid rgba(255,255,255,.4);padding:10px;border-radius:999px;">
-      安全なベビー用品の選び方
-    </a>
-
-    <a href="./eco.html" style="color:white;text-decoration:none;border:1px solid rgba(255,255,255,.4);padding:10px;border-radius:999px;">
-      リユースと環境への影響
-    </a>
-  </div>
-</div>
     <footer class="footer">
       <div>Mottainai Babeは、ベビー用品を必要な人へつなぐ交換プラットフォームです。</div>
-    <div>
-  <a href="./guide.html">ガイド</a>
-  &nbsp;|&nbsp;
-  <a href="./safety.html">安全ガイド</a>
-  &nbsp;|&nbsp;
-  <a href="./eco.html">エコ</a>
-  &nbsp;|&nbsp;
-  <a href="./terms.html">利用規約</a>
-  &nbsp;|&nbsp;
-  <a href="./privacy.html">プライバシーポリシー</a>
-  &nbsp;|&nbsp;
-  <a href="./about.html">お問い合わせ</a>
-</div>
+      <div>
+        <a href="./guide.html">ガイド</a>
+        &nbsp;|&nbsp;
+        <a href="./safety.html">安全ガイド</a>
+        &nbsp;|&nbsp;
+        <a href="./eco.html">エコ</a>
+        &nbsp;|&nbsp;
+        <a href="./terms.html">利用規約</a>
+        &nbsp;|&nbsp;
+        <a href="./privacy.html">プライバシーポリシー</a>
+        &nbsp;|&nbsp;
+        <a href="./about.html">お問い合わせ</a>
+      </div>
       <div>© 2026 Mottainai Babe. All rights reserved.</div>
     </footer>
   </main>
@@ -366,8 +398,6 @@
 
     // ✅ 出品する = 로그인 후 app 이동
     btnPost.addEventListener("click", async () => {
-      // LINE 등 인앱 브라우저는 Google 정책으로 disallowed_useragent가 잘 떠서
-      // 여기서 로그인 시도 자체를 막고 안내한다.
       if (isInAppBrowser()) {
         openInAppModal();
         return;
@@ -380,10 +410,7 @@
         const provider = new firebase.auth.GoogleAuthProvider();
         provider.setCustomParameters({ prompt: "select_account" });
 
-        // 일반 브라우저: popup 우선
         await firebase.auth().signInWithPopup(provider);
-
-        // 로그인 성공 → app.html
         location.href = "./app.html";
 
       }catch(err){
@@ -391,7 +418,6 @@
 
         const code = err?.code || "";
 
-        // popup 문제는 redirect로 fallback
         if (
           code === "auth/popup-blocked" ||
           code === "auth/popup-closed-by-user" ||
