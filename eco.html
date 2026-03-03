@@ -3,72 +3,123 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>エコの考え方：ベビー用品リユースがやさしい理由 | Mottainai Babe</title>
-  <meta name="description" content="ベビー用品リユースが家計と地球にやさしい理由。捨てない工夫、長く使うコツ、やさしい取引マナー、循環の作り方をまとめました。" />
+  <title>エコの考え方 | Mottainai Babe</title>
+  <meta name="description" content="ベビー用品のリユースが家計と環境に与えるメリット、気持ちよく循環させるコツとマナーをまとめました。" />
 
-  <!-- AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5865479939175622" crossorigin="anonymous"></script>
+  <!-- AdSense (site ownership / Auto ads) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5865479939175622"
+    crossorigin="anonymous"></script>
 
   <style>
     :root{
-      --bg:#0f3b34;
+      /* indexと統一 */
+      --bg:#377649;
+      --bg-dark:#2e633d;
+      --bg-darker:#1f4b2e;
+
       --paper:#ffffff;
+      --soft:#f3f4f6;
+
       --ink:#111827;
       --muted:#6b7280;
       --line:#e5e7eb;
-      --soft:#f5f7f7;
-      --accent:#16a34a;
-      --warn:#f59e0b;
-      --danger:#ef4444;
-      --radius:18px;
-      --shadow: 0 10px 30px rgba(0,0,0,.10);
-      --w: 760px;
+
+      --white:#ffffff;
+      --white-80: rgba(255,255,255,.85);
+      --white-65: rgba(255,255,255,.65);
+
+      --radius:20px;
+      --shadow: 0 18px 40px rgba(0,0,0,.12);
+      --w: 940px;
+      --content: 820px;
     }
+
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", "Segoe UI", Roboto, Arial;
       color:var(--ink);
       background:
-        radial-gradient(1200px 600px at 20% 0%, rgba(22,163,74,.22), transparent 55%),
-        radial-gradient(900px 500px at 100% 10%, rgba(245,158,11,.18), transparent 55%),
-        linear-gradient(180deg, #0b2c27 0%, #0f3b34 40%, #f3f4f6 40%, #f3f4f6 100%);
+        radial-gradient(1200px 600px at 20% 0%, rgba(255,255,255,.08), transparent 55%),
+        radial-gradient(900px 500px at 100% 10%, rgba(0,0,0,.12), transparent 55%),
+        linear-gradient(180deg, var(--bg-darker) 0%, var(--bg) 46%, var(--soft) 46%, var(--soft) 100%);
       min-height:100vh;
     }
-    a{color:inherit}
+    a{color:inherit;text-decoration:none}
+
+    /* Topbar */
     .topbar{
       position:sticky; top:0;
-      backdrop-filter: blur(10px);
-      background: rgba(15,59,52,.72);
-      border-bottom: 1px solid rgba(255,255,255,.10);
-      z-index:10;
+      z-index:50;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(55,118,73,.66);
+      border-bottom: 1px solid rgba(255,255,255,.16);
     }
     .topbar .inner{
       max-width: var(--w);
       margin: 0 auto;
-      padding: 14px 18px;
+      padding: 12px 18px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      color:#fff;
+      gap:12px;
     }
     .brand{
-      display:flex; align-items:center; gap:10px;
-      text-decoration:none;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width: 220px;
     }
-    .dot{
-      width:10px;height:10px;border-radius:50%;
-      background: var(--accent);
-      box-shadow: 0 0 0 6px rgba(22,163,74,.18);
+    .brandMark{
+      width:40px;height:40px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.18);
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      box-shadow: 0 10px 22px rgba(0,0,0,.12);
     }
-    .brand strong{letter-spacing:.2px}
+    .brandMark img{
+      width:34px;height:34px;
+      object-fit:contain;
+      display:block;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,.18));
+    }
+    .brandText{
+      display:flex;
+      flex-direction:column;
+      line-height:1.1;
+      color:#fff;
+    }
+    .brandText strong{font-size:15px; letter-spacing:.2px}
+    .brandText span{
+      font-size:12px;
+      color: var(--white-80);
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
     .nav a{
-      text-decoration:none;
-      opacity:.9;
-      padding:8px 10px;
+      color:#fff;
+      font-size:13px;
+      padding:9px 12px;
       border-radius:999px;
+      border:1px solid transparent;
+      opacity:.92;
+      white-space:nowrap;
     }
-    .nav a:hover{background: rgba(255,255,255,.10)}
+    .nav a:hover{
+      background: rgba(255,255,255,.10);
+      border-color: rgba(255,255,255,.14);
+      opacity:1;
+    }
+
+    /* Layout */
     .wrap{
       max-width: var(--w);
       margin: 0 auto;
@@ -76,120 +127,146 @@
     }
     .hero{
       color:#fff;
-      padding: 26px 0 10px;
+      padding: 16px 0 14px;
     }
     .kicker{
       display:inline-flex;
       gap:8px; align-items:center;
       font-size:12px;
-      opacity:.92;
+      color: var(--white-80);
       background: rgba(255,255,255,.10);
       border: 1px solid rgba(255,255,255,.16);
-      padding: 6px 10px;
+      padding: 7px 12px;
       border-radius: 999px;
     }
     h1{
-      margin: 14px 0 10px;
-      font-size: 30px;
-      line-height: 1.2;
-      letter-spacing: -.3px;
+      margin: 14px 0 8px;
+      font-size: 32px;
+      line-height: 1.15;
+      letter-spacing: -.4px;
     }
     .lead{
       margin:0;
-      max-width: 62ch;
-      color: rgba(255,255,255,.88);
-      line-height:1.7;
+      max-width: 76ch;
+      color: var(--white-80);
+      line-height:1.75;
     }
-    .btnrow{
-      display:flex; gap:10px; flex-wrap:wrap;
+
+    /* Article Card */
+    .paper{
+      max-width: var(--content);
+      background: rgba(255,255,255,.94);
+      border: 1px solid rgba(255,255,255,.70);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px 20px;
+      margin-top: 18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .paper::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(680px 260px at 15% 0%, rgba(55,118,73,.14), transparent 55%),
+        radial-gradient(420px 220px at 110% 10%, rgba(0,0,0,.06), transparent 55%);
+      pointer-events:none;
+    }
+    .paper > *{position:relative}
+
+    .section{
+      margin: 0 0 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(17,24,39,.10);
+    }
+    .section:last-child{border-bottom:none;padding-bottom:0;margin-bottom:0}
+
+    h2{
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing: -.2px;
+    }
+    p{
+      margin: 0 0 12px;
+      line-height: 1.9;
+      color: rgba(17,24,39,.92);
+    }
+    .list{
+      margin: 10px 0 0;
+      padding: 0;
+      list-style: none;
+      display:grid;
+      gap:10px;
+    }
+    .list li{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding: 12px 12px;
+      border: 1px solid rgba(17,24,39,.10);
+      border-radius: 14px;
+      background: rgba(255,255,255,.70);
+    }
+    .badge{
+      flex: 0 0 auto;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(55,118,73,.12);
+      color: var(--bg-darker);
+      border: 1px solid rgba(55,118,73,.18);
+      margin-top: 1px;
+      white-space:nowrap;
+    }
+    .muted{color: rgba(17,24,39,.72)}
+    .tip{
+      margin-top: 10px;
+      padding: 14px 14px;
+      border-radius: 16px;
+      background: rgba(55,118,73,.10);
+      border: 1px solid rgba(55,118,73,.16);
+      color: rgba(17,24,39,.88);
+      line-height: 1.85;
+    }
+
+    .actionsRow{
+      max-width: var(--content);
       margin-top: 14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
     }
     .btn{
-      text-decoration:none;
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,.22);
+      gap:8px;
+      padding: 10px 16px;
+      border-radius:999px;
+      border:none;
+      background: var(--bg);
       color:#fff;
-      background: rgba(255,255,255,.10);
+      font-weight:600;
+      letter-spacing:.1px;
+      box-shadow: 0 10px 18px rgba(55,118,73,.22);
+      transition: .2s ease;
     }
-    .btn:hover{background: rgba(255,255,255,.16)}
+    .btn:hover{background: var(--bg-dark); transform: translateY(-1px)}
+    .btnGhost{
+      background: rgba(255,255,255,.88);
+      color: rgba(17,24,39,.92);
+      border: 1px solid rgba(17,24,39,.10);
+      box-shadow: none;
+    }
+    .btnGhost:hover{filter: brightness(.98); transform:none}
 
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:16px;
-      margin-top: 18px;
-    }
-    @media (max-width: 860px){
-      .grid{grid-template-columns:1fr}
-    }
-    .card{
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .card .hd{
-      padding: 16px 18px;
-      border-bottom: 1px solid var(--line);
-      background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-    }
-    .card .hd h2{
-      margin:0;
-      font-size:16px;
-    }
-    .pill{
-      font-size:12px;
-      color: var(--muted);
-      padding: 6px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: #fff;
-      white-space: nowrap;
-    }
-    .card .bd{padding: 16px 18px}
-    .muted{color:var(--muted)}
-    .list{
-      margin:0;
-      padding-left: 18px;
-      line-height:1.9;
-    }
-    .quote{
-      padding: 14px 14px;
-      border-radius: 16px;
-      border: 1px dashed rgba(22,163,74,.40);
-      background: rgba(22,163,74,.08);
-      color:#0b2c27;
-      line-height:1.8;
-    }
-    .chips{
-      display:flex; gap:8px; flex-wrap:wrap;
-      margin-top: 12px;
-    }
-    .chip{
-      font-size:12px;
-      padding: 7px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: var(--soft);
-      color: rgba(17,24,39,.88);
-    }
+    /* Footer */
     .footer{
       margin-top: 18px;
-      color: rgba(17,24,39,.88);
       text-align:center;
       font-size: 12px;
-      opacity:.95;
+      color: rgba(17,24,39,.80);
     }
-    .footer a{color:inherit}
     .footer .links{
       display:flex;
       gap:12px;
@@ -197,17 +274,33 @@
       flex-wrap:wrap;
       margin: 10px 0 0;
     }
+    .footer .links a{
+      color: rgba(17,24,39,.78);
+      padding: 6px 8px;
+      border-radius: 10px;
+    }
+    .footer .links a:hover{
+      background: rgba(55,118,73,.10);
+      color: rgba(17,24,39,.92);
+    }
   </style>
 </head>
 
 <body>
   <header class="topbar">
     <div class="inner">
-      <a class="brand" href="./index.html">
-        <span class="dot"></span>
-        <strong>Mottainai Babe</strong>
+      <a class="brand" href="./index.html" aria-label="Mottainai Babe トップへ">
+        <span class="brandMark" aria-hidden="true">
+          <img src="./logo1.png" alt="" />
+        </span>
+        <span class="brandText">
+          <strong>Mottainai Babe</strong>
+          <span>リユースでつなぐ、やさしい循環</span>
+        </span>
       </a>
-      <nav class="nav">
+
+      <nav class="nav" aria-label="ナビゲーション">
+        <a href="./guide.html">ガイド</a>
         <a href="./app.html">アプリ</a>
         <a href="./about.html">お問い合わせ</a>
       </nav>
@@ -216,87 +309,140 @@
 
   <main class="wrap">
     <section class="hero">
-      <span class="kicker">Eco • やさしい循環</span>
-      <h1>エコの考え方：ベビー用品を「捨てない」選択</h1>
+      <span class="kicker">Guide • Eco</span>
+      <h1>リユースと環境への影響</h1>
       <p class="lead">
-        ベビー用品は使う期間が短いからこそ、リユースの価値が大きい分野です。
-        「安心して次へ渡せる状態」を作ることが、家計にも地球にもやさしい循環につながります。
+        使えるものを次の人へつなぐだけで、家計にも地球にもやさしい循環が生まれます。
+        このページでは、リユースの価値と、気持ちよく続けるためのコツをまとめます。
       </p>
-      <div class="btnrow">
-        <a class="btn" href="./safety.html">← 安全ガイドへ</a>
-        <a class="btn" href="./guide.html">ガイド一覧へ →</a>
-      </div>
     </section>
 
-    <section class="grid">
-      <article class="card">
-        <div class="hd">
-          <h2>リユースがやさしい理由</h2>
-          <span class="pill">家計 × 地球</span>
-        </div>
-        <div class="bd">
-          <p class="muted" style="margin-top:0;line-height:1.8;">
-            新品を買う回数が減るだけで、資源・輸送・廃棄の負荷が軽くなります。
-            さらに、必要な人に届けば「モノの寿命」が延びて、暮らしに余白も生まれます。
-          </p>
-          <ol class="list">
-            <li><b>廃棄を減らす</b>：捨てる前に「次の使い手」を探す。</li>
-            <li><b>必要な分だけ持つ</b>：収納や管理のストレスが軽くなる。</li>
-            <li><b>状態が良いまま循環</b>：短期間使用のベビー用品は相性が良い。</li>
-          </ol>
-          <div class="chips">
-            <span class="chip">もったいないを価値に</span>
-            <span class="chip">暮らしのミニマル化</span>
-            <span class="chip">やさしい選択</span>
-          </div>
-        </div>
-      </article>
-
-      <aside class="card">
-        <div class="hd">
-          <h2>長く使える状態の作り方</h2>
-          <span class="pill">次の人の安心</span>
-        </div>
-        <div class="bd">
-          <ol class="list">
-            <li><b>洗浄→乾燥</b>：におい・カビを防ぐ基本。</li>
-            <li><b>保管は湿気対策</b>：除湿剤＋通気、直射日光を避ける。</li>
-            <li><b>情報を添える</b>：購入時期、使用期間、注意点をメモ。</li>
-            <li><b>写真を丁寧に</b>：キズ・ラベル・付属品を正直に見せる。</li>
-          </ol>
-
-          <div class="quote" style="margin-top:12px;">
-            <b>小さなマナーが信頼を作る</b><br/>
-            “きれいにして渡す”だけでなく、<br/>
-            “状態を正しく伝える”ことが、安心できる取引につながります。
-          </div>
-        </div>
-      </aside>
-    </section>
-
-    <section class="card" style="margin-top:16px;">
-      <div class="hd">
-        <h2>やさしい取引のルール（Mottainai Babeの考え方）</h2>
-        <span class="pill">トラブル予防</span>
-      </div>
-      <div class="bd">
-        <p style="margin-top:0;line-height:1.8;">
-          リユースは「信頼」で成り立ちます。ほんの少しの気配りが、気持ちの良い循環を作ります。
+    <article class="paper" aria-label="エコガイド本文">
+      <section class="section">
+        <h2>なぜリユースが「エコ」なのか</h2>
+        <p>
+          ベビー用品は成長に合わせて買い替えが多く、短期間で使わなくなるものがたくさんあります。
+          そのたびに新しく作って・運んで・捨てると、資源やエネルギーの負担が大きくなります。
         </p>
-        <ol class="list">
-          <li><b>状態は正確に</b>：良い点だけでなく、気になる点も書く。</li>
-          <li><b>受け渡し前に最終確認</b>：欠品・動作・においなど。</li>
-          <li><b>困ったら無理しない</b>：不明点が多い場合は見送る勇気。</li>
-          <li><b>安全カテゴリは慎重に</b>：安全性が不安なら新品・正規品も選択肢。</li>
-        </ol>
+        <ul class="list">
+          <li>
+            <span class="badge">資源</span>
+            <div>
+              <p><strong>作る量を減らす</strong>ことで、素材（プラスチック・金属・布）の消費を抑えられます。</p>
+              <p class="muted">“必要な分だけ”の循環は、無理なく続けられるエコです。</p>
+            </div>
+          </li>
+          <li>
+            <span class="badge">輸送</span>
+            <div>
+              <p>新品の物流を減らし、<strong>輸送による負荷</strong>を小さくできます。</p>
+              <p class="muted">近い距離での受け渡しやまとめ配送も、工夫のひとつ。</p>
+            </div>
+          </li>
+          <li>
+            <span class="badge">廃棄</span>
+            <div>
+              <p>捨てる量が減ると、<strong>焼却・埋め立て</strong>の負担も軽くなります。</p>
+              <p class="muted">「まだ使える」状態で循環させることがポイントです。</p>
+            </div>
+          </li>
+        </ul>
+      </section>
 
-        <div class="quote" style="margin-top:14px;">
-          <b>目的は「節約」だけじゃない</b><br/>
-          赤ちゃんの安心、家族の余白、そして未来の環境。<br/>
-          その全部を少しずつ良くしていくのが、リユースの価値です。
+      <section class="section">
+        <h2>家計にもやさしい：リユースの現実的メリット</h2>
+        <p>
+          エコは“我慢”ではなく、暮らしの最適化。必要なときに必要なものを、無理なく回すのが続くコツです。
+        </p>
+        <ul class="list">
+          <li>
+            <span class="badge">節約</span>
+            <div>
+              <p>使用期間が短いものほど、<strong>新品にこだわらない選択</strong>が効きます。</p>
+              <p class="muted">例：ベビーバス、短期の衣類サイズ、季節アイテム。</p>
+            </div>
+          </li>
+          <li>
+            <span class="badge">空間</span>
+            <div>
+              <p>不要になったら手放すことで、<strong>収納の圧迫</strong>を減らせます。</p>
+              <p class="muted">家の中が整うと、育児のストレスも減りやすいです。</p>
+            </div>
+          </li>
+          <li>
+            <span class="badge">価値</span>
+            <div>
+              <p>状態が良いうちに循環させると、<strong>次の人にとっても価値が高い</strong>まま渡せます。</p>
+              <p class="muted">“もったいない”を“うれしい”に変える感覚。</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>やさしい取引マナー（気持ちよく循環させるために）</h2>
+        <p>
+          リユースは人と人のやり取り。小さな配慮が、信頼と安心を作ります。
+        </p>
+        <ul class="list">
+          <li>
+            <span class="badge">説明</span>
+            <div>
+              <p><strong>傷・汚れ・使用感</strong>は正直に。写真と文章で明確に。</p>
+              <p class="muted">隠すより、きちんと伝えた方がトラブルは減ります。</p>
+            </div>
+          </li>
+          <li>
+            <span class="badge">清潔</span>
+            <div>
+              <p>渡す前に、できる範囲で<strong>拭き取り・洗浄</strong>。</p>
+              <p class="muted">新品レベルを目指すより「受け取ってすぐ使える」状態が親切です。</p>
+            </div>
+          </li>
+          <li>
+            <span class="badge">対応</span>
+            <div>
+              <p>メッセージは短くてもOK。<strong>返信の目安</strong>だけ意識すると安心感が出ます。</p>
+              <p class="muted">例：「今日中に返信します」「明日発送予定です」など。</p>
+            </div>
+          </li>
+        </ul>
+
+        <div class="tip">
+          <strong>循環を続けるコツ：</strong>
+          “完璧”より“気持ちよさ”。
+          小さな配慮が積み重なるほど、リユースはもっと心地よい文化になります。
         </div>
-      </div>
-    </section>
+      </section>
+
+      <section class="section">
+        <h2>迷ったときの判断基準</h2>
+        <p>
+          何でもリユースが正解ではありません。安全性や衛生面に不安があるものは、無理に循環させない判断も大切です。
+        </p>
+        <ul class="list">
+          <li>
+            <span class="badge">安全</span>
+            <div>
+              <p>命に関わる製品は、<strong>状態確認が難しいなら避ける</strong>。</p>
+              <p class="muted">例：強い衝撃歴が不明なチャイルドシートなど。</p>
+            </div>
+          </li>
+          <li>
+            <span class="badge">衛生</span>
+            <div>
+              <p>洗えない・劣化しやすいものは、<strong>状態と素材</strong>を優先。</p>
+              <p class="muted">迷ったら「次の人が安心して使えるか」を基準に。</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </article>
+
+    <div class="actionsRow">
+      <a class="btn btnGhost" href="./guide.html">← ガイド一覧へ</a>
+      <a class="btn" href="./safety.html">前：安全ガイド →</a>
+    </div>
 
     <footer class="footer">
       <div>© 2026 Mottainai Babe. All rights reserved.</div>
