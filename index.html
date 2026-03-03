@@ -126,43 +126,53 @@
       opacity:.95;
       min-height:18px;
     }
+/* ===== Guide CTA section (統一デザイン) ===== */
+.info{
+  margin-top:40px;
+  text-align:center;
+}
 
-    /* ===== Guide CTA section (統一デザイン) ===== */
-    .info{
-      margin-top:40px;
-      text-align:center;
-    }
-    .infoTitle{
-      font-size:18px;
-      font-weight:800;
-      letter-spacing:.04em;
-      margin:0 0 12px;
-    }
-    .infoDesc{
-      margin:0 auto 12px;
-      max-width:52ch;
-      font-size:13px;
-      line-height:1.6;
-      color:var(--white-80);
-    }
-    .infoBtn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width:min(520px,92vw);
-      padding:12px 16px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.55);
-      background:rgba(255,255,255,.12);
-      color:#fff;
-      text-decoration:none;
-      font-weight:800;
-      letter-spacing:.02em;
-      transition: transform .08s ease, background .2s ease;
-      user-select:none;
-    }
-    .infoBtn:hover{background:rgba(255,255,255,.18)}
-    .infoBtn:active{transform:translateY(1px)}
+.infoDivider{
+  width:min(520px, 92vw);
+  margin: 0 auto 22px;
+  border-top:1px solid rgba(255,255,255,.14);
+}
+
+.infoTitle{
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:.04em;
+  margin:0 0 12px;
+}
+
+.infoDesc{
+  margin:0 auto 12px;
+  max-width:52ch;
+  font-size:13px;
+  line-height:1.6;
+  color:var(--white-80);
+}
+
+/* ✅ iPhone에서도 확실히 중앙정렬되게 block + margin auto */
+.infoBtn{
+  display:block;
+  width:min(520px, 92vw);
+  margin: 0 auto;
+  padding:12px 16px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.45);
+  background:rgba(255,255,255,.12);
+  color:#fff;
+  text-decoration:none;
+  font-weight:800;
+  letter-spacing:.02em;
+  text-align:center;
+  transition: transform .08s ease, background .2s ease;
+  user-select:none;
+}
+
+.infoBtn:hover{background:rgba(255,255,255,.18)}
+.infoBtn:active{transform:translateY(1px)}
 
     .footer{
       margin-top:22px;
@@ -253,14 +263,16 @@
     </section>
 
     <!-- ✅ 3개 버튼 삭제 → 1개 버튼으로 통합 -->
-    <section class="info">
-      <h2 class="infoTitle">子育てとリユース情報</h2>
-      <p class="infoDesc">
-        安全・エコ・リユースのヒントをガイドにまとめました。<br>
-        まずはガイド一覧からチェックできます。
-      </p>
-      <a class="infoBtn" href="./guide.html">ガイドを読む →</a>
-    </section>
+<section class="info">
+  <div class="infoDivider" aria-hidden="true"></div>
+
+  <h2 class="infoTitle">子育てとリユース情報</h2>
+  <p class="infoDesc">
+    安全・エコ・リユースのヒントをガイドにまとめました。<br>
+    まずはガイド一覧からチェックできます。
+  </p>
+  <a class="infoBtn" href="./guide.html">ガイドを読む →</a>
+</section>
 
     <footer class="footer">
       <div>Mottainai Babeは、ベビー用品を必要な人へつなぐ交換プラットフォームです。</div>
