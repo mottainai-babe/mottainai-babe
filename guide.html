@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ガイド | Mottainai Babe</title>
-  <meta name="description" content="Mottainai Babeのガイド一覧。安全、エコ、リユースの基本をわかりやすくまとめています。" />
+  <title>ガイド｜もったいないベビー</title>
+  <meta name="description" content="もったいないベビー（Mottainai Babe）のガイド一覧。安全、エコ、リユースの基本をわかりやすくまとめています。" />
 
   <!-- AdSense (site ownership / Auto ads) -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5865479939175622"
@@ -12,25 +12,21 @@
 
   <style>
     :root{
-      /* ✅ index.html と同じブランド色 */
-      --bg:#377649;
-      --bg-dark:#2e633d;
-      --bg-darker:#1f4b2e;
+      /* Brand */
+      --brand:#377649;
 
-      --paper:#ffffff;
-      --soft:#f3f4f6;
-
-      --ink:#111827;
-      --muted:#6b7280;
+      /* Page (white) */
+      --page:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
       --line:#e5e7eb;
 
-      --white:#ffffff;
-      --white-80: rgba(255,255,255,.85);
-      --white-65: rgba(255,255,255,.65);
+      /* Accents */
+      --pill:#eef7f1;
+      --radius: 22px;
+      --shadowSoft: 0 10px 26px rgba(2,6,23,.06);
 
-      --radius:20px;
-      --shadow: 0 18px 40px rgba(0,0,0,.12);
-      --w: 940px;
+      --w: 980px;
     }
 
     *{box-sizing:border-box}
@@ -38,175 +34,283 @@
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", "Segoe UI", Roboto, Arial;
-      color:var(--ink);
-      background:
-        radial-gradient(1200px 600px at 20% 0%, rgba(255,255,255,.08), transparent 55%),
-        radial-gradient(900px 500px at 100% 10%, rgba(0,0,0,.12), transparent 55%),
-        linear-gradient(180deg, var(--bg-darker) 0%, var(--bg) 46%, var(--soft) 46%, var(--soft) 100%);
-      min-height:100vh;
+      background:#f6f7f7;
+      color:var(--text);
     }
     a{color:inherit;text-decoration:none}
+    a:hover{ text-decoration: underline; }
 
-    /* ===== Topbar ===== */
+    /* ===== Header (same as terms) ===== */
     .topbar{
-      position:sticky; top:0;
-      z-index:50;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      background: rgba(55,118,73,.66);
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(55,118,73,.94);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
       border-bottom: 1px solid rgba(255,255,255,.16);
     }
     .topbar .inner{
       max-width: var(--w);
       margin: 0 auto;
-      padding: 12px 18px;
+      padding: 14px 16px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:12px;
+      gap: 12px;
     }
 
     .brand{
       display:flex;
       align-items:center;
-      gap:12px;
-      min-width: 220px;
-    }
-    .brandMark{
-      width:40px;height:40px;
-      border-radius: 14px;
-      background: rgba(255,255,255,.10);
-      border: 1px solid rgba(255,255,255,.18);
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-      box-shadow: 0 10px 22px rgba(0,0,0,.12);
-    }
-    .brandMark img{
-      width:34px;height:34px;
-      object-fit:contain;
-      display:block;
-      filter: drop-shadow(0 6px 10px rgba(0,0,0,.18));
-    }
-    .brandText{
-      display:flex;
-      flex-direction:column;
-      line-height:1.1;
+      gap: 12px;
+      min-width: 0;
       color:#fff;
     }
-    .brandText strong{font-size:15px; letter-spacing:.2px}
-    .brandText span{
-      font-size:12px;
-      color: var(--white-80);
-    }
-
-    .nav{
+    .logoWrap{
+      width: 68px;
+      height: 68px;
+      border-radius: 18px;
+      background: var(--brand);
+      border: 1px solid rgba(255,255,255,.22);
       display:flex;
       align-items:center;
-      gap:6px;
+      justify-content:center;
+      overflow:hidden;
+      flex: 0 0 auto;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.06);
     }
-    .nav a{
-      color:#fff;
-      font-size:13px;
-      padding:9px 12px;
-      border-radius:999px;
-      border:1px solid transparent;
-      opacity:.92;
-      white-space:nowrap;
-    }
-    .nav a:hover{
-      background: rgba(255,255,255,.10);
-      border-color: rgba(255,255,255,.14);
-      opacity:1;
+    .logoWrap img{
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+      display:block;
+      opacity: 1;
+      filter: none;
     }
 
-    /* ===== Layout ===== */
+    .brandText{
+      min-width: 0;
+      display:flex;
+      flex-direction:column;
+      line-height:1.15;
+    }
+    .brandName{
+      font-weight: 900;
+      font-size: 17px;
+      letter-spacing: .01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .brandJp{
+      font-size: 11px;
+      opacity:.92;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-weight: 800;
+      letter-spacing: .04em;
+    }
+    .brandDesc{
+      font-size: 10px;
+      opacity:.78;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    @media (max-width: 420px){
+      .brandDesc{ display:none; }
+    }
+
+    .menuArea{ position:relative; flex: 0 0 auto; }
+    .menuBtn{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      height: 44px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.34);
+      background: rgba(255,255,255,.10);
+      color: #fff;
+      font-weight: 900;
+      letter-spacing: .02em;
+      cursor: pointer;
+    }
+    .menuBtn:active{ transform: translateY(1px); }
+
+    .hamburger{
+      width: 18px;
+      height: 12px;
+      position: relative;
+      display:inline-block;
+    }
+    .hamburger::before,
+    .hamburger::after,
+    .hamburger span{
+      content:"";
+      position:absolute;
+      left:0; right:0;
+      height:2px;
+      border-radius:2px;
+      background: rgba(255,255,255,.95);
+    }
+    .hamburger::before{ top:0; }
+    .hamburger span{ top:5px; }
+    .hamburger::after{ bottom:0; }
+
+    /* ===== menu overlay + panel ===== */
+    .menuOverlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(2,6,23,.38);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease;
+      z-index: 70;
+    }
+    .menuOverlay.open{
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .menuPanel{
+      position: fixed;
+      top: 74px;
+      right: 14px;
+      width: min(320px, 92vw);
+      background: #ffffff;
+      color: var(--text);
+      border: 1px solid rgba(2,6,23,.08);
+      border-radius: 18px;
+      box-shadow: 0 18px 50px rgba(2,6,23,.22);
+      padding: 10px;
+      transform: translateY(-6px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease, transform .18s ease;
+      z-index: 80;
+    }
+    .menuPanel.open{
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .menuPanel a{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      text-align:right;
+      gap: 10px;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      background: #f6f7f7;
+      font-weight: 900;
+      color: var(--text);
+      text-decoration:none;
+    }
+    .menuPanel a + a{ margin-top: 8px; }
+    .menuPanel a:hover{
+      border-color: rgba(55,118,73,.22);
+      background: #eef7f1;
+      text-decoration:none;
+    }
+    .menuPanel small{
+      font-weight: 800;
+      color: #64748b;
+    }
+
+    /* ===== Page ===== */
+    main{ background: var(--page); }
     .wrap{
       max-width: var(--w);
       margin: 0 auto;
-      padding: 26px 18px 56px;
+      padding: 26px 16px 64px;
     }
-    .hero{
-      color:#fff;
-      padding: 16px 0 14px;
-    }
+
     .kicker{
       display:inline-flex;
-      gap:8px; align-items:center;
-      font-size:12px;
-      color: var(--white-80);
-      background: rgba(255,255,255,.10);
-      border: 1px solid rgba(255,255,255,.16);
-      padding: 7px 12px;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 12px;
       border-radius: 999px;
+      border: 1px solid rgba(55,118,73,.22);
+      background: var(--pill);
+      color: #1b4332;
+      font-weight: 900;
+      font-size: 13px;
     }
     h1{
-      margin: 14px 0 10px;
-      font-size: 32px;
+      margin: 16px 0 10px;
+      font-size: 34px;
       line-height: 1.15;
-      letter-spacing: -.4px;
+      letter-spacing: -.02em;
+      color: #0b1f16;
     }
     .lead{
-      margin:0;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.9;
       max-width: 72ch;
-      color: var(--white-80);
-      line-height:1.75;
+      font-size: 15px;
     }
 
-    /* ===== Cards ===== */
+    /* ===== Guide cards ===== */
     .grid{
+      margin-top: 18px;
       display:grid;
       grid-template-columns: 1fr 1fr;
-      gap:16px;
-      margin-top: 18px;
+      gap: 16px;
     }
-    @media (max-width: 900px){ .grid{grid-template-columns:1fr} }
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: 1fr; }
+    }
 
     .card{
-      background: rgba(255,255,255,.92);
-      border: 1px solid rgba(255,255,255,.70);
+      background:#fff;
+      border:1px solid var(--line);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadowSoft);
       overflow:hidden;
       display:flex;
       flex-direction:column;
-      position:relative;
     }
-    .card::before{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        radial-gradient(600px 240px at 20% 0%, rgba(55,118,73,.14), transparent 50%),
-        radial-gradient(420px 220px at 110% 10%, rgba(0,0,0,.06), transparent 55%);
-      pointer-events:none;
-    }
-    .card > *{position:relative}
-
-    .card .hd{
+    .cardHd{
       padding: 16px 18px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:12px;
-      border-bottom: 1px solid rgba(17,24,39,.08);
-      background: linear-gradient(180deg, rgba(255,255,255,.92) 0%, rgba(255,255,255,.78) 100%);
+      gap: 12px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff 0%, #fbfbfb 100%);
     }
-    .card .hd h2{margin:0;font-size:16px}
-    .pill{
-      font-size:12px;
-      padding:6px 10px;
-      border-radius:999px;
-      background: rgba(55,118,73,.12);
-      color: var(--bg-darker);
-      border: 1px solid rgba(55,118,73,.18);
-      white-space:nowrap;
+    .cardHd h2{
+      margin:0;
+      font-size: 16px;
+      color:#0b1f16;
+      letter-spacing: -.01em;
     }
-    .card .bd{
+    .tag{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--pill);
+      color:#1b4332;
+      border: 1px solid rgba(55,118,73,.22);
+      font-weight: 900;
+      white-space: nowrap;
+    }
+    .cardBd{
       padding: 16px 18px;
-      line-height:1.85;
-      color: rgba(17,24,39,.92);
+      color: var(--muted);
+      line-height: 1.95;
+      font-size: 15px;
     }
-    .actions{
+    .cardActions{
       margin-top:auto;
       padding: 14px 18px 18px;
       display:flex;
@@ -216,44 +320,43 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:8px;
+      gap: 8px;
       padding: 10px 16px;
-      border-radius:999px;
-      border:none;
-      background: var(--bg);
-      color:#fff;
-      font-weight:600;
-      letter-spacing:.1px;
-      box-shadow: 0 10px 18px rgba(55,118,73,.22);
-      transition: .2s ease;
+      border-radius: 999px;
+      border: 1px solid rgba(55,118,73,.22);
+      background: #f6fbf7;
+      color: #1b4332;
+      font-weight: 900;
+      cursor:pointer;
+      text-decoration:none;
+      transition: .15s ease;
     }
     .btn:hover{
-      background: var(--bg-dark);
+      background:#eef7f1;
+      text-decoration:none;
       transform: translateY(-1px);
     }
 
-    /* ===== Footer ===== */
-    .footer{
-      margin-top: 18px;
-      text-align:center;
+    /* footer */
+    footer{
+      margin-top: 26px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      color: #64748b;
       font-size: 12px;
-      color: rgba(17,24,39,.80);
+      text-align:center;
+      line-height: 1.7;
     }
-    .footer .links{
+    footer .links{
       display:flex;
-      gap:12px;
+      gap: 10px;
       justify-content:center;
       flex-wrap:wrap;
-      margin: 10px 0 0;
+      margin-top: 8px;
     }
-    .footer .links a{
-      color: rgba(17,24,39,.78);
-      padding: 6px 8px;
-      border-radius: 10px;
-    }
-    .footer .links a:hover{
-      background: rgba(55,118,73,.10);
-      color: rgba(17,24,39,.92);
+
+    @media (prefers-reduced-motion: reduce){
+      *{scroll-behavior:auto !important; transition:none !important; animation:none !important;}
     }
   </style>
 </head>
@@ -261,68 +364,111 @@
 <body>
   <header class="topbar">
     <div class="inner">
-      <a class="brand" href="./index.html" aria-label="Mottainai Babe トップへ">
-        <span class="brandMark" aria-hidden="true">
+      <a class="brand" href="./index.html" aria-label="Mottainai Babe ホーム">
+        <span class="logoWrap" aria-hidden="true">
           <img src="./logo1.png" alt="" />
         </span>
+
         <span class="brandText">
-          <strong>Mottainai Babe</strong>
-          <span>リユースでつなぐ、やさしい循環</span>
+          <span class="brandName">Mottainai Babe</span>
+          <span class="brandJp">もったいないベビー</span>
+          <span class="brandDesc">ベビー用品交換プラットフォーム</span>
         </span>
       </a>
 
-      <nav class="nav" aria-label="ナビゲーション">
-        <a href="./app.html">アプリ</a>
-        <a href="./about.html">お問い合わせ</a>
-      </nav>
+      <div class="menuArea">
+        <button id="menuBtn" class="menuBtn" type="button" aria-expanded="false" aria-controls="menuPanel">
+          <span class="hamburger" aria-hidden="true"><span></span></span>
+          メニュー
+        </button>
+      </div>
     </div>
   </header>
 
-  <main class="wrap">
-    <section class="hero">
+  <div id="menuOverlay" class="menuOverlay" aria-hidden="true"></div>
+  <nav id="menuPanel" class="menuPanel" aria-label="ページメニュー">
+    <a href="./app.html">アプリ <small>出品・閲覧</small></a>
+    <a href="./guide.html">ガイド <small>読みもの</small></a>
+    <a href="./about.html">お問い合わせ <small>連絡</small></a>
+  </nav>
+
+  <main>
+    <div class="wrap">
       <span class="kicker">Guides • 読みもの</span>
       <h1>ガイド一覧</h1>
       <p class="lead">
         安全に、気持ちよく、長く使うためのヒントをまとめました。
       </p>
-    </section>
 
-    <section class="grid" aria-label="ガイドカード">
-      <article class="card">
-        <div class="hd">
-          <h2>安全ガイド</h2>
-          <span class="pill">Safety</span>
-        </div>
-        <div class="bd">
-          リユースでも「安全が最優先」。危険サイン、受け渡し時の確認、カテゴリ別の注意点を整理しています。
-        </div>
-        <div class="actions">
-          <a class="btn" href="./safety.html" aria-label="安全ガイドを読む">読む →</a>
-        </div>
-      </article>
+      <section class="grid" aria-label="ガイドカード">
+        <article class="card">
+          <div class="cardHd">
+            <h2>安全ガイド</h2>
+            <span class="tag">Safety</span>
+          </div>
+          <div class="cardBd">
+            リユースでも「安全が最優先」。危険サイン、受け渡し時の確認、カテゴリ別の注意点を整理しています。
+          </div>
+          <div class="cardActions">
+            <a class="btn" href="./safety.html" aria-label="安全ガイドを読む">読む →</a>
+          </div>
+        </article>
 
-      <article class="card">
-        <div class="hd">
-          <h2>エコの考え方</h2>
-          <span class="pill">Eco</span>
-        </div>
-        <div class="bd">
-          “捨てない”選択が、家計にも地球にもやさしい。循環を作るコツと、やさしい取引マナーをまとめました。
-        </div>
-        <div class="actions">
-          <a class="btn" href="./eco.html" aria-label="エコの考え方を読む">読む →</a>
-        </div>
-      </article>
-    </section>
+        <article class="card">
+          <div class="cardHd">
+            <h2>エコの考え方</h2>
+            <span class="tag">Eco</span>
+          </div>
+          <div class="cardBd">
+            “捨てない”選択が、家計にも地球にもやさしい。循環を作るコツと、やさしい取引マナーをまとめました。
+          </div>
+          <div class="cardActions">
+            <a class="btn" href="./eco.html" aria-label="エコの考え方を読む">読む →</a>
+          </div>
+        </article>
+      </section>
 
-    <footer class="footer">
-      <div>© 2026 Mottainai Babe. All rights reserved.</div>
-      <div class="links">
-        <a href="./terms.html">利用規約</a>
-        <a href="./privacy.html">プライバシーポリシー</a>
-        <a href="./about.html">お問い合わせ</a>
-      </div>
-    </footer>
+      <footer>
+        <div>© 2026 Mottainai Babe. All rights reserved.</div>
+        <div class="links">
+          <a href="./terms.html">利用規約</a>
+          <a href="./privacy.html">プライバシーポリシー</a>
+          <a href="./about.html">お問い合わせ</a>
+        </div>
+      </footer>
+    </div>
   </main>
+
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const menuPanel = document.getElementById("menuPanel");
+    const menuOverlay = document.getElementById("menuOverlay");
+
+    function openMenu(){
+      menuPanel.classList.add("open");
+      menuOverlay.classList.add("open");
+      menuBtn.setAttribute("aria-expanded","true");
+    }
+    function closeMenu(){
+      menuPanel.classList.remove("open");
+      menuOverlay.classList.remove("open");
+      menuBtn.setAttribute("aria-expanded","false");
+    }
+    function toggleMenu(){
+      const isOpen = menuPanel.classList.contains("open");
+      isOpen ? closeMenu() : openMenu();
+    }
+
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    menuOverlay.addEventListener("click", closeMenu);
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape") closeMenu();
+    });
+    window.addEventListener("scroll", closeMenu, { passive:true });
+  </script>
 </body>
 </html>
