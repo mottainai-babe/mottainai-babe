@@ -3,376 +3,390 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>利用規約｜Mottainai Babe</title>
-  <meta name="description" content="Mottainai Babe（もったいないベビー）の利用規約です。" />
-
-  <!-- AdSense（審査中も入れてOK。広告表示は承認後） -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5865479939175622"
-    crossorigin="anonymous"></script>
+  <title>利用規約｜もったいないベビー</title>
+  <meta name="description" content="もったいないベビー（Mottainai Babe）の利用規約です。" />
 
   <style>
     :root{
+      /* ✅ index.html 과 동일 톤 */
       --bg:#377649;
       --white:#ffffff;
-      --white-80: rgba(255,255,255,.8);
+      --white-90: rgba(255,255,255,.90);
+      --white-80: rgba(255,255,255,.80);
       --white-65: rgba(255,255,255,.65);
       --pill: rgba(255,255,255,.12);
       --stroke: rgba(255,255,255,.45);
 
-      --paper: rgba(255,255,255,.10);
-      --paper2: rgba(255,255,255,.08);
-      --line: rgba(255,255,255,.18);
-
-      --radius: 18px;
+      --radius: 22px;
+      --shadow: 0 18px 40px rgba(0,0,0,.18);
       --w: 980px;
     }
 
     *{box-sizing:border-box}
     body{
       margin:0;
-      background:var(--bg);
-      color:var(--white);
       font-family: ui-sans-serif, system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", "Segoe UI", Roboto, Arial;
+      background: var(--bg);
+      color: var(--white);
       min-height:100vh;
     }
-    a{color:inherit}
-    .wrap{
-      width:min(var(--w), 92vw);
-      margin: 0 auto;
-      padding: 20px 0 56px;
-    }
+    a{color:inherit;text-decoration:none}
+    a:hover{ text-decoration: underline; }
 
-    /* ===== Header (統一) ===== */
+    /* ===== Header (glass + sticky) ===== */
     .topbar{
       position: sticky;
       top: 0;
       z-index: 50;
-      background: var(--bg);
+
+      /* ✅ 미세 blur glass */
+      background: rgba(55,118,73,.58);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+
+      border-bottom: 1px solid rgba(255,255,255,.14);
     }
-    .topbarInner{
-      width: min(var(--w), 92vw);
+
+    .topbar .inner{
+      max-width: var(--w);
       margin: 0 auto;
-      padding: 14px 18px;
-      display: flex;
-      align-items: center;
+      padding: 14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
       gap: 12px;
     }
+
+    /* brand */
     .brand{
       display:flex;
       align-items:center;
-      gap:12px;
-      min-width: 0;          /* ✅ 말줄임 안정화 */
-      flex: 1 1 auto;
-      text-decoration: none;
-      color: var(--white);
+      gap: 12px;
+      min-width: 0; /* ✅ 말줄임 안정 */
     }
-    .brandLogo{
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      border: 1px solid var(--stroke);
-      background: transparent;  /* ✅ 로고 박스 배경 통일 */
+
+    .logoWrap{
+      position: relative;
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+
+      /* ✅ 로고박스 배경은 투명(색 불일치 방지) */
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.22);
+
       display:flex;
       align-items:center;
       justify-content:center;
       overflow:hidden;
       flex: 0 0 auto;
     }
-    .brandLogo img{
-      width: 32px;
-      height: 32px;
+
+    .logoWrap img{
+      width: 34px;
+      height: 34px;
       object-fit: contain;
       display:block;
+      opacity: .98;
     }
+
+    /* ✅ 로고 안에 텍스트 겹치기 (고급스럽게) */
+    .logoOverlay{
+      position:absolute;
+      inset: 0;
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+      padding: 6px;
+      pointer-events:none;
+    }
+    .logoOverlay span{
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      padding: 4px 6px;
+      border-radius: 999px;
+
+      /* glass pill */
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.20);
+      color: rgba(255,255,255,.92);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+
+      transform: translateY(2px);
+      white-space: nowrap;
+    }
+
     .brandText{
-      min-width: 0; /* ✅ 말줄임 안정화 */
-      line-height: 1.1;
+      min-width: 0;
+      display:flex;
+      flex-direction:column;
+      line-height:1.15;
     }
     .brandName{
-      font-weight: 800;
-      font-size: 18px;
+      font-weight: 900;
+      font-size: 17px;
       letter-spacing: .01em;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    .brandSub{
-      margin-top: 4px;
-      font-size: 12px;
+    .brandJp{
+      font-size: 11px;
       color: var(--white-80);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-weight: 700;
+      letter-spacing: .04em;
+    }
+    .brandDesc{
+      font-size: 10px;
+      color: var(--white-65);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
-
-    .nav{
-      display:flex;
-      gap:10px;
-      flex: 0 0 auto;
-      flex-wrap: nowrap;
+    @media (max-width: 420px){
+      .brandDesc{ display:none; }
     }
-    .nav a{
+
+    /* ===== menu button (hamburger) ===== */
+    .menuBtn{
       display:inline-flex;
       align-items:center;
-      justify-content:center;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--stroke);
-      background: var(--pill);
-      color: var(--white);
-      font-weight: 800;
-      font-size: 13px;
-      white-space: nowrap;
-      text-decoration:none;
-    }
-
-    .menuBtn{
-      display:none;
-      flex: 0 0 auto;
-      border: 1px solid var(--stroke);
-      background: var(--pill);
-      color: var(--white);
-      border-radius: 999px;
-      padding: 10px 12px;
-      cursor: pointer;
-      align-items: center;
       gap: 10px;
+      height: 44px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.06);
+      color: var(--white);
       font-weight: 800;
-      font-size: 13px;
+      letter-spacing: .02em;
+      cursor: pointer;
+      flex: 0 0 auto;
     }
-    .menuIcon{
+    .menuBtn:active{ transform: translateY(1px); }
+
+    .hamburger{
       width: 18px;
       height: 12px;
-      display: inline-flex;
-      flex-direction: column;
-      justify-content: space-between;
+      position: relative;
+      display:inline-block;
     }
-    .menuIcon span{
-      height: 2px;
+    .hamburger::before,
+    .hamburger::after,
+    .hamburger span{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      height:2px;
       border-radius: 2px;
-      background: rgba(255,255,255,.9);
-      display:block;
+      background: rgba(255,255,255,.92);
     }
+    .hamburger::before{ top:0; }
+    .hamburger span{ top:5px; }
+    .hamburger::after{ bottom:0; }
 
-    .menuOverlay{
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.35);
-      display: none;
-      z-index: 100;
-    }
-    .menuPanel{
-      position: fixed;
-      right: 14px;
+    /* ===== dropdown ===== */
+    .menu{
+      position:absolute;
+      right: 16px;
       top: 64px;
-      width: min(320px, calc(100vw - 28px));
+      width: min(260px, 92vw);
       background: rgba(255,255,255,.10);
-      border: 1px solid rgba(255,255,255,.22);
-      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,.18);
       border-radius: 18px;
-      padding: 12px;
-      display: none;
-      z-index: 101;
+      padding: 10px;
+      box-shadow: var(--shadow);
+
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+
+      display:none;
     }
-    .menuPanel a{
+    .menu.open{ display:block; }
+
+    .menu a{
       display:flex;
       align-items:center;
       justify-content:space-between;
       padding: 12px 12px;
       border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.08);
-      color: var(--white);
       text-decoration:none;
+      color: var(--white-90);
       font-weight: 800;
-      margin-bottom: 10px;
+      border: 1px solid transparent;
+      background: rgba(255,255,255,.06);
     }
-    .menuPanel a:last-child{ margin-bottom: 0; }
-    .menuPanel a .arrow{ opacity:.9; }
+    .menu a + a{ margin-top: 8px; }
+    .menu a:hover{
+      text-decoration:none;
+      border-color: rgba(255,255,255,.18);
+      background: rgba(255,255,255,.10);
+    }
+    .menu small{
+      font-weight: 700;
+      color: var(--white-65);
+    }
 
-    @media (max-width: 560px){
-      .nav{ display:none; }
-      .menuBtn{ display:inline-flex; }
-      .brandSub{ display:none; }
-      .topbarInner{ padding: 12px 14px; }
+    /* ===== page layout ===== */
+    .wrap{
+      max-width: var(--w);
+      margin: 0 auto;
+      padding: 22px 16px 60px;
     }
-    body.menuOpen .menuOverlay{ display:block; }
-    body.menuOpen .menuPanel{ display:block; }
 
-    /* ===== Page layout ===== */
-    .hero{
-      padding: 18px 0 10px;
-      text-align: center;
-    }
     .kicker{
       display:inline-flex;
       align-items:center;
-      gap:8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--stroke);
-      background: var(--pill);
-      color: var(--white-80);
-      font-weight: 800;
-      font-size: 12px;
-    }
-    h1{
-      margin: 14px 0 8px;
-      font-size: 30px;
-      letter-spacing: -.2px;
-    }
-    .lead{
-      margin: 0 auto;
-      max-width: 70ch;
-      color: var(--white-80);
-      line-height: 1.8;
-      font-size: 14px;
-    }
-
-    .card{
-      margin-top: 18px;
-      border: 1px solid var(--line);
-      background: var(--paper);
-      border-radius: var(--radius);
-      overflow:hidden;
-    }
-    .cardInner{
-      padding: 18px;
-    }
-
-    .toc{
-      display:flex;
-      flex-wrap: wrap;
-      gap:10px;
-      padding: 14px 18px;
-      border-bottom: 1px solid var(--line);
-      background: var(--paper2);
-    }
-    .toc a{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
+      gap: 8px;
       padding: 8px 12px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.22);
-      background: rgba(255,255,255,.06);
-      text-decoration:none;
-      color: var(--white-80);
+      background: rgba(255,255,255,.08);
+      color: var(--white-90);
       font-weight: 800;
-      font-size: 12px;
-      white-space: nowrap;
-    }
-
-    section.rule{
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      border-radius: 18px;
-      padding: 16px 16px;
-      margin: 14px 0;
-    }
-    section.rule h2{
-      margin: 0 0 10px;
-      font-size: 18px;
-      letter-spacing: -.1px;
-    }
-    section.rule p{
-      margin: 0 0 10px;
-      color: var(--white-80);
-      line-height: 1.9;
-      font-size: 14px;
-    }
-    section.rule ul{
-      margin: 10px 0 0;
-      padding-left: 18px;
-      color: var(--white-80);
-      line-height: 1.9;
-      font-size: 14px;
-    }
-    section.rule li{ margin: 6px 0; }
-
-    .meta{
-      margin-top: 18px;
-      border-top: 1px solid var(--line);
-      padding-top: 14px;
-      color: var(--white-80);
-      line-height: 1.9;
       font-size: 13px;
     }
-    .meta b{ color: var(--white); }
 
-    .footer{
-      margin-top: 22px;
-      padding-top: 14px;
+    h1{
+      margin: 16px 0 10px;
+      font-size: 34px;
+      line-height: 1.15;
+      letter-spacing: -.02em;
+    }
+
+    .lead{
+      margin: 0;
+      color: var(--white-80);
+      line-height: 1.85;
+      max-width: 70ch;
+      font-size: 15px;
+    }
+
+    /* toc */
+    .toc{
+      margin-top: 18px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: var(--radius);
+      padding: 14px;
+    }
+    .tocGrid{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .toc a{
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      color: var(--white-90);
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: .02em;
+    }
+    .toc a:hover{
+      background: rgba(255,255,255,.10);
+      border-color: rgba(255,255,255,.24);
+    }
+
+    /* cards */
+    .card{
+      margin-top: 16px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: var(--radius);
+      padding: 18px 18px;
+    }
+    .card h2{
+      margin: 0 0 10px;
+      font-size: 22px;
+      letter-spacing: -.01em;
+    }
+    .card p, .card li{
+      color: var(--white-80);
+      line-height: 1.9;
+      font-size: 15px;
+    }
+    ul{ padding-left: 20px; margin: 10px 0 0; }
+
+    /* footer */
+    footer{
+      margin-top: 24px;
+      padding-top: 16px;
       border-top: 1px solid rgba(255,255,255,.14);
       color: var(--white-65);
       font-size: 12px;
-      line-height: 1.7;
       text-align:center;
+      line-height: 1.7;
     }
-    .footer a{
-      color: var(--white-80);
-      text-decoration:none;
-    }
-    .footer a:hover{text-decoration:underline}
-    .footerLinks{
-      margin-top: 10px;
+    footer .links{
       display:flex;
-      gap:10px;
-      flex-wrap:wrap;
+      gap: 10px;
       justify-content:center;
+      flex-wrap:wrap;
+      margin-top: 8px;
+    }
+
+    /* reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      *{scroll-behavior:auto !important; transition:none !important; animation:none !important;}
     }
   </style>
 </head>
 
 <body>
-  <!-- Header -->
   <header class="topbar">
-    <div class="topbarInner">
-      <a class="brand" href="./index.html">
-        <span class="brandLogo">
-          <img src="./logo1.png" alt="Mottainai Babe" />
+    <div class="inner">
+      <a class="brand" href="./index.html" aria-label="Mottainai Babe ホーム">
+        <span class="logoWrap" aria-hidden="true">
+          <img src="./logo1.png" alt="" />
+          <span class="logoOverlay"><span>MB</span></span>
         </span>
+
         <span class="brandText">
-          <div class="brandName">Mottainai Babe</div>
-          <div class="brandSub">ベビー用品交換プラットフォーム</div>
+          <span class="brandName">Mottainai Babe</span>
+          <span class="brandJp">もったいないベビー</span>
+          <span class="brandDesc">ベビー用品交換プラットフォーム</span>
         </span>
       </a>
 
-      <nav class="nav" aria-label="primary">
-        <a href="./app.html">アプリ</a>
-        <a href="./guide.html">ガイド</a>
-        <a href="./about.html">お問い合わせ</a>
-      </nav>
+      <div style="position:relative">
+        <button id="menuBtn" class="menuBtn" type="button" aria-expanded="false" aria-controls="menu">
+          <span class="hamburger" aria-hidden="true"><span></span></span>
+          メニュー
+        </button>
 
-      <button class="menuBtn" id="menuBtn" type="button" aria-label="メニュー" aria-expanded="false">
-        <span class="menuIcon" aria-hidden="true">
-          <span></span><span></span><span></span>
-        </span>
-        メニュー
-      </button>
+        <nav id="menu" class="menu" aria-label="ページメニュー">
+          <a href="./app.html">アプリ <small>出品・閲覧</small></a>
+          <a href="./guide.html">ガイド <small>読みもの</small></a>
+          <a href="./about.html">お問い合わせ <small>連絡</small></a>
+        </nav>
+      </div>
     </div>
   </header>
 
-  <div class="menuOverlay" id="menuOverlay" aria-hidden="true"></div>
-  <div class="menuPanel" id="menuPanel" role="dialog" aria-label="メニュー">
-    <a href="./app.html">アプリ <span class="arrow">›</span></a>
-    <a href="./guide.html">ガイド <span class="arrow">›</span></a>
-    <a href="./about.html">お問い合わせ <span class="arrow">›</span></a>
-  </div>
-
-  <!-- Page -->
   <main class="wrap">
-    <section class="hero">
-      <span class="kicker">Terms • 利用規約</span>
-      <h1>もったいないベビー 利用規約</h1>
-      <p class="lead">
-        本利用規約（以下「本規約」といいます。）は、もったいないベビー（以下「当サービス」といいます。）の利用条件を定めるものです。
-        利用者は、本規約に同意のうえ当サービスを利用するものとします。
-      </p>
-    </section>
+    <span class="kicker">Terms • 利用規約</span>
+    <h1>もったいないベビー 利用規約</h1>
+    <p class="lead">
+      本利用規約（以下「本規約」といいます。）は、もったいないベビー（以下「当サービス」といいます。）の利用条件を定めるものです。
+      利用者は、本規約に同意のうえ当サービスを利用するものとします。
+    </p>
 
-    <article class="card">
-      <nav class="toc" aria-label="目次">
+    <section class="toc" aria-label="目次">
+      <div class="tocGrid">
         <a href="#a1">第1条</a>
         <a href="#a2">第2条</a>
         <a href="#a3">第3条</a>
@@ -383,133 +397,122 @@
         <a href="#a8">第8条</a>
         <a href="#a9">第9条</a>
         <a href="#a10">第10条</a>
-      </nav>
-
-      <div class="cardInner">
-        <section class="rule" id="a1">
-          <h2>第1条（サービスの内容）</h2>
-          <p>当サービスは、ベビー用品の譲渡および交換の機会を提供するプラットフォームです。</p>
-          <p>当サービスは取引の当事者ではなく、取引契約は利用者間で直接成立します。</p>
-        </section>
-
-        <section class="rule" id="a2">
-          <h2>第2条（利用資格）</h2>
-          <p>利用者は、日本の法令に従い自己の責任において当サービスを利用するものとします。</p>
-        </section>
-
-        <section class="rule" id="a3">
-          <h2>第3条（禁止事項）</h2>
-          <p>利用者は以下の行為を行ってはなりません。</p>
-          <ul>
-            <li>法令に違反する行為</li>
-            <li>盗品、違法品、危険物の出品</li>
-            <li>虚偽の情報の登録</li>
-            <li>第三者の権利侵害</li>
-            <li>営利目的での反復継続した販売行為</li>
-            <li>その他当サービスが不適切と判断する行為</li>
-          </ul>
-        </section>
-
-        <section class="rule" id="a4">
-          <h2>第4条（取引の責任）</h2>
-          <p>
-            利用者間の取引は当事者間の責任において行うものとし、
-            当サービスは取引の安全性、合法性、品質を保証するものではありません。
-          </p>
-        </section>
-
-        <section class="rule" id="a5">
-          <h2>第5条（連絡先の開示）</h2>
-          <p>
-            当サービスでは、交換が成立した場合に限り、
-            取引当事者間で連絡を行う目的でメールアドレスが表示されます。
-          </p>
-          <p>この情報は取引目的以外に使用してはなりません。</p>
-        </section>
-
-        <section class="rule" id="a6">
-          <h2>第6条（古物営業法に関する事項）</h2>
-          <p>
-            当サービスは、物品の売買の当事者ではなく、
-            利用者間の取引の場を提供するのみであり、
-            古物営業法に基づく古物営業には該当しません。
-          </p>
-          <p>
-            ただし、利用者が反復継続して販売を行う場合、
-            古物商許可が必要になる場合があります。
-          </p>
-        </section>
-
-        <section class="rule" id="a7">
-          <h2>第7条（免責事項）</h2>
-          <p>当サービスは以下について一切の責任を負いません。</p>
-          <ul>
-            <li>利用者間のトラブル</li>
-            <li>物品の品質、安全性</li>
-            <li>損害、損失</li>
-          </ul>
-        </section>
-
-        <section class="rule" id="a8">
-          <h2>第8条（サービスの変更・停止）</h2>
-          <p>当サービスは、事前の通知なく変更または停止することがあります。</p>
-        </section>
-
-        <section class="rule" id="a9">
-          <h2>第9条（準拠法）</h2>
-          <p>本規約は日本法に基づき解釈されます。</p>
-        </section>
-
-        <section class="rule" id="a10">
-          <h2>第10条（運営者情報）</h2>
-          <p><b>運営者：</b>Haejin Kishishita</p>
-          <p><b>お問い合わせ：</b><a href="mailto:ainazmum2624@gmail.com">ainazmum2624@gmail.com</a></p>
-          <p><b>制定日：</b>2026年2月21日</p>
-        </section>
-
-        <div class="meta">
-          <div>※ 本規約は必要に応じて改定される場合があります。改定後は本ページにて掲示します。</div>
-        </div>
       </div>
-    </article>
+    </section>
 
-    <footer class="footer">
-      <div>Mottainai Babeは、ベビー用品を必要な人へつなぐ交換プラットフォームです。</div>
-      <div class="footerLinks">
+    <section id="a1" class="card">
+      <h2>第1条（サービスの内容）</h2>
+      <p>当サービスは、ベビー用品の譲渡および交換の機会を提供するプラットフォームです。</p>
+      <p>当サービスは取引の当事者ではなく、取引契約は利用者間で直接成立します。</p>
+    </section>
+
+    <section id="a2" class="card">
+      <h2>第2条（利用資格）</h2>
+      <p>利用者は、日本の法令に従い自己の責任において当サービスを利用するものとします。</p>
+    </section>
+
+    <section id="a3" class="card">
+      <h2>第3条（禁止事項）</h2>
+      <p>利用者は以下の行為を行ってはなりません。</p>
+      <ul>
+        <li>法令に違反する行為</li>
+        <li>盗品、違法品、危険物の出品</li>
+        <li>虚偽の情報の登録</li>
+        <li>第三者の権利侵害</li>
+        <li>営利目的での反復継続した販売行為</li>
+        <li>その他当サービスが不適切と判断する行為</li>
+      </ul>
+    </section>
+
+    <section id="a4" class="card">
+      <h2>第4条（取引の責任）</h2>
+      <p>
+        利用者間の取引は当事者間の責任において行うものとし、
+        当サービスは取引の安全性、合法性、品質を保証するものではありません。
+      </p>
+    </section>
+
+    <section id="a5" class="card">
+      <h2>第5条（連絡先の開示）</h2>
+      <p>
+        当サービスでは、交換が成立した場合に限り、
+        取引当事者間で連絡を行う目的でメールアドレスが表示されます。
+      </p>
+      <p>この情報は取引目的以外に使用してはなりません。</p>
+    </section>
+
+    <section id="a6" class="card">
+      <h2>第6条（古物営業法に関する事項）</h2>
+      <p>
+        当サービスは、物品の売買の当事者ではなく、
+        利用者間の取引の場を提供するのみであり、
+        古物営業法に基づく古物営業には該当しません。
+      </p>
+      <p>
+        ただし、利用者が反復継続して販売を行う場合、
+        古物商許可が必要になる場合があります。
+      </p>
+    </section>
+
+    <section id="a7" class="card">
+      <h2>第7条（免責事項）</h2>
+      <p>当サービスは以下について一切の責任を負いません。</p>
+      <ul>
+        <li>利用者間のトラブル</li>
+        <li>物品の品質、安全性</li>
+        <li>損害、損失</li>
+      </ul>
+    </section>
+
+    <section id="a8" class="card">
+      <h2>第8条（サービスの変更・停止）</h2>
+      <p>当サービスは、事前の通知なく変更または停止することがあります。</p>
+    </section>
+
+    <section id="a9" class="card">
+      <h2>第9条（準拠法）</h2>
+      <p>本規約は日本法に基づき解釈されます。</p>
+    </section>
+
+    <section id="a10" class="card">
+      <h2>第10条（運営者情報）</h2>
+      <p>運営者：Haejin Kishishita</p>
+      <p>お問い合わせ：ainazmum2624@gmail.com</p>
+      <p>制定日：2026年2月21日</p>
+    </section>
+
+    <footer>
+      <div>© 2026 Mottainai Babe. All rights reserved.</div>
+      <div class="links">
+        <a href="./index.html">ホーム</a>
         <a href="./guide.html">ガイド</a>
-        <a href="./terms.html">利用規約</a>
         <a href="./privacy.html">プライバシーポリシー</a>
         <a href="./about.html">お問い合わせ</a>
       </div>
-      <div style="margin-top:10px;">© 2026 Mottainai Babe. All rights reserved.</div>
     </footer>
   </main>
 
   <script>
-    (function(){
-      const btn = document.getElementById("menuBtn");
-      const overlay = document.getElementById("menuOverlay");
-      const panel = document.getElementById("menuPanel");
-      if(!btn || !overlay || !panel) return;
+    // hamburger menu toggle
+    const menuBtn = document.getElementById("menuBtn");
+    const menu = document.getElementById("menu");
 
-      function openMenu(){
-        document.body.classList.add("menuOpen");
-        btn.setAttribute("aria-expanded","true");
-      }
-      function closeMenu(){
-        document.body.classList.remove("menuOpen");
-        btn.setAttribute("aria-expanded","false");
-      }
-      function toggleMenu(){
-        if(document.body.classList.contains("menuOpen")) closeMenu();
-        else openMenu();
-      }
+    function closeMenu(){
+      menu.classList.remove("open");
+      menuBtn.setAttribute("aria-expanded","false");
+    }
+    function toggleMenu(){
+      const open = menu.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", String(open));
+    }
 
-      btn.addEventListener("click", toggleMenu);
-      overlay.addEventListener("click", closeMenu);
-      document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeMenu(); });
-      panel.querySelectorAll("a").forEach(a => a.addEventListener("click", closeMenu));
-    })();
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    document.addEventListener("click", () => closeMenu());
+    window.addEventListener("scroll", () => closeMenu(), { passive:true });
   </script>
 </body>
 </html>
