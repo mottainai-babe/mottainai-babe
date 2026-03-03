@@ -91,32 +91,7 @@
     }
 
     /* ✅ 로고 안에 텍스트 겹치기 (고급스럽게) */
-    .logoOverlay{
-      position:absolute;
-      inset: 0;
-      display:flex;
-      align-items:flex-end;
-      justify-content:center;
-      padding: 6px;
-      pointer-events:none;
-    }
-    .logoOverlay span{
-      font-size: 9px;
-      font-weight: 800;
-      letter-spacing: .08em;
-      padding: 4px 6px;
-      border-radius: 999px;
-
-      /* glass pill */
-      background: rgba(255,255,255,.10);
-      border: 1px solid rgba(255,255,255,.20);
-      color: rgba(255,255,255,.92);
-      -webkit-backdrop-filter: blur(8px);
-      backdrop-filter: blur(8px);
-
-      transform: translateY(2px);
-      white-space: nowrap;
-    }
+    
 
     .brandText{
       min-width: 0;
@@ -351,9 +326,8 @@
     <div class="inner">
       <a class="brand" href="./index.html" aria-label="Mottainai Babe ホーム">
         <span class="logoWrap" aria-hidden="true">
-          <img src="./logo1.png" alt="" />
-          <span class="logoOverlay"><span>MB</span></span>
-        </span>
+  <img src="./logo1.png" alt="" />
+</span>
 
         <span class="brandText">
           <span class="brandName">Mottainai Babe</span>
