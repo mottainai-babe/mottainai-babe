@@ -8,51 +8,52 @@
 
   <style>
     :root{
-      /* ✅ index.html と同一トーン */
-      --bg:#377649;
-      --white:#ffffff;
-      --white-95: rgba(255,255,255,.95);
-      --white-90: rgba(255,255,255,.90);
-      --white-80: rgba(255,255,255,.80);
-      --white-65: rgba(255,255,255,.65);
-      --stroke: rgba(255,255,255,.45);
+      /* Brand */
+      --brand:#377649;
 
-      --radius: 22px;
-      --shadow: 0 18px 40px rgba(0,0,0,.18);
-      --shadowMenu: 0 20px 60px rgba(0,0,0,.25);
+      /* Page (white) */
+      --page:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+      --line:#e5e7eb;
+
+      /* Accents */
+      --pill:#eef7f1;
+      --stroke: rgba(255,255,255,.28);
+      --radius: 18px;
+      --shadow: 0 14px 34px rgba(2,6,23,.12);
+
       --w: 980px;
     }
 
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
+    html,body{height:100%}
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", "Segoe UI", Roboto, Arial;
-      background: var(--bg);
-      color: var(--white);
-      min-height:100vh;
+      background: #f6f7f7;            /* ✅ header 외 영역은 밝게 */
+      color: var(--text);
     }
     a{color:inherit;text-decoration:none}
     a:hover{ text-decoration: underline; }
 
-    /* ===== Header (glass + sticky) ===== */
+    /* ===== Header (green + subtle glass) ===== */
     .topbar{
       position: sticky;
       top: 0;
       z-index: 60;
 
-      /* ✅ 미세 blur glass */
-      background: rgba(55,118,73,.58);
-      -webkit-backdrop-filter: blur(10px);
-      backdrop-filter: blur(10px);
+      /* ✅ 비침 방지: 불투명도 올림 */
+      background: rgba(55,118,73,.94);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
 
-      border-bottom: 1px solid rgba(255,255,255,.14);
+      border-bottom: 1px solid rgba(255,255,255,.16);
     }
-
     .topbar .inner{
       max-width: var(--w);
       margin: 0 auto;
-      padding: 12px 16px;
+      padding: 14px 16px;
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -65,55 +66,28 @@
       align-items:center;
       gap: 12px;
       min-width: 0; /* ✅ 말줄임 안정 */
+      color:#fff;
     }
-
     .logoWrap{
-      position: relative;
-      width: 54px;
-      height: 54px;
+      width: 62px;                  /* ✅ 로고 박스 크게 */
+      height: 62px;
       border-radius: 18px;
-
-      /* ✅ 로고박스 배경 투명(색 불일치 방지) */
-      background: transparent;
-      border: 1px solid rgba(255,255,255,.22);
-
+      border: 1px solid rgba(255,255,255,.26);
+      background: transparent;      /* ✅ 배경 통일 */
       display:flex;
       align-items:center;
       justify-content:center;
       overflow:hidden;
       flex: 0 0 auto;
     }
-
     .logoWrap img{
-      width: 36px;
-      height: 36px;
+      width: 50px;                  /* ✅ 로고 크게 */
+      height: 50px;
       object-fit: contain;
       display:block;
       opacity: .98;
-      transform: translateY(-1px);
+      filter: none;
     }
-
-    /* ✅ 로고 안에 텍스트 겹치기(고급 느낌) */
-    .logoOverlay{
-      position:absolute;
-      inset:0;
-      display:flex;
-      align-items:flex-end;
-      justify-content:center;
-      padding: 6px 6px 6px;
-      pointer-events:none;
-    }
-    .logoOverlay span{
-      font-size: 8.5px;
-      font-weight: 900;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.92);
-      text-shadow: 0 2px 10px rgba(0,0,0,.35);
-      mix-blend-mode: soft-light;
-      opacity: .75;
-    }
-
     .brandText{
       min-width: 0;
       display:flex;
@@ -127,11 +101,10 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      color: var(--white-95);
     }
     .brandJp{
       font-size: 11px;
-      color: var(--white-80);
+      opacity:.92;
       margin-top: 2px;
       white-space: nowrap;
       overflow: hidden;
@@ -141,19 +114,17 @@
     }
     .brandDesc{
       font-size: 10px;
-      color: var(--white-65);
+      opacity:.78;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      font-weight: 700;
     }
     @media (max-width: 420px){
       .brandDesc{ display:none; }
     }
 
     /* ===== menu button (hamburger) ===== */
-    .menuWrap{ position:relative; flex: 0 0 auto; }
-
+    .menuArea{ position:relative; flex: 0 0 auto; }
     .menuBtn{
       display:inline-flex;
       align-items:center;
@@ -161,16 +132,13 @@
       height: 44px;
       padding: 0 14px;
       border-radius: 999px;
-      border: 1px solid var(--stroke);
-
-      /* ✅ 고급 옵션 적용 */
-      background: rgba(255,255,255,.06);
-      color: var(--white);
+      border: 1px solid rgba(255,255,255,.34);
+      background: rgba(255,255,255,.10);
+      color: #fff;
       font-weight: 900;
       letter-spacing: .02em;
       cursor: pointer;
     }
-    .menuBtn:hover{ background: rgba(255,255,255,.08); }
     .menuBtn:active{ transform: translateY(1px); }
 
     .hamburger{
@@ -184,91 +152,86 @@
     .hamburger span{
       content:"";
       position:absolute;
-      left:0;
-      right:0;
+      left:0; right:0;
       height:2px;
-      border-radius: 2px;
-      background: rgba(255,255,255,.92);
+      border-radius:2px;
+      background: rgba(255,255,255,.95);
     }
     .hamburger::before{ top:0; }
     .hamburger span{ top:5px; }
     .hamburger::after{ bottom:0; }
 
-    /* ===== overlay (겹침 방지) ===== */
+    /* ===== menu overlay (FIX: 안 보이던 문제 해결) ===== */
     .menuOverlay{
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.45);
-      -webkit-backdrop-filter: blur(4px);
-      backdrop-filter: blur(4px);
-      z-index: 80;
-      display: none;
+      background: rgba(2,6,23,.38);   /* ✅ 어두운 오버레이 */
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease;
+      z-index: 70;
     }
-    .menuOverlay.open{ display:block; }
+    .menuOverlay.open{
+      opacity: 1;
+      pointer-events: auto;
+    }
 
-    /* ===== dropdown ===== */
-    .menu{
-      position:absolute;
-      right: 0;
-      top: 54px;
-      width: min(280px, 92vw);
-
-      /* ✅ 고급 옵션 적용 */
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.20);
+    .menuPanel{
+      position: fixed;
+      top: 74px;                      /* header 아래 */
+      right: 14px;
+      width: min(320px, 92vw);
+      background: #ffffff;            /* ✅ 흰색 고정(블러X) */
+      color: var(--text);
+      border: 1px solid rgba(2,6,23,.08);
       border-radius: 18px;
+      box-shadow: 0 18px 50px rgba(2,6,23,.22);
       padding: 10px;
-      box-shadow: var(--shadowMenu);
-
-      -webkit-backdrop-filter: blur(14px);
-      backdrop-filter: blur(14px);
-
-      display:none;
-      z-index: 90;
-      transform-origin: top right;
+      transform: translateY(-6px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease, transform .18s ease;
+      z-index: 80;
     }
-    .menu.open{ display:block; }
-
-    /* ✅ 메뉴 애니메이션(가볍게) */
-    @keyframes pop {
-      from { opacity:0; transform: translateY(-6px) scale(.98); }
-      to   { opacity:1; transform: translateY(0) scale(1); }
+    .menuPanel.open{
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
     }
-    .menu.open{ animation: pop .14s ease-out; }
 
-    .menu a{
+    .menuPanel a{
       display:flex;
       align-items:center;
-
-      /* ✅ 오른쪽 정렬 */
-      justify-content:flex-end;
-      text-align:right;
-
+      justify-content:flex-end;       /* ✅ 텍스트 오른쪽 정렬 */
+      text-align:right;              /* ✅ 텍스트 오른쪽 정렬 */
+      gap: 10px;
       padding: 12px 12px;
       border-radius: 14px;
-      text-decoration:none;
-      color: var(--white-90);
-      font-weight: 900;
       border: 1px solid transparent;
-      background: rgba(255,255,255,.06);
-    }
-    .menu a + a{ margin-top: 8px; }
-    .menu a:hover{
+      background: #f6f7f7;
+      font-weight: 900;
+      color: var(--text);
       text-decoration:none;
-      border-color: rgba(255,255,255,.18);
-      background: rgba(255,255,255,.10);
     }
-    .menu small{
+    .menuPanel a + a{ margin-top: 8px; }
+    .menuPanel a:hover{
+      border-color: rgba(55,118,73,.22);
+      background: #eef7f1;
+      text-decoration:none;
+    }
+    .menuPanel small{
       font-weight: 800;
-      color: var(--white-65);
-      margin-left: 10px;
+      color: #64748b;
     }
 
-    /* ===== page layout ===== */
+    /* ===== page layout (white) ===== */
+    main{
+      background: var(--page);        /* ✅ 헤더 외 영역 흰색 */
+    }
     .wrap{
       max-width: var(--w);
       margin: 0 auto;
-      padding: 22px 16px 60px;
+      padding: 26px 16px 64px;
     }
 
     .kicker{
@@ -277,9 +240,9 @@
       gap: 8px;
       padding: 8px 12px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.22);
-      background: rgba(255,255,255,.08);
-      color: var(--white-90);
+      border: 1px solid rgba(55,118,73,.22);
+      background: var(--pill);
+      color: #1b4332;
       font-weight: 900;
       font-size: 13px;
     }
@@ -289,23 +252,24 @@
       font-size: 34px;
       line-height: 1.15;
       letter-spacing: -.02em;
+      color: #0b1f16;
     }
-
     .lead{
       margin: 0;
-      color: var(--white-80);
-      line-height: 1.85;
-      max-width: 70ch;
+      color: var(--muted);
+      line-height: 1.9;
+      max-width: 72ch;
       font-size: 15px;
     }
 
     /* toc */
     .toc{
       margin-top: 18px;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.16);
-      border-radius: var(--radius);
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
       padding: 14px;
+      box-shadow: 0 10px 26px rgba(2,6,23,.06);
     }
     .tocGrid{
       display:flex;
@@ -319,45 +283,46 @@
       justify-content:center;
       padding: 10px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.06);
-      color: var(--white-90);
+      border: 1px solid rgba(55,118,73,.22);
+      background: #f6fbf7;
+      color: #1b4332;
       font-weight: 900;
       font-size: 13px;
       letter-spacing: .02em;
     }
     .toc a:hover{
-      background: rgba(255,255,255,.10);
-      border-color: rgba(255,255,255,.24);
+      background: #eef7f1;
+      border-color: rgba(55,118,73,.32);
+      text-decoration:none;
     }
 
     /* cards */
     .card{
       margin-top: 16px;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.16);
-      border-radius: var(--radius);
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
       padding: 18px 18px;
+      box-shadow: 0 10px 26px rgba(2,6,23,.06);
     }
     .card h2{
       margin: 0 0 10px;
       font-size: 22px;
       letter-spacing: -.01em;
-      font-weight: 900;
+      color:#0b1f16;
     }
     .card p, .card li{
-      color: var(--white-80);
-      line-height: 1.9;
+      color: var(--muted);
+      line-height: 1.95;
       font-size: 15px;
     }
     ul{ padding-left: 20px; margin: 10px 0 0; }
 
-    /* footer */
     footer{
-      margin-top: 24px;
+      margin-top: 26px;
       padding-top: 16px;
-      border-top: 1px solid rgba(255,255,255,.14);
-      color: var(--white-65);
+      border-top: 1px solid var(--line);
+      color: #64748b;
       font-size: 12px;
       text-align:center;
       line-height: 1.7;
@@ -370,10 +335,8 @@
       margin-top: 8px;
     }
 
-    /* reduce motion */
     @media (prefers-reduced-motion: reduce){
-      html{scroll-behavior:auto !important;}
-      *{transition:none !important; animation:none !important;}
+      *{scroll-behavior:auto !important; transition:none !important; animation:none !important;}
     }
   </style>
 </head>
@@ -384,8 +347,6 @@
       <a class="brand" href="./index.html" aria-label="Mottainai Babe ホーム">
         <span class="logoWrap" aria-hidden="true">
           <img src="./logo1.png" alt="" />
-          <!-- ✅ MB 텍스트 없음 -->
-          <span class="logoOverlay"><span>Mottainai</span></span>
         </span>
 
         <span class="brandText">
@@ -395,154 +356,158 @@
         </span>
       </a>
 
-      <div class="menuWrap">
-        <button id="menuBtn" class="menuBtn" type="button" aria-expanded="false" aria-controls="menu">
+      <div class="menuArea">
+        <button id="menuBtn" class="menuBtn" type="button" aria-expanded="false" aria-controls="menuPanel">
           <span class="hamburger" aria-hidden="true"><span></span></span>
           メニュー
         </button>
-
-        <nav id="menu" class="menu" aria-label="ページメニュー">
-          <a href="./app.html">アプリ <small>出品・閲覧</small></a>
-          <a href="./guide.html">ガイド <small>読みもの</small></a>
-          <a href="./about.html">お問い合わせ <small>連絡</small></a>
-        </nav>
       </div>
     </div>
   </header>
 
-  <!-- ✅ overlay (겹침 방지 + 배경 dim/blur) -->
+  <!-- ✅ overlay + panel (가독성 해결) -->
   <div id="menuOverlay" class="menuOverlay" aria-hidden="true"></div>
+  <nav id="menuPanel" class="menuPanel" aria-label="ページメニュー">
+    <a href="./app.html">アプリ <small>出品・閲覧</small></a>
+    <a href="./guide.html">ガイド <small>読みもの</small></a>
+    <a href="./about.html">お問い合わせ <small>連絡</small></a>
+  </nav>
 
-  <main class="wrap">
-    <span class="kicker">Terms • 利用規約</span>
-    <h1>もったいないベビー 利用規約</h1>
-    <p class="lead">
-      本利用規約（以下「本規約」といいます。）は、もったいないベビー（以下「当サービス」といいます。）の利用条件を定めるものです。
-      利用者は、本規約に同意のうえ当サービスを利用するものとします。
-    </p>
-
-    <section class="toc" aria-label="目次">
-      <div class="tocGrid">
-        <a href="#a1">第1条</a>
-        <a href="#a2">第2条</a>
-        <a href="#a3">第3条</a>
-        <a href="#a4">第4条</a>
-        <a href="#a5">第5条</a>
-        <a href="#a6">第6条</a>
-        <a href="#a7">第7条</a>
-        <a href="#a8">第8条</a>
-        <a href="#a9">第9条</a>
-        <a href="#a10">第10条</a>
-      </div>
-    </section>
-
-    <section id="a1" class="card">
-      <h2>第1条（サービスの内容）</h2>
-      <p>当サービスは、ベビー用品の譲渡および交換の機会を提供するプラットフォームです。</p>
-      <p>当サービスは取引の当事者ではなく、取引契約は利用者間で直接成立します。</p>
-    </section>
-
-    <section id="a2" class="card">
-      <h2>第2条（利用資格）</h2>
-      <p>利用者は、日本の法令に従い自己の責任において当サービスを利用するものとします。</p>
-    </section>
-
-    <section id="a3" class="card">
-      <h2>第3条（禁止事項）</h2>
-      <p>利用者は以下の行為を行ってはなりません。</p>
-      <ul>
-        <li>法令に違反する行為</li>
-        <li>盗品、違法品、危険物の出品</li>
-        <li>虚偽の情報の登録</li>
-        <li>第三者の権利侵害</li>
-        <li>営利目的での反復継続した販売行為</li>
-        <li>その他当サービスが不適切と判断する行為</li>
-      </ul>
-    </section>
-
-    <section id="a4" class="card">
-      <h2>第4条（取引の責任）</h2>
-      <p>
-        利用者間の取引は当事者間の責任において行うものとし、
-        当サービスは取引の安全性、合法性、品質を保証するものではありません。
+  <main>
+    <div class="wrap">
+      <span class="kicker">Terms • 利用規約</span>
+      <h1>もったいないベビー 利用規約</h1>
+      <p class="lead">
+        本利用規約（以下「本規約」といいます。）は、もったいないベビー（以下「当サービス」といいます。）の利用条件を定めるものです。
+        利用者は、本規約に同意のうえ当サービスを利用するものとします。
       </p>
-    </section>
 
-    <section id="a5" class="card">
-      <h2>第5条（連絡先の開示）</h2>
-      <p>
-        当サービスでは、交換が成立した場合に限り、
-        取引当事者間で連絡を行う目的でメールアドレスが表示されます。
-      </p>
-      <p>この情報は取引目的以外に使用してはなりません。</p>
-    </section>
+      <section class="toc" aria-label="目次">
+        <div class="tocGrid">
+          <a href="#a1">第1条</a>
+          <a href="#a2">第2条</a>
+          <a href="#a3">第3条</a>
+          <a href="#a4">第4条</a>
+          <a href="#a5">第5条</a>
+          <a href="#a6">第6条</a>
+          <a href="#a7">第7条</a>
+          <a href="#a8">第8条</a>
+          <a href="#a9">第9条</a>
+          <a href="#a10">第10条</a>
+        </div>
+      </section>
 
-    <section id="a6" class="card">
-      <h2>第6条（古物営業法に関する事項）</h2>
-      <p>
-        当サービスは、物品の売買の当事者ではなく、
-        利用者間の取引の場を提供するのみであり、
-        古物営業法に基づく古物営業には該当しません。
-      </p>
-      <p>
-        ただし、利用者が反復継続して販売を行う場合、
-        古物商許可が必要になる場合があります。
-      </p>
-    </section>
+      <section id="a1" class="card">
+        <h2>第1条（サービスの内容）</h2>
+        <p>当サービスは、ベビー用品の譲渡および交換の機会を提供するプラットフォームです。</p>
+        <p>当サービスは取引の当事者ではなく、取引契約は利用者間で直接成立します。</p>
+      </section>
 
-    <section id="a7" class="card">
-      <h2>第7条（免責事項）</h2>
-      <p>当サービスは以下について一切の責任を負いません。</p>
-      <ul>
-        <li>利用者間のトラブル</li>
-        <li>物品の品質、安全性</li>
-        <li>損害、損失</li>
-      </ul>
-    </section>
+      <section id="a2" class="card">
+        <h2>第2条（利用資格）</h2>
+        <p>利用者は、日本の法令に従い自己の責任において当サービスを利用するものとします。</p>
+      </section>
 
-    <section id="a8" class="card">
-      <h2>第8条（サービスの変更・停止）</h2>
-      <p>当サービスは、事前の通知なく変更または停止することがあります。</p>
-    </section>
+      <section id="a3" class="card">
+        <h2>第3条（禁止事項）</h2>
+        <p>利用者は以下の行為を行ってはなりません。</p>
+        <ul>
+          <li>法令に違反する行為</li>
+          <li>盗品、違法品、危険物の出品</li>
+          <li>虚偽の情報の登録</li>
+          <li>第三者の権利侵害</li>
+          <li>営利目的での反復継続した販売行為</li>
+          <li>その他当サービスが不適切と判断する行為</li>
+        </ul>
+      </section>
 
-    <section id="a9" class="card">
-      <h2>第9条（準拠法）</h2>
-      <p>本規約は日本法に基づき解釈されます。</p>
-    </section>
+      <section id="a4" class="card">
+        <h2>第4条（取引の責任）</h2>
+        <p>
+          利用者間の取引は当事者間の責任において行うものとし、
+          当サービスは取引の安全性、合法性、品質を保証するものではありません。
+        </p>
+      </section>
 
-    <section id="a10" class="card">
-      <h2>第10条（運営者情報）</h2>
-      <p>運営者：Haejin Kishishita</p>
-      <p>お問い合わせ：ainazmum2624@gmail.com</p>
-      <p>制定日：2026年2月21日</p>
-    </section>
+      <section id="a5" class="card">
+        <h2>第5条（連絡先の開示）</h2>
+        <p>
+          当サービスでは、交換が成立した場合に限り、
+          取引当事者間で連絡を行う目的でメールアドレスが表示されます。
+        </p>
+        <p>この情報は取引目的以外に使用してはなりません。</p>
+      </section>
 
-    <footer>
-      <div>© 2026 Mottainai Babe. All rights reserved.</div>
-      <div class="links">
-        <a href="./index.html">ホーム</a>
-        <a href="./guide.html">ガイド</a>
-        <a href="./privacy.html">プライバシーポリシー</a>
-        <a href="./about.html">お問い合わせ</a>
-      </div>
-    </footer>
+      <section id="a6" class="card">
+        <h2>第6条（古物営業法に関する事項）</h2>
+        <p>
+          当サービスは、物品の売買の当事者ではなく、
+          利用者間の取引の場を提供するのみであり、
+          古物営業法に基づく古物営業には該当しません。
+        </p>
+        <p>
+          ただし、利用者が反復継続して販売を行う場合、
+          古物商許可が必要になる場合があります。
+        </p>
+      </section>
+
+      <section id="a7" class="card">
+        <h2>第7条（免責事項）</h2>
+        <p>当サービスは以下について一切の責任を負いません。</p>
+        <ul>
+          <li>利用者間のトラブル</li>
+          <li>物品の品質、安全性</li>
+          <li>損害、損失</li>
+        </ul>
+      </section>
+
+      <section id="a8" class="card">
+        <h2>第8条（サービスの変更・停止）</h2>
+        <p>当サービスは、事前の通知なく変更または停止することがあります。</p>
+      </section>
+
+      <section id="a9" class="card">
+        <h2>第9条（準拠法）</h2>
+        <p>本規約は日本法に基づき解釈されます。</p>
+      </section>
+
+      <section id="a10" class="card">
+        <h2>第10条（運営者情報）</h2>
+        <p>運営者：Haejin Kishishita</p>
+        <p>お問い合わせ：ainazmum2624@gmail.com</p>
+        <p>制定日：2026年2月21日</p>
+      </section>
+
+      <footer>
+        <div>© 2026 Mottainai Babe. All rights reserved.</div>
+        <div class="links">
+          <a href="./index.html">ホーム</a>
+          <a href="./guide.html">ガイド</a>
+          <a href="./privacy.html">プライバシーポリシー</a>
+          <a href="./about.html">お問い合わせ</a>
+        </div>
+      </footer>
+    </div>
   </main>
 
   <script>
-    // hamburger menu toggle + overlay
     const menuBtn = document.getElementById("menuBtn");
-    const menu = document.getElementById("menu");
+    const menuPanel = document.getElementById("menuPanel");
     const menuOverlay = document.getElementById("menuOverlay");
 
+    function openMenu(){
+      menuPanel.classList.add("open");
+      menuOverlay.classList.add("open");
+      menuBtn.setAttribute("aria-expanded","true");
+    }
     function closeMenu(){
-      menu.classList.remove("open");
+      menuPanel.classList.remove("open");
       menuOverlay.classList.remove("open");
       menuBtn.setAttribute("aria-expanded","false");
     }
     function toggleMenu(){
-      const open = menu.classList.toggle("open");
-      menuOverlay.classList.toggle("open");
-      menuBtn.setAttribute("aria-expanded", String(open));
+      const isOpen = menuPanel.classList.contains("open");
+      isOpen ? closeMenu() : openMenu();
     }
 
     menuBtn.addEventListener("click", (e) => {
@@ -551,13 +516,10 @@
     });
 
     menuOverlay.addEventListener("click", closeMenu);
-    document.addEventListener("click", () => closeMenu());
-    window.addEventListener("scroll", () => closeMenu(), { passive:true });
-
-    // Esc to close
-    window.addEventListener("keydown", (e) => {
+    document.addEventListener("keydown", (e) => {
       if(e.key === "Escape") closeMenu();
     });
+    window.addEventListener("scroll", closeMenu, { passive:true });
   </script>
 </body>
 </html>
