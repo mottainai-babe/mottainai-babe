@@ -1,70 +1,359 @@
-<h1>ベビー用品を安全にリユースする方法</h1>
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ベビー用品を安全にリユースする方法 | Mottainai Babe</title>
+  <meta name="description" content="ベビー用品を安全にリユースするためのチェックポイント、洗浄・消毒、保管、受け渡しのコツをまとめました。" />
 
-<p>
-ベビー用品は使用期間が短いものが多く、数ヶ月から1年ほどで
-使われなくなるケースも少なくありません。
-しかし、正しく管理されていれば多くのアイテムは
-次のご家庭でも十分に活用することができます。
-</p>
+  <!-- AdSense (승인/검증용: 모든 페이지 head에 1번씩 있으면 가장 안전) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5865479939175622" crossorigin="anonymous"></script>
 
-<p>
-リユースは家計の負担を軽減するだけでなく、
-廃棄物削減や環境保護にもつながる大切な取り組みです。
-ただし、赤ちゃんが使用するものだからこそ、
-安全性の確認は欠かせません。
-ここでは、安心してベビー用品をリユースするための
-具体的なポイントをご紹介します。
-</p>
+  <style>
+    :root{
+      --bg:#0f3b34;
+      --paper:#ffffff;
+      --ink:#111827;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --soft:#f5f7f7;
+      --accent:#16a34a;
+      --warn:#f59e0b;
+      --danger:#ef4444;
+      --radius:18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.10);
+      --w: 760px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", "Segoe UI", Roboto, Arial;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 600px at 20% 0%, rgba(22,163,74,.22), transparent 55%),
+        radial-gradient(900px 500px at 100% 10%, rgba(245,158,11,.18), transparent 55%),
+        linear-gradient(180deg, #0b2c27 0%, #0f3b34 40%, #f3f4f6 40%, #f3f4f6 100%);
+      min-height:100vh;
+    }
+    a{color:inherit}
+    .topbar{
+      position:sticky; top:0;
+      backdrop-filter: blur(10px);
+      background: rgba(15,59,52,.72);
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      z-index:10;
+    }
+    .topbar .inner{
+      max-width: var(--w);
+      margin: 0 auto;
+      padding: 14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      color:#fff;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(22,163,74,.18);
+    }
+    .brand strong{letter-spacing:.2px}
+    .nav a{
+      text-decoration:none;
+      opacity:.9;
+      padding:8px 10px;
+      border-radius:999px;
+    }
+    .nav a:hover{background: rgba(255,255,255,.10)}
+    .wrap{
+      max-width: var(--w);
+      margin: 0 auto;
+      padding: 26px 18px 56px;
+    }
+    .hero{
+      color:#fff;
+      padding: 26px 0 10px;
+    }
+    .kicker{
+      display:inline-flex;
+      gap:8px; align-items:center;
+      font-size:12px;
+      opacity:.92;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.16);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+    h1{
+      margin: 14px 0 10px;
+      font-size: 30px;
+      line-height: 1.2;
+      letter-spacing: -.3px;
+    }
+    .lead{
+      margin:0;
+      max-width: 58ch;
+      color: rgba(255,255,255,.88);
+      line-height:1.7;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:16px;
+      margin-top: 18px;
+    }
+    @media (max-width: 860px){
+      .grid{grid-template-columns:1fr}
+    }
+    .card{
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card .hd{
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .card .hd h2{
+      margin:0;
+      font-size:16px;
+    }
+    .pill{
+      font-size:12px;
+      color: var(--muted);
+      padding: 6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: #fff;
+      white-space: nowrap;
+    }
+    .card .bd{padding: 16px 18px}
+    .checklist{
+      list-style:none;
+      margin:0;
+      padding:0;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .checklist li{
+      display:flex;
+      gap:10px;
+      padding: 12px 12px;
+      border:1px solid var(--line);
+      background: var(--soft);
+      border-radius: 14px;
+      line-height:1.6;
+    }
+    .check{
+      width:22px;height:22px;border-radius:8px;
+      background: rgba(22,163,74,.12);
+      border:1px solid rgba(22,163,74,.30);
+      display:grid; place-items:center;
+      flex:0 0 auto;
+      margin-top:2px;
+    }
+    .check:before{
+      content:"✓";
+      color: var(--accent);
+      font-weight:800;
+      font-size:13px;
+    }
+    .muted{color:var(--muted)}
+    .steps{
+      margin:0;
+      padding-left: 18px;
+      line-height:1.8;
+    }
+    .note{
+      border-radius: 16px;
+      border: 1px dashed rgba(22,163,74,.40);
+      background: rgba(22,163,74,.08);
+      padding: 14px 14px;
+      line-height:1.7;
+      color:#0b2c27;
+    }
+    .callouts{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top: 12px;
+    }
+    @media (max-width: 860px){
+      .callouts{grid-template-columns:1fr}
+    }
+    .callout{
+      padding: 14px 14px;
+      border-radius: 16px;
+      border:1px solid var(--line);
+      background: #fff;
+    }
+    .callout b{display:block;margin-bottom:6px}
+    .warn{
+      border-color: rgba(245,158,11,.35);
+      background: rgba(245,158,11,.08);
+    }
+    .danger{
+      border-color: rgba(239,68,68,.30);
+      background: rgba(239,68,68,.06);
+    }
+    .footer{
+      margin-top: 18px;
+      color: rgba(17,24,39,.88);
+      text-align:center;
+      font-size: 12px;
+      opacity:.95;
+    }
+    .footer a{color:inherit}
+    .footer .links{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin: 10px 0 0;
+    }
+    .btnrow{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top: 14px;
+    }
+    .btn{
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.22);
+      color:#fff;
+      background: rgba(255,255,255,.10);
+    }
+    .btn:hover{background: rgba(255,255,255,.16)}
+  </style>
+</head>
 
-<h2>チェックポイント</h2>
+<body>
+  <header class="topbar">
+    <div class="inner">
+      <a class="brand" href="./index.html">
+        <span class="dot"></span>
+        <strong>Mottainai Babe</strong>
+      </a>
+      <nav class="nav">
+        <a href="./app.html">アプリ</a>
+        <a href="./about.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
 
-<p>
-購入・譲渡の前に、以下の項目を必ず確認しましょう。
-</p>
+  <main class="wrap">
+    <section class="hero">
+      <span class="kicker">Guide • リユースを安心に</span>
+      <h1>ベビー用品を安全にリユースする方法</h1>
+      <p class="lead">
+        ベビー用品は短期間しか使わないものが多く、状態が良いまま手放されることが少なくありません。
+        でも「安全」と「清潔」を守るためには、いくつかの確認ポイントがあります。
+        ここでは、購入前チェックから洗浄・消毒、保管、受け渡しまでを一気にまとめます。
+      </p>
+      <div class="btnrow">
+        <a class="btn" href="./index.html">← トップに戻る</a>
+        <a class="btn" href="./safety.html">次：安全な選び方 →</a>
+      </div>
+    </section>
 
-<ul>
-<li><strong>使用年数の確認：</strong> プラスチック製品やチャイルドシートなどは経年劣化が起こる場合があります。製造年や購入時期を確認しましょう。</li>
-<li><strong>リコール情報の確認：</strong> 消費者庁やメーカー公式サイトでリコール対象商品になっていないか確認することが重要です。</li>
-<li><strong>破損や部品不足のチェック：</strong> ネジやベルト、固定パーツなどが揃っているか必ず確認してください。</li>
-<li><strong>衛生状態の確認：</strong> カビや汚れ、異臭がないかをチェックし、必要に応じて洗浄・消毒を行いましょう。</li>
-</ul>
+    <section class="grid">
+      <article class="card">
+        <div class="hd">
+          <h2>チェックポイント（購入前・受け取り前）</h2>
+          <span class="pill">迷ったら「不明＝避ける」</span>
+        </div>
+        <div class="bd">
+          <ul class="checklist">
+            <li><span class="check"></span><div><b>使用年数の確認</b><span class="muted">チャイルドシートや哺乳瓶など、素材の劣化が安全性に直結します。いつ頃購入されたかを必ず聞きましょう。</span></div></li>
+            <li><span class="check"></span><div><b>リコール情報の確認</b><span class="muted">メーカー名・型番が分かればリコール対象か調べられます。型番が見えないものは慎重に。</span></div></li>
+            <li><span class="check"></span><div><b>破損・欠品の確認</b><span class="muted">留め具、ベルト、ネジ、取説、付属パーツ。欠品があると正しく使えず危険なケースがあります。</span></div></li>
+            <li><span class="check"></span><div><b>ニオイ・カビ・変色</b><span class="muted">保管環境のサインです。布製品はカビの再発が起きやすいので注意。</span></div></li>
+          </ul>
 
-<h2>洗浄・消毒の方法</h2>
+          <div class="callouts">
+            <div class="callout warn">
+              <b>注意：安全に関わる用品</b>
+              チャイルドシート／ベビーカー／抱っこ紐／ベビーベッドなどは、
+              “見た目が綺麗”でも内部劣化があり得ます。履歴が分からない場合は避けるのが安全です。
+            </div>
+            <div class="callout danger">
+              <b>NGの目安</b>
+              強い割れ・ひび／ベルトの毛羽立ち／留め具の違和感／
+              消えないカビ臭／喫煙環境の強い臭い は基本的に見送り推奨です。
+            </div>
+          </div>
+        </div>
+      </article>
 
-<p>
-布製品は洗濯表示を確認し、可能であれば高温洗浄を行います。
-プラスチックや金属部分は中性洗剤で洗浄後、
-アルコールやベビー用品専用消毒剤で拭き取りましょう。
-ただし、強い薬剤は素材を傷める可能性があるため注意が必要です。
-</p>
+      <aside class="card">
+        <div class="hd">
+          <h2>洗浄・消毒の基本</h2>
+          <span class="pill">やりすぎより「適切」</span>
+        </div>
+        <div class="bd">
+          <ol class="steps">
+            <li><b>素材を確認</b>：熱に弱いプラスチック、コーティング布などは高温NG。</li>
+            <li><b>中性洗剤で洗浄</b>：まず汚れを落とす（消毒より先）。</li>
+            <li><b>乾燥を徹底</b>：湿気が残るとカビの原因に。</li>
+            <li><b>必要な範囲で消毒</b>：哺乳瓶・口に入るもの中心に。</li>
+          </ol>
 
-<p>
-ぬいぐるみや布団類は天日干しを行い、
-しっかり乾燥させることで雑菌の繁殖を防ぎます。
-湿気対策も安全確保の重要なポイントです。
-</p>
+          <div class="note" style="margin-top:12px;">
+            <b>ポイント</b><br/>
+            「洗浄→乾燥→（必要なら）消毒」の順番が大事です。<br/>
+            消毒だけして汚れが残っていると、逆に不衛生になる場合があります。
+          </div>
 
-<h2>保管方法</h2>
+          <div style="margin-top:12px;" class="muted">
+            ※本ガイドは一般的な目安です。医療的な判断や製品仕様は各メーカーの取扱説明書を優先してください。
+          </div>
+        </div>
+      </aside>
+    </section>
 
-<p>
-リユース前の保管は、湿気の少ない風通しの良い場所を選びましょう。
-直射日光は素材の劣化を早めるため避けることが大切です。
-防虫剤を使用する場合は赤ちゃんに影響の少ないものを選び、
-十分に換気を行いましょう。
-</p>
+    <section class="card" style="margin-top:16px;">
+      <div class="hd">
+        <h2>保管方法（長持ち・におい・カビ対策）</h2>
+        <span class="pill">湿気＝最大の敵</span>
+      </div>
+      <div class="bd">
+        <p style="margin-top:0;line-height:1.8;">
+          ベビー用品は「買う前」よりも「保管」で状態が大きく変わります。
+          特に布製品・樹脂製品は、湿気と直射日光で劣化が進みやすいので注意しましょう。
+        </p>
 
-<h2>安全にリユースするために</h2>
+        <ul class="checklist">
+          <li><span class="check"></span><div><b>湿気の少ない場所で保管</b><span class="muted">押し入れの奥は湿気がこもりやすいので、除湿剤＋通気を。</span></div></li>
+          <li><span class="check"></span><div><b>直射日光を避ける</b><span class="muted">樹脂の黄ばみや布の色あせ、劣化の原因になります。</span></div></li>
+          <li><span class="check"></span><div><b>密閉しすぎない</b><span class="muted">完全密閉は湿気が逃げにくいことも。乾燥後に収納し、時々空気を入れ替えると◎。</span></div></li>
+          <li><span class="check"></span><div><b>ラベルを付ける</b><span class="muted">購入時期・使用期間・注意点をメモしておくと、次の人が安心して使えます。</span></div></li>
+        </ul>
+      </div>
+    </section>
 
-<p>
-ベビー用品は「安さ」だけで選ぶのではなく、
-安全性と信頼性を重視することが最も重要です。
-出品者・譲渡者との丁寧なコミュニケーションも
-安心につながります。
-</p>
-
-<p>
-Mottainai Babeでは、まだ使えるベビー用品を
-次の家族へつなぐことを目的とし、
-安全でやさしい循環を広げる取り組みを大切にしています。
-正しい知識を持ち、安心してリユースを実践しましょう。
-</p>
+    <footer class="footer">
+      <div>© 2026 Mottainai Babe. All rights reserved.</div>
+      <div class="links">
+        <a href="./terms.html">利用規約</a>
+        <a href="./privacy.html">プライバシーポリシー</a>
+        <a href="./about.html">お問い合わせ</a>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
