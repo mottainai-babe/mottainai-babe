@@ -3,35 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>エコの考え方 | Mottainai Babe</title>
-  <meta name="description" content="ベビー用品のリユースが家計と環境に与えるメリット、気持ちよく循環させるコツとマナーをまとめました。" />
+  <title>エコの考え方｜もったいないベビー</title>
+  <meta name="description" content="リユースが家計と地球にやさしい理由。もったいないベビーのエコの考え方をまとめました。" />
 
-  <!-- AdSense (site ownership / Auto ads) -->
+  <!-- AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5865479939175622"
     crossorigin="anonymous"></script>
 
   <style>
     :root{
-      /* indexと統一 */
-      --bg:#377649;
-      --bg-dark:#2e633d;
-      --bg-darker:#1f4b2e;
-
-      --paper:#ffffff;
-      --soft:#f3f4f6;
-
-      --ink:#111827;
-      --muted:#6b7280;
+      --brand:#377649;
+      --page:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
       --line:#e5e7eb;
-
-      --white:#ffffff;
-      --white-80: rgba(255,255,255,.85);
-      --white-65: rgba(255,255,255,.65);
-
-      --radius:20px;
-      --shadow: 0 18px 40px rgba(0,0,0,.12);
-      --w: 940px;
-      --content: 820px;
+      --pill:#eef7f1;
+      --radius:22px;
+      --shadowSoft:0 10px 26px rgba(2,6,23,.06);
+      --w:980px;
+      --content:860px;
     }
 
     *{box-sizing:border-box}
@@ -39,28 +29,25 @@
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", "Segoe UI", Roboto, Arial;
-      color:var(--ink);
-      background:
-        radial-gradient(1200px 600px at 20% 0%, rgba(255,255,255,.08), transparent 55%),
-        radial-gradient(900px 500px at 100% 10%, rgba(0,0,0,.12), transparent 55%),
-        linear-gradient(180deg, var(--bg-darker) 0%, var(--bg) 46%, var(--soft) 46%, var(--soft) 100%);
-      min-height:100vh;
+      background:#f6f7f7;
+      color:var(--text);
     }
     a{color:inherit;text-decoration:none}
+    a:hover{text-decoration:underline;}
 
-    /* Topbar */
+    /* ===== Header ===== */
     .topbar{
-      position:sticky; top:0;
-      z-index:50;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      background: rgba(55,118,73,.66);
-      border-bottom: 1px solid rgba(255,255,255,.16);
+      position:sticky;
+      top:0;
+      z-index:60;
+      background:rgba(55,118,73,.94);
+      backdrop-filter:blur(6px);
+      border-bottom:1px solid rgba(255,255,255,.16);
     }
     .topbar .inner{
-      max-width: var(--w);
-      margin: 0 auto;
-      padding: 12px 18px;
+      max-width:var(--w);
+      margin:0 auto;
+      padding:14px 16px;
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -70,381 +57,316 @@
       display:flex;
       align-items:center;
       gap:12px;
-      min-width: 220px;
+      color:#fff;
+      min-width:0;
     }
-    .brandMark{
-      width:40px;height:40px;
-      border-radius: 14px;
-      background: rgba(255,255,255,.10);
-      border: 1px solid rgba(255,255,255,.18);
-      display:grid;
-      place-items:center;
+    .logoWrap{
+      width:68px;
+      height:68px;
+      border-radius:18px;
+      background:var(--brand);
+      border:1px solid rgba(255,255,255,.22);
+      display:flex;
+      align-items:center;
+      justify-content:center;
       overflow:hidden;
-      box-shadow: 0 10px 22px rgba(0,0,0,.12);
+      box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);
     }
-    .brandMark img{
-      width:34px;height:34px;
+    .logoWrap img{
+      width:58px;
+      height:58px;
       object-fit:contain;
       display:block;
-      filter: drop-shadow(0 6px 10px rgba(0,0,0,.18));
     }
     .brandText{
       display:flex;
       flex-direction:column;
-      line-height:1.1;
-      color:#fff;
+      line-height:1.15;
+      min-width:0;
     }
-    .brandText strong{font-size:15px; letter-spacing:.2px}
-    .brandText span{
-      font-size:12px;
-      color: var(--white-80);
-    }
-    .nav{
-      display:flex;
-      align-items:center;
-      gap:6px;
-    }
-    .nav a{
-      color:#fff;
-      font-size:13px;
-      padding:9px 12px;
-      border-radius:999px;
-      border:1px solid transparent;
-      opacity:.92;
+    .brandName{
+      font-weight:900;
+      font-size:17px;
       white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
-    .nav a:hover{
-      background: rgba(255,255,255,.10);
-      border-color: rgba(255,255,255,.14);
-      opacity:1;
+    .brandJp{
+      font-size:11px;
+      font-weight:800;
+      opacity:.9;
+    }
+    .brandDesc{
+      font-size:10px;
+      opacity:.75;
+    }
+    @media (max-width:420px){
+      .brandDesc{display:none;}
     }
 
-    /* Layout */
-    .wrap{
-      max-width: var(--w);
-      margin: 0 auto;
-      padding: 26px 18px 56px;
-    }
-    .hero{
+    .menuBtn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      height:44px;
+      padding:0 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.34);
+      background:rgba(255,255,255,.10);
       color:#fff;
-      padding: 16px 0 14px;
+      font-weight:900;
+      cursor:pointer;
     }
+
+    .hamburger{
+      width:18px;height:12px;position:relative;
+    }
+    .hamburger::before,
+    .hamburger::after,
+    .hamburger span{
+      content:"";
+      position:absolute;
+      left:0;right:0;
+      height:2px;
+      background:#fff;
+      border-radius:2px;
+    }
+    .hamburger::before{top:0;}
+    .hamburger span{top:5px;}
+    .hamburger::after{bottom:0;}
+
+    .menuOverlay{
+      position:fixed;
+      inset:0;
+      background:rgba(2,6,23,.38);
+      opacity:0;
+      pointer-events:none;
+      transition:.18s;
+      z-index:70;
+    }
+    .menuOverlay.open{opacity:1;pointer-events:auto;}
+
+    .menuPanel{
+      position:fixed;
+      top:74px;
+      right:14px;
+      width:min(320px,92vw);
+      background:#fff;
+      border:1px solid rgba(2,6,23,.08);
+      border-radius:18px;
+      box-shadow:0 18px 50px rgba(2,6,23,.22);
+      padding:10px;
+      opacity:0;
+      transform:translateY(-6px);
+      pointer-events:none;
+      transition:.18s;
+      z-index:80;
+    }
+    .menuPanel.open{
+      opacity:1;
+      transform:translateY(0);
+      pointer-events:auto;
+    }
+    .menuPanel a{
+      display:flex;
+      justify-content:flex-end;
+      text-align:right;
+      padding:12px;
+      border-radius:14px;
+      background:#f6f7f7;
+      font-weight:900;
+      margin-bottom:8px;
+    }
+    .menuPanel a:last-child{margin-bottom:0;}
+    .menuPanel a:hover{
+      background:#eef7f1;
+    }
+    .menuPanel small{color:#64748b;font-weight:800;}
+
+    /* ===== Page ===== */
+    main{background:var(--page);}
+    .wrap{
+      max-width:var(--w);
+      margin:0 auto;
+      padding:26px 16px 64px;
+    }
+
     .kicker{
       display:inline-flex;
-      gap:8px; align-items:center;
-      font-size:12px;
-      color: var(--white-80);
-      background: rgba(255,255,255,.10);
-      border: 1px solid rgba(255,255,255,.16);
-      padding: 7px 12px;
-      border-radius: 999px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:var(--pill);
+      border:1px solid rgba(55,118,73,.22);
+      font-size:13px;
+      font-weight:900;
+      color:#1b4332;
     }
     h1{
-      margin: 14px 0 8px;
-      font-size: 32px;
-      line-height: 1.15;
-      letter-spacing: -.4px;
+      margin:16px 0 10px;
+      font-size:34px;
+      letter-spacing:-.02em;
+      color:#0b1f16;
     }
     .lead{
-      margin:0;
-      max-width: 76ch;
-      color: var(--white-80);
-      line-height:1.75;
+      color:var(--muted);
+      line-height:1.9;
+      font-size:15px;
+      max-width:78ch;
     }
 
-    /* Article Card */
     .paper{
-      max-width: var(--content);
-      background: rgba(255,255,255,.94);
-      border: 1px solid rgba(255,255,255,.70);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 22px 20px;
-      margin-top: 18px;
-      position:relative;
-      overflow:hidden;
+      max-width:var(--content);
+      margin-top:18px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadowSoft);
+      padding:20px 18px;
     }
-    .paper::before{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        radial-gradient(680px 260px at 15% 0%, rgba(55,118,73,.14), transparent 55%),
-        radial-gradient(420px 220px at 110% 10%, rgba(0,0,0,.06), transparent 55%);
-      pointer-events:none;
-    }
-    .paper > *{position:relative}
 
     .section{
-      margin: 0 0 18px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid rgba(17,24,39,.10);
+      margin-bottom:18px;
+      padding-bottom:18px;
+      border-bottom:1px solid var(--line);
     }
-    .section:last-child{border-bottom:none;padding-bottom:0;margin-bottom:0}
+    .section:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
 
     h2{
-      margin: 0 0 10px;
-      font-size: 18px;
-      letter-spacing: -.2px;
+      font-size:20px;
+      margin-bottom:10px;
+      color:#0b1f16;
     }
     p{
-      margin: 0 0 12px;
-      line-height: 1.9;
-      color: rgba(17,24,39,.92);
+      color:var(--muted);
+      line-height:1.95;
+      font-size:15px;
+      margin-bottom:12px;
     }
-    .list{
-      margin: 10px 0 0;
-      padding: 0;
-      list-style: none;
-      display:grid;
-      gap:10px;
-    }
-    .list li{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-      padding: 12px 12px;
-      border: 1px solid rgba(17,24,39,.10);
-      border-radius: 14px;
-      background: rgba(255,255,255,.70);
-    }
-    .badge{
-      flex: 0 0 auto;
-      font-size: 12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(55,118,73,.12);
-      color: var(--bg-darker);
-      border: 1px solid rgba(55,118,73,.18);
-      margin-top: 1px;
-      white-space:nowrap;
-    }
-    .muted{color: rgba(17,24,39,.72)}
-    .tip{
-      margin-top: 10px;
-      padding: 14px 14px;
-      border-radius: 16px;
-      background: rgba(55,118,73,.10);
-      border: 1px solid rgba(55,118,73,.16);
-      color: rgba(17,24,39,.88);
-      line-height: 1.85;
+
+    .highlight{
+      background:var(--pill);
+      border:1px solid rgba(55,118,73,.22);
+      padding:14px;
+      border-radius:18px;
+      color:#1b4332;
+      font-size:14px;
+      line-height:1.9;
     }
 
     .actionsRow{
-      max-width: var(--content);
-      margin-top: 14px;
+      max-width:var(--content);
+      margin-top:14px;
       display:flex;
       gap:10px;
       flex-wrap:wrap;
     }
     .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding: 10px 16px;
+      padding:10px 16px;
       border-radius:999px;
-      border:none;
-      background: var(--bg);
+      font-weight:900;
+      border:1px solid rgba(55,118,73,.22);
+      background:#f6fbf7;
+      color:#1b4332;
+      text-decoration:none;
+    }
+    .btn:hover{background:#eef7f1;}
+    .btnPrimary{
+      background:var(--brand);
       color:#fff;
-      font-weight:600;
-      letter-spacing:.1px;
-      box-shadow: 0 10px 18px rgba(55,118,73,.22);
-      transition: .2s ease;
+      border-color:rgba(55,118,73,.35);
     }
-    .btn:hover{background: var(--bg-dark); transform: translateY(-1px)}
-    .btnGhost{
-      background: rgba(255,255,255,.88);
-      color: rgba(17,24,39,.92);
-      border: 1px solid rgba(17,24,39,.10);
-      box-shadow: none;
-    }
-    .btnGhost:hover{filter: brightness(.98); transform:none}
 
-    /* Footer */
-    .footer{
-      margin-top: 18px;
+    footer{
+      margin-top:26px;
+      padding-top:16px;
+      border-top:1px solid var(--line);
+      font-size:12px;
       text-align:center;
-      font-size: 12px;
-      color: rgba(17,24,39,.80);
+      color:#64748b;
     }
-    .footer .links{
+    footer .links{
+      margin-top:8px;
       display:flex;
-      gap:12px;
       justify-content:center;
+      gap:10px;
       flex-wrap:wrap;
-      margin: 10px 0 0;
-    }
-    .footer .links a{
-      color: rgba(17,24,39,.78);
-      padding: 6px 8px;
-      border-radius: 10px;
-    }
-    .footer .links a:hover{
-      background: rgba(55,118,73,.10);
-      color: rgba(17,24,39,.92);
     }
   </style>
 </head>
 
 <body>
-  <header class="topbar">
-    <div class="inner">
-      <a class="brand" href="./index.html" aria-label="Mottainai Babe トップへ">
-        <span class="brandMark" aria-hidden="true">
-          <img src="./logo1.png" alt="" />
-        </span>
-        <span class="brandText">
-          <strong>Mottainai Babe</strong>
-          <span>リユースでつなぐ、やさしい循環</span>
-        </span>
-      </a>
 
-      <nav class="nav" aria-label="ナビゲーション">
-        <a href="./guide.html">ガイド</a>
-        <a href="./app.html">アプリ</a>
-        <a href="./about.html">お問い合わせ</a>
-      </nav>
-    </div>
-  </header>
+<header class="topbar">
+  <div class="inner">
+    <a class="brand" href="./index.html">
+      <span class="logoWrap"><img src="./logo1.png" alt=""></span>
+      <span class="brandText">
+        <span class="brandName">Mottainai Babe</span>
+        <span class="brandJp">もったいないベビー</span>
+        <span class="brandDesc">ベビー用品交換プラットフォーム</span>
+      </span>
+    </a>
 
-  <main class="wrap">
-    <section class="hero">
-      <span class="kicker">Guide • Eco</span>
-      <h1>リユースと環境への影響</h1>
-      <p class="lead">
-        使えるものを次の人へつなぐだけで、家計にも地球にもやさしい循環が生まれます。
-        このページでは、リユースの価値と、気持ちよく続けるためのコツをまとめます。
-      </p>
-    </section>
+    <button id="menuBtn" class="menuBtn">
+      <span class="hamburger"><span></span></span>
+      メニュー
+    </button>
+  </div>
+</header>
 
-    <article class="paper" aria-label="エコガイド本文">
+<div id="menuOverlay" class="menuOverlay"></div>
+<nav id="menuPanel" class="menuPanel">
+  <a href="./app.html">アプリ <small>出品・閲覧</small></a>
+  <a href="./guide.html">ガイド <small>読みもの</small></a>
+  <a href="./about.html">お問い合わせ <small>連絡</small></a>
+</nav>
+
+<main>
+  <div class="wrap">
+    <span class="kicker">Guide • Eco</span>
+    <h1>リユースがやさしい理由</h1>
+    <p class="lead">
+      ベビー用品は使用期間が短いからこそ、次の家庭へつなぐことで大きな価値が生まれます。
+      「もったいない」という気持ちは、家計にも地球にもやさしい選択です。
+    </p>
+
+    <article class="paper">
       <section class="section">
-        <h2>なぜリユースが「エコ」なのか</h2>
+        <h2>なぜリユースがエコなのか？</h2>
         <p>
-          ベビー用品は成長に合わせて買い替えが多く、短期間で使わなくなるものがたくさんあります。
-          そのたびに新しく作って・運んで・捨てると、資源やエネルギーの負担が大きくなります。
+          新品を製造するには、原材料・エネルギー・輸送コストが必要です。
+          すでに存在している製品を活用することで、
+          <strong>資源消費とCO₂排出を減らす</strong>ことができます。
         </p>
-        <ul class="list">
-          <li>
-            <span class="badge">資源</span>
-            <div>
-              <p><strong>作る量を減らす</strong>ことで、素材（プラスチック・金属・布）の消費を抑えられます。</p>
-              <p class="muted">“必要な分だけ”の循環は、無理なく続けられるエコです。</p>
-            </div>
-          </li>
-          <li>
-            <span class="badge">輸送</span>
-            <div>
-              <p>新品の物流を減らし、<strong>輸送による負荷</strong>を小さくできます。</p>
-              <p class="muted">近い距離での受け渡しやまとめ配送も、工夫のひとつ。</p>
-            </div>
-          </li>
-          <li>
-            <span class="badge">廃棄</span>
-            <div>
-              <p>捨てる量が減ると、<strong>焼却・埋め立て</strong>の負担も軽くなります。</p>
-              <p class="muted">「まだ使える」状態で循環させることがポイントです。</p>
-            </div>
-          </li>
-        </ul>
       </section>
 
       <section class="section">
-        <h2>家計にもやさしい：リユースの現実的メリット</h2>
+        <h2>家計にもやさしい循環</h2>
         <p>
-          エコは“我慢”ではなく、暮らしの最適化。必要なときに必要なものを、無理なく回すのが続くコツです。
+          子どもの成長は早く、短期間しか使わないものも多くあります。
+          必要な期間だけ使い、次へつなぐことで、
+          無駄な出費を減らしながら価値を循環させられます。
         </p>
-        <ul class="list">
-          <li>
-            <span class="badge">節約</span>
-            <div>
-              <p>使用期間が短いものほど、<strong>新品にこだわらない選択</strong>が効きます。</p>
-              <p class="muted">例：ベビーバス、短期の衣類サイズ、季節アイテム。</p>
-            </div>
-          </li>
-          <li>
-            <span class="badge">空間</span>
-            <div>
-              <p>不要になったら手放すことで、<strong>収納の圧迫</strong>を減らせます。</p>
-              <p class="muted">家の中が整うと、育児のストレスも減りやすいです。</p>
-            </div>
-          </li>
-          <li>
-            <span class="badge">価値</span>
-            <div>
-              <p>状態が良いうちに循環させると、<strong>次の人にとっても価値が高い</strong>まま渡せます。</p>
-              <p class="muted">“もったいない”を“うれしい”に変える感覚。</p>
-            </div>
-          </li>
-        </ul>
       </section>
 
       <section class="section">
-        <h2>やさしい取引マナー（気持ちよく循環させるために）</h2>
+        <h2>気持ちよい取引のために</h2>
         <p>
-          リユースは人と人のやり取り。小さな配慮が、信頼と安心を作ります。
+          丁寧な説明・きれいな状態・思いやりあるやり取りが、
+          やさしい循環を生みます。
         </p>
-        <ul class="list">
-          <li>
-            <span class="badge">説明</span>
-            <div>
-              <p><strong>傷・汚れ・使用感</strong>は正直に。写真と文章で明確に。</p>
-              <p class="muted">隠すより、きちんと伝えた方がトラブルは減ります。</p>
-            </div>
-          </li>
-          <li>
-            <span class="badge">清潔</span>
-            <div>
-              <p>渡す前に、できる範囲で<strong>拭き取り・洗浄</strong>。</p>
-              <p class="muted">新品レベルを目指すより「受け取ってすぐ使える」状態が親切です。</p>
-            </div>
-          </li>
-          <li>
-            <span class="badge">対応</span>
-            <div>
-              <p>メッセージは短くてもOK。<strong>返信の目安</strong>だけ意識すると安心感が出ます。</p>
-              <p class="muted">例：「今日中に返信します」「明日発送予定です」など。</p>
-            </div>
-          </li>
-        </ul>
-
-        <div class="tip">
-          <strong>循環を続けるコツ：</strong>
-          “完璧”より“気持ちよさ”。
-          小さな配慮が積み重なるほど、リユースはもっと心地よい文化になります。
+        <div class="highlight">
+          小さな「ありがとう」が、次の家庭への安心につながります。
         </div>
-      </section>
-
-      <section class="section">
-        <h2>迷ったときの判断基準</h2>
-        <p>
-          何でもリユースが正解ではありません。安全性や衛生面に不安があるものは、無理に循環させない判断も大切です。
-        </p>
-        <ul class="list">
-          <li>
-            <span class="badge">安全</span>
-            <div>
-              <p>命に関わる製品は、<strong>状態確認が難しいなら避ける</strong>。</p>
-              <p class="muted">例：強い衝撃歴が不明なチャイルドシートなど。</p>
-            </div>
-          </li>
-          <li>
-            <span class="badge">衛生</span>
-            <div>
-              <p>洗えない・劣化しやすいものは、<strong>状態と素材</strong>を優先。</p>
-              <p class="muted">迷ったら「次の人が安心して使えるか」を基準に。</p>
-            </div>
-          </li>
-        </ul>
       </section>
     </article>
 
     <div class="actionsRow">
-      <a class="btn btnGhost" href="./guide.html">← ガイド一覧へ</a>
-      <a class="btn" href="./safety.html">前：安全ガイド →</a>
+      <a class="btn" href="./guide.html">← ガイド一覧へ</a>
+      <a class="btn btnPrimary" href="./safety.html">安全ガイドへ →</a>
     </div>
 
-    <footer class="footer">
+    <footer>
       <div>© 2026 Mottainai Babe. All rights reserved.</div>
       <div class="links">
         <a href="./terms.html">利用規約</a>
@@ -452,6 +374,21 @@
         <a href="./about.html">お問い合わせ</a>
       </div>
     </footer>
-  </main>
+  </div>
+</main>
+
+<script>
+const menuBtn=document.getElementById("menuBtn");
+const menuPanel=document.getElementById("menuPanel");
+const menuOverlay=document.getElementById("menuOverlay");
+
+function toggleMenu(){
+  menuPanel.classList.toggle("open");
+  menuOverlay.classList.toggle("open");
+}
+menuBtn.addEventListener("click",toggleMenu);
+menuOverlay.addEventListener("click",toggleMenu);
+</script>
+
 </body>
 </html>
