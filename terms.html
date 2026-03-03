@@ -1,173 +1,340 @@
 <!doctype html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<title>利用規約｜もったいないベビー</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<style>
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-max-width:800px;margin:auto;padding:20px;line-height:1.8;color:#111;}
-h1,h2{margin-top:28px}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>利用規約｜Mottainai Babe</title>
+  <meta name="description" content="もったいないベビー（Mottainai Babe）の利用規約です。" />
+
+  <!-- AdSense (심사/수익화용: 페이지마다 넣는 걸 추천) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5865479939175622"
+    crossorigin="anonymous"></script>
+
+  <style>
+    :root{
+      --bg:#377649;
+      --white:#ffffff;
+      --white-80: rgba(255,255,255,.8);
+      --white-65: rgba(255,255,255,.65);
+      --stroke: rgba(255,255,255,.55);
+      --card: rgba(255,255,255,.10);
+      --card2: rgba(255,255,255,.14);
+      --radius: 18px;
+      --w: 980px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--white);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Hiragino Sans","Noto Sans JP", "Segoe UI", Roboto, Arial;
+      min-height:100vh;
+    }
+    a{color:var(--white); text-decoration:none}
+    a:hover{ text-decoration:underline }
+
+    /* ===== Top Header (same tone) ===== */
+    .top{
+      padding:22px 0 10px;
+    }
+    .topInner{
+      width:min(var(--w), 92vw);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+    .brand img{
+      width:46px; height:46px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.25);
+      background:rgba(255,255,255,.08);
+      padding:6px;
+      object-fit:contain;
+    }
+    .brandText{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      min-width:0;
+    }
+    .brandName{
+      font-weight:900;
+      letter-spacing:.01em;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .brandSub{
+      font-size:12px;
+      color:var(--white-80);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .nav{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.25);
+      background:rgba(255,255,255,.08);
+      color:var(--white-80);
+      font-weight:800;
+      font-size:13px;
+      text-decoration:none;
+    }
+    .nav a:hover{
+      background:rgba(255,255,255,.14);
+      color:var(--white);
+      text-decoration:none;
+    }
+
+    /* ===== Main ===== */
+    .wrap{
+      width:min(var(--w), 92vw);
+      margin:0 auto;
+      padding:14px 0 46px;
+    }
+    .hero{
+      margin-top:10px;
+      text-align:center;
+      padding:18px 0 6px;
+    }
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.25);
+      background:rgba(255,255,255,.08);
+      color:var(--white-80);
+      font-size:12px;
+      font-weight:800;
+    }
+    h1{
+      margin:14px 0 8px;
+      font-size:26px;
+      letter-spacing:-.02em;
+    }
+    .lead{
+      margin:0 auto;
+      max-width: 70ch;
+      color:var(--white-80);
+      line-height:1.75;
+      font-size:13px;
+    }
+
+    .card{
+      margin:18px auto 0;
+      max-width: 900px;
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.18);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.07));
+      padding: 18px;
+    }
+
+    .section{
+      padding:14px 14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.06);
+      margin:12px 0;
+    }
+    h2{
+      margin:0 0 8px;
+      font-size:16px;
+      letter-spacing:-.01em;
+    }
+    p{
+      margin:0 0 10px;
+      color:var(--white-80);
+      line-height:1.85;
+      font-size:13px;
+    }
+    ul{
+      margin:8px 0 0 18px;
+      padding:0;
+      color:var(--white-80);
+      line-height:1.85;
+      font-size:13px;
+    }
+    li{ margin:4px 0; }
+
+    .meta{
+      display:grid;
+      gap:10px;
+      margin-top:12px;
+      padding-top:14px;
+      border-top:1px solid rgba(255,255,255,.14);
+      color:var(--white-80);
+      font-size:13px;
+      line-height:1.8;
+    }
+    .meta b{ color: var(--white); }
+
+    /* ===== Footer ===== */
+    .footer{
+      margin-top:28px;
+      padding-top:18px;
+      border-top:1px solid rgba(255,255,255,.14);
+      color:var(--white-65);
+      font-size:12px;
+      line-height:1.6;
+      text-align:center;
+    }
+    .footer a{color:var(--white-80)}
+    .footer a:hover{text-decoration:underline}
+
+    @media (max-width:520px){
+      .topInner{ align-items:flex-start; }
+      .brand img{ width:42px; height:42px; }
+      h1{ font-size:22px; }
+      .card{ padding:14px; }
+      .section{ padding:12px; }
+    }
+  </style>
 </head>
+
 <body>
-
-<h1>もったいないベビー 利用規約</h1>
-
-<p>
-本利用規約（以下「本規約」といいます。）は、もったいないベビー（以下「当サービス」といいます。）の利用条件を定めるものです。
-利用者は、本規約に同意のうえ当サービスを利用するものとします。
-</p>
-
-
-<h2>第1条（サービスの内容）</h2>
-
-<p>
-当サービスは、ベビー用品の譲渡および交換の機会を提供するプラットフォームです。
-</p>
-
-<p>
-当サービスは取引の当事者ではなく、取引契約は利用者間で直接成立します。
-</p>
-
-
-<h2>第2条（利用資格）</h2>
-
-<p>
-利用者は、日本の法令に従い自己の責任において当サービスを利用するものとします。
-</p>
-
-
-<h2>第3条（禁止事項）</h2>
-
-<p>利用者は以下の行為を行ってはなりません。</p>
-
-<ul>
-
-<li>法令に違反する行為</li>
-
-<li>盗品、違法品、危険物の出品</li>
-
-<li>虚偽の情報の登録</li>
-
-<li>第三者の権利侵害</li>
-
-<li>営利目的での反復継続した販売行為</li>
-
-<li>その他当サービスが不適切と判断する行為</li>
-
-</ul>
-
-
-<h2>第4条（取引の責任）</h2>
-
-<p>
-
-利用者間の取引は当事者間の責任において行うものとし、
-
-当サービスは取引の安全性、合法性、品質を保証するものではありません。
-
-</p>
-
-
-<h2>第5条（連絡先の開示）</h2>
-
-<p>
-
-当サービスでは、交換が成立した場合に限り、
-
-取引当事者間で連絡を行う目的でメールアドレスが表示されます。
-
-</p>
-
-<p>
-
-この情報は取引目的以外に使用してはなりません。
-
-</p>
-
-
-<h2>第6条（古物営業法に関する事項）</h2>
-
-<p>
-
-当サービスは、物品の売買の当事者ではなく、
-
-利用者間の取引の場を提供するのみであり、
-
-古物営業法に基づく古物営業には該当しません。
-
-</p>
-
-<p>
-
-ただし、利用者が反復継続して販売を行う場合、
-
-古物商許可が必要になる場合があります。
-
-</p>
-
-
-<h2>第7条（免責事項）</h2>
-
-<p>
-
-当サービスは以下について一切の責任を負いません。
-
-</p>
-
-<ul>
-
-<li>利用者間のトラブル</li>
-
-<li>物品の品質、安全性</li>
-
-<li>損害、損失</li>
-
-</ul>
-
-
-<h2>第8条（サービスの変更・停止）</h2>
-
-<p>
-
-当サービスは、事前の通知なく変更または停止することがあります。
-
-</p>
-
-
-<h2>第9条（準拠法）</h2>
-
-<p>
-
-本規約は日本法に基づき解釈されます。
-
-</p>
-
-
-<h2>第10条（運営者情報）</h2>
-
-<p>
-
-運営者：Haejin Kishishita
-
-</p>
-
-<p>
-
-お問い合わせ：
-
-ainazmum2624@gmail.com
-
-</p>
-
-
-<p>
-
-制定日：2026年2月21日
-
-</p>
-
-
+  <header class="top">
+    <div class="topInner">
+      <a class="brand" href="./index.html" aria-label="Mottainai Babe Home">
+        <img src="./logo1.png" alt="Mottainai Babe" />
+        <span class="brandText">
+          <span class="brandName">Mottainai Babe</span>
+          <span class="brandSub">ベビー用品交換プラットフォーム</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="site">
+        <a href="./app.html">アプリ</a>
+        <a href="./guide.html">ガイド</a>
+        <a href="./about.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <span class="kicker">Terms • 利用規約</span>
+      <h1>もったいないベビー 利用規約</h1>
+      <p class="lead">
+        本利用規約（以下「本規約」といいます。）は、もったいないベビー（以下「当サービス」といいます。）の利用条件を定めるものです。
+        利用者は、本規約に同意のうえ当サービスを利用するものとします。
+      </p>
+    </section>
+
+    <div class="card">
+      <div class="section">
+        <h2>第1条（サービスの内容）</h2>
+        <p>当サービスは、ベビー用品の譲渡および交換の機会を提供するプラットフォームです。</p>
+        <p>当サービスは取引の当事者ではなく、取引契約は利用者間で直接成立します。</p>
+      </div>
+
+      <div class="section">
+        <h2>第2条（利用資格）</h2>
+        <p>利用者は、日本の法令に従い自己の責任において当サービスを利用するものとします。</p>
+      </div>
+
+      <div class="section">
+        <h2>第3条（禁止事項）</h2>
+        <p>利用者は以下の行為を行ってはなりません。</p>
+        <ul>
+          <li>法令に違反する行為</li>
+          <li>盗品、違法品、危険物の出品</li>
+          <li>虚偽の情報の登録</li>
+          <li>第三者の権利侵害</li>
+          <li>営利目的での反復継続した販売行為</li>
+          <li>その他当サービスが不適切と判断する行為</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>第4条（取引の責任）</h2>
+        <p>
+          利用者間の取引は当事者間の責任において行うものとし、
+          当サービスは取引の安全性、合法性、品質を保証するものではありません。
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>第5条（連絡先の開示）</h2>
+        <p>
+          当サービスでは、交換が成立した場合に限り、
+          取引当事者間で連絡を行う目的でメールアドレスが表示されます。
+        </p>
+        <p>この情報は取引目的以外に使用してはなりません。</p>
+      </div>
+
+      <div class="section">
+        <h2>第6条（古物営業法に関する事項）</h2>
+        <p>
+          当サービスは、物品の売買の当事者ではなく、
+          利用者間の取引の場を提供するのみであり、
+          古物営業法に基づく古物営業には該当しません。
+        </p>
+        <p>
+          ただし、利用者が反復継続して販売を行う場合、
+          古物商許可が必要になる場合があります。
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>第7条（免責事項）</h2>
+        <p>当サービスは以下について一切の責任を負いません。</p>
+        <ul>
+          <li>利用者間のトラブル</li>
+          <li>物品の品質、安全性</li>
+          <li>損害、損失</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>第8条（サービスの変更・停止）</h2>
+        <p>当サービスは、事前の通知なく変更または停止することがあります。</p>
+      </div>
+
+      <div class="section">
+        <h2>第9条（準拠法）</h2>
+        <p>本規約は日本法に基づき解釈されます。</p>
+      </div>
+
+      <div class="section">
+        <h2>第10条（運営者情報）</h2>
+        <div class="meta">
+          <div><b>運営者：</b>Haejin Kishishita</div>
+          <div><b>お問い合わせ：</b><a href="mailto:ainazmum2624@gmail.com">ainazmum2624@gmail.com</a></div>
+          <div><b>制定日：</b>2026年2月21日</div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div>© 2026 Mottainai Babe. All rights reserved.</div>
+      <div style="margin-top:10px;">
+        <a href="./terms.html">利用規約</a>
+        &nbsp;|&nbsp;
+        <a href="./privacy.html">プライバシーポリシー</a>
+        &nbsp;|&nbsp;
+        <a href="./about.html">お問い合わせ</a>
+      </div>
+    </footer>
+  </main>
 </body>
 </html>
