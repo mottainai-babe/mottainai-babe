@@ -1,71 +1,396 @@
-<h1>安全なベビー用品の選び方ガイド</h1>
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>安全ガイド：安心して使えるベビー用品の選び方 | Mottainai Babe</title>
+  <meta name="description" content="リユースでも安心して使えるベビー用品の選び方。危険サイン、カテゴリ別の注意点、受け渡し時の確認、トラブル防止のポイントをまとめました。" />
 
-<p>
-赤ちゃんが使用するベビー用品は、安全性が最も重要です。
-特にリユース品を選ぶ場合は、価格や見た目だけでなく、
-素材・構造・使用履歴などを総合的に確認する必要があります。
-ここでは、安心してベビー用品を選ぶための具体的なポイントをご紹介します。
-</p>
+  <!-- AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5865479939175622" crossorigin="anonymous"></script>
 
-<h2>年齢・月齢に合った製品を選ぶ</h2>
+  <style>
+    :root{
+      --bg:#0f3b34;
+      --paper:#ffffff;
+      --ink:#111827;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --soft:#f5f7f7;
+      --accent:#16a34a;
+      --warn:#f59e0b;
+      --danger:#ef4444;
+      --radius:18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.10);
+      --w: 760px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", "Segoe UI", Roboto, Arial;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 600px at 20% 0%, rgba(22,163,74,.22), transparent 55%),
+        radial-gradient(900px 500px at 100% 10%, rgba(245,158,11,.18), transparent 55%),
+        linear-gradient(180deg, #0b2c27 0%, #0f3b34 40%, #f3f4f6 40%, #f3f4f6 100%);
+      min-height:100vh;
+    }
+    a{color:inherit}
+    .topbar{
+      position:sticky; top:0;
+      backdrop-filter: blur(10px);
+      background: rgba(15,59,52,.72);
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      z-index:10;
+    }
+    .topbar .inner{
+      max-width: var(--w);
+      margin: 0 auto;
+      padding: 14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      color:#fff;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(22,163,74,.18);
+    }
+    .brand strong{letter-spacing:.2px}
+    .nav a{
+      text-decoration:none;
+      opacity:.9;
+      padding:8px 10px;
+      border-radius:999px;
+    }
+    .nav a:hover{background: rgba(255,255,255,.10)}
+    .wrap{
+      max-width: var(--w);
+      margin: 0 auto;
+      padding: 26px 18px 56px;
+    }
+    .hero{
+      color:#fff;
+      padding: 26px 0 10px;
+    }
+    .kicker{
+      display:inline-flex;
+      gap:8px; align-items:center;
+      font-size:12px;
+      opacity:.92;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.16);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+    h1{
+      margin: 14px 0 10px;
+      font-size: 30px;
+      line-height: 1.2;
+      letter-spacing: -.3px;
+    }
+    .lead{
+      margin:0;
+      max-width: 60ch;
+      color: rgba(255,255,255,.88);
+      line-height:1.7;
+    }
+    .btnrow{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top: 14px;
+    }
+    .btn{
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.22);
+      color:#fff;
+      background: rgba(255,255,255,.10);
+    }
+    .btn:hover{background: rgba(255,255,255,.16)}
 
-<p>
-ベビー用品は月齢や体重に応じて設計されています。
-対象年齢を必ず確認し、現在の発育状況に適しているかをチェックしましょう。
-サイズが合わない製品は事故の原因になることがあります。
-</p>
+    .grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:16px;
+      margin-top: 18px;
+    }
+    @media (max-width: 860px){
+      .grid{grid-template-columns:1fr}
+    }
+    .card{
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card .hd{
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .card .hd h2{
+      margin:0;
+      font-size:16px;
+    }
+    .pill{
+      font-size:12px;
+      color: var(--muted);
+      padding: 6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: #fff;
+      white-space: nowrap;
+    }
+    .card .bd{padding: 16px 18px}
+    .checklist{
+      list-style:none;
+      margin:0;
+      padding:0;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .checklist li{
+      display:flex;
+      gap:10px;
+      padding: 12px 12px;
+      border:1px solid var(--line);
+      background: var(--soft);
+      border-radius: 14px;
+      line-height:1.6;
+    }
+    .check{
+      width:22px;height:22px;border-radius:8px;
+      background: rgba(22,163,74,.12);
+      border:1px solid rgba(22,163,74,.30);
+      display:grid; place-items:center;
+      flex:0 0 auto;
+      margin-top:2px;
+    }
+    .check:before{
+      content:"✓";
+      color: var(--accent);
+      font-weight:800;
+      font-size:13px;
+    }
+    .muted{color:var(--muted)}
+    .callouts{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top: 12px;
+    }
+    @media (max-width: 860px){
+      .callouts{grid-template-columns:1fr}
+    }
+    .callout{
+      padding: 14px 14px;
+      border-radius: 16px;
+      border:1px solid var(--line);
+      background: #fff;
+      line-height:1.7;
+    }
+    .callout b{display:block;margin-bottom:6px}
+    .warn{
+      border-color: rgba(245,158,11,.35);
+      background: rgba(245,158,11,.08);
+    }
+    .danger{
+      border-color: rgba(239,68,68,.30);
+      background: rgba(239,68,68,.06);
+    }
+    .table{
+      width:100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow:hidden;
+      border-radius: 16px;
+      border:1px solid var(--line);
+      background:#fff;
+    }
+    .table th, .table td{
+      text-align:left;
+      padding: 12px 12px;
+      border-bottom:1px solid var(--line);
+      vertical-align:top;
+      line-height:1.6;
+    }
+    .table th{
+      font-size:12px;
+      letter-spacing:.2px;
+      color: var(--muted);
+      background: #fafafa;
+    }
+    .table tr:last-child td{border-bottom:none}
+    .note{
+      border-radius: 16px;
+      border: 1px dashed rgba(22,163,74,.40);
+      background: rgba(22,163,74,.08);
+      padding: 14px 14px;
+      line-height:1.7;
+      color:#0b2c27;
+    }
+    .footer{
+      margin-top: 18px;
+      color: rgba(17,24,39,.88);
+      text-align:center;
+      font-size: 12px;
+      opacity:.95;
+    }
+    .footer a{color:inherit}
+    .footer .links{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin: 10px 0 0;
+    }
+  </style>
+</head>
 
-<h2>リコール情報の確認</h2>
+<body>
+  <header class="topbar">
+    <div class="inner">
+      <a class="brand" href="./index.html">
+        <span class="dot"></span>
+        <strong>Mottainai Babe</strong>
+      </a>
+      <nav class="nav">
+        <a href="./app.html">アプリ</a>
+        <a href="./about.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
 
-<p>
-購入前には必ずリコール対象商品でないかを確認してください。
-日本では消費者庁や各メーカーの公式サイトで
-最新のリコール情報が公開されています。
-中古品の場合は特に注意が必要です。
-</p>
+  <main class="wrap">
+    <section class="hero">
+      <span class="kicker">Safety • 安心して使うために</span>
+      <h1>安全ガイド：リユースでも“安心”を最優先に</h1>
+      <p class="lead">
+        リユースは家計にも環境にもやさしい一方で、ベビー用品は安全性が最重要です。
+        ここでは「避けるべきサイン」「カテゴリ別の注意」「受け渡し時の確認」を、迷わない形で整理します。
+      </p>
+      <div class="btnrow">
+        <a class="btn" href="./guide.html">← ガイドへ</a>
+        <a class="btn" href="./eco.html">次：エコの考え方 →</a>
+      </div>
+    </section>
 
-<h2>安全基準マークの確認</h2>
+    <section class="grid">
+      <article class="card">
+        <div class="hd">
+          <h2>まず見るべき「危険サイン」</h2>
+          <span class="pill">不明点が多い＝見送り</span>
+        </div>
+        <div class="bd">
+          <ul class="checklist">
+            <li><span class="check"></span><div><b>型番・メーカーが分からない</b><span class="muted">リコール確認ができないためリスクが上がります。写真でラベル確認ができると理想。</span></div></li>
+            <li><span class="check"></span><div><b>留め具・ベルトに違和感</b><span class="muted">緩い／硬い／戻らない等は要注意。安全機構が機能しない可能性があります。</span></div></li>
+            <li><span class="check"></span><div><b>強い割れ・歪み・ネジ欠品</b><span class="muted">見た目が軽微でも、荷重がかかると破損が進むケースがあります。</span></div></li>
+            <li><span class="check"></span><div><b>カビ臭・喫煙臭が強い</b><span class="muted">衛生面だけでなく、赤ちゃんの体調に影響する可能性。落とし切れない場合も多いです。</span></div></li>
+          </ul>
 
-<p>
-製品によってはSGマークやPSCマークなどの
-安全基準認証が表示されています。
-これらのマークは一定の安全基準を満たしている証拠です。
-特にチャイルドシートやベビーカーなどは必ず確認しましょう。
-</p>
+          <div class="callouts">
+            <div class="callout warn">
+              <b>「安い」より「確かな履歴」</b>
+              使用期間・購入時期・保管環境（湿気/ペット/喫煙）を聞くだけで判断がラクになります。
+            </div>
+            <div class="callout danger">
+              <b>特に慎重に：安全カテゴリ</b>
+              チャイルドシート／抱っこ紐／ベビーベッド／ベビーカーは、
+              目に見えない劣化や衝撃履歴がリスクになります。
+            </div>
+          </div>
+        </div>
+      </article>
 
-<h2>破損・劣化のチェックポイント</h2>
+      <aside class="card">
+        <div class="hd">
+          <h2>受け渡し時のチェック</h2>
+          <span class="pill">“その場で”確認</span>
+        </div>
+        <div class="bd">
+          <ul class="checklist">
+            <li><span class="check"></span><div><b>動作確認</b><span class="muted">ボタン、折りたたみ、ロック、バックルは実際に触って確認。</span></div></li>
+            <li><span class="check"></span><div><b>付属品の有無</b><span class="muted">説明書、クッション、ベルトパッド、工具など。欠品は安全性や使いやすさに影響します。</span></div></li>
+            <li><span class="check"></span><div><b>クリーニング状態</b><span class="muted">洗浄済みか、どの方法で洗ったか（洗剤/乾燥）を共有できると安心。</span></div></li>
+          </ul>
 
-<ul>
-<li>プラスチック部分にひび割れがないか</li>
-<li>ネジや固定部品が緩んでいないか</li>
-<li>ベルトやバックルが正常に作動するか</li>
-<li>クッション材のへたりがないか</li>
-</ul>
+          <div class="note" style="margin-top:12px;">
+            <b>小さなコツ</b><br/>
+            受け渡し前に「写真（ラベル・型番・留め具）」をもらうと、当日の確認がスムーズです。
+          </div>
+        </div>
+      </aside>
+    </section>
 
-<p>
-わずかな破損でも事故につながる可能性があります。
-不安がある場合は使用を控えましょう。
-</p>
+    <section class="card" style="margin-top:16px;">
+      <div class="hd">
+        <h2>カテゴリ別：見落としやすい注意点</h2>
+        <span class="pill">迷ったらここを見る</span>
+      </div>
+      <div class="bd">
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="width:22%;">カテゴリ</th>
+              <th>チェックポイント</th>
+              <th style="width:28%;">見送り推奨の例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>チャイルドシート</b></td>
+              <td class="muted">製造年、事故歴、ベルトの状態、ロック機構、取付説明書の有無</td>
+              <td class="muted">製造年不明／強い日焼け・劣化／事故歴不明</td>
+            </tr>
+            <tr>
+              <td><b>抱っこ紐</b></td>
+              <td class="muted">バックルの硬さ、縫製のほつれ、ベルトの毛羽立ち、タグ情報</td>
+              <td class="muted">縫い目の裂け／バックルが戻らない</td>
+            </tr>
+            <tr>
+              <td><b>ベビーカー</b></td>
+              <td class="muted">折り畳み・ロック、タイヤの摩耗、ブレーキ、フレームの歪み</td>
+              <td class="muted">ブレーキ効かない／歪み／異音が大きい</td>
+            </tr>
+            <tr>
+              <td><b>口に入るもの</b></td>
+              <td class="muted">傷・変色・におい、耐熱、消毒方法、素材（BPA等）</td>
+              <td class="muted">深い傷／白濁・変形／強いにおい</td>
+            </tr>
+          </tbody>
+        </table>
 
-<h2>衛生管理の重要性</h2>
+        <div class="note" style="margin-top:14px;">
+          <b>免責</b><br/>
+          本ページは一般的な目安です。製品の使用方法・安全基準はメーカーの取扱説明書および公的情報を優先してください。
+        </div>
+      </div>
+    </section>
 
-<p>
-赤ちゃんは免疫力がまだ十分ではありません。
-布製品は洗濯表示を確認し、可能であれば高温洗浄を行いましょう。
-プラスチックや金属部分は中性洗剤で洗浄後、
-アルコールで拭き取り乾燥させることが効果的です。
-</p>
-
-<h2>安全な取引のために</h2>
-
-<p>
-個人間取引の場合は、商品の状態について具体的に質問し、
-写真を確認することが大切です。
-曖昧な説明しかない場合は慎重に判断しましょう。
-</p>
-
-<p>
-Mottainai Babeでは、安心してベビー用品を循環させるために、
-利用者同士の丁寧なコミュニケーションを推奨しています。
-安全を第一に考え、無理のないリユースを心がけましょう。
-</p>
+    <footer class="footer">
+      <div>© 2026 Mottainai Babe. All rights reserved.</div>
+      <div class="links">
+        <a href="./terms.html">利用規約</a>
+        <a href="./privacy.html">プライバシーポリシー</a>
+        <a href="./about.html">お問い合わせ</a>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
