@@ -15,33 +15,42 @@
 
   <title>もったいないベビー｜ベビー用品ゆずりあい</title>
 
- 
-
   <style>
     :root{
-      --bg:#f6f7f8;
+      /* ===== Brand (統一カラー) ===== */
+      --brand:#377649;
+      --brand-2:#2e633d;
+      --brand-soft:#eef7f1;
+
+      /* Page */
+      --bg:#f6f7f7;          /* header外 배경 */
+      --page:#ffffff;        /* main 배경 */
       --card:#ffffff;
-      --text:#111827;
-      --muted:#6b7280;
+      --text:#0f172a;
+      --muted:#475569;
       --line:#e5e7eb;
 
-      /* Brand (Green) */
-      --primary:#1f8f5a;
-      --primary-2:#167247;
-      --primary-soft:#e8f6ef;
+      /* Existing tokens (기능/톤 유지용) */
+      --primary: var(--brand);
+      --primary-2: var(--brand-2);
+      --primary-soft: var(--brand-soft);
 
       --danger:#ef4444;
       --ghost:#f3f4f6;
 
       --radius:18px;
       --radius-sm:14px;
-      --shadow:0 8px 24px rgba(17,24,39,.08);
+      --shadow:0 10px 26px rgba(2,6,23,.06);
 
-      /* ✅ 스티키 헤더 보정 */
-      --sticky-offset: 120px;
+      /* ✅ 스티키 헤더 보정(헤더 높이 변화 반영) */
+      --sticky-offset: 118px;
+
+      /* widths */
+      --w: 1040px;
     }
 
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
       background:var(--bg);
@@ -50,58 +59,116 @@
     }
     a{color:inherit}
 
-    /* Layout */
-    .wrap{max-width:1040px;margin:0 auto;padding:18px 14px 40px}
-    @media (min-width:860px){ .wrap{padding:24px 18px 60px} }
-
-    /* Header */
+    /* ===== Unified Header (Termsと同じ系統) ===== */
     .topbar{
-      position:sticky;top:0;z-index:5;
-      background:rgba(246,247,248,.86);
-      backdrop-filter: blur(8px);
-      border-bottom:1px solid rgba(229,231,235,.7);
+      position:sticky;
+      top:0;
+      z-index:60;
+
+      background: rgba(55,118,73,.94);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+
+      border-bottom: 1px solid rgba(255,255,255,.16);
     }
     .topbarInner{
-      max-width:1040px;margin:0 auto;
-      padding:10px 14px;
-      display:flex;align-items:center;justify-content:space-between;gap:10px;
-    }
-    .brand{
-      display:flex;align-items:center;gap:10px;min-width:0;
-      text-decoration:none;
-    }
-    .logo{
-      width:38px;height:38px;border-radius:12px;
-      background:var(--primary-soft);
-      border:1px solid rgba(31,143,90,.18);
-      display:flex;align-items:center;justify-content:center;
-      overflow:hidden;flex:0 0 auto;
-    }
-    .logo img{width:100%;height:100%;object-fit:cover;display:block}
-    .brandText{min-width:0}
-    .brandName{
-      font-weight:900;letter-spacing:.2px;
-      line-height:1.1;
-      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-    }
-    .brandTag{
-      font-size:12px;color:var(--muted);
-      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+      max-width: var(--w);
+      margin:0 auto;
+      padding:14px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
     }
 
-    /* Buttons */
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+      text-decoration:none;
+      color:#fff;
+    }
+
+    /* ✅ 큰 로고 + 브랜드색 통일 */
+    .logo{
+      width:68px;
+      height:68px;
+      border-radius:18px;
+      background: var(--brand);
+      border: 1px solid rgba(255,255,255,.22);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      flex:0 0 auto;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.06);
+    }
+    .logo img{
+      width:58px;
+      height:58px;
+      object-fit:contain;
+      display:block;
+      opacity:1;
+    }
+
+    .brandText{min-width:0; display:flex; flex-direction:column; line-height:1.15;}
+    .brandName{
+      font-weight:900;
+      letter-spacing:.2px;
+      line-height:1.1;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      font-size:17px;
+    }
+    .brandTag{
+      font-size:11px;
+      opacity:.92;
+      margin-top:2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      font-weight:800;
+      letter-spacing:.04em;
+      color:#fff;
+    }
+    .brandDesc{
+      font-size:10px;
+      opacity:.78;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      color:#fff;
+    }
+    @media (max-width: 420px){
+      .brandDesc{display:none;}
+    }
+
+    /* ===== Right (Auth + Menu) ===== */
     button{font-family:inherit}
     .btn{
-      border:none;cursor:pointer;
+      border:none; cursor:pointer;
       border-radius:999px;
       padding:10px 14px;
       font-size:14px;
-      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
       transition:.15s ease;
       user-select:none;
       white-space:nowrap;
     }
     .btn:active{transform:translateY(1px)}
+
+    /* ✅ 헤더 전용 버튼 톤(다른 페이지와 동일) */
+    .btnHeader{
+      border: 1px solid rgba(255,255,255,.34);
+      background: rgba(255,255,255,.10);
+      color:#fff;
+      font-weight:900;
+    }
+    .btnHeader:hover{ background: rgba(255,255,255,.14); }
+
+    /* 앱 내부 Primary는 기존과 동일(브랜드색 반영) */
     .btnPrimary{background:var(--primary);color:#fff}
     .btnPrimary:hover{background:var(--primary-2)}
     .btnGhost{background:var(--ghost);color:var(--text)}
@@ -109,6 +176,135 @@
     .btnDanger{background:var(--danger);color:#fff}
     .btnDanger:hover{filter:brightness(.95)}
 
+    .rightBox{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      flex:0 0 auto;
+    }
+
+    /* 로그인 상태 pill (id=loginState 유지) */
+    .authState{
+      font-size:13px;
+      padding:10px 12px;
+      border-radius:999px;
+      border: 1px solid rgba(255,255,255,.30);
+      background: rgba(255,255,255,.10);
+      color:#fff;
+      font-weight:900;
+      max-width:min(46vw, 360px);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .hidden{display:none}
+
+    /* ===== Menu (overlay + panel) ===== */
+    .menuBtn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      height:44px;
+      padding:0 14px;
+      border-radius:999px;
+      border: 1px solid rgba(255,255,255,.34);
+      background: rgba(255,255,255,.10);
+      color:#fff;
+      font-weight:900;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .menuBtn:active{ transform: translateY(1px); }
+
+    .hamburger{
+      width:18px;
+      height:12px;
+      position:relative;
+      display:inline-block;
+    }
+    .hamburger::before,
+    .hamburger::after,
+    .hamburger span{
+      content:"";
+      position:absolute;
+      left:0; right:0;
+      height:2px;
+      border-radius:2px;
+      background: rgba(255,255,255,.95);
+    }
+    .hamburger::before{ top:0; }
+    .hamburger span{ top:5px; }
+    .hamburger::after{ bottom:0; }
+
+    .menuOverlay{
+      position:fixed;
+      inset:0;
+      background: rgba(2,6,23,.38);
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .18s ease;
+      z-index:70;
+    }
+    .menuOverlay.open{
+      opacity:1;
+      pointer-events:auto;
+    }
+
+    .menuPanel{
+      position:fixed;
+      top:74px;
+      right:14px;
+      width:min(320px, 92vw);
+      background:#fff;
+      color:var(--text);
+      border:1px solid rgba(2,6,23,.08);
+      border-radius:18px;
+      box-shadow: 0 18px 50px rgba(2,6,23,.22);
+      padding:10px;
+      transform: translateY(-6px);
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .18s ease, transform .18s ease;
+      z-index:80;
+    }
+    .menuPanel.open{
+      opacity:1;
+      pointer-events:auto;
+      transform: translateY(0);
+    }
+    .menuPanel a{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end; /* ✅ 오른쪽 정렬 */
+      text-align:right;
+      gap:10px;
+      padding:12px 12px;
+      border-radius:14px;
+      background:#f6f7f7;
+      font-weight:900;
+      color:var(--text);
+      border:1px solid transparent;
+      text-decoration:none;
+    }
+    .menuPanel a + a{ margin-top:8px; }
+    .menuPanel a:hover{
+      border-color: rgba(55,118,73,.22);
+      background: #eef7f1;
+    }
+    .menuPanel small{
+      font-weight:800;
+      color:#64748b;
+    }
+
+    /* ===== Layout ===== */
+    main{ background: var(--page); }
+    .wrap{max-width:var(--w);margin:0 auto;padding:18px 14px 40px}
+    @media (min-width:860px){ .wrap{padding:24px 18px 60px} }
+
+    /* Pills (기존 유지) */
     .pill{
       display:inline-flex;align-items:center;gap:6px;
       padding:4px 10px;border-radius:999px;
@@ -122,7 +318,7 @@
     .muted{color:var(--muted)}
     .small{font-size:12px}
 
-    /* Cards */
+    /* Cards (기존 유지 + 약간 통일) */
     .card{
       background:var(--card);
       border:1px solid var(--line);
@@ -132,7 +328,7 @@
     .cardPad{padding:16px}
     @media (min-width:860px){ .cardPad{padding:20px} }
 
-    /* Hero (앱 본문 상단) */
+    /* Hero */
     .hero{
       margin-top:14px;
       display:grid;gap:12px;
@@ -149,16 +345,6 @@
     @media (min-width:860px){ .heroTitle{font-size:26px} }
     .heroDesc{margin:8px 0 0;color:var(--muted);line-height:1.5}
 
-    /* Auth row (header) */
-    .authRow{
-      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
-    }
-    .authState{
-      font-size:13px;color:var(--muted);
-      padding:6px 10px;border-radius:999px;border:1px dashed rgba(107,114,128,.35);
-      background:#fff;
-    }
-
     /* Main grid */
     .grid{
       margin-top:14px;
@@ -172,11 +358,7 @@
       }
     }
 
-    /* Section titles */
-    .secTitle{
-      margin:0 0 10px;
-      font-size:16px;
-    }
+    .secTitle{ margin:0 0 10px; font-size:16px; }
     .divider{height:1px;background:var(--line);margin:14px 0}
 
     /* Tabs */
@@ -194,7 +376,7 @@
     .tab:hover{filter:brightness(.98)}
     .tab.active{
       background:var(--primary-soft);
-      border-color:rgba(31,143,90,.35);
+      border-color:rgba(55,118,73,.30);
       color:var(--primary-2);
       font-weight:700;
     }
@@ -210,8 +392,8 @@
       outline:none;
     }
     input:focus,textarea:focus{
-      border-color:rgba(31,143,90,.45);
-      box-shadow:0 0 0 4px rgba(31,143,90,.12);
+      border-color:rgba(55,118,73,.45);
+      box-shadow:0 0 0 4px rgba(55,118,73,.12);
     }
     textarea{min-height:84px;resize:vertical}
 
@@ -220,16 +402,12 @@
       padding:10px 12px;
       border-radius:14px;
       background:var(--primary-soft);
-      border:1px solid rgba(31,143,90,.22);
+      border:1px solid rgba(55,118,73,.20);
       color:#065f46;
       font-size:12px;
       line-height:1.45;
     }
-    .warn{
-      color:#b91c1c;
-      font-size:12px;
-      margin-top:6px;
-    }
+    .warn{ color:#b91c1c; font-size:12px; margin-top:6px; }
 
     /* List cards */
     .itemsWrap{margin-top:12px}
@@ -256,12 +434,7 @@
       overflow:hidden;
     }
 
-    /* Detail box */
-    .detailTitle{
-      margin:10px 0 6px;
-      font-size:18px;
-      line-height:1.25;
-    }
+    .detailTitle{ margin:10px 0 6px; font-size:18px; line-height:1.25; }
 
     .offerBox{
       border:1px solid rgba(229,231,235,.9);
@@ -270,37 +443,15 @@
       margin-top:12px;
       background:#fff;
     }
-    .offerTop{
-      display:flex;gap:12px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;
-    }
+    .offerTop{ display:flex;gap:12px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap; }
     .twoBtns{display:flex;gap:10px;flex-wrap:wrap}
     .right{text-align:right}
-
-    .hidden{display:none}
-
-    /* Footer */
-    footer{
-      margin-top:28px;
-      padding:26px 16px;
-      text-align:center;
-      color:var(--muted);
-      font-size:14px;
-      border-top:1px solid rgba(229,231,235,.85);
-      background:#fff;
-    }
-    .footerLinks a{
-      color:var(--primary);
-      text-decoration:none;
-      margin:0 10px;
-    }
-    .footerLinks a:hover{text-decoration:underline}
 
     /* ✅ scrollIntoView 보정 */
     #detailBox, .inlineDetailMount{
       scroll-margin-top: var(--sticky-offset);
     }
 
-    /* ✅ 상세 상단 줄 */
     .detailTopBar{
       display:flex;
       gap:10px;
@@ -314,12 +465,10 @@
       flex-wrap:wrap;
       align-items:center;
     }
-
     @media (max-width: 900px){
       #closeDetailBtn{ width:100%; }
     }
 
-    /* ✅ 모바일에서 클릭한 글 아래 상세 mount */
     .inlineDetailMount{
       margin-top: 12px;
       border: 1px solid #e5e7eb;
@@ -328,7 +477,7 @@
       background: #fff;
     }
 
-    /* ===== In-app( LINE etc ) modal ===== */
+    /* ===== In-app modal ===== */
     .modalBack{
       position:fixed;inset:0;
       background:rgba(17,24,39,.55);
@@ -358,6 +507,23 @@
       margin:10px 0 12px;
     }
     .modal .btn{flex:1}
+
+    /* Footer (기존 유지하되 main 밖 배경 통일) */
+    footer{
+      margin-top:28px;
+      padding:26px 16px;
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+      border-top:1px solid rgba(229,231,235,.85);
+      background:#fff;
+    }
+    .footerLinks a{
+      color:var(--brand);
+      text-decoration:none;
+      margin:0 10px;
+    }
+    .footerLinks a:hover{text-decoration:underline}
   </style>
 
   <!-- ✅ config (window.FIREBASE_CONFIG) -->
@@ -366,26 +532,45 @@
 
 <body>
 
-  <!-- Sticky Header -->
+  <!-- ===== Unified Sticky Header ===== -->
   <header class="topbar">
     <div class="topbarInner">
       <a class="brand" href="./">
         <div class="logo" aria-hidden="true">
-          <img src="./logo.png" alt="Mottainai Babe">
+          <!-- ✅ 다른 페이지와 통일: logo1.png -->
+          <img src="./logo1.png" alt="Mottainai Babe">
         </div>
         <div class="brandText">
-          <div class="brandName">もったいないベビー</div>
-          <div class="brandTag">ベビー用品ゆずりあい</div>
+          <div class="brandName">Mottainai Babe</div>
+          <div class="brandTag">もったいないベビー</div>
+          <div class="brandDesc">ベビー用品交換プラットフォーム</div>
         </div>
       </a>
 
-      <div class="authRow">
-        <button id="loginBtn" class="btn btnPrimary">Googleでログイン</button>
-        <button id="logoutBtn" class="btn btnGhost hidden">ログアウト</button>
+      <div class="rightBox">
+        <!-- ✅ 기존 기능 ID 유지 -->
+        <button id="loginBtn" class="btn btnHeader">Googleでログイン</button>
+        <button id="logoutBtn" class="btn btnHeader hidden">ログアウト</button>
         <span class="authState" id="loginState">未ログイン</span>
+
+        <!-- ✅ menu -->
+        <button id="menuBtn" class="menuBtn" type="button" aria-expanded="false" aria-controls="menuPanel">
+          <span class="hamburger" aria-hidden="true"><span></span></span>
+          メニュー
+        </button>
       </div>
     </div>
   </header>
+
+  <!-- ✅ overlay + panel -->
+  <div id="menuOverlay" class="menuOverlay" aria-hidden="true"></div>
+  <nav id="menuPanel" class="menuPanel" aria-label="ページメニュー">
+    <a href="./app.html">アプリ <small>出品・閲覧</small></a>
+    <a href="./guide.html">ガイド <small>読みもの</small></a>
+    <a href="./terms.html">利用規約 <small>Terms</small></a>
+    <a href="./privacy.html">プライバシー <small>Privacy</small></a>
+    <a href="./about.html">お問い合わせ <small>連絡</small></a>
+  </nav>
 
   <main class="wrap">
     <section id="appSection">
@@ -546,7 +731,7 @@
 
     import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
-    // ✅ firebase-config.js의 값을 그대로 사용
+    // ✅ firebase-config.jsの値をそのまま使用
     const firebaseConfig = window.FIREBASE_CONFIG;
 
     if (!firebaseConfig || !firebaseConfig.apiKey) {
@@ -572,7 +757,7 @@
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: "select_account" });
 
-    // ✅ 인앱 브라우저 감지 (LINE/Instagram/Facebook 등)
+    // ✅ インアプリブラウザ検知 (LINE/Instagram/Facebookなど)
     function isInAppBrowser() {
       const ua = navigator.userAgent || "";
       return /Line\/|LIFF|FBAN|FBAV|Instagram|KAKAOTALK|Twitter|WebView/i.test(ua);
@@ -586,7 +771,6 @@
     const tryOpenNewTabBtn = document.getElementById("tryOpenNewTabBtn");
 
     function canonicalUrl(){
-      // 현재 경로를 기준으로 절대 URL 생성
       return new URL(location.pathname, location.origin).toString();
     }
 
@@ -600,13 +784,11 @@
           await navigator.clipboard.writeText(url);
           alert("コピーしました。Safari / Chromeで開いてください。");
         }catch{
-          // clipboard 실패 시 fallback
           prompt("このURLをコピーしてください:", url);
         }
       };
 
       tryOpenNewTabBtn.onclick = () => {
-        // 어떤 환경에서는 외부로 나가기도 하고, 안 되면 사용자가 메뉴에서 열기
         const w = window.open(url, "_blank");
         if(!w) location.href = url;
       };
@@ -622,8 +804,6 @@
 
     // ✅ 로그인 함수 (안전 버전)
     async function doLogin(){
-      // LINE 등 인앱 브라우저에서는 Google 정책으로 disallowed_useragent가 잘 떠서
-      // 여기서 로그인 시도 자체를 막고 안내한다.
       if(isInAppBrowser()){
         openInAppModal();
         return;
@@ -635,7 +815,6 @@
         console.error("Login error", e);
         const code = e?.code || "";
 
-        // popup이 막히면 redirect로 fallback
         if(
           code.includes("popup-blocked") ||
           code.includes("popup-closed") ||
@@ -655,7 +834,7 @@
       try{ await signOut(auth); } catch(e){ console.error("LOGOUT_ERROR", e); }
     };
 
-    // redirect 결과 처리 (redirect 사용했을 경우)
+    // redirect結果処理
     try{ await getRedirectResult(auth); }catch(e){ console.error("getRedirectResult error", e); }
 
     // ===== 앱 요소들 =====
@@ -1290,6 +1469,36 @@
       await loadItems();
       if(selectedItemId) await openDetail(selectedItemId);
     });
+
+    // ===== Header menu (new, no conflict) =====
+    const menuBtn = document.getElementById("menuBtn");
+    const menuPanel = document.getElementById("menuPanel");
+    const menuOverlay = document.getElementById("menuOverlay");
+
+    function openMenu(){
+      menuPanel.classList.add("open");
+      menuOverlay.classList.add("open");
+      menuBtn.setAttribute("aria-expanded","true");
+    }
+    function closeMenu(){
+      menuPanel.classList.remove("open");
+      menuOverlay.classList.remove("open");
+      menuBtn.setAttribute("aria-expanded","false");
+    }
+    function toggleMenu(){
+      const isOpen = menuPanel.classList.contains("open");
+      isOpen ? closeMenu() : openMenu();
+    }
+
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleMenu();
+    });
+    menuOverlay.addEventListener("click", closeMenu);
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape") closeMenu();
+    });
+    window.addEventListener("scroll", closeMenu, { passive:true });
   </script>
 
   <footer>
@@ -1308,7 +1517,7 @@
 
     <div style="margin-bottom:10px;">
       お問い合わせ：
-      <a href="mailto:ainazmum2624@gmail.com" style="color:var(--primary);text-decoration:none;">
+      <a href="mailto:ainazmum2624@gmail.com" style="color:var(--brand);text-decoration:none;">
         ainazmum2624@gmail.com
       </a>
     </div>
