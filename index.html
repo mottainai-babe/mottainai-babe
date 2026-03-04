@@ -33,6 +33,10 @@
       --modalText: #111827;
       --modalMuted: #6b7280;
       --modalLine: #e5e7eb;
+
+      /* iPhone safe area */
+      --safeL: env(safe-area-inset-left);
+      --safeR: env(safe-area-inset-right);
     }
 
     *{box-sizing:border-box}
@@ -48,7 +52,7 @@
       justify-content:center;
     }
 
-    /* ===== Top bar (true centered) ===== */
+    /* ===== Top bar (true centered + safe-area) ===== */
     header{
       position: sticky;
       top: 0;
@@ -62,11 +66,31 @@
     .topbar{
       max-width: 1200px;
       margin: 0 auto;
-      padding: 16px var(--pad);
+
+      /* ✅ safe-area 반영 */
+      padding-top: 16px;
+      padding-bottom: 16px;
+      padding-left: calc(var(--pad) + var(--safeL));
+      padding-right: calc(var(--pad) + var(--safeR));
+
+      /* ✅ 가운데를 절대 중앙에 고정: 1fr / auto / 1fr */
       display:grid;
-      grid-template-columns: 44px 1fr auto; /* left fixed, center flexible, right auto */
+      grid-template-columns: 1fr auto 1fr;
       align-items:center;
       gap: 14px;
+    }
+
+    .leftSlot{
+      display:flex;
+      align-items:center;
+      justify-content:flex-start;
+      min-width: 0;
+    }
+    .rightSlot{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      min-width: 0;
     }
 
     .menuBtn{
@@ -77,7 +101,6 @@
       border:none;
       background:transparent;
       cursor:pointer;
-      justify-self:start;
     }
     .hamburger{
       width:22px;
@@ -98,19 +121,18 @@
     .hamburger span{ top:50%; transform:translateY(-50%); }
     .hamburger::after{ bottom:0; }
 
-    /* Center brand ALWAYS centered in viewport */
+    /* ✅ truly centered */
     .brandTop{
-      justify-self:center;
       font-weight:600;
       letter-spacing:.22em;
       font-size:18px;
       color:var(--green);
       text-align:center;
       white-space:nowrap;
+      padding: 0 6px;
     }
 
     .topCta{
-      justify-self:end;
       font-size:12px;
       letter-spacing:.08em;
       padding:10px 12px;
@@ -128,6 +150,7 @@
       width:min(var(--max),92vw);
       padding: 34px 0 46px;
       position:relative;
+      margin: 0 auto;
     }
 
     .center{
@@ -296,8 +319,9 @@
       .center{padding-top:44px}
       .btn{height:54px}
       .brandTop{font-size:16px}
-      .topbar{padding: 14px var(--pad);}
-      .topCta{padding: 9px 10px;}
+
+      /* CTA가 너무 길면 줄바꿈 없이 좁게 */
+      .topCta{padding: 9px 10px; font-size: 12px;}
     }
 
     /* ===== In-app modal ===== */
@@ -349,13 +373,17 @@
 <body>
   <header>
     <div class="topbar">
-      <button class="menuBtn" type="button" aria-label="menu">
-        <div class="hamburger"><span></span></div>
-      </button>
+      <div class="leftSlot">
+        <button class="menuBtn" type="button" aria-label="menu">
+          <div class="hamburger"><span></span></div>
+        </button>
+      </div>
 
       <div class="brandTop">MOTTAINAI BABE</div>
 
-      <a class="topCta" href="./brand.html">ブランドストーリー</a>
+      <div class="rightSlot">
+        <a class="topCta" href="./brand.html">ブランドストーリー</a>
+      </div>
     </div>
   </header>
 
@@ -370,7 +398,6 @@
         <button id="btnPost" class="btn primary" type="button">出品する</button>
         <button id="btnView" class="btn" type="button">アイテムを見る</button>
 
-        <!-- brand story button -->
         <button class="btn secondary" type="button" onclick="location.href='./brand.html'">
           ブランドストーリーを見る
         </button>
@@ -399,7 +426,6 @@
     <footer class="footer">
       <div>Mottainai Babeは、ベビー用品を必要な人へつなぐ交換プラットフォームです。</div>
       <div>
-        <!-- ✅ ブランド 삭제 / ブランドストーリー만 유지 -->
         <a href="./brand.html">ブランドストーリー</a>
         &nbsp;|&nbsp;
         <a href="./guide.html">ガイド</a>
