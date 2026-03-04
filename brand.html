@@ -1,51 +1,46 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mottainai Babe — Brand</title>
-  <meta name="description" content="Inspired by Japan’s spirit of Mottainai. Share what your baby has outgrown. 使わなくなったベビー用品を、次の家族へ。" />
+  <title>Mottainai Babe — ブランドストーリー</title>
+  <meta name="description" content="Mottainai Babe ブランドストーリー。日本の「もったいない」の精神から生まれた、ベビー用品のシェア＆交換コミュニティ。" />
 
   <style>
     :root{
-      --bg: #0b1220;
-      --surface: rgba(255,255,255,.06);
-      --surface-2: rgba(255,255,255,.10);
-      --border: rgba(255,255,255,.14);
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.72);
-      --muted-2: rgba(255,255,255,.56);
+      /* BAUM-ish: calm, airy, editorial */
+      --bg: #fbfaf7;        /* warm off-white */
+      --ink: #111111;       /* near black */
+      --muted: #575757;
+      --muted2:#7a7a7a;
+      --line: rgba(17,17,17,.12);
 
-      --accent: #22c55e; /* green */
-      --accent-2: #16a34a;
+      --accent:#0f6b4d;     /* deep green (brand-ish) */
+      --accent2:#0b513b;
 
+      --max: 1100px;
+      --pad: 22px;
       --radius: 16px;
-      --radius-lg: 22px;
+      --radius2: 22px;
 
-      --shadow: 0 18px 50px rgba(0,0,0,.35);
-      --shadow-soft: 0 10px 30px rgba(0,0,0,.22);
+      --shadow: 0 18px 50px rgba(0,0,0,.08);
 
-      --max: 1120px;
-      --pad: 20px;
-      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      --serif: ui-serif, "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", "Times New Roman", serif;
+      --sans: ui-sans-serif, system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
     body{
       margin:0;
-      font-family: var(--font);
-      color: var(--text);
-      background:
-        radial-gradient(1200px 700px at 20% -10%, rgba(34,197,94,.28), transparent 55%),
-        radial-gradient(1100px 700px at 90% 10%, rgba(34,197,94,.18), transparent 55%),
-        radial-gradient(900px 700px at 50% 110%, rgba(255,255,255,.06), transparent 60%),
-        var(--bg);
-      line-height:1.55;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: var(--sans);
+      line-height: 1.85;
       letter-spacing: .2px;
     }
 
-    a{ color: inherit; text-decoration: none; }
+    a{ color: inherit; text-decoration:none; }
     a:hover{ text-decoration: underline; }
 
     .container{
@@ -58,17 +53,17 @@
     header{
       position: sticky;
       top: 0;
-      z-index: 50;
-      backdrop-filter: blur(14px);
-      background: rgba(11,18,32,.64);
-      border-bottom: 1px solid rgba(255,255,255,.08);
+      z-index: 40;
+      background: rgba(251,250,247,.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
     }
     .nav{
       display:flex;
       align-items:center;
       justify-content:space-between;
+      gap: 14px;
       padding: 14px 0;
-      gap: 16px;
     }
     .brand{
       display:flex;
@@ -76,56 +71,51 @@
       gap: 12px;
       min-width: 220px;
     }
-    .logoMark{
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background:
-        radial-gradient(18px 18px at 30% 30%, rgba(255,255,255,.35), transparent 55%),
-        linear-gradient(135deg, rgba(34,197,94,.95), rgba(34,197,94,.55));
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(255,255,255,.18);
+    .mark{
+      width: 42px; height: 42px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: #ffffff;
       display:grid;
       place-items:center;
-      font-weight: 800;
-      color: rgba(255,255,255,.95);
-      letter-spacing: .6px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: .8px;
     }
-    .brandName{
+    .brandText{
       display:flex;
       flex-direction:column;
-      line-height:1.15;
+      line-height: 1.2;
     }
-    .brandName strong{
+    .brandText strong{
       font-size: 14px;
-      letter-spacing: .5px;
+      letter-spacing: .6px;
     }
-    .brandName span{
+    .brandText span{
       font-size: 12px;
-      color: var(--muted-2);
+      color: var(--muted2);
     }
 
     nav ul{
       display:flex;
-      gap: 16px;
+      gap: 14px;
       list-style:none;
-      padding:0;
-      margin:0;
+      padding:0; margin:0;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content:center;
     }
     nav a{
-      font-size: 13px;
+      font-size: 12px;
       color: var(--muted);
       padding: 8px 10px;
-      border-radius: 12px;
+      border-radius: 999px;
       border: 1px solid transparent;
-      transition: .2s ease;
+      transition: .18s ease;
     }
     nav a:hover{
-      color: var(--text);
-      background: rgba(255,255,255,.06);
-      border-color: rgba(255,255,255,.10);
+      color: var(--ink);
+      border-color: var(--line);
+      background: #fff;
       text-decoration:none;
     }
 
@@ -134,32 +124,8 @@
       align-items:center;
       gap: 10px;
       min-width: 220px;
-      justify-content: flex-end;
+      justify-content:flex-end;
     }
-    .chip{
-      display:inline-flex;
-      align-items:center;
-      gap: 8px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: var(--muted);
-      font-size: 12px;
-      white-space: nowrap;
-    }
-    .chip button{
-      all: unset;
-      cursor: pointer;
-      padding: 2px 6px;
-      border-radius: 999px;
-      color: rgba(255,255,255,.88);
-      background: rgba(255,255,255,.10);
-      border: 1px solid rgba(255,255,255,.14);
-      font-size: 12px;
-    }
-    .chip button:hover{ background: rgba(255,255,255,.14); }
-
     .btn{
       display:inline-flex;
       align-items:center;
@@ -167,282 +133,251 @@
       gap: 10px;
       padding: 10px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: rgba(255,255,255,.90);
-      font-size: 13px;
+      border: 1px solid var(--line);
+      background: #fff;
+      font-size: 12px;
       font-weight: 650;
-      cursor: pointer;
-      transition: .2s ease;
+      cursor:pointer;
+      transition: .18s ease;
       white-space: nowrap;
     }
-    .btn:hover{
-      background: rgba(255,255,255,.10);
-      border-color: rgba(255,255,255,.18);
-    }
+    .btn:hover{ transform: translateY(-1px); }
     .btn.primary{
-      background: linear-gradient(135deg, rgba(34,197,94,.92), rgba(22,163,74,.70));
-      border-color: rgba(34,197,94,.40);
-      box-shadow: 0 14px 40px rgba(34,197,94,.18);
-    }
-    .btn.primary:hover{
-      filter: brightness(1.05);
-      border-color: rgba(34,197,94,.55);
+      border-color: rgba(15,107,77,.25);
+      background: linear-gradient(180deg, rgba(15,107,77,.08), rgba(15,107,77,.02));
+      color: var(--accent2);
     }
 
     /* Hero */
     .hero{
-      padding: 46px 0 28px;
-    }
-    .heroGrid{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 18px;
-      align-items: stretch;
-    }
-    .heroCard{
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: var(--radius-lg);
-      background: rgba(255,255,255,.05);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
-    }
-    .heroCard::before{
-      content:"";
-      position:absolute;
-      inset:-40% -30% auto -30%;
-      height: 240px;
-      background: radial-gradient(closest-side, rgba(34,197,94,.25), transparent 70%);
-      transform: rotate(-10deg);
-      pointer-events:none;
+      padding: 56px 0 18px;
     }
     .heroInner{
-      padding: 28px 26px 22px;
-      position:relative;
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 24px;
+      align-items:end;
+      padding-bottom: 26px;
+      border-bottom: 1px solid var(--line);
     }
-    .kicker{
+    .eyebrow{
       display:inline-flex;
       align-items:center;
       gap: 10px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(34,197,94,.12);
-      border: 1px solid rgba(34,197,94,.22);
-      color: rgba(255,255,255,.88);
       font-size: 12px;
       letter-spacing: .4px;
+      color: var(--muted2);
     }
-    .kicker .dot{
-      width: 8px; height: 8px;
-      border-radius: 999px;
+    .eyebrow .dot{
+      width: 6px; height: 6px; border-radius: 999px;
       background: var(--accent);
-      box-shadow: 0 0 0 4px rgba(34,197,94,.18);
     }
     h1{
-      margin: 14px 0 10px;
-      font-size: 40px;
-      line-height: 1.12;
-      letter-spacing: -.6px;
+      margin: 12px 0 10px;
+      font-family: var(--serif);
+      font-size: 42px;
+      line-height: 1.2;
+      letter-spacing: -.4px;
+      font-weight: 600;
     }
-    .subtitle{
-      margin: 0 0 18px;
-      color: var(--muted);
-      font-size: 15px;
-      max-width: 62ch;
-    }
-    .heroActions{
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 16px;
-    }
-
-    .sideCard{
-      padding: 22px;
-      display:flex;
-      flex-direction:column;
-      gap: 12px;
-      justify-content:space-between;
-    }
-    .sideCard h3{
-      margin:0;
-      font-size: 16px;
-      letter-spacing: .2px;
-    }
-    .sideCard p{
-      margin: 6px 0 0;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .stats{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-top: 14px;
-    }
-    .stat{
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      padding: 12px 12px 10px;
-    }
-    .stat strong{
-      display:block;
-      font-size: 16px;
-      letter-spacing: -.2px;
-    }
-    .stat span{
-      display:block;
-      margin-top: 2px;
-      font-size: 12px;
-      color: var(--muted-2);
-    }
-
-    /* Sections */
-    section{
-      padding: 34px 0;
-    }
-    .sectionHead{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-    .sectionTitle{
-      margin:0;
-      font-size: 22px;
-      letter-spacing: -.2px;
-    }
-    .sectionNote{
-      margin:0;
-      color: var(--muted-2);
-      font-size: 13px;
-      max-width: 56ch;
-    }
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 14px;
-    }
-    .card{
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.05);
-      padding: 18px;
-      box-shadow: 0 8px 22px rgba(0,0,0,.18);
-    }
-    .card h3{
-      margin: 0 0 8px;
-      font-size: 16px;
-      letter-spacing: -.1px;
-    }
-    .card p{
+    .lead{
       margin: 0;
       color: var(--muted);
       font-size: 14px;
+      max-width: 62ch;
     }
 
-    /* bilingual blocks */
-    .bilingual{
+    /* Hero media (placeholder) */
+    .heroMedia{
+      border-radius: var(--radius2);
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(900px 240px at 30% 15%, rgba(15,107,77,.12), transparent 60%),
+        #ffffff;
+      min-height: 260px;
+      position: relative;
+      overflow:hidden;
+      box-shadow: var(--shadow);
+    }
+    .heroMedia::after{
+      content:"キービジュアル（画像を後で差し替え）";
+      position:absolute;
+      left: 18px;
+      bottom: 14px;
+      font-size: 12px;
+      color: var(--muted2);
+      letter-spacing: .3px;
+      background: rgba(251,250,247,.88);
+      border: 1px solid var(--line);
+      padding: 6px 10px;
+      border-radius: 999px;
+      backdrop-filter: blur(6px);
+    }
+
+    /* Editorial sections */
+    section{
+      padding: 44px 0;
+    }
+    .sectionTitle{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .sectionTitle h2{
+      margin:0;
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -.2px;
+    }
+    .sectionTitle p{
+      margin:0;
+      color: var(--muted2);
+      font-size: 12px;
+      max-width: 60ch;
+      text-align:right;
+    }
+
+    /* Blocks with image + paragraph, alternating */
+    .storyList{
+      display:flex;
+      flex-direction:column;
+      gap: 34px;
+    }
+    .block{
       display:grid;
       grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      align-items:start;
+      gap: 20px;
+      align-items:center;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius2);
+      background: #fff;
     }
-    .lang{
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 14px;
-      background: rgba(255,255,255,.04);
-      padding: 14px 14px 12px;
+    .block:nth-child(even){
+      direction: rtl; /* easy flip */
     }
-    .lang .label{
-      font-size: 11px;
-      color: var(--muted-2);
-      letter-spacing: .5px;
-      text-transform: uppercase;
-    }
-    .lang .text{
-      margin-top: 8px;
-      color: var(--text);
-      font-size: 14px;
-      line-height: 1.65;
-    }
-    .lang .text small{
-      color: var(--muted-2);
-      display:block;
-      margin-top: 8px;
-      font-size: 12px;
-      line-height: 1.6;
+    .block:nth-child(even) > *{
+      direction: ltr;
     }
 
-    /* How it works */
-    .steps{
+    .media{
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(15,107,77,.10), rgba(15,107,77,.02)),
+        #ffffff;
+      min-height: 240px;
+      overflow:hidden;
+      position:relative;
+    }
+    .media .cap{
+      position:absolute;
+      left: 14px;
+      bottom: 12px;
+      font-size: 12px;
+      color: var(--muted2);
+      background: rgba(255,255,255,.88);
+      border: 1px solid var(--line);
+      padding: 6px 10px;
+      border-radius: 999px;
+      backdrop-filter: blur(6px);
+    }
+
+    .copy .k{
+      font-size: 12px;
+      color: var(--muted2);
+      letter-spacing: .5px;
+      margin-bottom: 10px;
+    }
+    .copy h3{
+      margin:0 0 10px;
+      font-family: var(--serif);
+      font-size: 18px;
+      letter-spacing: -.2px;
+      font-weight: 600;
+    }
+    .copy p{
+      margin:0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .quote{
+      margin-top: 14px;
+      padding-left: 14px;
+      border-left: 2px solid rgba(15,107,77,.35);
+      color: #2a2a2a;
+      font-size: 14px;
+      font-family: var(--serif);
+    }
+
+    /* Small “principles” cards */
+    .principles{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
     }
-    .stepTop{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 10px;
-      margin-bottom: 8px;
+    .pCard{
+      border: 1px solid var(--line);
+      border-radius: var(--radius2);
+      background: #fff;
+      padding: 18px;
     }
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width: 28px; height: 28px;
-      border-radius: 10px;
-      background: rgba(34,197,94,.14);
-      border: 1px solid rgba(34,197,94,.22);
-      color: rgba(255,255,255,.92);
-      font-weight: 800;
+    .pCard .num{
       font-size: 12px;
+      color: var(--muted2);
+      letter-spacing: .5px;
     }
-    .mini{
-      font-size: 12px;
-      color: var(--muted-2);
+    .pCard h3{
+      margin: 8px 0 8px;
+      font-family: var(--serif);
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .pCard p{
+      margin:0;
+      color: var(--muted);
+      font-size: 13px;
     }
 
     /* CTA */
     .cta{
-      padding: 44px 0 56px;
+      padding: 52px 0 64px;
+      border-top: 1px solid var(--line);
     }
     .ctaBox{
-      border-radius: 24px;
-      border: 1px solid rgba(255,255,255,.14);
+      border: 1px solid var(--line);
+      border-radius: 28px;
       background:
-        radial-gradient(900px 400px at 20% 0%, rgba(34,197,94,.22), transparent 55%),
-        rgba(255,255,255,.05);
-      box-shadow: var(--shadow);
+        radial-gradient(1000px 300px at 20% 0%, rgba(15,107,77,.12), transparent 60%),
+        #fff;
       padding: 26px;
       display:flex;
+      align-items:center;
+      justify-content:space-between;
       gap: 18px;
-      align-items: center;
-      justify-content: space-between;
       flex-wrap: wrap;
+      box-shadow: var(--shadow);
     }
     .ctaBox h2{
       margin:0;
+      font-family: var(--serif);
       font-size: 22px;
-      letter-spacing: -.2px;
+      font-weight: 600;
     }
     .ctaBox p{
-      margin: 6px 0 0;
+      margin: 8px 0 0;
       color: var(--muted);
-      max-width: 70ch;
       font-size: 14px;
+      max-width: 70ch;
     }
 
-    /* Footer */
     footer{
-      border-top: 1px solid rgba(255,255,255,.10);
-      padding: 22px 0 34px;
-      color: var(--muted-2);
+      border-top: 1px solid var(--line);
+      padding: 18px 0 30px;
+      color: var(--muted2);
       font-size: 12px;
     }
     .footerRow{
@@ -450,60 +385,53 @@
       align-items:center;
       justify-content:space-between;
       gap: 14px;
-      flex-wrap: wrap;
+      flex-wrap:wrap;
     }
 
     /* Responsive */
     @media (max-width: 980px){
-      .heroGrid{ grid-template-columns: 1fr; }
-      h1{ font-size: 34px; }
-      .stats{ grid-template-columns: 1fr 1fr 1fr; }
+      .heroInner{ grid-template-columns: 1fr; }
+      h1{ font-size: 36px; }
+      .block{ grid-template-columns: 1fr; }
+      .principles{ grid-template-columns: 1fr; }
+      nav ul{ gap: 10px; }
     }
     @media (max-width: 760px){
-      nav ul{ display:none; } /* keep it clean on mobile */
+      nav ul{ display:none; }
       .brand{ min-width: unset; }
       .navActions{ min-width: unset; }
-      .bilingual{ grid-template-columns: 1fr; }
-      .steps{ grid-template-columns: 1fr; }
-      .stats{ grid-template-columns: 1fr; }
+      .hero{ padding-top: 40px; }
+      .heroMedia{ min-height: 220px; }
+      .media{ min-height: 210px; }
     }
-
-    /* Language toggle (optional) */
-    [data-lang="en"] .jp-only{ display:none; }
-    [data-lang="jp"] .en-only{ display:none; }
   </style>
 </head>
 
-<body data-lang="both">
+<body>
   <header>
     <div class="container">
       <div class="nav">
-        <a class="brand" href="#top" aria-label="Mottainai Babe Home">
-          <div class="logoMark" aria-hidden="true">MB</div>
-          <div class="brandName">
+        <a class="brand" href="#top" aria-label="Mottainai Babe">
+          <div class="mark" aria-hidden="true">MB</div>
+          <div class="brandText">
             <strong>Mottainai Babe</strong>
-            <span>Brand / ブランド</span>
+            <span>ブランドストーリー</span>
           </div>
         </a>
 
         <nav aria-label="Primary">
           <ul>
-            <li><a href="#story">Our Story / ストーリー</a></li>
-            <li><a href="#why">Why / なぜ</a></li>
-            <li><a href="#how">How it works / 使い方</a></li>
-            <li><a href="#community">Community / コミュニティ</a></li>
-            <li><a href="#vision">Vision / ビジョン</a></li>
+            <li><a href="#story">ストーリー</a></li>
+            <li><a href="#mottainai">もったいない</a></li>
+            <li><a href="#principles">私たちの考え</a></li>
+            <li><a href="#vision">ビジョン</a></li>
           </ul>
         </nav>
 
         <div class="navActions">
-          <div class="chip" title="Optional language view">
-            Language:
-            <button type="button" id="langBoth">Both</button>
-            <button type="button" id="langEN">EN</button>
-            <button type="button" id="langJP">JP</button>
-          </div>
-          <a class="btn primary" href="#join">Join</a>
+          <!-- 서비스 페이지가 있으면 /app 등으로 연결하세요 -->
+          <a class="btn primary" href="/app">交換を始める</a>
+          <a class="btn" href="#join">参加する</a>
         </div>
       </div>
     </div>
@@ -512,268 +440,144 @@
   <main id="top" class="container">
     <!-- HERO -->
     <section class="hero">
-      <div class="heroGrid">
-        <div class="heroCard">
-          <div class="heroInner">
-            <div class="kicker"><span class="dot"></span>Inspired by Mottainai / 「もったいない」から</div>
-
-            <h1>
-              <span class="en-only">Share what your baby has outgrown.</span>
-              <span class="jp-only">使わなくなったベビー用品を、次の家族へ。</span>
-              <span data-lang="both">
-                <span class="en-only"></span>
-                <span class="jp-only"></span>
-              </span>
-            </h1>
-
-            <p class="subtitle">
-              <span class="en-only">
-                Mottainai Babe is a community where baby items can be shared, exchanged, and loved again —
-                inspired by Japan’s spirit of Mottainai.
-              </span>
-              <span class="jp-only">
-                Mottainai Babe は、日本の「もったいない」の精神から生まれた、
-                ベビー用品をシェアし、交換し、もう一度大切に使うためのコミュニティです。
-              </span>
-              <span data-lang="both">
-                <span style="display:block;margin-top:10px" class="en-only"></span>
-              </span>
-            </p>
-
-            <!-- When data-lang="both" we want both visible; simplest is duplicate content blocks below -->
-            <div data-lang="both">
-              <p class="subtitle" style="margin-top:-6px">
-                <span class="en-only"></span>
-                <span class="jp-only"></span>
-                <span>
-                  <span style="display:block;color:var(--text)">
-                    <strong>From one baby to another. From one family to another.</strong><br/>
-                    <span style="color:var(--muted)">ひとつの赤ちゃんから、次の赤ちゃんへ。ひとつの家族から、次の家族へ。</span>
-                  </span>
-                </span>
-              </p>
-            </div>
-
-            <div class="heroActions">
-              <a class="btn primary" href="#how">Get started / はじめる</a>
-              <a class="btn" href="#story">Read our story / ストーリー</a>
-            </div>
-          </div>
+      <div class="heroInner">
+        <div>
+          <div class="eyebrow"><span class="dot"></span>日本の「もったいない」から生まれた</div>
+          <h1>使わなくなったベビー用品を、次の家族へ。</h1>
+          <p class="lead">
+            Mottainai Babe は、ベビー用品をシェアし、交換し、もう一度大切に使うためのコミュニティです。<br/>
+            小さな循環を積み重ねて、無駄を減らし、家族同士がつながる温かい場所を目指しています。
+          </p>
         </div>
-
-        <div class="heroCard sideCard">
-          <div>
-            <h3>Impact snapshot / インパクト</h3>
-            <p>Replace these with real numbers when you launch.</p>
-            <div class="stats">
-              <div class="stat">
-                <strong>5,000+</strong>
-                <span>items shared / 共有</span>
-              </div>
-              <div class="stat">
-                <strong>2,000+</strong>
-                <span>families connected / 家族</span>
-              </div>
-              <div class="stat">
-                <strong>1,200kg</strong>
-                <span>waste reduced / 削減</span>
-              </div>
-            </div>
-          </div>
-          <div class="card" style="padding:14px">
-            <h3 style="margin-bottom:6px">Tagline / タグライン</h3>
-            <p style="font-size:13px">
-              <strong>Nothing useful should go to waste.</strong><br/>
-              <span style="color:var(--muted)">まだ使えるものを、無駄にしない。</span>
-            </p>
-          </div>
-        </div>
+        <div class="heroMedia" aria-label="Key visual placeholder"></div>
       </div>
     </section>
 
-    <!-- STORY -->
+    <!-- STORY (Editorial blocks) -->
     <section id="story">
-      <div class="sectionHead">
-        <h2 class="sectionTitle">Our Story / ストーリー</h2>
-        <p class="sectionNote">A warm, founder-led origin story that builds trust.</p>
+      <div class="sectionTitle">
+        <h2>ストーリー</h2>
+        <p>画像と短い章立てで、読みやすく信頼感のある構成に。</p>
       </div>
 
-      <div class="bilingual">
-        <div class="lang">
-          <div class="label">EN</div>
-          <div class="text">
-            “Mottainai” is a uniquely Japanese word that expresses respect for resources — and the feeling that
-            something valuable should not go to waste.
-            <br/><br/>
-            Mottainai Babe began from a simple question: <em>What if baby items could keep going, from one family to another?</em>
-            <br/><br/>
-            I’m a mother of two living in Japan. As my children grew, I realized how many items are used only for a short time —
-            clothes, toys, and everyday baby essentials. Many are still in great condition, yet they often end up unused or discarded.
-            <br/><br/>
-            Mottainai Babe exists to help these items find a new home — and to bring families together through sharing and exchange.
+      <div class="storyList">
+        <!-- Block 1 -->
+        <div class="block">
+          <div class="media" aria-label="Image placeholder 1">
+            <div class="cap">写真：家の中のやさしい光（後で差し替え）</div>
+          </div>
+          <div class="copy">
+            <div class="k">CHAPTER 01</div>
+            <h3>二人の子育ての中で気づいたこと</h3>
+            <p>
+              子どもが成長するたびに、使う期間が短いものがたくさんあることに気づきました。<br/>
+              ベビー服、おもちゃ、さまざまな育児用品。まだきれいで、十分に使えるのに、役目を終えてしまう物が多いのです。
+            </p>
+            <div class="quote">「まだ使えるのに、捨てられてしまうのはもったいない。」</div>
           </div>
         </div>
 
-        <div class="lang">
-          <div class="label">JP</div>
-          <div class="text">
-            「もったいない」という言葉には、まだ使えるものを無駄にしないという気持ちと、
-            物に込められた価値や想いを大切にする日本の文化が込められています。
-            <br/><br/>
-            Mottainai Babe は、ある小さな問いから始まりました。<em>ベビー用品が、家族から家族へと受け継がれていったら？</em>
-            <br/><br/>
-            私は日本で二人の子どもを育てている母親です。子育てをする中で、ベビー服やおもちゃなど、
-            短い期間しか使わない物が本当に多いことに気づきました。まだきれいで十分に使えるのに、
-            使われなくなったり捨てられたりすることもあります。
-            <br/><br/>
-            Mottainai Babe は、そうした物が次の家族へとつながり、シェアや交換を通じて家族同士がつながる場所を目指しています。
+        <!-- Block 2 (auto alternates) -->
+        <div class="block">
+          <div class="media" aria-label="Image placeholder 2">
+            <div class="cap">写真：整えられた収納／ラベル（後で差し替え）</div>
+          </div>
+          <div class="copy">
+            <div class="k">CHAPTER 02</div>
+            <h3>物には、時間と想いが宿る</h3>
+            <p>
+              物は単なる消耗品ではなく、誰かの時間や工夫、そして思い出が重なったものだと思います。<br/>
+              だからこそ、次の家族へ受け継がれていく仕組みがあれば、物の価値はもう一度よみがえります。
+            </p>
+          </div>
+        </div>
+
+        <!-- Block 3 -->
+        <div class="block">
+          <div class="media" aria-label="Image placeholder 3">
+            <div class="cap">写真：手渡し／梱包の手元（後で差し替え）</div>
+          </div>
+          <div class="copy">
+            <div class="k">CHAPTER 03</div>
+            <h3>シェアと交換で、家族がつながる</h3>
+            <p>
+              必要なくなった物は、別の誰かにとって必要な物かもしれません。<br/>
+              小さな交換が生まれるたびに、無駄が減り、暮らしが少し軽くなり、家族同士がつながっていく。そんな循環を育てたいと考えています。
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- WHY -->
-    <section id="why">
-      <div class="sectionHead">
-        <h2 class="sectionTitle">Why Mottainai / なぜ「もったいない」</h2>
-        <p class="sectionNote">Clear philosophy, simple message, global relevance.</p>
+    <!-- WHY MOTTAINAI -->
+    <section id="mottainai">
+      <div class="sectionTitle">
+        <h2>なぜ「もったいない」なのか</h2>
+        <p>日本の価値観をヒントに、暮らしにやさしい循環を。</p>
       </div>
 
-      <div class="grid">
-        <div class="card" style="grid-column: span 4;">
-          <h3>Respect for value / 価値を尊重</h3>
+      <div class="block" style="grid-template-columns:1.1fr .9fr;">
+        <div class="copy">
+          <div class="k">CONCEPT</div>
+          <h3>まだ使えるものを、無駄にしない</h3>
           <p>
-            <span class="en-only">Not everything is disposable. Many items still have life left.</span>
-            <span class="jp-only">物は「使い捨て」ではなく、まだ役割を持てるもの。</span>
-            <span data-lang="both">
-              Not everything is disposable. Many items still have life left.<br/>
-              <small style="color:var(--muted-2)">物は「使い捨て」ではなく、まだ役割を持てるもの。</small>
-            </span>
+            「もったいない」は、資源を大切にし、価値あるものを尊重する気持ち。<br/>
+            Mottainai Babe はこの考え方を、ベビー用品のシェア＆交換という形で、日常の中に自然に取り入れたいと考えています。
           </p>
+          <div class="quote">小さな行動が積み重なれば、社会はもっと持続可能になる。</div>
         </div>
-
-        <div class="card" style="grid-column: span 4;">
-          <h3>Small actions, real change / 小さな行動が変化に</h3>
-          <p>
-            <span data-lang="both">
-              Sharing and exchanging reduces waste and supports families.<br/>
-              <small style="color:var(--muted-2)">シェアや交換は、無駄を減らし、家族を支えます。</small>
-            </span>
-          </p>
-        </div>
-
-        <div class="card" style="grid-column: span 4;">
-          <h3>From Japan to the world / 日本から世界へ</h3>
-          <p>
-            <span data-lang="both">
-              Inspired by a Japanese value — built for families everywhere.<br/>
-              <small style="color:var(--muted-2)">日本の価値観をヒントに、世界の家族へ。</small>
-            </span>
-          </p>
+        <div class="media" aria-label="Image placeholder concept">
+          <div class="cap">写真：自然素材／緑のディテール（後で差し替え）</div>
         </div>
       </div>
     </section>
 
-    <!-- HOW -->
-    <section id="how">
-      <div class="sectionHead">
-        <h2 class="sectionTitle">How it Works / 使い方</h2>
-        <p class="sectionNote">A simple 3-step flow that feels trustworthy and easy.</p>
+    <!-- PRINCIPLES -->
+    <section id="principles">
+      <div class="sectionTitle">
+        <h2>私たちの考え</h2>
+        <p>シンプルで、やさしく、続けられる体験を。</p>
       </div>
 
-      <div class="steps">
-        <div class="card">
-          <div class="stepTop">
-            <span class="badge">1</span>
-            <span class="mini">Share / シェア</span>
-          </div>
-          <h3>List items you no longer need</h3>
-          <p>
-            Post what your baby has outgrown and add simple details (condition, size, notes).<br/>
-            <small style="color:var(--muted-2)">使わなくなった物を登録し、状態やサイズなどを簡単に記載します。</small>
-          </p>
+      <div class="principles">
+        <div class="pCard">
+          <div class="num">01</div>
+          <h3>やさしい交換</h3>
+          <p>相手への思いやりを大切に。物を通して、気持ちの良い関係が生まれるように。</p>
         </div>
-
-        <div class="card">
-          <div class="stepTop">
-            <span class="badge">2</span>
-            <span class="mini">Exchange / 交換</span>
-          </div>
-          <h3>Connect with other families</h3>
-          <p>
-            Find what you need and exchange through friendly, transparent communication.<br/>
-            <small style="color:var(--muted-2)">必要な物を見つけ、丁寧で分かりやすいコミュニケーションで交換します。</small>
-          </p>
+        <div class="pCard">
+          <div class="num">02</div>
+          <h3>分かりやすさ</h3>
+          <p>ルールや流れをシンプルに。初めてでも迷わない体験を目指します。</p>
         </div>
-
-        <div class="card">
-          <div class="stepTop">
-            <span class="badge">3</span>
-            <span class="mini">Reuse / 再利用</span>
-          </div>
-          <h3>Give items a new life</h3>
-          <p>
-            Items continue their story in a new home — reducing waste and helping families.<br/>
-            <small style="color:var(--muted-2)">物が次の家族へ受け継がれ、無駄を減らし家族を支えます。</small>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- COMMUNITY -->
-    <section id="community">
-      <div class="sectionHead">
-        <h2 class="sectionTitle">Our Community / コミュニティ</h2>
-        <p class="sectionNote">More than transactions — trust, warmth, and mutual support.</p>
-      </div>
-
-      <div class="grid">
-        <div class="card" style="grid-column: span 7;">
-          <h3>More than a platform / 単なるサービスではない</h3>
-          <p>
-            Mottainai Babe is a place where families can connect, help one another, and share resources with care.<br/>
-            <small style="color:var(--muted-2)">Mottainai Babe は、家族同士がつながり、助け合い、思いやりをもってシェアする場所です。</small>
-          </p>
-        </div>
-        <div class="card" style="grid-column: span 5;">
-          <h3>Values / 大切にすること</h3>
-          <p>
-            • Kind exchange / やさしい交換<br/>
-            • Transparency / 分かりやすさ<br/>
-            • Respect & safety / 安心と尊重
-          </p>
+        <div class="pCard">
+          <div class="num">03</div>
+          <h3>安心と尊重</h3>
+          <p>家族が安心して使える場所へ。安全性と信頼を第一に考えます。</p>
         </div>
       </div>
     </section>
 
     <!-- VISION -->
     <section id="vision">
-      <div class="sectionHead">
-        <h2 class="sectionTitle">Vision / ビジョン</h2>
-        <p class="sectionNote">Start with baby items, grow into a bigger culture of reuse.</p>
+      <div class="sectionTitle">
+        <h2>ビジョン</h2>
+        <p>ベビー用品から始まり、将来はもっと大きな循環へ。</p>
       </div>
 
-      <div class="bilingual">
-        <div class="lang">
-          <div class="label">EN</div>
-          <div class="text">
-            Mottainai Babe begins with baby items — because that’s where waste and need often meet.
-            <br/><br/>
-            Over time, we aim to grow into a community that spreads a culture of sharing, exchanging, and reusing useful things.
-            <br/><br/>
-            <strong>Nothing useful should go to waste.</strong>
+      <div class="storyList">
+        <div class="block">
+          <div class="media" aria-label="Image placeholder vision 1">
+            <div class="cap">写真：コミュニティの風景（後で差し替え）</div>
           </div>
-        </div>
-
-        <div class="lang">
-          <div class="label">JP</div>
-          <div class="text">
-            Mottainai Babe は、ベビー用品の交換から始まります。
-            無駄になりやすい一方で、必要とする人も多い領域だからです。
-            <br/><br/>
-            そして将来的には、役に立つ物をシェアし、交換し、再利用する文化を広げるコミュニティへと成長していきたいと考えています。
-            <br/><br/>
-            <strong>まだ使えるものを、無駄にしない。</strong>
+          <div class="copy">
+            <div class="k">FUTURE</div>
+            <h3>コミュニティとして広がっていく</h3>
+            <p>
+              Mottainai Babe はベビー用品の交換から始まります。<br/>
+              そして将来的には、物を大切にする文化が広がり、人と人が助け合えるコミュニティへと育っていくことを目指しています。
+            </p>
+            <div class="quote">まだ使えるものを、無駄にしない。</div>
           </div>
         </div>
       </div>
@@ -783,45 +587,35 @@
     <section id="join" class="cta">
       <div class="ctaBox">
         <div>
-          <h2>Join the community / コミュニティに参加</h2>
+          <h2>コミュニティに参加する</h2>
           <p>
-            Start sharing today — give baby items a second life and help build a more sustainable future.<br/>
-            <small style="color:var(--muted-2)">今日からシェアを始めましょう。ベビー用品に“次の物語”を。</small>
+            今日からシェアを始めましょう。ベビー用品に“次の物語”を。<br/>
+            小さな循環を積み重ねて、より持続可能で温かい未来へ。
           </p>
         </div>
         <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <a class="btn primary" href="#how">Get started / はじめる</a>
-          <a class="btn" href="#story">Read our story / ストーリー</a>
+          <a class="btn primary" href="/app">交換を始める</a>
+          <a class="btn" href="#story">ストーリーを読む</a>
         </div>
       </div>
     </section>
-
   </main>
 
   <footer>
     <div class="container">
       <div class="footerRow">
-        <div>© <span id="year"></span> Mottainai Babe</div>
+        <div>© <span id="y"></span> Mottainai Babe</div>
         <div style="display:flex;gap:14px;flex-wrap:wrap;">
-          <a href="#top">Top</a>
-          <a href="#how">How it Works</a>
-          <a href="#join">Join</a>
+          <a href="#top">トップ</a>
+          <a href="#story">ストーリー</a>
+          <a href="#join">参加</a>
         </div>
       </div>
     </div>
   </footer>
 
   <script>
-    // Footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Language toggle
-    const root = document.body;
-    const setLang = (lang) => root.setAttribute('data-lang', lang);
-
-    document.getElementById('langBoth').addEventListener('click', () => setLang('both'));
-    document.getElementById('langEN').addEventListener('click', () => setLang('en'));
-    document.getElementById('langJP').addEventListener('click', () => setLang('jp'));
+    document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
