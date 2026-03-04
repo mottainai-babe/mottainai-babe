@@ -11,68 +11,158 @@
 
   <style>
     :root{
-      --bg:#377649;
-      --white:#ffffff;
-      --white-80: rgba(255,255,255,.8);
-      --white-65: rgba(255,255,255,.65);
-      --pill: rgba(255,255,255,.12);
-      --stroke: rgba(255,255,255,.55);
+      /* ===== BAUM-like minimal theme (white + green) ===== */
+      --bg:#ffffff;
+      --ink:#111111;
+      --muted:#444444;
 
-      /* modal */
+      --green:#0f6b4d;
+      --green2:#0b513b;
+      --line: rgba(15,107,77,.28); /* green lines */
+
+      /* Buttons */
+      --btnBg: transparent;
+      --btnHoverBg: rgba(15,107,77,.06);
+      --btnStroke: var(--line);
+
+      /* layout */
+      --max: 980px;
+      --pad: 22px;
+
+      /* ===== modal (keep readable on white) ===== */
       --modalBack: rgba(0,0,0,.55);
       --modalCard: #ffffff;
       --modalText: #111827;
       --modalMuted: #6b7280;
       --modalLine: #e5e7eb;
     }
+
     *{box-sizing:border-box}
+
     body{
       margin:0;
       background:var(--bg);
-      color:var(--white);
+      color:var(--ink);
       font-family: ui-sans-serif, system-ui, -apple-system, "Hiragino Sans","Noto Sans JP", "Segoe UI", Roboto, Arial;
       min-height:100vh;
       display:flex;
-      align-items:center;
+      align-items:flex-start;
       justify-content:center;
     }
 
-    .wrap{
-      width:min(980px,92vw);
-      padding:48px 70px;
+    /* ===== Top bar (new, minimal) ===== */
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      width:100%;
+      background: rgba(255,255,255,.90);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar{
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px var(--pad);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+    .menuBtn{
+      width: 44px;
+      height: 44px;
+      display:grid;
+      place-items:center;
+      border:none;
+      background:transparent;
+      cursor:pointer;
+    }
+    .hamburger{
+      width:22px;
+      height:12px;
       position:relative;
     }
+    .hamburger::before,
+    .hamburger::after,
+    .hamburger span{
+      content:"";
+      position:absolute;
+      left:0; right:0;
+      height:1px; /* thickness 그대로 */
+      background: var(--green);
+      opacity:.95;
+    }
+    .hamburger::before{ top:0; }
+    .hamburger span{ top:50%; transform:translateY(-50%); }
+    .hamburger::after{ bottom:0; }
+
+    .brandTop{
+      font-weight:600;
+      letter-spacing:.22em;
+      font-size:18px;
+      color:var(--green);
+      text-align:center;
+      white-space:nowrap;
+    }
+
+    .topCta{
+      font-size:12px;
+      letter-spacing:.08em;
+      padding:10px 12px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:transparent;
+      color:var(--green);
+      white-space:nowrap;
+      text-decoration:none;
+    }
+    .topCta:hover{ background: var(--btnHoverBg); text-decoration:none; }
+
+    /* ===== Main wrap ===== */
+    .wrap{
+      width:min(var(--max),92vw);
+      padding: 34px 0 46px;
+      position:relative;
+    }
+
+    /* hero */
     .center{
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:center;
-      gap:18px;
+      gap:16px;
       text-align:center;
-      padding:28px 0 10px;
+      padding: 56px 0 8px;
     }
+
     .logo{
       width:min(520px, 78vw);
       height:auto;
       display:block;
+      /* Keep your logo as-is. If logo has transparent bg, it will look great on white */
     }
+
     .jp-title{
       font-size:18px;
-      letter-spacing:.06em;
+      letter-spacing:.10em;
       font-weight:700;
-      margin-top:4px;
+      margin-top: 6px;
+      color: var(--green);
     }
     .jp-sub{
       font-size:14px;
       letter-spacing:.05em;
-      color:var(--white-80);
+      color: var(--muted);
     }
 
+    /* buttons */
     .btns{
       display:flex;
       flex-direction:column;
       gap:12px;
-      margin-top:10px;
+      margin-top:12px;
       width:min(520px, 78vw);
     }
     .btn{
@@ -83,60 +173,82 @@
       font-weight:700;
       letter-spacing:.02em;
       cursor:pointer;
-      border:1px solid var(--stroke);
-      background:transparent;
-      color:var(--white);
+      border:1px solid var(--btnStroke);
+      background:var(--btnBg);
+      color: var(--green);
+      transition: background .18s ease, transform .06s ease;
     }
+    .btn:hover{ background: var(--btnHoverBg); }
     .btn.primary{
-      background:rgba(255,255,255,.85);
-      border-color:rgba(255,255,255,.85);
-      color:#1f3d2b;
+      background: rgba(15,107,77,.10);
+      border-color: rgba(15,107,77,.30);
+      color: var(--green2);
     }
     .btn:active{transform:translateY(1px)}
     .btn[disabled]{opacity:.6; cursor:not-allowed}
 
+    /* brand story button (new) */
+    .btn.secondary{
+      background: transparent;
+      border-color: rgba(15,107,77,.26);
+      color: var(--green);
+    }
+
+    /* badges -> minimal chips */
     .badges{
-      margin-top:14px;
+      margin-top: 16px;
       display:flex;
-      gap:14px;
+      gap:12px;
       flex-wrap:wrap;
       justify-content:center;
     }
     .badge{
       padding:10px 16px;
       border-radius:999px;
-      background:var(--pill);
-      border:1px solid rgba(255,255,255,.12);
+      background: rgba(15,107,77,.06);
+      border:1px solid rgba(15,107,77,.22);
       font-size:13px;
-      color:var(--white-80);
+      color: rgba(15,107,77,.92);
       font-weight:700;
+      letter-spacing:.02em;
     }
 
-    /* Guide section */
+    /* status */
+    .status{
+      margin-top:12px;
+      font-size:12px;
+      color: rgba(15,107,77,.85);
+      opacity:.95;
+      min-height:18px;
+      text-align:center;
+    }
+
+    /* Guide section (keep structure, redesign) */
     .infoSection{
       width:100%;
-      margin-top:48px;
-      padding-top:34px;
-      border-top:1px solid rgba(255,255,255,.14); /* 요청한 구분선 */
+      margin-top: 54px;
+      padding-top: 44px;
+      border-top:1px solid var(--line);
       text-align:center;
     }
     .infoInner{
       width:100%;
       display:flex;
       flex-direction:column;
-      align-items:center; /* ✅ iPhone에서도 중앙 고정 */
+      align-items:center;
       gap:14px;
     }
     .infoTitle{
       font-size:18px;
       font-weight:800;
-      letter-spacing:.02em;
+      letter-spacing:.06em;
+      color: var(--green);
     }
     .infoDesc{
       max-width:52ch;
       font-size:13px;
-      line-height:1.7;
-      color:var(--white-80);
+      line-height:1.8;
+      color: var(--muted);
     }
     .infoBtn{
       display:block;
@@ -144,45 +256,49 @@
       max-width:520px;
       padding:14px 18px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.45);
-      background:rgba(255,255,255,.12);
-      color:#fff;
+      border:1px solid var(--btnStroke);
+      background: transparent;
+      color: var(--green);
       text-decoration:none;
       font-weight:800;
       text-align:center;
-      transition:background .2s ease;
-      margin-left:auto;  /* ✅ 혹시 모를 iOS margin 계산 방지 */
-      margin-right:auto; /* ✅ */
+      transition: background .18s ease;
+      margin-left:auto;
+      margin-right:auto;
+      letter-spacing:.02em;
     }
-    .infoBtn:hover{background:rgba(255,255,255,.18)}
+    .infoBtn:hover{ background: var(--btnHoverBg); }
 
+    /* footer */
     .footer{
-      margin-top:30px;
-      padding-top:18px;
-      border-top:1px solid rgba(255,255,255,.14);
-      color:var(--white-65);
+      margin-top: 34px;
+      padding-top: 18px;
+      border-top:1px solid var(--line);
+      color: rgba(15,107,77,.85);
       font-size:12px;
-      line-height:1.55;
+      line-height:1.7;
       text-align:center;
     }
-    .footer a{color:var(--white-80); text-decoration:none}
-    .footer a:hover{text-decoration:underline}
-
-    .status{
-      margin-top:12px;
-      font-size:12px;
-      color:rgba(255,255,255,.85);
-      opacity:.95;
-      min-height:18px;
-      text-align:center;
+    .footer a{
+      color: rgba(15,107,77,.92);
+      text-decoration:none;
+      border-bottom:1px solid transparent;
+      padding-bottom:2px;
+    }
+    .footer a:hover{
+      border-bottom-color: var(--line);
+      text-decoration:none;
     }
 
+    /* Responsive */
     @media (max-width:520px){
-      .wrap{padding:34px 20px}
+      .wrap{padding: 26px 0 40px}
+      .center{padding-top:44px}
       .btn{height:54px}
+      .brandTop{font-size:16px}
     }
 
-    /* ===== In-app modal ===== */
+    /* ===== In-app modal (unchanged functionality) ===== */
     .modalBack{
       position:fixed; inset:0;
       background:var(--modalBack);
@@ -229,6 +345,20 @@
 </head>
 
 <body>
+  <!-- Minimal top bar (does not affect existing JS) -->
+  <header>
+    <div class="topbar">
+      <button class="menuBtn" type="button" aria-label="menu">
+        <div class="hamburger"><span></span></div>
+      </button>
+
+      <div class="brandTop">MOTTAINAI BABE</div>
+
+      <!-- optional quick link -->
+      <a class="topCta" href="./brand.html">ブランドストーリー</a>
+    </div>
+  </header>
+
   <main class="wrap">
     <section class="center">
       <img class="logo" src="./logo1.png" alt="Mottainai Babe" />
@@ -237,8 +367,14 @@
       <div class="jp-sub">ベビー用品交換プラットフォーム</div>
 
       <div class="btns">
+        <!-- ✅ IDs unchanged -->
         <button id="btnPost" class="btn primary" type="button">出品する</button>
         <button id="btnView" class="btn" type="button">アイテムを見る</button>
+
+        <!-- ✅ NEW: brand story button -->
+        <button class="btn secondary" type="button" onclick="location.href='./brand.html'">
+          ブランドストーリーを見る
+        </button>
       </div>
 
       <div class="badges" aria-label="features">
@@ -247,6 +383,7 @@
         <div class="badge">利用無料</div>
       </div>
 
+      <!-- ✅ status id unchanged -->
       <div id="status" class="status"></div>
     </section>
 
@@ -263,7 +400,13 @@
 
     <footer class="footer">
       <div>Mottainai Babeは、ベビー用品を必要な人へつなぐ交換プラットフォームです。</div>
+
+      <!-- ✅ footer links updated: add ブランド / ブランドストーリー -->
       <div>
+        <a href="./brand.html">ブランド</a>
+        &nbsp;|&nbsp;
+        <a href="./brand.html">ブランドストーリー</a>
+        &nbsp;|&nbsp;
         <a href="./guide.html">ガイド</a>
         &nbsp;|&nbsp;
         <a href="./terms.html">利用規約</a>
@@ -272,6 +415,7 @@
         &nbsp;|&nbsp;
         <a href="./about.html">お問い合わせ</a>
       </div>
+
       <div>© 2026 Mottainai Babe. All rights reserved.</div>
     </footer>
   </main>
