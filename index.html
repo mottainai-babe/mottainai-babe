@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Mottainai Babe</title>
+  <meta name="description" content="もったいないベビー｜ベビー用品交換プラットフォーム" />
 
   <!-- AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5865479939175622"
@@ -34,17 +35,20 @@
       --modalMuted: #6b7280;
       --modalLine: #e5e7eb;
 
+      /* ===== Menu (BAUM-like) ===== */
+      --menuOverlay: rgba(0,0,0,.18);
+      --menuPanelBg: #f6f7f7; /* ✅ 메뉴 배경 (원하면 #e6f4ef 로 변경) */
+      --menuLine: rgba(17,17,17,.10);
+      --menuInk: #111111;
+      --menuMuted: rgba(17,17,17,.64);
+
       /* iPhone safe area */
       --safeL: env(safe-area-inset-left);
       --safeR: env(safe-area-inset-right);
-
-      /* ===== Menu (BAUM-like) ===== */
-      --menuBg: #e6f4ef;
-      --menuInk: #111111;
-      --menuLine: rgba(17,17,17,.14);
     }
 
     *{box-sizing:border-box}
+    html,body{height:100%}
 
     body{
       margin:0;
@@ -53,7 +57,7 @@
       font-family: ui-sans-serif, system-ui, -apple-system, "Hiragino Sans","Noto Sans JP", "Segoe UI", Roboto, Arial;
       min-height:100vh;
 
-      /* ✅ header + main stack vertically */
+      /* ✅ header + main should stack vertically */
       display:flex;
       flex-direction: column;
       align-items: stretch;
@@ -61,6 +65,7 @@
     }
 
     a{color:inherit;text-decoration:none}
+    a:hover{text-decoration:underline}
 
     /* ===== Top bar (true centered + safe-area) ===== */
     header{
@@ -99,8 +104,10 @@
       align-items:center;
       justify-content:flex-end;
       min-width: 0;
+      gap: 10px;
     }
 
+    /* Hamburger button */
     .menuBtn{
       width: 44px;
       height: 44px;
@@ -111,8 +118,7 @@
       cursor:pointer;
       border-radius: 999px;
     }
-    .menuBtn:hover{ background: rgba(15,107,77,.06); }
-
+    .menuBtn:hover{ background: var(--btnHoverBg); }
     .hamburger{
       width:22px;
       height:12px;
@@ -132,6 +138,7 @@
     .hamburger span{ top:50%; transform:translateY(-50%); }
     .hamburger::after{ bottom:0; }
 
+    /* centered brand text */
     .brandTop{
       font-weight:600;
       letter-spacing:.22em;
@@ -140,139 +147,7 @@
       text-align:center;
       white-space:nowrap;
       padding: 0 6px;
-      user-select:none;
     }
-
-    /* ✅ 오른쪽 버튼 삭제(요청사항) */
-    .rightSlot .topCta{ display:none; }
-
-    /* ===== BAUM-like Fullscreen Menu ===== */
-    .menuOverlay{
-      position:fixed; inset:0;
-      background: rgba(2,6,23,.45);
-      opacity:0;
-      pointer-events:none;
-      transition: opacity .18s ease;
-      z-index: 80;
-    }
-    .menuOverlay.open{
-      opacity:1;
-      pointer-events:auto;
-    }
-
-    .menuSheet{
-      position:fixed;
-      inset:0;
-      background: var(--menuBg);
-      color: var(--menuInk);
-      transform: translateY(-6px);
-      opacity:0;
-      pointer-events:none;
-      transition: opacity .18s ease, transform .18s ease;
-      z-index: 90;
-      overflow:auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    .menuSheet.open{
-      opacity:1;
-      pointer-events:auto;
-      transform: translateY(0);
-    }
-
-    .menuTop{
-      max-width: 740px;
-      margin: 0 auto;
-      padding: 18px 18px 10px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      border-bottom: 1px solid var(--menuLine);
-    }
-    .menuTop .title{
-      font-weight: 900;
-      letter-spacing:.18em;
-      font-size: 18px;
-      user-select:none;
-    }
-    .menuClose{
-      width: 44px; height: 44px;
-      border-radius: 999px;
-      border: 1px solid var(--menuLine);
-      background: transparent;
-      cursor:pointer;
-      display:grid;
-      place-items:center;
-      font-size: 20px;
-      line-height: 1;
-    }
-
-    .menuBody{
-      max-width: 740px;
-      margin: 0 auto;
-      padding: 12px 18px 26px;
-    }
-
-    /* 상단 강조 버튼 2개 */
-    .menuActions{
-      margin: 14px 0 18px;
-      display:grid;
-      gap:12px;
-    }
-    .menuPrimaryBtn{
-      height: 56px;
-      border-radius: 10px;
-      border: none;
-      background: #111;
-      color:#fff;
-      font-weight: 900;
-      font-size: 15px;
-      cursor:pointer;
-      letter-spacing:.06em;
-    }
-    .menuSecondaryBtn{
-      height: 56px;
-      border-radius: 10px;
-      border: 1px solid #111;
-      background: transparent;
-      color:#111;
-      font-weight: 900;
-      font-size: 15px;
-      cursor:pointer;
-      letter-spacing:.06em;
-    }
-
-    .menuList{
-      list-style:none;
-      padding:0;
-      margin:0;
-      border-top: 1px solid var(--menuLine);
-    }
-    .menuItem{
-      border-bottom: 1px solid var(--menuLine);
-    }
-    .menuLink{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  justify-content:center;
-  padding:24px 6px;
-  gap:4px;
-}
-
-.menuLink strong{
-  font-size:18px;
-  font-weight:500;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-}
-
-.menuLink span{
-  font-size:12px;
-  opacity:.7;
-  letter-spacing:.06em;
-}
-    .menuLink:hover{ opacity:.92; }
 
     /* ===== Main wrap ===== */
     .wrap{
@@ -335,32 +210,28 @@
       color: var(--green);
       transition: background .18s ease, transform .06s ease;
     }
-    .btn:hover{ background: var(--btnHoverBg); }
+    .btn:hover{ background: var(--btnHoverBg); text-decoration:none; }
     .btn.primary{
       background: rgba(15,107,77,.10);
       border-color: rgba(15,107,77,.30);
       color: var(--green2);
     }
-    .btn.secondary{ display:none; } /* ✅ 중앙 브랜드스토리 버튼 삭제 */
     .btn:active{transform:translateY(1px)}
     .btn[disabled]{opacity:.6; cursor:not-allowed}
 
-    /* ✅ badges -> BAUM spacing text */
-    .featuresLine{
+    /* ✅ Minimal feature row (no frames) */
+    .features{
       margin-top: 16px;
       font-size: 12px;
-      letter-spacing: .22em;
+      letter-spacing: .18em;
+      color: rgba(17,17,17,.72);
       text-transform: none;
-      color: rgba(17,17,17,.78);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap: 14px;
-      flex-wrap:wrap;
-      user-select:none;
+      white-space: nowrap;
     }
-    .featuresLine .sep{
-      opacity:.55;
+    .features .sep{
+      display:inline-block;
+      margin: 0 10px;
+      color: rgba(17,17,17,.32);
     }
 
     .status{
@@ -416,7 +287,7 @@
       margin-right:auto;
       letter-spacing:.02em;
     }
-    .infoBtn:hover{ background: var(--btnHoverBg); }
+    .infoBtn:hover{ background: var(--btnHoverBg); text-decoration:none; }
 
     /* footer */
     .footer{
@@ -444,7 +315,8 @@
       .center{padding-top:44px}
       .btn{height:54px}
       .brandTop{font-size:16px}
-      .featuresLine{ letter-spacing:.18em; }
+      .features{letter-spacing:.14em}
+      .features .sep{margin:0 8px}
     }
 
     /* ===== In-app modal ===== */
@@ -490,6 +362,166 @@
     }
     .modalBtn.ghost{background:#f3f4f6;color:#111827}
     .modalBtn.primary{background:#1f8f5a;color:#fff}
+
+    /* ===== Menu Overlay + Panel (BAUM-like) ===== */
+    .menuOverlay{
+      position: fixed;
+      inset: 0;
+      background: var(--menuOverlay);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease;
+      z-index: 70;
+    }
+    .menuOverlay.open{
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .menuPanel{
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100vh;
+      background: var(--menuPanelBg);
+      color: var(--menuInk);
+      transform: translateY(-8px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease, transform .18s ease;
+      z-index: 80;
+
+      padding-top: 18px;
+      padding-bottom: 22px;
+      padding-left: calc(22px + var(--safeL));
+      padding-right: calc(22px + var(--safeR));
+
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .menuPanel.open{
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .menuTop{
+      max-width: 980px;
+      margin: 0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 8px 0 18px;
+      border-bottom: 1px solid var(--menuLine);
+    }
+    .menuTitle{
+      font-weight: 600;
+      letter-spacing: .22em;
+      font-size: 18px;
+      color: var(--menuInk);
+      white-space: nowrap;
+    }
+    .menuClose{
+      width: 44px;
+      height: 44px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      border-radius: 999px;
+      display:grid;
+      place-items:center;
+    }
+    .menuClose:hover{ background: rgba(0,0,0,.04); }
+    .xIcon{
+      width: 18px;
+      height: 18px;
+      position: relative;
+    }
+    .xIcon::before, .xIcon::after{
+      content:"";
+      position:absolute;
+      left:0; right:0;
+      top:50%;
+      height:1px;
+      background: #111;
+      opacity:.85;
+      transform-origin:center;
+    }
+    .xIcon::before{ transform: translateY(-50%) rotate(45deg); }
+    .xIcon::after{ transform: translateY(-50%) rotate(-45deg); }
+
+    .menuBody{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 18px 0 0;
+    }
+
+    .menuCtas{
+      display:grid;
+      gap: 10px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--menuLine);
+    }
+    .menuBtn{
+      width: 100%;
+      height: 54px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,.20);
+      background: rgba(255,255,255,.60);
+      color: #111;
+      font-weight: 600;
+      letter-spacing: .02em;
+      cursor:pointer;
+    }
+    .menuBtn:hover{ filter: brightness(.98); }
+    .menuBtnPrimary{
+      background: rgba(15,107,77,.12);
+      border-color: rgba(15,107,77,.28);
+      color: var(--green2);
+    }
+    .menuBtnGhost{
+      background: rgba(255,255,255,.65);
+      border-color: rgba(0,0,0,.16);
+      color:#111;
+    }
+
+    .menuLinks{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .menuLink{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 10px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--menuLine);
+      text-decoration:none;
+    }
+    .menuLink:last-child{ border-bottom: none; }
+    .menuLink strong{
+      display:block;
+      font-weight: 600;
+      letter-spacing: .18em;
+      font-size: 14px;
+      color: #111;
+    }
+    .menuLink span{
+      display:block;
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--menuMuted);
+      letter-spacing: .04em;
+    }
+    .menuLink:hover strong{ text-decoration: underline; }
+
+    @media (max-width: 520px){
+      .menuTitle{ font-size: 16px; }
+      .menuLink strong{ font-size: 13px; }
+    }
   </style>
 </head>
 
@@ -497,63 +529,80 @@
   <header>
     <div class="topbar">
       <div class="leftSlot">
-        <button id="menuBtn" class="menuBtn" type="button" aria-label="menu" aria-expanded="false" aria-controls="menuSheet">
+        <button id="menuBtn" class="menuBtn" type="button" aria-label="menu" aria-expanded="false" aria-controls="menuPanel">
           <div class="hamburger"><span></span></div>
         </button>
       </div>
 
       <div class="brandTop">MOTTAINAI BABE</div>
 
-      <div class="rightSlot">
-        <!-- ✅ 요청: 맨 오른쪽 브랜드스토리 버튼 삭제 -->
-      </div>
+      <!-- ✅ 우측 버튼 삭제(요청사항) -->
+      <div class="rightSlot"></div>
     </div>
   </header>
 
-  <!-- ===== Fullscreen Menu (BAUM-like) ===== -->
+  <!-- ✅ Menu Overlay + Panel -->
   <div id="menuOverlay" class="menuOverlay" aria-hidden="true"></div>
 
-  <aside id="menuSheet" class="menuSheet" aria-label="サイトメニュー" role="dialog" aria-modal="true">
+  <aside id="menuPanel" class="menuPanel" aria-label="サイトメニュー" aria-hidden="true">
     <div class="menuTop">
-      <div class="title">MOTTAINAI BABE</div>
-      <button id="menuClose" class="menuClose" type="button" aria-label="閉じる">×</button>
+      <div class="menuTitle">MOTTAINAI BABE</div>
+      <button id="menuClose" class="menuClose" type="button" aria-label="close menu">
+        <span class="xIcon" aria-hidden="true"></span>
+      </button>
     </div>
 
     <div class="menuBody">
-      <!-- ✅ 강조 버튼형 -->
-      <div class="menuActions">
-        <button id="menuPostBtn" class="menuPrimaryBtn" type="button">出品する</button>
-        <button id="menuViewBtn" class="menuSecondaryBtn" type="button">アイテムを見る</button>
+      <div class="menuCtas" aria-label="main actions">
+        <!-- ✅ 버튼형 강조 -->
+        <button id="menuPostBtn" class="menuBtn menuBtnPrimary" type="button">出品する</button>
+        <button id="menuViewBtn" class="menuBtn menuBtnGhost" type="button">アイテムを見る</button>
       </div>
 
-      <!-- ✅ 메뉴 항목 -->
-      <ul class="menuList">
-        <li class="menuItem">
-          <a class="menuLink" href="./brand.html">
-            <strong>ブランドストーリー</strong><span>Brand story</span>
-          </a>
-        </li>
-        <li class="menuItem">
-          <a class="menuLink" href="./guide.html">
-            <strong>ガイド</strong><span>Guides</span>
-          </a>
-        </li>
-        <li class="menuItem">
-          <a class="menuLink" href="./terms.html">
-            <strong>利用規約</strong><span>Terms</span>
-          </a>
-        </li>
-        <li class="menuItem">
-          <a class="menuLink" href="./privacy.html">
-            <strong>プライバシーポリシー</strong><span>Privacy</span>
-          </a>
-        </li>
-        <li class="menuItem">
-          <a class="menuLink" href="./about.html">
-            <strong>お問い合わせ</strong><span>Contact</span>
-          </a>
-        </li>
-      </ul>
+      <nav aria-label="pages">
+        <ul class="menuLinks">
+          <li>
+            <a class="menuLink" href="./brand.html">
+              <div>
+                <strong>BRAND STORY</strong>
+                <span>ブランドストーリー</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="menuLink" href="./guide.html">
+              <div>
+                <strong>GUIDE</strong>
+                <span>ガイド</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="menuLink" href="./terms.html">
+              <div>
+                <strong>TERMS</strong>
+                <span>利用規約</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="menuLink" href="./privacy.html">
+              <div>
+                <strong>PRIVACY</strong>
+                <span>プライバシーポリシー</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="menuLink" href="./about.html">
+              <div>
+                <strong>CONTACT</strong>
+                <span>お問い合わせ</span>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </aside>
 
@@ -567,17 +616,12 @@
       <div class="btns">
         <button id="btnPost" class="btn primary" type="button">出品する</button>
         <button id="btnView" class="btn" type="button">アイテムを見る</button>
-
-        <!-- ✅ 요청: 정중앙 브랜드스토리 보기 버튼 삭제 -->
+        <!-- ✅ 정중앙 브랜드스토리 버튼 삭제(요청사항) -->
       </div>
 
-      <!-- ✅ 요청: 프레임 없이 BAUM 스타일로 -->
-      <div class="featuresLine" aria-label="features">
-        <span>簡単出品</span>
-        <span class="sep">|</span>
-        <span>安心交換</span>
-        <span class="sep">|</span>
-        <span>利用無料</span>
+      <!-- ✅ 프레임 없는 미니멀 표기 -->
+      <div class="features" aria-label="features">
+        簡単出品 <span class="sep">|</span> 安心交換 <span class="sep">|</span> 利用無料
       </div>
 
       <div id="status" class="status"></div>
@@ -643,54 +687,54 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
 
   <script>
-    /* ===== Menu toggle (index only) ===== */
-    const menuBtn = document.getElementById("menuBtn");
-    const menuOverlay = document.getElementById("menuOverlay");
-    const menuSheet = document.getElementById("menuSheet");
-    const menuClose = document.getElementById("menuClose");
-    const menuPostBtn = document.getElementById("menuPostBtn");
-    const menuViewBtn = document.getElementById("menuViewBtn");
+    /* ========= MENU (open/close) ========= */
+    const menuBtnEl = document.getElementById("menuBtn");
+    const menuPanelEl = document.getElementById("menuPanel");
+    const menuOverlayEl = document.getElementById("menuOverlay");
+    const menuCloseEl = document.getElementById("menuClose");
 
     function openMenu(){
-      menuOverlay.classList.add("open");
-      menuSheet.classList.add("open");
-      menuBtn.setAttribute("aria-expanded","true");
+      menuPanelEl.classList.add("open");
+      menuOverlayEl.classList.add("open");
+      menuPanelEl.setAttribute("aria-hidden","false");
+      menuOverlayEl.setAttribute("aria-hidden","false");
+      menuBtnEl.setAttribute("aria-expanded","true");
       document.body.style.overflow = "hidden";
     }
     function closeMenu(){
-      menuOverlay.classList.remove("open");
-      menuSheet.classList.remove("open");
-      menuBtn.setAttribute("aria-expanded","false");
+      menuPanelEl.classList.remove("open");
+      menuOverlayEl.classList.remove("open");
+      menuPanelEl.setAttribute("aria-hidden","true");
+      menuOverlayEl.setAttribute("aria-hidden","true");
+      menuBtnEl.setAttribute("aria-expanded","false");
       document.body.style.overflow = "";
     }
+    function toggleMenu(){
+      const isOpen = menuPanelEl.classList.contains("open");
+      isOpen ? closeMenu() : openMenu();
+    }
 
-    menuBtn.addEventListener("click", (e)=>{
+    menuBtnEl.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
-      const isOpen = menuSheet.classList.contains("open");
-      isOpen ? closeMenu() : openMenu();
+      toggleMenu();
     });
-
-    menuClose.addEventListener("click", closeMenu);
-    menuOverlay.addEventListener("click", closeMenu);
-
-    document.addEventListener("keydown", (e)=>{
+    menuCloseEl.addEventListener("click", closeMenu);
+    menuOverlayEl.addEventListener("click", closeMenu);
+    document.addEventListener("keydown", (e) => {
       if(e.key === "Escape") closeMenu();
     });
 
-    // 메뉴 안 링크 클릭 시 닫기
-    menuSheet.querySelectorAll("a").forEach(a=>{
-      a.addEventListener("click", ()=> closeMenu());
-    });
-
-    /* ===== 기존 기능(절대 유지) ===== */
+    /* ========= APP CTA (existing behavior kept) ========= */
     const statusEl = document.getElementById("status");
     const btnPost  = document.getElementById("btnPost");
     const btnView  = document.getElementById("btnView");
+    const menuPostBtn = document.getElementById("menuPostBtn");
+    const menuViewBtn = document.getElementById("menuViewBtn");
 
     function setStatus(msg){ statusEl.textContent = msg || ""; }
 
-    // ✅ 아이템 보기: app.html 이동
+    // ✅ アイテムを見る: app.html 이동 (로그인 없이)
     function goView(){
       closeMenu();
       location.href = "./app.html";
@@ -770,8 +814,8 @@
         console.error("getRedirectResult error", err);
       });
 
-    // ✅ 出品する = 로그인 후 app 이동 (기존 로직 그대로)
-    async function doPost(){
+    // ✅ 出品する = 로그인 후 app 이동 (기존 동작 유지)
+    async function doPostFlow(){
       closeMenu();
 
       if (isInAppBrowser()) {
@@ -781,13 +825,16 @@
 
       try{
         btnPost.disabled = true;
+        menuPostBtn.disabled = true;
         setStatus("Googleログイン中…");
 
         const provider = new firebase.auth.GoogleAuthProvider();
         provider.setCustomParameters({ prompt: "select_account" });
 
+        // popup 우선
         await firebase.auth().signInWithPopup(provider);
 
+        // 성공 → app.html
         location.href = "./app.html";
 
       }catch(err){
@@ -795,6 +842,7 @@
 
         const code = err?.code || "";
 
+        // popup 문제는 redirect fallback
         if (
           code === "auth/popup-blocked" ||
           code === "auth/popup-closed-by-user" ||
@@ -820,11 +868,12 @@
 
       }finally{
         btnPost.disabled = false;
+        menuPostBtn.disabled = false;
       }
     }
 
-    btnPost.addEventListener("click", doPost);
-    menuPostBtn.addEventListener("click", doPost);
+    btnPost.addEventListener("click", doPostFlow);
+    menuPostBtn.addEventListener("click", doPostFlow);
   </script>
 </body>
 </html>
