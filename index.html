@@ -47,9 +47,12 @@
       color:var(--ink);
       font-family: ui-sans-serif, system-ui, -apple-system, "Hiragino Sans","Noto Sans JP", "Segoe UI", Roboto, Arial;
       min-height:100vh;
+
+      /* ✅ FIX: header + main should stack vertically, not side-by-side */
       display:flex;
-      align-items:flex-start;
-      justify-content:center;
+      flex-direction: column;   /* ★ 이게 핵심 */
+      align-items: stretch;     /* header 100% 폭 유지 */
+      justify-content: flex-start;
     }
 
     /* ===== Top bar (true centered + safe-area) ===== */
@@ -121,7 +124,6 @@
     .hamburger span{ top:50%; transform:translateY(-50%); }
     .hamburger::after{ bottom:0; }
 
-    /* ✅ truly centered */
     .brandTop{
       font-weight:600;
       letter-spacing:.22em;
@@ -150,7 +152,7 @@
       width:min(var(--max),92vw);
       padding: 34px 0 46px;
       position:relative;
-      margin: 0 auto;
+      margin: 0 auto; /* ✅ center the main container */
     }
 
     .center{
@@ -319,8 +321,6 @@
       .center{padding-top:44px}
       .btn{height:54px}
       .brandTop{font-size:16px}
-
-      /* CTA가 너무 길면 줄바꿈 없이 좁게 */
       .topCta{padding: 9px 10px; font-size: 12px;}
     }
 
