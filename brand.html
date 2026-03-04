@@ -13,19 +13,23 @@
       --ink: #111111;
       --muted: #444444;
 
-      /* brand green (tweak freely) */
+      /* brand green */
       --green: #0f6b4d;
       --green2:#0b513b;
 
-      /* lines should be green (same thickness as before) */
+      /* lines */
       --line: rgba(15,107,77,.28);
 
-      --max: 820px;  /* centered text width */
+      --max: 820px;
       --pad: 22px;
 
-      /* Minimal sans-serif stacks (no serif) */
       --sans: ui-sans-serif, system-ui, -apple-system, "Hiragino Kaku Gothic ProN",
               "Yu Gothic", "Noto Sans JP", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+      /* Menu */
+      --menuBack: rgba(0,0,0,.35);
+      --menuPanelBg: #ffffff; /* ✅ 메뉴 패널 배경 (원하면 #e6f4ef 로 바꾸면 됨) */
+      --menuLine: rgba(0,0,0,.12);
     }
 
     *{ box-sizing:border-box; }
@@ -42,7 +46,7 @@
     a{ color:inherit; text-decoration:none; }
     a:hover{ text-decoration:underline; }
 
-    /* Top bar */
+    /* ===== Top bar (INDEX와 동일) ===== */
     header{
       position: sticky;
       top: 0;
@@ -83,7 +87,7 @@
       position:absolute;
       left:0;
       right:0;
-      height: 1px;           /* keep thickness */
+      height: 1px;
       background: var(--green);
       opacity: .95;
     }
@@ -93,25 +97,175 @@
 
     .brand{
       font-weight: 600;
-      letter-spacing: .22em; /* BAUM-like tracking */
+      letter-spacing: .22em;
       font-size: 18px;
       color: var(--green);
+      white-space: nowrap;
     }
 
     .cta{
       font-size: 12px;
       letter-spacing: .08em;
       padding: 10px 12px;
-      border: 1px solid var(--line); /* green line */
+      border: 1px solid var(--line);
       background: transparent;
       border-radius: 999px;
       color: var(--green);
+      white-space: nowrap;
     }
 
-    /* Page sections */
-    .section{
-      padding: 64px 0;
+    /* ===== BAUM-like Menu Overlay ===== */
+    .menuOverlay{
+      position: fixed;
+      inset: 0;
+      background: var(--menuBack);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease;
+      z-index: 100;
     }
+    .menuOverlay.open{
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .menuPanel{
+      position: fixed;
+      inset: 0;
+      background: var(--menuPanelBg);
+      transform: translateY(-8px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease, transform .18s ease;
+      z-index: 110;
+      padding: 22px var(--pad) 28px;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .menuPanel.open{
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .menuTop{
+      max-width: 780px;
+      margin: 0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 6px 0 18px;
+      border-bottom: 1px solid var(--menuLine);
+    }
+    .menuTitle{
+      font-weight: 600;
+      letter-spacing: .22em;
+      font-size: 18px;
+      color: #111;
+    }
+    .menuClose{
+      width: 44px;
+      height: 44px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      display:grid;
+      place-items:center;
+    }
+    .menuClose::before,
+    .menuClose::after{
+      content:"";
+      width: 22px;
+      height: 1px;
+      background: #111;
+      position:absolute;
+    }
+    .menuClose{ position: relative; }
+    .menuClose::before{ transform: rotate(45deg); }
+    .menuClose::after{ transform: rotate(-45deg); }
+
+    .menuBody{
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 18px 0 0;
+    }
+
+    /* 강조 버튼 2개 */
+    .menuCtas{
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--menuLine);
+    }
+    .menuBtnPrimary,
+    .menuBtnGhost{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height: 56px;
+      border-radius: 999px;
+      font-size: 15px;
+      letter-spacing: .06em;
+      text-decoration: none;
+      border: 1px solid var(--line);
+    }
+    .menuBtnPrimary{
+      background: rgba(15,107,77,.10);
+      color: var(--green2);
+      border-color: rgba(15,107,77,.30);
+      font-weight: 600;
+    }
+    .menuBtnGhost{
+      background: transparent;
+      color: var(--green);
+      border-color: rgba(15,107,77,.26);
+      font-weight: 600;
+    }
+    .menuBtnPrimary:hover,
+    .menuBtnGhost:hover{
+      text-decoration:none;
+      background: rgba(15,107,77,.06);
+    }
+
+    /* 리스트 링크들 (BAUM 느낌: 얇고 자간 넓게, 여백 크게) */
+    .menuLinks{
+      padding: 10px 0 0;
+    }
+    .menuLink{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      justify-content:center;
+      padding: 24px 6px;
+      gap: 4px;
+      border-bottom: 1px solid var(--menuLine);
+      text-decoration:none;
+    }
+    .menuLink:last-child{ border-bottom:none; }
+
+    .menuLink strong{
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #111;
+    }
+    .menuLink span{
+      font-size: 12px;
+      opacity: .7;
+      letter-spacing: .06em;
+      color: #111;
+      margin-top: 2px;
+    }
+    .menuLink:hover{
+      background: rgba(15,107,77,.04);
+      text-decoration:none;
+    }
+
+    /* ===== Page sections ===== */
+    .section{ padding: 64px 0; }
     .section--tight{ padding: 44px 0; }
 
     .center{
@@ -143,7 +297,6 @@
       color: var(--muted);
     }
 
-    /* vertical rule (green) */
     .rule{
       width: 1px;
       height: 42px;
@@ -151,7 +304,6 @@
       margin: 34px auto 0;
     }
 
-    /* Full-bleed image blocks (no frames) */
     .bleed{
       width: 100%;
       height: min(54vh, 520px);
@@ -159,13 +311,12 @@
       background:
         linear-gradient(180deg, rgba(15,107,77,.06), rgba(15,107,77,.06)),
         radial-gradient(900px 500px at 30% 30%, rgba(15,107,77,.10), transparent 60%),
-        #eef5f1; /* subtle placeholder */
+        #eef5f1;
       background-size: cover;
       background-position: center;
       margin: 0;
     }
 
-    /* Typography blocks like BAUM */
     .blockTitle{
       font-size: 28px;
       letter-spacing: .06em;
@@ -181,7 +332,7 @@
     }
 
     .text{
-      text-align:left; /* BAUM body feels left while section is centered */
+      text-align:left;
       margin: 28px auto 0;
       max-width: 70ch;
       color: var(--muted);
@@ -190,7 +341,6 @@
     .text p{ margin: 0 0 18px; }
     .text p:last-child{ margin-bottom: 0; }
 
-    /* Simple nav list (optional) */
     .anchors{
       display:flex;
       justify-content:center;
@@ -205,7 +355,7 @@
       letter-spacing: .08em;
       color: rgba(15,107,77,.85);
       padding: 10px 12px;
-      border-bottom: 1px solid transparent; /* keep thickness via 1px */
+      border-bottom: 1px solid transparent;
     }
     .anchors a:hover{
       border-bottom-color: var(--line);
@@ -213,7 +363,6 @@
       color: var(--green);
     }
 
-    /* Footer */
     footer{
       border-top: 1px solid var(--line);
       padding: 22px var(--pad) 34px;
@@ -228,7 +377,6 @@
       flex-wrap: wrap;
     }
 
-    /* Mobile tuning */
     @media (max-width: 560px){
       h1{ font-size: 28px; }
       .blockTitle{ font-size: 24px; }
@@ -237,13 +385,17 @@
       .bleed{ height: 44vh; min-height: 240px; }
       .text{ font-size: 14.5px; }
     }
+
+    @media (prefers-reduced-motion: reduce){
+      *{ transition:none !important; scroll-behavior:auto !important; }
+    }
   </style>
 </head>
 
 <body>
   <header>
     <div class="topbar">
-      <button class="menuBtn" aria-label="menu">
+      <button id="menuBtn" class="menuBtn" aria-label="menu" aria-expanded="false" aria-controls="menuPanel">
         <div class="hamburger"><span></span></div>
       </button>
 
@@ -253,6 +405,46 @@
       <a class="cta" href="/app">交換を始める</a>
     </div>
   </header>
+
+  <!-- ✅ Menu Overlay + Panel -->
+  <div id="menuOverlay" class="menuOverlay" aria-hidden="true"></div>
+
+  <aside id="menuPanel" class="menuPanel" aria-label="サイトメニュー">
+    <div class="menuTop">
+      <div class="menuTitle">MOTTAINAI BABE</div>
+      <button id="menuClose" class="menuClose" type="button" aria-label="close"></button>
+    </div>
+
+    <div class="menuBody">
+      <div class="menuCtas">
+        <a class="menuBtnPrimary" href="./app.html">出品する</a>
+        <a class="menuBtnGhost" href="./app.html">アイテムを見る</a>
+      </div>
+
+      <nav class="menuLinks" aria-label="ページリンク">
+        <a class="menuLink" href="./brand.html">
+          <strong>BRAND STORY</strong>
+          <span>ブランドストーリー</span>
+        </a>
+        <a class="menuLink" href="./guide.html">
+          <strong>GUIDE</strong>
+          <span>ガイド</span>
+        </a>
+        <a class="menuLink" href="./terms.html">
+          <strong>TERMS</strong>
+          <span>利用規約</span>
+        </a>
+        <a class="menuLink" href="./privacy.html">
+          <strong>PRIVACY</strong>
+          <span>プライバシーポリシー</span>
+        </a>
+        <a class="menuLink" href="./about.html">
+          <strong>CONTACT</strong>
+          <span>お問い合わせ</span>
+        </a>
+      </nav>
+    </div>
+  </aside>
 
   <!-- HERO -->
   <section class="section" id="top">
@@ -275,7 +467,6 @@
   </section>
 
   <!-- FULL BLEED IMAGE 1 -->
-  <!-- 나중에 여기 background-image만 바꾸면 됩니다 -->
   <figure class="bleed" style="background-image:url('');" aria-label="image placeholder 1"></figure>
 
   <!-- OUR ROOTS -->
@@ -371,7 +562,34 @@
   </footer>
 
   <script>
+    // year
     document.getElementById('y').textContent = new Date().getFullYear();
+
+    // menu open/close
+    const menuBtn = document.getElementById("menuBtn");
+    const menuPanel = document.getElementById("menuPanel");
+    const menuOverlay = document.getElementById("menuOverlay");
+    const menuClose = document.getElementById("menuClose");
+
+    function openMenu(){
+      menuPanel.classList.add("open");
+      menuOverlay.classList.add("open");
+      menuBtn.setAttribute("aria-expanded","true");
+    }
+    function closeMenu(){
+      menuPanel.classList.remove("open");
+      menuOverlay.classList.remove("open");
+      menuBtn.setAttribute("aria-expanded","false");
+    }
+    function toggleMenu(){
+      const isOpen = menuPanel.classList.contains("open");
+      isOpen ? closeMenu() : openMenu();
+    }
+
+    menuBtn.addEventListener("click", (e) => { e.stopPropagation(); toggleMenu(); });
+    menuOverlay.addEventListener("click", closeMenu);
+    menuClose.addEventListener("click", closeMenu);
+    document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeMenu(); });
   </script>
 </body>
 </html>
