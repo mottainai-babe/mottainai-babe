@@ -252,22 +252,26 @@
       border-bottom: 1px solid var(--menuLine);
     }
     .menuLink{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap:12px;
-      padding: 18px 4px;
-      text-decoration:none;
-    }
-    .menuLink strong{
-      font-size: 18px;
-      letter-spacing:.04em;
-    }
-    .menuLink span{
-      font-size: 12px;
-      opacity:.75;
-      white-space:nowrap;
-    }
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  padding:24px 6px;
+  gap:4px;
+}
+
+.menuLink strong{
+  font-size:18px;
+  font-weight:500;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+.menuLink span{
+  font-size:12px;
+  opacity:.7;
+  letter-spacing:.06em;
+}
     .menuLink:hover{ opacity:.92; }
 
     /* ===== Main wrap ===== */
