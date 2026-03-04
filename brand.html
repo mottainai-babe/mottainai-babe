@@ -8,13 +8,19 @@
 
   <style>
     :root{
-      /* BAUM-like calm palette */
-      --bg: #f3f0ea;      /* warm off-white */
-      --ink: #111;
-      --muted: #444;
-      --line: rgba(17,17,17,.18);
+      /* whiter background */
+      --bg: #ffffff;
+      --ink: #111111;
+      --muted: #444444;
 
-      --max: 820px;       /* centered text width */
+      /* brand green (tweak freely) */
+      --green: #0f6b4d;
+      --green2:#0b513b;
+
+      /* lines should be green (same thickness as before) */
+      --line: rgba(15,107,77,.28);
+
+      --max: 820px;  /* centered text width */
       --pad: 22px;
 
       /* Minimal sans-serif stacks (no serif) */
@@ -41,7 +47,7 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(243,240,234,.92);
+      background: rgba(255,255,255,.90);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
     }
@@ -55,6 +61,7 @@
       margin: 0 auto;
     }
 
+    /* Hamburger */
     .menuBtn{
       width: 44px;
       height: 44px;
@@ -76,9 +83,9 @@
       position:absolute;
       left:0;
       right:0;
-      height: 1px;
-      background: var(--ink);
-      opacity:.9;
+      height: 1px;           /* keep thickness */
+      background: var(--green);
+      opacity: .95;
     }
     .hamburger::before{ top:0; }
     .hamburger span{ top:50%; transform:translateY(-50%); }
@@ -88,15 +95,17 @@
       font-weight: 600;
       letter-spacing: .22em; /* BAUM-like tracking */
       font-size: 18px;
+      color: var(--green);
     }
 
     .cta{
       font-size: 12px;
       letter-spacing: .08em;
       padding: 10px 12px;
-      border: 1px solid var(--line);
+      border: 1px solid var(--line); /* green line */
       background: transparent;
       border-radius: 999px;
+      color: var(--green);
     }
 
     /* Page sections */
@@ -115,7 +124,7 @@
     .kicker{
       font-size: 12px;
       letter-spacing: .14em;
-      color: var(--muted);
+      color: var(--green);
       margin-bottom: 14px;
     }
 
@@ -124,6 +133,7 @@
       font-size: 34px;
       letter-spacing: .08em;
       font-weight: 600;
+      color: var(--green);
     }
 
     .lead{
@@ -133,6 +143,7 @@
       color: var(--muted);
     }
 
+    /* vertical rule (green) */
     .rule{
       width: 1px;
       height: 42px;
@@ -146,9 +157,9 @@
       height: min(54vh, 520px);
       min-height: 280px;
       background:
-        linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,.06)),
-        radial-gradient(900px 500px at 30% 30%, rgba(0,0,0,.08), transparent 60%),
-        #d8d2c7; /* placeholder */
+        linear-gradient(180deg, rgba(15,107,77,.06), rgba(15,107,77,.06)),
+        radial-gradient(900px 500px at 30% 30%, rgba(15,107,77,.10), transparent 60%),
+        #eef5f1; /* subtle placeholder */
       background-size: cover;
       background-position: center;
       margin: 0;
@@ -160,22 +171,22 @@
       letter-spacing: .06em;
       font-weight: 600;
       margin: 0;
+      color: var(--green);
     }
     .sub{
       margin-top: 10px;
       font-size: 13px;
       letter-spacing: .08em;
-      color: var(--muted);
+      color: rgba(15,107,77,.75);
     }
 
     .text{
-      text-align:left;              /* BAUM body feels left while section is centered */
+      text-align:left; /* BAUM body feels left while section is centered */
       margin: 28px auto 0;
       max-width: 70ch;
       color: var(--muted);
       font-size: 15px;
     }
-
     .text p{ margin: 0 0 18px; }
     .text p:last-child{ margin-bottom: 0; }
 
@@ -192,14 +203,14 @@
     .anchors a{
       font-size: 12px;
       letter-spacing: .08em;
-      color: var(--muted);
+      color: rgba(15,107,77,.85);
       padding: 10px 12px;
-      border-bottom: 1px solid transparent;
+      border-bottom: 1px solid transparent; /* keep thickness via 1px */
     }
     .anchors a:hover{
       border-bottom-color: var(--line);
       text-decoration:none;
-      color: var(--ink);
+      color: var(--green);
     }
 
     /* Footer */
@@ -208,7 +219,7 @@
       padding: 22px var(--pad) 34px;
       max-width: 1200px;
       margin: 0 auto;
-      color: var(--muted);
+      color: rgba(15,107,77,.85);
       font-size: 12px;
       letter-spacing: .04em;
       display:flex;
@@ -331,7 +342,7 @@
           国や文化が違っても、子どもを思う気持ちは同じだから。
         </p>
         <p>
-          <strong style="color:var(--ink); font-weight:600;">まだ使えるものを、無駄にしない。</strong><br>
+          <strong style="color:var(--green); font-weight:600;">まだ使えるものを、無駄にしない。</strong><br>
           その当たり前を、日常の中で続けられる形に。
         </p>
       </div>
