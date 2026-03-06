@@ -8,155 +8,100 @@
 
   <style>
     :root{
-      /* Brand */
-      --brand:#377649;
+      --bg:#ffffff;
+      --ink:#111111;
+      --muted:#444444;
 
-      /* Page (white) */
-      --page:#ffffff;
-      --text:#0f172a;
-      --muted:#475569;
-      --line:#e5e7eb;
+      --green:#0f6b4d;
+      --green2:#0b513b;
+      --line: rgba(15,107,77,.28);
 
-      /* Accents */
-      --pill:#eef7f1;
-      --stroke: rgba(255,255,255,.28);
-      --radius: 18px;
-      --shadow: 0 14px 34px rgba(2,6,23,.12);
+      --max: 1040px;
+      --content: 900px;
+      --pad: 22px;
 
-      --w: 980px;
+      --sans: ui-sans-serif, system-ui, -apple-system, "Hiragino Kaku Gothic ProN",
+              "Yu Gothic", "Noto Sans JP", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+      --menuBack: rgba(0,0,0,.35);
+      --menuPanelBg: #ffffff;
+      --menuLine: rgba(0,0,0,.12);
+
+      --safeL: env(safe-area-inset-left);
+      --safeR: env(safe-area-inset-right);
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", "Segoe UI", Roboto, Arial;
-      background: #f6f7f7;            /* ✅ header 외 영역은 밝게 */
-      color: var(--text);
-    }
-    a{color:inherit;text-decoration:none}
-    a:hover{ text-decoration: underline; }
-
-    /* ===== Header (green + subtle glass) ===== */
-    .topbar{
-      position: sticky;
-      top: 0;
-      z-index: 60;
-
-      /* ✅ 비침 방지: 불투명도 올림 */
-      background: rgba(55,118,73,.94);
-      -webkit-backdrop-filter: blur(6px);
-      backdrop-filter: blur(6px);
-
-      border-bottom: 1px solid rgba(255,255,255,.16);
-    }
-    .topbar .inner{
-      max-width: var(--w);
-      margin: 0 auto;
-      padding: 14px 16px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 12px;
-    }
-
-    /* brand */
-    .brand{
-      display:flex;
-      align-items:center;
-      gap: 12px;
-      min-width: 0; /* ✅ 말줄임 안정 */
-      color:#fff;
-    }
-    .logoWrap{
-  width: 68px;                 /* ✅ 더 크게 */
-  height: 68px;
-  border-radius: 18px;
-
-  /* ✅ 브랜드 그린과 완전 일치 */
-  background: var(--brand);
-
-  /* ✅ 테두리는 아주 미세하게만 */
-  border: 1px solid rgba(255,255,255,.22);
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  flex: 0 0 auto;
-
-  /* ✅ ‘안쪽 네모가 따로 보이는 느낌’ 방지 */
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.06);
-}
-
-.logoWrap img{
-  width: 58px;                 /* ✅ 로고 더 크게 */
-  height: 58px;
-  object-fit: contain;
-  display:block;
-
-  /* ✅ 로고 아래가 비쳐보이는 느낌 최소화(선명도/대비) */
-  opacity: 1;
-  filter: none;
-}
-    .brandText{
-      min-width: 0;
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      letter-spacing: .2px;
+      line-height: 1.95;
+      min-height:100vh;
       display:flex;
       flex-direction:column;
-      line-height:1.15;
-    }
-    .brandName{
-      font-weight: 900;
-      font-size: 17px;
-      letter-spacing: .01em;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .brandJp{
-      font-size: 11px;
-      opacity:.92;
-      margin-top: 2px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      font-weight: 800;
-      letter-spacing: .04em;
-    }
-    .brandDesc{
-      font-size: 10px;
-      opacity:.78;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    @media (max-width: 420px){
-      .brandDesc{ display:none; }
+      align-items:stretch;
+      justify-content:flex-start;
     }
 
-    /* ===== menu button (hamburger) ===== */
-    .menuArea{ position:relative; flex: 0 0 auto; }
-    .menuBtn{
-      display:inline-flex;
+    a{ color:inherit; text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    /* ===== Header ===== */
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      width:100%;
+      background: rgba(255,255,255,.90);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar{
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      padding-left: calc(var(--pad) + var(--safeL));
+      padding-right: calc(var(--pad) + var(--safeR));
+      display:grid;
+      grid-template-columns: 1fr auto 1fr;
       align-items:center;
-      gap: 10px;
-      height: 44px;
-      padding: 0 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.34);
-      background: rgba(255,255,255,.10);
-      color: #fff;
-      font-weight: 900;
-      letter-spacing: .02em;
-      cursor: pointer;
+      gap: 14px;
     }
-    .menuBtn:active{ transform: translateY(1px); }
 
+    .leftSlot{
+      display:flex;
+      align-items:center;
+      justify-content:flex-start;
+      min-width:0;
+    }
+    .rightSlot{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      min-width:0;
+      gap:10px;
+    }
+
+    .menuBtn{
+      width: 44px;
+      height: 44px;
+      display:grid;
+      place-items:center;
+      border:none;
+      background:transparent;
+      cursor:pointer;
+      padding:0;
+    }
     .hamburger{
-      width: 18px;
-      height: 12px;
-      position: relative;
-      display:inline-block;
+      width:22px;
+      height:12px;
+      position:relative;
     }
     .hamburger::before,
     .hamburger::after,
@@ -164,23 +109,60 @@
       content:"";
       position:absolute;
       left:0; right:0;
-      height:2px;
-      border-radius:2px;
-      background: rgba(255,255,255,.95);
+      height:1px;
+      background:var(--green);
+      opacity:.95;
     }
     .hamburger::before{ top:0; }
-    .hamburger span{ top:5px; }
+    .hamburger span{ top:50%; transform:translateY(-50%); }
     .hamburger::after{ bottom:0; }
 
-    /* ===== menu overlay (FIX: 안 보이던 문제 해결) ===== */
+    .brandLogo{
+      justify-self:center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-width:0;
+      text-decoration:none;
+    }
+    .brandLogo img{
+      height:42px;
+      width:auto;
+      display:block;
+    }
+    @media (max-width:520px){
+      .brandLogo img{ height:34px; }
+    }
+
+    .cta{
+      font-family: inherit;
+      font-size: 12px;
+      letter-spacing: .08em;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      background: transparent;
+      border-radius: 999px;
+      color: var(--green);
+      white-space: nowrap;
+      text-decoration: none;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .cta:hover{
+      background: rgba(15,107,77,.06);
+      text-decoration:none;
+    }
+
+    /* ===== Menu Overlay ===== */
     .menuOverlay{
       position: fixed;
       inset: 0;
-      background: rgba(2,6,23,.38);   /* ✅ 어두운 오버레이 */
+      background: var(--menuBack);
       opacity: 0;
       pointer-events: none;
       transition: opacity .18s ease;
-      z-index: 70;
+      z-index: 100;
     }
     .menuOverlay.open{
       opacity: 1;
@@ -189,20 +171,19 @@
 
     .menuPanel{
       position: fixed;
-      top: 74px;                      /* header 아래 */
-      right: 14px;
-      width: min(320px, 92vw);
-      background: #ffffff;            /* ✅ 흰색 고정(블러X) */
-      color: var(--text);
-      border: 1px solid rgba(2,6,23,.08);
-      border-radius: 18px;
-      box-shadow: 0 18px 50px rgba(2,6,23,.22);
-      padding: 10px;
-      transform: translateY(-6px);
+      inset: 0;
+      background: var(--menuPanelBg);
+      transform: translateY(-8px);
       opacity: 0;
       pointer-events: none;
       transition: opacity .18s ease, transform .18s ease;
-      z-index: 80;
+      z-index: 110;
+      padding-top: 22px;
+      padding-bottom: 28px;
+      padding-left: calc(var(--pad) + var(--safeL));
+      padding-right: calc(var(--pad) + var(--safeR));
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
     }
     .menuPanel.open{
       opacity: 1;
@@ -210,216 +191,379 @@
       transform: translateY(0);
     }
 
-    .menuPanel a{
+    .menuTop{
+      max-width: 780px;
+      margin: 0 auto;
       display:flex;
       align-items:center;
-      justify-content:flex-end;       /* ✅ 텍스트 오른쪽 정렬 */
-      text-align:right;              /* ✅ 텍스트 오른쪽 정렬 */
-      gap: 10px;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid transparent;
-      background: #f6f7f7;
-      font-weight: 900;
-      color: var(--text);
-      text-decoration:none;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 6px 0 18px;
+      border-bottom: 1px solid var(--menuLine);
     }
-    .menuPanel a + a{ margin-top: 8px; }
-    .menuPanel a:hover{
-      border-color: rgba(55,118,73,.22);
-      background: #eef7f1;
-      text-decoration:none;
+    .menuTitle{
+      font-weight: 600;
+      letter-spacing: .22em;
+      font-size: 18px;
+      color: #111;
+      white-space:nowrap;
     }
-    .menuPanel small{
-      font-weight: 800;
-      color: #64748b;
+    .menuClose{
+      width: 44px;
+      height: 44px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      display:grid;
+      place-items:center;
+      position: relative;
+      padding:0;
     }
+    .menuClose::before,
+    .menuClose::after{
+      content:"";
+      width: 22px;
+      height: 1px;
+      background: #111;
+      position:absolute;
+    }
+    .menuClose::before{ transform: rotate(45deg); }
+    .menuClose::after{ transform: rotate(-45deg); }
 
-    /* ===== page layout (white) ===== */
-    main{
-      background: var(--page);        /* ✅ 헤더 외 영역 흰색 */
-    }
-    .wrap{
-      max-width: var(--w);
+    .menuBody{
+      max-width: 780px;
       margin: 0 auto;
-      padding: 26px 16px 64px;
+      padding: 18px 0 0;
     }
 
+    .menuCtas{
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--menuLine);
+    }
+    .menuBtnPrimary,
+    .menuBtnGhost{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height: 56px;
+      border-radius: 999px;
+      font-size: 15px;
+      letter-spacing: .06em;
+      text-decoration: none;
+      border: 1px solid var(--line);
+    }
+    .menuBtnPrimary{
+      background: rgba(15,107,77,.10);
+      color: var(--green2);
+      border-color: rgba(15,107,77,.30);
+      font-weight: 600;
+    }
+    .menuBtnGhost{
+      background: transparent;
+      color: var(--green);
+      border-color: rgba(15,107,77,.26);
+      font-weight: 600;
+    }
+    .menuBtnPrimary:hover,
+    .menuBtnGhost:hover{
+      text-decoration:none;
+      background: rgba(15,107,77,.06);
+    }
+
+    .menuLinks{ padding: 10px 0 0; }
+    .menuLink{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      justify-content:center;
+      padding: 24px 6px;
+      gap: 4px;
+      border-bottom: 1px solid var(--menuLine);
+      text-decoration:none;
+    }
+    .menuLink:last-child{ border-bottom:none; }
+    .menuLink strong{
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #111;
+    }
+    .menuLink span{
+      font-size: 12px;
+      opacity: .7;
+      letter-spacing: .06em;
+      color: #111;
+      margin-top: 2px;
+    }
+    .menuLink:hover{
+      background: rgba(15,107,77,.04);
+      text-decoration:none;
+    }
+
+    /* ===== Layout ===== */
+    main.wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      width:100%;
+      padding: 18px 14px 40px;
+    }
+
+    /* ===== Hero ===== */
+    .pageHero{
+      margin-top:10px;
+      text-align:center;
+      padding: 10px 0 4px;
+    }
     .kicker{
       display:inline-flex;
       align-items:center;
-      gap: 8px;
+      justify-content:center;
       padding: 8px 12px;
       border-radius: 999px;
-      border: 1px solid rgba(55,118,73,.22);
-      background: var(--pill);
-      color: #1b4332;
-      font-weight: 900;
-      font-size: 13px;
+      border: 1px solid rgba(15,107,77,.18);
+      background: rgba(15,107,77,.06);
+      color: var(--green2);
+      font-size: 12px;
+      letter-spacing: .08em;
+      font-weight: 700;
     }
-
-    h1{
-      margin: 16px 0 10px;
-      font-size: 34px;
-      line-height: 1.15;
-      letter-spacing: -.02em;
-      color: #0b1f16;
+    .pageTitle{
+      margin:16px 0 0;
+      font-size: 32px;
+      line-height:1.2;
+      letter-spacing: .02em;
+      color: var(--ink);
+      position:relative;
+      padding-bottom:10px;
     }
-    .lead{
-      margin: 0;
+    .pageTitle::after{
+      content:"";
+      display:block;
+      width:40px;
+      height:2px;
+      margin:10px auto 0;
+      background: var(--green);
+      opacity:.55;
+      border-radius:2px;
+    }
+    .pageLead{
+      margin: 12px auto 0;
+      max-width: 64ch;
       color: var(--muted);
-      line-height: 1.9;
-      max-width: 72ch;
       font-size: 15px;
+      line-height:1.8;
+      text-align:center;
     }
 
-    /* toc */
+    /* ===== TOC ===== */
     .toc{
-      margin-top: 18px;
-      background: #ffffff;
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 14px;
-      box-shadow: 0 10px 26px rgba(2,6,23,.06);
+      max-width: var(--content);
+      margin: 24px auto 0;
+      padding: 16px;
+      border:1px solid rgba(15,107,77,.18);
+      border-radius:18px;
+      box-shadow: 0 8px 24px rgba(17,24,39,.06);
+      background:#fff;
     }
     .tocGrid{
       display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:center;
     }
     .toc a{
-      text-decoration:none;
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(55,118,73,.22);
-      background: #f6fbf7;
-      color: #1b4332;
-      font-weight: 900;
-      font-size: 13px;
-      letter-spacing: .02em;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(15,107,77,.18);
+      background:#fff;
+      color:var(--green2);
+      font-size:13px;
+      font-weight:700;
+      letter-spacing:.04em;
+      text-decoration:none;
+      transition:.15s ease;
     }
     .toc a:hover{
-      background: #eef7f1;
-      border-color: rgba(55,118,73,.32);
+      background: rgba(15,107,77,.06);
       text-decoration:none;
     }
 
-    /* cards */
-    .card{
+    /* ===== Sections ===== */
+    .article{
+      max-width: var(--content);
+      margin: 16px auto 0;
+    }
+    .sectionCard{
+      background:#fff;
+      border:1px solid rgba(15,107,77,.18);
+      border-radius:18px;
+      box-shadow: 0 8px 24px rgba(17,24,39,.06);
+      padding: 18px;
       margin-top: 16px;
-      background: #ffffff;
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 18px 18px;
-      box-shadow: 0 10px 26px rgba(2,6,23,.06);
     }
-    .card h2{
-      margin: 0 0 10px;
-      font-size: 22px;
-      letter-spacing: -.01em;
-      color:#0b1f16;
-    }
-    .card p, .card li{
-      color: var(--muted);
-      line-height: 1.95;
-      font-size: 15px;
-    }
-    ul{ padding-left: 20px; margin: 10px 0 0; }
+    .sectionCard:first-child{ margin-top:0; }
 
-    footer{
-      margin-top: 26px;
-      padding-top: 16px;
-      border-top: 1px solid var(--line);
-      color: #64748b;
-      font-size: 12px;
-      text-align:center;
-      line-height: 1.7;
+    .sectionCard h2{
+      margin:0 0 10px;
+      font-size:20px;
+      line-height:1.35;
+      color:var(--ink);
+      letter-spacing:.01em;
     }
-    footer .links{
-      display:flex;
-      gap: 10px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-top: 8px;
+    .sectionCard p,
+    .sectionCard li{
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.9;
+    }
+    .sectionCard p{
+      margin:0 0 12px;
+    }
+    .sectionCard p:last-child{ margin-bottom:0; }
+    .sectionCard ul{
+      margin:10px 0 0;
+      padding-left:20px;
+    }
+
+    /* ===== Footer ===== */
+    .footer{
+      margin-top: 34px;
+      padding-top: 18px;
+      border-top:1px solid var(--line);
+      color: rgba(15,107,77,.85);
+      font-size:12px;
+      line-height:1.7;
+      text-align:center;
+    }
+    .footer a{
+      color: rgba(15,107,77,.92);
+      text-decoration:none;
+      border-bottom:1px solid transparent;
+      padding-bottom:2px;
+    }
+    .footer a:hover{
+      border-bottom-color: var(--line);
+      text-decoration:none;
+    }
+
+    @media (max-width:520px){
+      .brandLogo img{ height:34px; }
+      .cta{ padding: 9px 10px; font-size: 12px; }
+      .pageTitle{ font-size:28px; }
+      .pageLead{ font-size:14px; }
+      .sectionCard{ padding:16px; }
+      .sectionCard h2{ font-size:18px; }
     }
 
     @media (prefers-reduced-motion: reduce){
-      *{scroll-behavior:auto !important; transition:none !important; animation:none !important;}
+      *{ transition:none !important; scroll-behavior:auto !important; animation:none !important; }
     }
   </style>
 </head>
 
 <body>
-  <header class="topbar">
-    <div class="inner">
-      <a class="brand" href="./index.html" aria-label="Mottainai Babe ホーム">
-        <span class="logoWrap" aria-hidden="true">
-          <img src="./logo1.png" alt="" />
-        </span>
+  <header>
+    <div class="topbar">
+      <div class="leftSlot">
+        <button id="menuBtn" class="menuBtn" type="button" aria-label="menu" aria-expanded="false" aria-controls="menuPanel">
+          <div class="hamburger"><span></span></div>
+        </button>
+      </div>
 
-        <span class="brandText">
-          <span class="brandName">Mottainai Babe</span>
-          <span class="brandJp">もったいないベビー</span>
-          <span class="brandDesc">ベビー用品交換プラットフォーム</span>
-        </span>
+      <a class="brandLogo" href="./index.html" aria-label="Mottainai Babe ホーム">
+        <img src="./logo-design-02.png" alt="Mottainai Babe" />
       </a>
 
-      <div class="menuArea">
-        <button id="menuBtn" class="menuBtn" type="button" aria-expanded="false" aria-controls="menuPanel">
-          <span class="hamburger" aria-hidden="true"><span></span></span>
-          メニュー
-        </button>
+      <div class="rightSlot">
+        <a class="cta" href="./app.html">アプリへ</a>
       </div>
     </div>
   </header>
 
-  <!-- ✅ overlay + panel (가독성 해결) -->
   <div id="menuOverlay" class="menuOverlay" aria-hidden="true"></div>
-  <nav id="menuPanel" class="menuPanel" aria-label="ページメニュー">
-    <a href="./app.html">アプリ <small>出品・閲覧</small></a>
-    <a href="./guide.html">ガイド <small>読みもの</small></a>
-    <a href="./about.html">お問い合わせ <small>連絡</small></a>
-  </nav>
 
-  <main>
-    <div class="wrap">
-      <span class="kicker">Terms • 利用規約</span>
-      <h1>もったいないベビー 利用規約</h1>
-      <p class="lead">
-        本利用規約（以下「本規約」といいます。）は、もったいないベビー（以下「当サービス」といいます。）の利用条件を定めるものです。
+  <aside id="menuPanel" class="menuPanel" aria-label="サイトメニュー" aria-hidden="true">
+    <div class="menuTop">
+      <div class="menuTitle">MOTTAINAI BABE</div>
+      <button id="menuClose" class="menuClose" type="button" aria-label="close menu"></button>
+    </div>
+
+    <div class="menuBody">
+      <div class="menuCtas">
+        <a class="menuBtnPrimary" href="./app.html">出品する</a>
+        <a class="menuBtnGhost" href="./app.html">アイテムを見る</a>
+      </div>
+
+      <nav class="menuLinks" aria-label="ページリンク">
+        <a class="menuLink" href="./brand.html">
+          <strong>BRAND STORY</strong>
+          <span>ブランドストーリー</span>
+        </a>
+        <a class="menuLink" href="./guide.html">
+          <strong>GUIDE</strong>
+          <span>ガイド</span>
+        </a>
+        <a class="menuLink" href="./terms.html">
+          <strong>TERMS</strong>
+          <span>利用規約</span>
+        </a>
+        <a class="menuLink" href="./privacy.html">
+          <strong>PRIVACY</strong>
+          <span>プライバシーポリシー</span>
+        </a>
+        <a class="menuLink" href="./about.html">
+          <strong>CONTACT</strong>
+          <span>お問い合わせ</span>
+        </a>
+      </nav>
+    </div>
+  </aside>
+
+  <main class="wrap">
+    <section class="pageHero">
+      <span class="kicker">TERMS / 利用規約</span>
+      <h1 class="pageTitle">もったいないベビー 利用規約</h1>
+      <p class="pageLead">
+        本利用規約は、もったいないベビーの利用条件を定めるものです。
         利用者は、本規約に同意のうえ当サービスを利用するものとします。
       </p>
+    </section>
 
-      <section class="toc" aria-label="目次">
-        <div class="tocGrid">
-          <a href="#a1">第1条</a>
-          <a href="#a2">第2条</a>
-          <a href="#a3">第3条</a>
-          <a href="#a4">第4条</a>
-          <a href="#a5">第5条</a>
-          <a href="#a6">第6条</a>
-          <a href="#a7">第7条</a>
-          <a href="#a8">第8条</a>
-          <a href="#a9">第9条</a>
-          <a href="#a10">第10条</a>
-        </div>
-      </section>
+    <section class="toc" aria-label="目次">
+      <div class="tocGrid">
+        <a href="#a1">第1条</a>
+        <a href="#a2">第2条</a>
+        <a href="#a3">第3条</a>
+        <a href="#a4">第4条</a>
+        <a href="#a5">第5条</a>
+        <a href="#a6">第6条</a>
+        <a href="#a7">第7条</a>
+        <a href="#a8">第8条</a>
+        <a href="#a9">第9条</a>
+        <a href="#a10">第10条</a>
+      </div>
+    </section>
 
-      <section id="a1" class="card">
+    <article class="article">
+      <section id="a1" class="sectionCard">
         <h2>第1条（サービスの内容）</h2>
         <p>当サービスは、ベビー用品の譲渡および交換の機会を提供するプラットフォームです。</p>
         <p>当サービスは取引の当事者ではなく、取引契約は利用者間で直接成立します。</p>
       </section>
 
-      <section id="a2" class="card">
+      <section id="a2" class="sectionCard">
         <h2>第2条（利用資格）</h2>
         <p>利用者は、日本の法令に従い自己の責任において当サービスを利用するものとします。</p>
       </section>
 
-      <section id="a3" class="card">
+      <section id="a3" class="sectionCard">
         <h2>第3条（禁止事項）</h2>
         <p>利用者は以下の行為を行ってはなりません。</p>
         <ul>
@@ -432,7 +576,7 @@
         </ul>
       </section>
 
-      <section id="a4" class="card">
+      <section id="a4" class="sectionCard">
         <h2>第4条（取引の責任）</h2>
         <p>
           利用者間の取引は当事者間の責任において行うものとし、
@@ -440,7 +584,7 @@
         </p>
       </section>
 
-      <section id="a5" class="card">
+      <section id="a5" class="sectionCard">
         <h2>第5条（連絡先の開示）</h2>
         <p>
           当サービスでは、交換が成立した場合に限り、
@@ -449,7 +593,7 @@
         <p>この情報は取引目的以外に使用してはなりません。</p>
       </section>
 
-      <section id="a6" class="card">
+      <section id="a6" class="sectionCard">
         <h2>第6条（古物営業法に関する事項）</h2>
         <p>
           当サービスは、物品の売買の当事者ではなく、
@@ -462,7 +606,7 @@
         </p>
       </section>
 
-      <section id="a7" class="card">
+      <section id="a7" class="sectionCard">
         <h2>第7条（免責事項）</h2>
         <p>当サービスは以下について一切の責任を負いません。</p>
         <ul>
@@ -472,65 +616,83 @@
         </ul>
       </section>
 
-      <section id="a8" class="card">
+      <section id="a8" class="sectionCard">
         <h2>第8条（サービスの変更・停止）</h2>
         <p>当サービスは、事前の通知なく変更または停止することがあります。</p>
       </section>
 
-      <section id="a9" class="card">
+      <section id="a9" class="sectionCard">
         <h2>第9条（準拠法）</h2>
         <p>本規約は日本法に基づき解釈されます。</p>
       </section>
 
-      <section id="a10" class="card">
+      <section id="a10" class="sectionCard">
         <h2>第10条（運営者情報）</h2>
         <p>運営者：Haejin Kishishita</p>
         <p>お問い合わせ：ainazmum2624@gmail.com</p>
         <p>制定日：2026年2月21日</p>
       </section>
+    </article>
 
-      <footer>
-        <div>© 2026 Mottainai Babe. All rights reserved.</div>
-        <div class="links">
-          <a href="./index.html">ホーム</a>
-          <a href="./guide.html">ガイド</a>
-          <a href="./privacy.html">プライバシーポリシー</a>
-          <a href="./about.html">お問い合わせ</a>
-        </div>
-      </footer>
-    </div>
+    <footer class="footer">
+      <div>Mottainai Babeは、ベビー用品を必要な人へつなぐ交換プラットフォームです。</div>
+      <div>
+        <a href="./brand.html">ブランドストーリー</a>
+        &nbsp;|&nbsp;
+        <a href="./guide.html">ガイド</a>
+        &nbsp;|&nbsp;
+        <a href="./terms.html">利用規約</a>
+        &nbsp;|&nbsp;
+        <a href="./privacy.html">プライバシーポリシー</a>
+        &nbsp;|&nbsp;
+        <a href="./about.html">お問い合わせ</a>
+      </div>
+      <div>© 2026 Mottainai Babe. All rights reserved.</div>
+    </footer>
   </main>
 
   <script>
     const menuBtn = document.getElementById("menuBtn");
     const menuPanel = document.getElementById("menuPanel");
     const menuOverlay = document.getElementById("menuOverlay");
+    const menuClose = document.getElementById("menuClose");
 
     function openMenu(){
       menuPanel.classList.add("open");
       menuOverlay.classList.add("open");
+      menuPanel.setAttribute("aria-hidden","false");
+      menuOverlay.setAttribute("aria-hidden","false");
       menuBtn.setAttribute("aria-expanded","true");
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
     }
+
     function closeMenu(){
       menuPanel.classList.remove("open");
       menuOverlay.classList.remove("open");
+      menuPanel.setAttribute("aria-hidden","true");
+      menuOverlay.setAttribute("aria-hidden","true");
       menuBtn.setAttribute("aria-expanded","false");
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
     }
+
     function toggleMenu(){
       const isOpen = menuPanel.classList.contains("open");
       isOpen ? closeMenu() : openMenu();
     }
 
     menuBtn.addEventListener("click", (e) => {
+      e.preventDefault();
       e.stopPropagation();
       toggleMenu();
     });
 
     menuOverlay.addEventListener("click", closeMenu);
+    menuClose.addEventListener("click", closeMenu);
     document.addEventListener("keydown", (e) => {
       if(e.key === "Escape") closeMenu();
     });
-    window.addEventListener("scroll", closeMenu, { passive:true });
   </script>
 </body>
 </html>
