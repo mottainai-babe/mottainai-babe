@@ -17,150 +17,414 @@
 
   <style>
     :root{
-      /* ===== Brand (site unified) ===== */
-      --brand:#377649;
+      /* ===== Index unified ===== */
+      --bg:#ffffff;
+      --ink:#111111;
+      --muted:#444444;
 
-      /* Page */
-      --bg:#f6f7f8;
-      --card:#ffffff;
-      --text:#0f172a;
-      --muted:#6b7280;
-      --line:#e5e7eb;
+      --green:#0f6b4d;
+      --green2:#0b513b;
+      --line: rgba(15,107,77,.28);
 
-      /* Accents */
-      --primary:#1f8f5a;
-      --primary-2:#167247;
-      --primary-soft:#e8f6ef;
+      --max: 1040px;
+      --pad: 22px;
 
-      --danger:#ef4444;
-      --ghost:#f3f4f6;
+      --sans: ui-sans-serif, system-ui, -apple-system, "Hiragino Kaku Gothic ProN",
+              "Yu Gothic", "Noto Sans JP", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
-      --radius:18px;
-      --radius-sm:14px;
-      --shadow:0 8px 24px rgba(17,24,39,.08);
+      /* ===== Menu ===== */
+      --menuBack: rgba(0,0,0,.35);
+      --menuPanelBg: #ffffff; /* 원하면 #e6f4ef */
+      --menuLine: rgba(0,0,0,.12);
 
-      /* sticky offset for scrollIntoView */
+      /* ===== In-app modal ===== */
+      --modalBack: rgba(0,0,0,.55);
+      --modalCard: #ffffff;
+      --modalText: #111827;
+      --modalMuted: #6b7280;
+      --modalLine: #e5e7eb;
+
+      /* iPhone safe area */
+      --safeL: env(safe-area-inset-left);
+      --safeR: env(safe-area-inset-right);
+
+      /* scrollIntoView offset */
       --sticky-offset: 140px;
-      --w: 1040px;
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
-      background:var(--bg);
-      color:var(--text);
-      font-family: ui-sans-serif, system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", "Segoe UI", Roboto, Arial;
-    }
-    a{color:inherit}
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      letter-spacing: .2px;
+      line-height: 1.95;
+      min-height:100vh;
 
-    /* ===== Unified Header (green) ===== */
+      display:flex;
+      flex-direction:column;
+      align-items:stretch;
+      justify-content:flex-start;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    /* ===== Header (Index same) ===== */
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      width:100%;
+      background: rgba(255,255,255,.90);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
     .topbar{
-      position:sticky; top:0; z-index:60;
-      background: rgba(55,118,73,.94);
-      -webkit-backdrop-filter: blur(6px);
-      backdrop-filter: blur(6px);
-      border-bottom: 1px solid rgba(255,255,255,.16);
-    }
-    .topbarInner{
-      max-width: var(--w);
-      margin:0 auto;
-      padding: 12px 14px;
-      display:flex;
+      max-width: 1200px;
+      margin: 0 auto;
+
+      padding-top: 16px;
+      padding-bottom: 16px;
+      padding-left: calc(var(--pad) + var(--safeL));
+      padding-right: calc(var(--pad) + var(--safeR));
+
+      display:grid;
+      grid-template-columns: 1fr auto 1fr;
       align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      color:#fff;
+      gap: 14px;
     }
 
-    .brand{
+    .leftSlot{
       display:flex;
       align-items:center;
-      gap:12px;
+      justify-content:flex-start;
       min-width:0;
-      text-decoration:none;
-      color:#fff;
-      flex: 1 1 auto;
     }
-    .logoWrap{
-      width: 56px;
-      height: 56px;
-      border-radius: 16px;
-      background: var(--brand);
-      border: 1px solid rgba(255,255,255,.22);
+    .rightSlot{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      min-width:0;
+      gap:10px;
+    }
+
+    /* Hamburger (no frame) */
+    .menuBtn{
+      width: 44px;
+      height: 44px;
+      display:grid;
+      place-items:center;
+      border: none;
+      background: transparent;
+      cursor:pointer;
+      padding:0;
+    }
+    .hamburger{
+      width: 22px;
+      height: 12px;
+      position: relative;
+    }
+    .hamburger::before,
+    .hamburger::after,
+    .hamburger span{
+      content:"";
+      position:absolute;
+      left:0; right:0;
+      height: 1px;
+      background: var(--green);
+      opacity: .95;
+    }
+    .hamburger::before{ top:0; }
+    .hamburger span{ top:50%; transform:translateY(-50%); }
+    .hamburger::after{ bottom:0; }
+
+    /* Center logo (text -> horizontal logo image) */
+    .brandLogo{
+      justify-self:center;
       display:flex;
       align-items:center;
       justify-content:center;
-      overflow:hidden;
-      flex: 0 0 auto;
-      box-shadow: inset 0 0 0 1px rgba(0,0,0,.06);
-    }
-    .logoWrap img{
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
-      display:block;
-      opacity: 1;
-      filter:none;
-    }
-
-    .brandText{
+      gap:10px;
       min-width:0;
-      display:flex;
-      flex-direction:column;
-      line-height:1.15;
+      text-decoration:none;
     }
-    .brandName{
-      font-weight: 900;
-      font-size: 16px;
-      letter-spacing: .01em;
-      white-space: nowrap;
-      overflow:hidden;
-      text-overflow: ellipsis;
+    .brandLogo img{
+      height: 18px;          /* ✅ text 18px 느낌과 맞춘 높이 */
+      width: auto;
+      display:block;
     }
-    .brandJp{
-      font-size: 11px;
-      opacity:.92;
-      margin-top: 2px;
-      white-space: nowrap;
-      overflow:hidden;
-      text-overflow: ellipsis;
-      font-weight: 800;
-      letter-spacing: .04em;
-    }
-    .brandDesc{
-      font-size: 10px;
-      opacity:.78;
-      white-space: nowrap;
-      overflow:hidden;
-      text-overflow: ellipsis;
-    }
-    @media (max-width: 420px){
-      .brandDesc{ display:none; }
+    @media (max-width:520px){
+      .brandLogo img{ height: 16px; }
     }
 
-    /* ===== Auth row (no overlap on mobile) ===== */
-    .authRow{
+    .cta{
+      font-size: 12px;
+      letter-spacing: .08em;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      background: transparent;
+      border-radius: 999px;
+      color: var(--green);
+      white-space:nowrap;
+      text-decoration:none;
+    }
+    .cta:hover{ background: rgba(15,107,77,.06); text-decoration:none; }
+
+    /* ===== Menu Overlay (Index same) ===== */
+    .menuOverlay{
+      position: fixed;
+      inset: 0;
+      background: var(--menuBack);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease;
+      z-index: 100;
+    }
+    .menuOverlay.open{
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .menuPanel{
+      position: fixed;
+      inset: 0;
+      background: var(--menuPanelBg);
+      transform: translateY(-8px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease, transform .18s ease;
+      z-index: 110;
+
+      padding-top: 22px;
+      padding-bottom: 28px;
+      padding-left: calc(var(--pad) + var(--safeL));
+      padding-right: calc(var(--pad) + var(--safeR));
+
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .menuPanel.open{
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .menuTop{
+      max-width: 780px;
+      margin: 0 auto;
       display:flex;
       align-items:center;
-      gap:10px;
-      flex: 0 0 auto;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 6px 0 18px;
+      border-bottom: 1px solid var(--menuLine);
     }
-    .authState{
-      font-size:12px;
-      padding:6px 10px;
-      border-radius:999px;
-      border: 1px solid rgba(255,255,255,.28);
-      background: rgba(255,255,255,.10);
-      color: rgba(255,255,255,.92);
-      max-width: 320px;
-      overflow:hidden;
-      text-overflow: ellipsis;
+    .menuTitle{
+      font-weight: 600;
+      letter-spacing: .22em;
+      font-size: 18px;
+      color: #111;
       white-space:nowrap;
     }
+    .menuClose{
+      width: 44px;
+      height: 44px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      display:grid;
+      place-items:center;
+      position: relative;
+      padding:0;
+    }
+    .menuClose::before,
+    .menuClose::after{
+      content:"";
+      width: 22px;
+      height: 1px;
+      background: #111;
+      position:absolute;
+    }
+    .menuClose::before{ transform: rotate(45deg); }
+    .menuClose::after{ transform: rotate(-45deg); }
 
-    /* ===== Buttons ===== */
-    button{font-family:inherit}
+    .menuBody{
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 18px 0 0;
+    }
+
+    .menuCtas{
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--menuLine);
+    }
+    .menuBtnPrimary,
+    .menuBtnGhost{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height: 56px;
+      border-radius: 999px;
+      font-size: 15px;
+      letter-spacing: .06em;
+      text-decoration: none;
+      border: 1px solid var(--line);
+    }
+    .menuBtnPrimary{
+      background: rgba(15,107,77,.10);
+      color: var(--green2);
+      border-color: rgba(15,107,77,.30);
+      font-weight: 600;
+    }
+    .menuBtnGhost{
+      background: transparent;
+      color: var(--green);
+      border-color: rgba(15,107,77,.26);
+      font-weight: 600;
+    }
+    .menuBtnPrimary:hover,
+    .menuBtnGhost:hover{
+      text-decoration:none;
+      background: rgba(15,107,77,.06);
+    }
+
+    .menuLinks{ padding: 10px 0 0; }
+    .menuLink{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      justify-content:center;
+      padding: 24px 6px;
+      gap: 4px;
+      border-bottom: 1px solid var(--menuLine);
+      text-decoration:none;
+    }
+    .menuLink:last-child{ border-bottom:none; }
+    .menuLink strong{
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #111;
+    }
+    .menuLink span{
+      font-size: 12px;
+      opacity: .7;
+      letter-spacing: .06em;
+      color: #111;
+      margin-top: 2px;
+    }
+    .menuLink:hover{
+      background: rgba(15,107,77,.04);
+      text-decoration:none;
+    }
+
+    /* ===== Layout ===== */
+    main.wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      width:100%;
+      padding: 18px 14px 40px;
+    }
+    @media (min-width:860px){
+      main.wrap{ padding: 24px 18px 60px; }
+    }
+
+    /* ===== App: keep structure but unify look ===== */
+    .card{
+      background:#fff;
+      border:1px solid rgba(15,107,77,.18);
+      border-radius:18px;
+      box-shadow: 0 8px 24px rgba(17,24,39,.06);
+    }
+    .cardPad{ padding:16px; }
+    @media (min-width:860px){ .cardPad{ padding:20px; } }
+
+    .hero{ margin-top:14px; display:grid; gap:12px; }
+    .heroTop{
+      display:flex; align-items:flex-start; justify-content:space-between;
+      gap:12px; flex-wrap:wrap;
+    }
+    .heroTitle{
+      margin:0;
+      font-size:20px;
+      line-height:1.15;
+      letter-spacing:.2px;
+      color: var(--ink);
+    }
+    @media (min-width:860px){ .heroTitle{ font-size:26px; } }
+    .heroDesc{ margin:8px 0 0; color: var(--muted); line-height:1.5; }
+
+    .helpBox{
+      margin-top:8px;
+      padding:10px 12px;
+      border-radius:14px;
+      background: rgba(15,107,77,.06);
+      border:1px solid rgba(15,107,77,.22);
+      color: rgba(15,107,77,.92);
+      font-size:12px;
+      line-height:1.45;
+    }
+    .warn{ color:#b91c1c; font-size:12px; margin-top:6px; }
+
+    .grid{
+      margin-top:14px;
+      display:grid;
+      gap:14px;
+    }
+    @media (min-width:980px){
+      .grid{ grid-template-columns: 1.05fr .95fr; align-items:start; }
+    }
+
+    .secTitle{ margin:0 0 10px; font-size:16px; color: var(--ink); }
+    .divider{ height:1px; background: rgba(15,107,77,.18); margin:14px 0; }
+
+    /* Tabs */
+    .tabs{ display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 8px; }
+    .tab{
+      border:1px solid rgba(15,107,77,.18);
+      background:#fff;
+      color: var(--ink);
+      border-radius:999px;
+      padding:9px 12px;
+      font-size:13px;
+      cursor:pointer;
+      transition:.15s ease;
+    }
+    .tab:hover{ background: rgba(15,107,77,.04); }
+    .tab.active{
+      background: rgba(15,107,77,.10);
+      border-color: rgba(15,107,77,.30);
+      color: var(--green2);
+      font-weight:700;
+    }
+
+    /* Inputs */
+    input,textarea{
+      width:100%;
+      border:1px solid rgba(15,107,77,.18);
+      border-radius:14px;
+      padding:11px 12px;
+      font-size:14px;
+      background:#fff;
+      outline:none;
+      font-family: inherit;
+    }
+    input:focus,textarea:focus{
+      border-color:rgba(15,107,77,.45);
+      box-shadow:0 0 0 4px rgba(15,107,77,.12);
+    }
+    textarea{ min-height:84px; resize:vertical; }
+
+    /* Buttons (BAUM-like pills, but keep existing class names) */
+    button{ font-family:inherit; }
     .btn{
       border:none; cursor:pointer;
       border-radius:999px;
@@ -174,170 +438,75 @@
       user-select:none;
       white-space:nowrap;
     }
-    .btn:active{transform:translateY(1px)}
-    .btnPrimary{background: var(--primary); color:#fff}
-    .btnPrimary:hover{background: var(--primary-2)}
-    .btnGhost{background: rgba(255,255,255,.14); color:#fff; border:1px solid rgba(255,255,255,.22)}
-    .btnGhost:hover{background: rgba(255,255,255,.18)}
-    .btnDanger{background: var(--danger); color:#fff}
-    .btnDanger:hover{filter:brightness(.95)}
-    .hidden{display:none}
-
-    /* Mobile header fix */
-    @media (max-width: 640px){
-      .topbarInner{
-        flex-wrap: wrap;
-        gap:10px;
-      }
-      .brand{
-        width:100%;
-      }
-      .logoWrap{ width:52px; height:52px; }
-      .logoWrap img{ width:44px; height:44px; }
-      .authRow{
-        width:100%;
-        justify-content:flex-end;
-        gap:6px;
-      }
-      .btn{
-        padding:7px 10px;
-        font-size:12px;
-      }
-      .authState{
-        font-size:11px;
-        padding:5px 8px;
-        max-width: 58vw;
-      }
+    .btn:active{ transform:translateY(1px); }
+    .btnPrimary{
+      background: rgba(15,107,77,.10);
+      border:1px solid rgba(15,107,77,.30);
+      color: var(--green2);
+      font-weight: 800;
     }
-    @media (max-width: 360px){
-      .authState{ display:none; }
+    .btnPrimary:hover{ background: rgba(15,107,77,.14); }
+    .btnGhost{
+      background: transparent;
+      border:1px solid rgba(15,107,77,.26);
+      color: var(--green);
+      font-weight: 800;
     }
-
-    /* ===== Layout ===== */
-    .wrap{max-width: var(--w); margin:0 auto; padding:18px 14px 40px}
-    @media (min-width:860px){ .wrap{padding:24px 18px 60px} }
-
-    /* Cards */
-    .card{
-      background:var(--card);
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
+    .btnGhost:hover{ background: rgba(15,107,77,.06); }
+    .btnDanger{
+      background:#ef4444; color:#fff; border:1px solid rgba(0,0,0,.06);
+      font-weight:800;
     }
-    .cardPad{padding:16px}
-    @media (min-width:860px){ .cardPad{padding:20px} }
+    .btnDanger:hover{ filter:brightness(.95); }
+    .hidden{ display:none; }
 
-    /* Hero */
-    .hero{margin-top:14px; display:grid; gap:12px}
-    .heroTop{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
-    .heroTitle{margin:0;font-size:20px;line-height:1.15;letter-spacing:.2px}
-    @media (min-width:860px){ .heroTitle{font-size:26px} }
-    .heroDesc{margin:8px 0 0;color:var(--muted);line-height:1.5}
-
+    /* Pills */
     .pill{
       display:inline-flex;align-items:center;gap:6px;
       padding:4px 10px;border-radius:999px;
-      font-size:12px;border:1px solid var(--line);
-      background:#fff;color:var(--text);
+      font-size:12px;border:1px solid rgba(15,107,77,.18);
+      background:#fff;color:var(--ink);
     }
-    .pill.gray{background:#f3f4f6;border-color:#e5e7eb;color:#374151}
-    .pill.blue{background:#eff6ff;border-color:#bfdbfe;color:#1d4ed8}
-    .pill.green{background:#ecfdf5;border-color:#a7f3d0;color:#047857}
+    .pill.gray{ background:#f3f4f6; border-color:#e5e7eb; color:#374151; }
+    .pill.blue{ background:#eff6ff; border-color:#bfdbfe; color:#1d4ed8; }
+    .pill.green{ background:#ecfdf5; border-color:#a7f3d0; color:#047857; }
 
-    .muted{color:var(--muted)}
-    .small{font-size:12px}
+    .muted{ color: var(--muted); }
+    .small{ font-size:12px; }
 
-    .helpBox{
-      margin-top:8px;
-      padding:10px 12px;
-      border-radius:14px;
-      background:var(--primary-soft);
-      border:1px solid rgba(31,143,90,.22);
-      color:#065f46;
-      font-size:12px;
-      line-height:1.45;
+    /* Lists */
+    .itemsWrap{ margin-top:12px; }
+    .itemCard{ border-top:1px solid rgba(15,107,77,.18); padding-top:14px; margin-top:14px; }
+    .itemHead{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:10px;flex-wrap:wrap;
     }
-    .warn{color:#b91c1c;font-size:12px;margin-top:6px}
-
-    /* Main grid */
-    .grid{
-      margin-top:14px;
-      display:grid;
-      gap:14px;
-    }
-    @media (min-width:980px){
-      .grid{grid-template-columns: 1.05fr .95fr; align-items:start;}
-    }
-
-    .secTitle{margin:0 0 10px;font-size:16px}
-    .divider{height:1px;background:var(--line);margin:14px 0}
-
-    /* Tabs */
-    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 8px}
-    .tab{
-      border:1px solid var(--line);
-      background:#fff;
-      color:var(--text);
-      border-radius:999px;
-      padding:9px 12px;
-      font-size:13px;
-      cursor:pointer;
-      transition:.15s ease;
-    }
-    .tab:hover{filter:brightness(.98)}
-    .tab.active{
-      background:var(--primary-soft);
-      border-color:rgba(31,143,90,.35);
-      color:var(--primary-2);
-      font-weight:700;
-    }
-
-    /* Inputs */
-    input,textarea{
-      width:100%;
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:11px 12px;
-      font-size:14px;
-      background:#fff;
-      outline:none;
-    }
-    input:focus,textarea:focus{
-      border-color:rgba(31,143,90,.45);
-      box-shadow:0 0 0 4px rgba(31,143,90,.12);
-    }
-    textarea{min-height:84px;resize:vertical}
-
-    /* List cards */
-    .itemsWrap{margin-top:12px}
-    .itemCard{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}
-    .itemHead{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-    .itemTitle{margin:10px 0 6px;font-size:16px;line-height:1.25}
+    .itemTitle{ margin:10px 0 6px; font-size:16px; line-height:1.25; }
     .thumb{
       width:180px;max-width:100%;
       border-radius:16px;
       margin-top:10px;
       display:block;
-      border:1px solid rgba(229,231,235,.8);
+      border:1px solid rgba(15,107,77,.12);
       background:#fafafa;
       overflow:hidden;
     }
 
     /* Detail box */
-    .detailTitle{margin:10px 0 6px;font-size:18px;line-height:1.25}
+    .detailTitle{ margin:10px 0 6px; font-size:18px; line-height:1.25; }
     .offerBox{
-      border:1px solid rgba(229,231,235,.9);
+      border:1px solid rgba(15,107,77,.12);
       border-radius:16px;
       padding:12px;
       margin-top:12px;
       background:#fff;
     }
-    .offerTop{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
-    .twoBtns{display:flex;gap:10px;flex-wrap:wrap}
-    .right{text-align:right}
+    .offerTop{ display:flex; gap:12px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; }
+    .twoBtns{ display:flex; gap:10px; flex-wrap:wrap; }
+    .right{ text-align:right; }
 
-    /* ✅ scrollIntoView 보정 */
-    #detailBox, .inlineDetailMount{scroll-margin-top: var(--sticky-offset);}
+    /* scrollIntoView fix */
+    #detailBox, .inlineDetailMount{ scroll-margin-top: var(--sticky-offset); }
 
     .detailTopBar{
       display:flex; gap:10px;
@@ -354,31 +523,65 @@
 
     .inlineDetailMount{
       margin-top: 12px;
-      border: 1px solid #e5e7eb;
+      border: 1px solid rgba(15,107,77,.18);
       border-radius: 16px;
       padding: 14px;
       background: #fff;
     }
 
-    /* ===== In-app modal ===== */
+    /* ===== Auth block in body (requested) ===== */
+    .authCard{
+      margin-top:14px;
+    }
+    .authRowBody{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .authStateBody{
+      font-size:12px;
+      letter-spacing:.04em;
+      color: rgba(17,17,17,.72);
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(15,107,77,.18);
+      background:#fff;
+      max-width: 100%;
+      overflow:hidden;
+      text-overflow: ellipsis;
+      white-space:nowrap;
+    }
+    @media (max-width:520px){
+      .btn{ padding:9px 12px; font-size:13px; }
+      .authStateBody{ width:100%; }
+      .authRowBody{ align-items:stretch; }
+      .authRowBody .btn{ width:100%; }
+    }
+
+    /* ===== In-app modal (index same) ===== */
     .modalBack{
-      position:fixed;inset:0;
-      background:rgba(17,24,39,.55);
-      display:none;align-items:center;justify-content:center;
+      position:fixed; inset:0;
+      background:var(--modalBack);
+      display:none;
+      align-items:center;
+      justify-content:center;
       z-index:9999;
       padding:16px;
     }
     .modal{
       width:min(520px, 96vw);
-      background:#fff;
-      border:1px solid var(--line);
+      background:var(--modalCard);
+      border:1px solid var(--modalLine);
       border-radius:18px;
-      box-shadow:0 10px 30px rgba(0,0,0,.2);
+      box-shadow:0 10px 30px rgba(0,0,0,.25);
       padding:16px;
-      color:var(--text);
+      color:var(--modalText);
+      text-align:left;
     }
     .modal h3{margin:0 0 8px;font-size:16px}
-    .modal p{margin:0 0 12px;color:var(--muted);line-height:1.5;font-size:13px}
+    .modal p{margin:0 0 12px;color:var(--modalMuted);line-height:1.5;font-size:13px}
     .modal .row{display:flex;gap:10px;flex-wrap:wrap}
     .modal .url{
       font-size:12px;
@@ -389,24 +592,46 @@
       word-break:break-all;
       margin:10px 0 12px;
     }
-    .modal .btn{flex:1}
-
-    /* Footer */
-    footer{
-      margin-top:28px;
-      padding:26px 16px;
-      text-align:center;
-      color:var(--muted);
+    .modalBtn{
+      flex:1;
+      border:none;
+      cursor:pointer;
+      border-radius:999px;
+      padding:10px 14px;
       font-size:14px;
-      border-top:1px solid rgba(229,231,235,.85);
-      background:#fff;
+      font-weight:700;
     }
-    .footerLinks a{
-      color:var(--primary);
+    .modalBtn.ghost{background:#f3f4f6;color:#111827}
+    .modalBtn.primary{background:#1f8f5a;color:#fff}
+
+    /* ===== Footer (index same) ===== */
+    .footer{
+      margin-top: 34px;
+      padding-top: 18px;
+      border-top:1px solid var(--line);
+      color: rgba(15,107,77,.85);
+      font-size:12px;
+      line-height:1.7;
+      text-align:center;
+    }
+    .footer a{
+      color: rgba(15,107,77,.92);
       text-decoration:none;
-      margin:0 10px;
+      border-bottom:1px solid transparent;
+      padding-bottom:2px;
     }
-    .footerLinks a:hover{text-decoration:underline}
+    .footer a:hover{
+      border-bottom-color: var(--line);
+      text-decoration:none;
+    }
+
+    @media (max-width:520px){
+      .cta{ padding: 9px 10px; font-size: 12px; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{ transition:none !important; scroll-behavior:auto !important; }
+    }
   </style>
 
   <!-- ✅ config (window.FIREBASE_CONFIG) -->
@@ -415,35 +640,84 @@
 
 <body>
 
-  <!-- Sticky Header -->
-  <header class="topbar">
-    <div class="topbarInner">
-      <a class="brand" href="./index.html" aria-label="Mottainai Babe ホーム">
-        <span class="logoWrap" aria-hidden="true">
-          <img src="./logo1.png" alt="" />
-        </span>
-        <span class="brandText">
-          <span class="brandName">Mottainai Babe</span>
-          <span class="brandJp">もったいないベビー</span>
-          <span class="brandDesc">ベビー用品交換プラットフォーム</span>
-        </span>
+  <!-- Header (unified) -->
+  <header>
+    <div class="topbar">
+      <div class="leftSlot">
+        <button id="menuBtn" class="menuBtn" type="button" aria-label="menu" aria-expanded="false" aria-controls="menuPanel">
+          <div class="hamburger"><span></span></div>
+        </button>
+      </div>
+
+      <!-- ✅ 가운데: 가로형 로고 -->
+      <a class="brandLogo" href="./index.html" aria-label="Mottainai Babe ホーム">
+        <!-- 🔧 여기를 네 가로형 로고 파일로 바꾸면 됨 -->
+        <img src="./logo-horizontal.png" alt="Mottainai Babe" />
       </a>
 
-      <div class="authRow">
-        <button id="loginBtn" class="btn btnPrimary">Googleでログイン</button>
-        <button id="logoutBtn" class="btn btnGhost hidden">ログアウト</button>
-        <span class="authState" id="loginState">未ログイン</span>
+      <div class="rightSlot">
+        <a class="cta" href="./index.html">TOPへ</a>
       </div>
     </div>
   </header>
 
+  <!-- Menu Overlay + Panel (unified) -->
+  <div id="menuOverlay" class="menuOverlay" aria-hidden="true"></div>
+
+  <aside id="menuPanel" class="menuPanel" aria-label="サイトメニュー" aria-hidden="true">
+    <div class="menuTop">
+      <div class="menuTitle">MOTTAINAI BABE</div>
+      <button id="menuClose" class="menuClose" type="button" aria-label="close menu"></button>
+    </div>
+
+    <div class="menuBody">
+      <div class="menuCtas">
+        <!-- ✅ app에서는 앱 내부 기능이라 app.html로 -->
+        <a class="menuBtnPrimary" href="./app.html">出品する</a>
+        <a class="menuBtnGhost" href="./app.html">アイテムを見る</a>
+      </div>
+
+      <nav class="menuLinks" aria-label="ページリンク">
+        <a class="menuLink" href="./brand.html">
+          <strong>BRAND STORY</strong>
+          <span>ブランドストーリー</span>
+        </a>
+        <a class="menuLink" href="./guide.html">
+          <strong>GUIDE</strong>
+          <span>ガイド</span>
+        </a>
+        <a class="menuLink" href="./terms.html">
+          <strong>TERMS</strong>
+          <span>利用規約</span>
+        </a>
+        <a class="menuLink" href="./privacy.html">
+          <strong>PRIVACY</strong>
+          <span>プライバシーポリシー</span>
+        </a>
+        <a class="menuLink" href="./about.html">
+          <strong>CONTACT</strong>
+          <span>お問い合わせ</span>
+        </a>
+      </nav>
+    </div>
+  </aside>
+
   <main class="wrap">
     <section id="appSection">
+
+      <!-- ✅ Auth block moved into body (first block) -->
+      <section class="card cardPad authCard" aria-label="auth">
+        <div class="authRowBody">
+          <button id="loginBtn" class="btn btnPrimary" type="button">Googleでログイン</button>
+          <button id="logoutBtn" class="btn btnGhost hidden" type="button">ログアウト</button>
+          <span class="authStateBody" id="loginState">未ログイン</span>
+        </div>
+      </section>
 
       <section class="card cardPad hero">
         <div class="heroTop">
           <div style="min-width:0;">
-            <h1 class="heroTitle">ベビー用品を、<span style="color:var(--primary-2);">“もったいない”から“ありがとう”へ</span></h1>
+            <h1 class="heroTitle">ベビー用品を、<span style="color:var(--green2);">“もったいない”から“ありがとう”へ</span></h1>
             <p class="heroDesc">
               使わなくなったベビー用品を、必要なご家庭へ。<br>
               出品 → 交換提案 → 成立後に当事者のみ連絡先表示（Gmail作成画面を開きます）
@@ -548,10 +822,27 @@
         </div>
       </section>
 
+      <!-- ✅ Footer: index와 동일 -->
+      <footer class="footer">
+        <div>Mottainai Babeは、ベビー用品を必要な人へつなぐ交換プラットフォームです。</div>
+        <div>
+          <a href="./brand.html">ブランドストーリー</a>
+          &nbsp;|&nbsp;
+          <a href="./guide.html">ガイド</a>
+          &nbsp;|&nbsp;
+          <a href="./terms.html">利用規約</a>
+          &nbsp;|&nbsp;
+          <a href="./privacy.html">プライバシーポリシー</a>
+          &nbsp;|&nbsp;
+          <a href="./about.html">お問い合わせ</a>
+        </div>
+        <div>© 2026 Mottainai Babe. All rights reserved.</div>
+      </footer>
+
     </section>
   </main>
 
-  <!-- In-app modal -->
+  <!-- In-app modal (index same) -->
   <div id="inAppModalBack" class="modalBack" role="dialog" aria-modal="true">
     <div class="modal">
       <h3>LINEなどのアプリ内ブラウザではログインできない場合があります</h3>
@@ -562,12 +853,12 @@
       </p>
       <div id="openUrlBox" class="url"></div>
       <div class="row">
-        <button id="copyUrlBtn" class="btn btnGhost" type="button">URLをコピー</button>
-        <button id="closeModalBtn" class="btn btnGhost" type="button">閉じる</button>
+        <button id="copyUrlBtn" class="modalBtn ghost" type="button">URLをコピー</button>
+        <button id="closeModalBtn" class="modalBtn ghost" type="button">閉じる</button>
       </div>
       <div style="height:10px"></div>
       <div class="row">
-        <button id="tryOpenNewTabBtn" class="btn btnPrimary" type="button">外部ブラウザで開く（試す）</button>
+        <button id="tryOpenNewTabBtn" class="modalBtn primary" type="button">外部ブラウザで開く（試す）</button>
       </div>
       <p class="small muted" style="margin-top:10px;">
         ※うまく開けない場合：右上の「…」→「Safariで開く」を選択してください。
@@ -596,6 +887,39 @@
 
     import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
+    // ===== Menu open/close (unified) =====
+    const menuBtn = document.getElementById("menuBtn");
+    const menuPanel = document.getElementById("menuPanel");
+    const menuOverlay = document.getElementById("menuOverlay");
+    const menuClose = document.getElementById("menuClose");
+
+    function openMenu(){
+      menuPanel.classList.add("open");
+      menuOverlay.classList.add("open");
+      menuPanel.setAttribute("aria-hidden","false");
+      menuOverlay.setAttribute("aria-hidden","false");
+      menuBtn.setAttribute("aria-expanded","true");
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+    }
+    function closeMenu(){
+      menuPanel.classList.remove("open");
+      menuOverlay.classList.remove("open");
+      menuPanel.setAttribute("aria-hidden","true");
+      menuOverlay.setAttribute("aria-hidden","true");
+      menuBtn.setAttribute("aria-expanded","false");
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+    }
+    function toggleMenu(){
+      const isOpen = menuPanel.classList.contains("open");
+      isOpen ? closeMenu() : openMenu();
+    }
+    menuBtn.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); toggleMenu(); });
+    menuOverlay.addEventListener("click", closeMenu);
+    menuClose.addEventListener("click", closeMenu);
+    document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeMenu(); });
+
     // ✅ firebase-config.js의 값을 그대로 사용
     const firebaseConfig = window.FIREBASE_CONFIG;
 
@@ -614,7 +938,7 @@
       console.error("setPersistence error", e);
     });
 
-    // ===== Auth UI elements =====
+    // ===== Auth UI elements (moved to body) =====
     const loginBtn = document.getElementById("loginBtn");
     const logoutBtn = document.getElementById("logoutBtn");
     const loginState = document.getElementById("loginState");
@@ -636,7 +960,6 @@
     const tryOpenNewTabBtn = document.getElementById("tryOpenNewTabBtn");
 
     function canonicalUrl(){
-      // 현재 경로를 기준으로 절대 URL 생성
       return new URL(location.pathname, location.origin).toString();
     }
 
@@ -650,7 +973,6 @@
           await navigator.clipboard.writeText(url);
           alert("コピーしました。Safari / Chromeで開いてください。");
         }catch{
-          // clipboard 실패 시 fallback
           prompt("このURLをコピーしてください:", url);
         }
       };
@@ -701,7 +1023,7 @@
       try{ await signOut(auth); } catch(e){ console.error("LOGOUT_ERROR", e); }
     };
 
-    // redirect 결과 처리 (redirect 사용했을 경우)
+    // redirect 결과 처리
     try{ await getRedirectResult(auth); }catch(e){ console.error("getRedirectResult error", e); }
 
     // ===== 앱 요소들 =====
@@ -714,7 +1036,6 @@
     const detailEmpty = document.getElementById("detailEmpty");
     const detailBox = document.getElementById("detailBox");
 
-    // detailBox 원래 자리 마커
     const detailHomeMarker = document.createElement("div");
     detailHomeMarker.id = "detailHomeMarker";
     detailBox.parentElement.insertBefore(detailHomeMarker, detailBox);
@@ -1337,30 +1658,6 @@
       if(selectedItemId) await openDetail(selectedItemId);
     });
   </script>
-
-  <footer>
-    <div style="font-weight:900;color:var(--text);margin-bottom:8px;">もったいないベビー</div>
-    <div style="margin-bottom:12px;">ベビー用品ゆずりあいサービス</div>
-
-    <div class="footerLinks" style="margin-bottom:14px;">
-      <a href="./about.html">運営者情報</a> |
-      <a href="./privacy.html">プライバシーポリシー</a> |
-      <a href="./terms.html">利用規約</a>
-    </div>
-
-    <div style="margin-bottom:12px;">
-      運営者：<b>Haejin Kishishita</b>
-    </div>
-
-    <div style="margin-bottom:10px;">
-      お問い合わせ：
-      <a href="mailto:ainazmum2624@gmail.com" style="color:var(--primary);text-decoration:none;">
-        ainazmum2624@gmail.com
-      </a>
-    </div>
-
-    <div class="small">© 2026 Mottainai Babe. All rights reserved.</div>
-  </footer>
 
 </body>
 </html>
