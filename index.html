@@ -12,7 +12,7 @@
 
   <style>
     :root{
-      /* ===== BAUM-like minimal theme (white + green) ===== */
+      /* ===== Index base ===== */
       --bg:#ffffff;
       --ink:#111111;
       --muted:#444444;
@@ -21,53 +21,50 @@
       --green2:#0b513b;
       --line: rgba(15,107,77,.28);
 
-      --btnBg: transparent;
-      --btnHoverBg: rgba(15,107,77,.06);
-      --btnStroke: var(--line);
-
       --max: 980px;
       --pad: 22px;
 
-      /* ===== modal ===== */
+      --sans: ui-sans-serif, system-ui, -apple-system, "Hiragino Kaku Gothic ProN",
+              "Yu Gothic", "Noto Sans JP", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+      /* ===== In-app modal ===== */
       --modalBack: rgba(0,0,0,.55);
       --modalCard: #ffffff;
       --modalText: #111827;
       --modalMuted: #6b7280;
       --modalLine: #e5e7eb;
 
-      /* ===== Menu (BAUM-like) ===== */
-      --menuOverlay: rgba(0,0,0,.18);
-      --menuPanelBg: #f6f7f7; /* ✅ 메뉴 배경 (원하면 #e6f4ef 로 변경) */
-      --menuLine: rgba(17,17,17,.10);
-      --menuInk: #111111;
-      --menuMuted: rgba(17,17,17,.64);
+      /* ===== Menu (✅ 네가 준 통일 스타일 그대로) ===== */
+      --menuBack: rgba(0,0,0,.35);
+      --menuPanelBg: #ffffff; /* 원하면 #e6f4ef */
+      --menuLine: rgba(0,0,0,.12);
 
       /* iPhone safe area */
       --safeL: env(safe-area-inset-left);
       --safeR: env(safe-area-inset-right);
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
-      background:var(--bg);
-      color:var(--ink);
-      font-family: ui-sans-serif, system-ui, -apple-system, "Hiragino Sans","Noto Sans JP", "Segoe UI", Roboto, Arial;
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      letter-spacing: .2px;
+      line-height: 1.95;
       min-height:100vh;
 
-      /* ✅ header + main should stack vertically */
       display:flex;
-      flex-direction: column;
-      align-items: stretch;
-      justify-content: flex-start;
+      flex-direction:column;
+      align-items:stretch;
+      justify-content:flex-start;
     }
 
-    a{color:inherit;text-decoration:none}
-    a:hover{text-decoration:underline}
+    a{ color:inherit; text-decoration:none; }
+    a:hover{ text-decoration:underline; }
 
-    /* ===== Top bar (true centered + safe-area) ===== */
+    /* ===== Top bar (✅ 네 스타일: 중앙 고정) ===== */
     header{
       position: sticky;
       top: 0;
@@ -97,32 +94,31 @@
       display:flex;
       align-items:center;
       justify-content:flex-start;
-      min-width: 0;
+      min-width:0;
     }
     .rightSlot{
       display:flex;
       align-items:center;
       justify-content:flex-end;
-      min-width: 0;
-      gap: 10px;
+      min-width:0;
+      gap:10px;
     }
 
-    /* Hamburger button */
+    /* Hamburger (✅ 프레임/호버 배경 없음 = 네 코드 그대로) */
     .menuBtn{
       width: 44px;
       height: 44px;
       display:grid;
       place-items:center;
-      border:none;
-      background:transparent;
+      border: none;
+      background: transparent;
       cursor:pointer;
-      border-radius: 999px;
+      padding:0;
     }
-    .menuBtn:hover{ background: var(--btnHoverBg); }
     .hamburger{
-      width:22px;
-      height:12px;
-      position:relative;
+      width: 22px;
+      height: 12px;
+      position: relative;
     }
     .hamburger::before,
     .hamburger::after,
@@ -130,34 +126,47 @@
       content:"";
       position:absolute;
       left:0; right:0;
-      height:1px;
+      height: 1px;
       background: var(--green);
-      opacity:.95;
+      opacity: .95;
     }
     .hamburger::before{ top:0; }
     .hamburger span{ top:50%; transform:translateY(-50%); }
     .hamburger::after{ bottom:0; }
 
-    /* centered brand text */
+    /* Brand (✅ 인덱스/브랜드 통일) */
     .brandTop{
-      font-weight:600;
-      letter-spacing:.22em;
-      font-size:18px;
-      color:var(--green);
+      font-weight: 600;
+      letter-spacing: .22em;
+      font-size: 18px;
+      color: var(--green);
       text-align:center;
       white-space:nowrap;
       padding: 0 6px;
+      justify-self:center;
     }
 
-    /* ===== Main wrap ===== */
+    .cta{
+      font-size: 12px;
+      letter-spacing: .08em;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      background: transparent;
+      border-radius: 999px;
+      color: var(--green);
+      white-space:nowrap;
+      text-decoration:none;
+    }
+    .cta:hover{ background: rgba(15,107,77,.06); text-decoration:none; }
+
+    /* ===== Main ===== */
     .wrap{
       width:min(var(--max),92vw);
-      padding: 34px 0 46px;
-      position:relative;
       margin: 0 auto;
+      padding: 34px 0 46px;
     }
 
-    .center{
+    .centerHero{
       display:flex;
       flex-direction:column;
       align-items:center;
@@ -205,12 +214,12 @@
       font-weight:700;
       letter-spacing:.02em;
       cursor:pointer;
-      border:1px solid var(--btnStroke);
-      background:var(--btnBg);
+      border:1px solid var(--line);
+      background:transparent;
       color: var(--green);
       transition: background .18s ease, transform .06s ease;
     }
-    .btn:hover{ background: var(--btnHoverBg); text-decoration:none; }
+    .btn:hover{ background: rgba(15,107,77,.06); text-decoration:none; }
     .btn.primary{
       background: rgba(15,107,77,.10);
       border-color: rgba(15,107,77,.30);
@@ -219,13 +228,12 @@
     .btn:active{transform:translateY(1px)}
     .btn[disabled]{opacity:.6; cursor:not-allowed}
 
-    /* ✅ Minimal feature row (no frames) */
+    /* ✅ 미니멀 feature row */
     .features{
       margin-top: 16px;
       font-size: 12px;
       letter-spacing: .18em;
       color: rgba(17,17,17,.72);
-      text-transform: none;
       white-space: nowrap;
     }
     .features .sep{
@@ -276,7 +284,7 @@
       max-width:520px;
       padding:14px 18px;
       border-radius:999px;
-      border:1px solid var(--btnStroke);
+      border:1px solid var(--line);
       background: transparent;
       color: var(--green);
       text-decoration:none;
@@ -287,9 +295,9 @@
       margin-right:auto;
       letter-spacing:.02em;
     }
-    .infoBtn:hover{ background: var(--btnHoverBg); text-decoration:none; }
+    .infoBtn:hover{ background: rgba(15,107,77,.06); text-decoration:none; }
 
-    /* footer */
+    /* Footer (✅ 인덱스 구성 고정) */
     .footer{
       margin-top: 34px;
       padding-top: 18px;
@@ -312,11 +320,12 @@
 
     @media (max-width:520px){
       .wrap{padding: 26px 0 40px}
-      .center{padding-top:44px}
+      .centerHero{padding-top:44px}
       .btn{height:54px}
       .brandTop{font-size:16px}
       .features{letter-spacing:.14em}
       .features .sep{margin:0 8px}
+      .cta{ padding: 9px 10px; font-size: 12px; }
     }
 
     /* ===== In-app modal ===== */
@@ -363,15 +372,15 @@
     .modalBtn.ghost{background:#f3f4f6;color:#111827}
     .modalBtn.primary{background:#1f8f5a;color:#fff}
 
-    /* ===== Menu Overlay + Panel (BAUM-like) ===== */
+    /* ===== ✅ BAUM-like Menu Overlay (네 스타일 그대로) ===== */
     .menuOverlay{
       position: fixed;
       inset: 0;
-      background: var(--menuOverlay);
+      background: var(--menuBack);
       opacity: 0;
       pointer-events: none;
       transition: opacity .18s ease;
-      z-index: 70;
+      z-index: 100;
     }
     .menuOverlay.open{
       opacity: 1;
@@ -380,22 +389,18 @@
 
     .menuPanel{
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 100vh;
+      inset: 0;
       background: var(--menuPanelBg);
-      color: var(--menuInk);
       transform: translateY(-8px);
       opacity: 0;
       pointer-events: none;
       transition: opacity .18s ease, transform .18s ease;
-      z-index: 80;
+      z-index: 110;
 
-      padding-top: 18px;
-      padding-bottom: 22px;
-      padding-left: calc(22px + var(--safeL));
-      padding-right: calc(22px + var(--safeR));
+      padding-top: 22px;
+      padding-bottom: 28px;
+      padding-left: calc(var(--pad) + var(--safeL));
+      padding-right: calc(var(--pad) + var(--safeR));
 
       overflow: auto;
       -webkit-overflow-scrolling: touch;
@@ -407,21 +412,21 @@
     }
 
     .menuTop{
-      max-width: 980px;
+      max-width: 780px;
       margin: 0 auto;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap: 12px;
-      padding: 8px 0 18px;
+      padding: 6px 0 18px;
       border-bottom: 1px solid var(--menuLine);
     }
     .menuTitle{
       font-weight: 600;
       letter-spacing: .22em;
       font-size: 18px;
-      color: var(--menuInk);
-      white-space: nowrap;
+      color: #111;
+      white-space:nowrap;
     }
     .menuClose{
       width: 44px;
@@ -429,98 +434,99 @@
       border: none;
       background: transparent;
       cursor: pointer;
-      border-radius: 999px;
       display:grid;
       place-items:center;
-    }
-    .menuClose:hover{ background: rgba(0,0,0,.04); }
-    .xIcon{
-      width: 18px;
-      height: 18px;
       position: relative;
+      padding:0;
     }
-    .xIcon::before, .xIcon::after{
+    .menuClose::before,
+    .menuClose::after{
       content:"";
-      position:absolute;
-      left:0; right:0;
-      top:50%;
-      height:1px;
+      width: 22px;
+      height: 1px;
       background: #111;
-      opacity:.85;
-      transform-origin:center;
+      position:absolute;
     }
-    .xIcon::before{ transform: translateY(-50%) rotate(45deg); }
-    .xIcon::after{ transform: translateY(-50%) rotate(-45deg); }
+    .menuClose::before{ transform: rotate(45deg); }
+    .menuClose::after{ transform: rotate(-45deg); }
 
     .menuBody{
-      max-width: 980px;
+      max-width: 780px;
       margin: 0 auto;
       padding: 18px 0 0;
     }
 
     .menuCtas{
-      display:grid;
-      gap: 10px;
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
       padding-bottom: 18px;
       border-bottom: 1px solid var(--menuLine);
     }
-    .menuBtn{
-      width: 100%;
-      height: 54px;
+    .menuBtnPrimary,
+    .menuBtnGhost{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height: 56px;
       border-radius: 999px;
-      border: 1px solid rgba(0,0,0,.20);
-      background: rgba(255,255,255,.60);
-      color: #111;
-      font-weight: 600;
-      letter-spacing: .02em;
-      cursor:pointer;
+      font-size: 15px;
+      letter-spacing: .06em;
+      text-decoration: none;
+      border: 1px solid var(--line);
     }
-    .menuBtn:hover{ filter: brightness(.98); }
     .menuBtnPrimary{
-      background: rgba(15,107,77,.12);
-      border-color: rgba(15,107,77,.28);
+      background: rgba(15,107,77,.10);
       color: var(--green2);
+      border-color: rgba(15,107,77,.30);
+      font-weight: 600;
     }
     .menuBtnGhost{
-      background: rgba(255,255,255,.65);
-      border-color: rgba(0,0,0,.16);
-      color:#111;
+      background: transparent;
+      color: var(--green);
+      border-color: rgba(15,107,77,.26);
+      font-weight: 600;
+    }
+    .menuBtnPrimary:hover,
+    .menuBtnGhost:hover{
+      text-decoration:none;
+      background: rgba(15,107,77,.06);
     }
 
-    .menuLinks{
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
+    .menuLinks{ padding: 10px 0 0; }
     .menuLink{
       display:flex;
+      flex-direction:column;
       align-items:flex-start;
-      justify-content:space-between;
-      gap: 10px;
-      padding: 18px 0;
+      justify-content:center;
+      padding: 24px 6px;
+      gap: 4px;
       border-bottom: 1px solid var(--menuLine);
       text-decoration:none;
     }
-    .menuLink:last-child{ border-bottom: none; }
+    .menuLink:last-child{ border-bottom:none; }
+
     .menuLink strong{
-      display:block;
-      font-weight: 600;
-      letter-spacing: .18em;
-      font-size: 14px;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
       color: #111;
     }
     .menuLink span{
-      display:block;
-      margin-top: 6px;
       font-size: 12px;
-      color: var(--menuMuted);
-      letter-spacing: .04em;
+      opacity: .7;
+      letter-spacing: .06em;
+      color: #111;
+      margin-top: 2px;
     }
-    .menuLink:hover strong{ text-decoration: underline; }
+    .menuLink:hover{
+      background: rgba(15,107,77,.04);
+      text-decoration:none;
+    }
 
-    @media (max-width: 520px){
-      .menuTitle{ font-size: 16px; }
-      .menuLink strong{ font-size: 13px; }
+    @media (prefers-reduced-motion: reduce){
+      *{ transition:none !important; scroll-behavior:auto !important; }
     }
   </style>
 </head>
@@ -536,8 +542,10 @@
 
       <div class="brandTop">MOTTAINAI BABE</div>
 
-      <!-- ✅ 우측 버튼 삭제(요청사항) -->
-      <div class="rightSlot"></div>
+      <div class="rightSlot">
+        <!-- ✅ 오른쪽 CTA는 인덱스에서 유지 (원하면 여기 지우면 됨) -->
+        <a class="cta" href="./app.html">交換を始める</a>
+      </div>
     </div>
   </header>
 
@@ -547,67 +555,43 @@
   <aside id="menuPanel" class="menuPanel" aria-label="サイトメニュー" aria-hidden="true">
     <div class="menuTop">
       <div class="menuTitle">MOTTAINAI BABE</div>
-      <button id="menuClose" class="menuClose" type="button" aria-label="close menu">
-        <span class="xIcon" aria-hidden="true"></span>
-      </button>
+      <button id="menuClose" class="menuClose" type="button" aria-label="close menu"></button>
     </div>
 
     <div class="menuBody">
-      <div class="menuCtas" aria-label="main actions">
-        <!-- ✅ 버튼형 강조 -->
-        <button id="menuPostBtn" class="menuBtn menuBtnPrimary" type="button">出品する</button>
-        <button id="menuViewBtn" class="menuBtn menuBtnGhost" type="button">アイテムを見る</button>
+      <div class="menuCtas">
+        <!-- ✅ 기능 유지: 出品する는 로그인 플로우 -->
+        <a id="menuPostLink" class="menuBtnPrimary" href="#">出品する</a>
+        <a class="menuBtnGhost" href="./app.html">アイテムを見る</a>
       </div>
 
-      <nav aria-label="pages">
-        <ul class="menuLinks">
-          <li>
-            <a class="menuLink" href="./brand.html">
-              <div>
-                <strong>BRAND STORY</strong>
-                <span>ブランドストーリー</span>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a class="menuLink" href="./guide.html">
-              <div>
-                <strong>GUIDE</strong>
-                <span>ガイド</span>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a class="menuLink" href="./terms.html">
-              <div>
-                <strong>TERMS</strong>
-                <span>利用規約</span>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a class="menuLink" href="./privacy.html">
-              <div>
-                <strong>PRIVACY</strong>
-                <span>プライバシーポリシー</span>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a class="menuLink" href="./about.html">
-              <div>
-                <strong>CONTACT</strong>
-                <span>お問い合わせ</span>
-              </div>
-            </a>
-          </li>
-        </ul>
+      <nav class="menuLinks" aria-label="ページリンク">
+        <a class="menuLink" href="./brand.html">
+          <strong>BRAND STORY</strong>
+          <span>ブランドストーリー</span>
+        </a>
+        <a class="menuLink" href="./guide.html">
+          <strong>GUIDE</strong>
+          <span>ガイド</span>
+        </a>
+        <a class="menuLink" href="./terms.html">
+          <strong>TERMS</strong>
+          <span>利用規約</span>
+        </a>
+        <a class="menuLink" href="./privacy.html">
+          <strong>PRIVACY</strong>
+          <span>プライバシーポリシー</span>
+        </a>
+        <a class="menuLink" href="./about.html">
+          <strong>CONTACT</strong>
+          <span>お問い合わせ</span>
+        </a>
       </nav>
     </div>
   </aside>
 
   <main class="wrap">
-    <section class="center">
+    <section class="centerHero">
       <img class="logo" src="./logo-design.png" alt="Mottainai Babe" />
 
       <div class="jp-title">もったいないベビー</div>
@@ -616,10 +600,8 @@
       <div class="btns">
         <button id="btnPost" class="btn primary" type="button">出品する</button>
         <button id="btnView" class="btn" type="button">アイテムを見る</button>
-        <!-- ✅ 정중앙 브랜드스토리 버튼 삭제(요청사항) -->
       </div>
 
-      <!-- ✅ 프레임 없는 미니멀 표기 -->
       <div class="features" aria-label="features">
         簡単出品 <span class="sep">|</span> 安心交換 <span class="sep">|</span> 利用無料
       </div>
@@ -687,60 +669,50 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
 
   <script>
-    /* ========= MENU (open/close) ========= */
-    const menuBtnEl = document.getElementById("menuBtn");
-    const menuPanelEl = document.getElementById("menuPanel");
-    const menuOverlayEl = document.getElementById("menuOverlay");
-    const menuCloseEl = document.getElementById("menuClose");
+    /* ===== Menu open/close (기능만, 스타일은 CSS가 전부) ===== */
+    const menuBtn = document.getElementById("menuBtn");
+    const menuPanel = document.getElementById("menuPanel");
+    const menuOverlay = document.getElementById("menuOverlay");
+    const menuClose = document.getElementById("menuClose");
 
     function openMenu(){
-      menuPanelEl.classList.add("open");
-      menuOverlayEl.classList.add("open");
-      menuPanelEl.setAttribute("aria-hidden","false");
-      menuOverlayEl.setAttribute("aria-hidden","false");
-      menuBtnEl.setAttribute("aria-expanded","true");
+      menuPanel.classList.add("open");
+      menuOverlay.classList.add("open");
+      menuPanel.setAttribute("aria-hidden","false");
+      menuOverlay.setAttribute("aria-hidden","false");
+      menuBtn.setAttribute("aria-expanded","true");
+      document.documentElement.style.overflow = "hidden";
       document.body.style.overflow = "hidden";
     }
     function closeMenu(){
-      menuPanelEl.classList.remove("open");
-      menuOverlayEl.classList.remove("open");
-      menuPanelEl.setAttribute("aria-hidden","true");
-      menuOverlayEl.setAttribute("aria-hidden","true");
-      menuBtnEl.setAttribute("aria-expanded","false");
+      menuPanel.classList.remove("open");
+      menuOverlay.classList.remove("open");
+      menuPanel.setAttribute("aria-hidden","true");
+      menuOverlay.setAttribute("aria-hidden","true");
+      menuBtn.setAttribute("aria-expanded","false");
+      document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
     }
     function toggleMenu(){
-      const isOpen = menuPanelEl.classList.contains("open");
+      const isOpen = menuPanel.classList.contains("open");
       isOpen ? closeMenu() : openMenu();
     }
 
-    menuBtnEl.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      toggleMenu();
-    });
-    menuCloseEl.addEventListener("click", closeMenu);
-    menuOverlayEl.addEventListener("click", closeMenu);
-    document.addEventListener("keydown", (e) => {
-      if(e.key === "Escape") closeMenu();
-    });
+    menuBtn.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); toggleMenu(); });
+    menuOverlay.addEventListener("click", closeMenu);
+    menuClose.addEventListener("click", closeMenu);
+    document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeMenu(); });
 
-    /* ========= APP CTA (existing behavior kept) ========= */
+    /* ===== Index existing behavior (로그인/이동) ===== */
     const statusEl = document.getElementById("status");
     const btnPost  = document.getElementById("btnPost");
     const btnView  = document.getElementById("btnView");
-    const menuPostBtn = document.getElementById("menuPostBtn");
-    const menuViewBtn = document.getElementById("menuViewBtn");
+    const menuPostLink = document.getElementById("menuPostLink");
 
     function setStatus(msg){ statusEl.textContent = msg || ""; }
 
-    // ✅ アイテムを見る: app.html 이동 (로그인 없이)
-    function goView(){
-      closeMenu();
-      location.href = "./app.html";
-    }
-    btnView.addEventListener("click", goView);
-    menuViewBtn.addEventListener("click", goView);
+    // 아이템 보기: 그냥 app 이동
+    btnView.addEventListener("click", () => { location.href = "./app.html"; });
 
     // ✅ LINE/인앱 브라우저 판별
     function isInAppBrowser() {
@@ -814,7 +786,7 @@
         console.error("getRedirectResult error", err);
       });
 
-    // ✅ 出品する = 로그인 후 app 이동 (기존 동작 유지)
+    // ✅ 出品する: 로그인 후 app 이동
     async function doPostFlow(){
       closeMenu();
 
@@ -825,7 +797,6 @@
 
       try{
         btnPost.disabled = true;
-        menuPostBtn.disabled = true;
         setStatus("Googleログイン中…");
 
         const provider = new firebase.auth.GoogleAuthProvider();
@@ -839,7 +810,6 @@
 
       }catch(err){
         console.error(err);
-
         const code = err?.code || "";
 
         // popup 문제는 redirect fallback
@@ -868,12 +838,16 @@
 
       }finally{
         btnPost.disabled = false;
-        menuPostBtn.disabled = false;
       }
     }
 
     btnPost.addEventListener("click", doPostFlow);
-    menuPostBtn.addEventListener("click", doPostFlow);
+
+    // 메뉴의 出品する (a태그)도 같은 플로우로 연결
+    menuPostLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      doPostFlow();
+    });
   </script>
 </body>
 </html>
