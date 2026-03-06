@@ -162,18 +162,24 @@
     }
 
     .cta{
-      font-size: 12px;
-      letter-spacing: .08em;
-      padding: 10px 12px;
-      border: 1px solid var(--line);
-      background: transparent;
-      border-radius: 999px;
-      color: var(--green);
-      white-space:nowrap;
-      text-decoration:none;
-    }
-    .cta:hover{ background: rgba(15,107,77,.06); text-decoration:none; }
-
+  font-family: inherit;
+  font-size: 12px;
+  letter-spacing: .08em;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  background: transparent;
+  border-radius: 999px;
+  color: var(--green);
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.cta:hover{
+  background: rgba(15,107,77,.06);
+  text-decoration:none;
+}
     /* ===== Menu Overlay (Index same) ===== */
     .menuOverlay{
       position: fixed;
@@ -656,8 +662,8 @@
       </a>
 
       <div class="rightSlot">
-        <a class="cta" href="./index.html">TOPへ</a>
-      </div>
+  <button id="authTopBtn" class="cta" type="button">ログイン</button>
+</div>
     </div>
   </header>
 
@@ -942,6 +948,7 @@
     const loginBtn = document.getElementById("loginBtn");
     const logoutBtn = document.getElementById("logoutBtn");
     const loginState = document.getElementById("loginState");
+    const authTopBtn = document.getElementById("authTopBtn");
 
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: "select_account" });
@@ -1019,9 +1026,17 @@
 
     loginBtn.onclick = doLogin;
 
-    logoutBtn.onclick = async () => {
-      try{ await signOut(auth); } catch(e){ console.error("LOGOUT_ERROR", e); }
-    };
+    authTopBtn.onclick = async () => {
+  if(currentUser){
+    try{
+      await signOut(auth);
+    }catch(e){
+      console.error("TOP_LOGOUT_ERROR", e);
+    }
+  }else{
+    await doLogin();
+  }
+};
 
     // redirect 결과 처리
     try{ await getRedirectResult(auth); }catch(e){ console.error("getRedirectResult error", e); }
@@ -1642,21 +1657,23 @@
 
     // ===== Auth state =====
     onAuthStateChanged(auth, async (user) => {
-      currentUser = user;
+  currentUser = user;
 
-      if(user){
-        loginBtn.classList.add("hidden");
-        logoutBtn.classList.remove("hidden");
-        loginState.textContent = `ログイン中：${user.email ?? ""}`;
-      }else{
-        loginBtn.classList.remove("hidden");
-        logoutBtn.classList.add("hidden");
-        loginState.textContent = "未ログイン";
-      }
+  if(user){
+    loginBtn.classList.add("hidden");
+    logoutBtn.classList.remove("hidden");
+    loginState.textContent = `ログイン中：${user.email ?? ""}`;
+    authTopBtn.textContent = "ログアウト";
+  }else{
+    loginBtn.classList.remove("hidden");
+    logoutBtn.classList.add("hidden");
+    loginState.textContent = "未ログイン";
+    authTopBtn.textContent = "ログイン";
+  }
 
-      await loadItems();
-      if(selectedItemId) await openDetail(selectedItemId);
-    });
+  await loadItems();
+  if(selectedItemId) await openDetail(selectedItemId);
+});
   </script>
 
 </body>
