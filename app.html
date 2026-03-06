@@ -360,13 +360,22 @@
     }
     .heroTitle{
       margin:0;
-      font-size:20px;
-      line-height:1.15;
+      font-size:22px;
+      line-height:1.3;
       letter-spacing:.2px;
       color: var(--ink);
     }
     @media (min-width:860px){ .heroTitle{ font-size:26px; } }
     .heroDesc{ margin:8px 0 0; color: var(--muted); line-height:1.5; }
+    
+    .heroMeta{
+  margin-top:16px;
+  padding-top:16px;
+  border-top:1px solid rgba(15,107,77,.14);
+  font-size:12px;
+  letter-spacing:.08em;
+  color:rgba(15,107,77,.78);
+}
 
     .helpBox{
       margin-top:8px;
@@ -704,24 +713,23 @@
 <button id="logoutBtn" class="hidden" type="button">ログアウト</button>
 
       <section class="card cardPad hero">
-        <div class="heroTop">
-          <div style="min-width:0;">
-            <h1 class="heroTitle">ベビー用品を、<span style="color:var(--green2);">“もったいない”から“ありがとう”へ</span></h1>
-            <p class="heroDesc">
-              使わなくなったベビー用品を、必要なご家庭へ。<br>
-              出品 → 交換提案 → 成立後に当事者のみ連絡先表示（Gmail作成画面を開きます）
-            </p>
-          </div>
-          <div class="pill green" title="Beta">BETA</div>
-        </div>
+  <div class="heroTop">
+    <div style="min-width:0;">
+      <h1 class="heroTitle">ベビー用品を、次の家族へ。</h1>
 
-        <div class="helpBox">
-          ✅ 出品一覧はログインなしでも見られます。<br>
-          ✅ 出品・提案・削除・受諾などの操作はログイン後に使えます。<br>
-          ✅ 画像は自動で軽量化してアップロード（上限 5MB）
-        </div>
-      </section>
+      <p class="heroDesc">
+        使わなくなったものを、必要な人へつなぐ。<br>
+        出品と交換提案は、ログイン後に利用できます。
+      </p>
+    </div>
 
+    <div class="pill green">BETA</div>
+  </div>
+
+  <div class="heroMeta">
+    閲覧自由　/　出品・提案はログイン後　/　画像5MBまで
+  </div>
+</section>
       <section class="grid">
         <!-- LEFT -->
         <div class="card cardPad">
