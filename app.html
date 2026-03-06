@@ -536,35 +536,18 @@
     }
 
     /* ===== Auth block in body (requested) ===== */
-    .authCard{
-      margin-top:14px;
-    }
-    .authRowBody{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-    .authStateBody{
-      font-size:12px;
-      letter-spacing:.04em;
-      color: rgba(17,17,17,.72);
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(15,107,77,.18);
-      background:#fff;
-      max-width: 100%;
-      overflow:hidden;
-      text-overflow: ellipsis;
-      white-space:nowrap;
-    }
-    @media (max-width:520px){
-      .btn{ padding:9px 12px; font-size:13px; }
-      .authStateBody{ width:100%; }
-      .authRowBody{ align-items:stretch; }
-      .authRowBody .btn{ width:100%; }
-    }
+    .authStatusBar{
+  margin-top: 14px;
+  margin-bottom: 2px;
+  text-align: center;
+}
+.authStatusText{
+  font-size: 13px;
+  letter-spacing: .04em;
+  color: rgba(15,107,77,.82);
+  line-height: 1.7;
+  word-break: break-all;
+}
 
     /* ===== In-app modal (index same) ===== */
     .modalBack{
@@ -712,13 +695,13 @@
     <section id="appSection">
 
       <!-- ✅ Auth block moved into body (first block) -->
-      <section class="card cardPad authCard" aria-label="auth">
-        <div class="authRowBody">
-          <button id="loginBtn" class="btn btnPrimary" type="button">Googleでログイン</button>
-          <button id="logoutBtn" class="btn btnGhost hidden" type="button">ログアウト</button>
-          <span class="authStateBody" id="loginState">未ログイン</span>
-        </div>
-      </section>
+      <section id="authStatusBar" class="authStatusBar hidden" aria-label="login status">
+  <div id="loginState" class="authStatusText"></div>
+</section>
+
+<!-- 숨김용: 기존 JS 연결 유지 -->
+<button id="loginBtn" class="hidden" type="button">Googleでログイン</button>
+<button id="logoutBtn" class="hidden" type="button">ログアウト</button>
 
       <section class="card cardPad hero">
         <div class="heroTop">
@@ -946,9 +929,10 @@
 
     // ===== Auth UI elements (moved to body) =====
     const loginBtn = document.getElementById("loginBtn");
-    const logoutBtn = document.getElementById("logoutBtn");
-    const loginState = document.getElementById("loginState");
-    const authTopBtn = document.getElementById("authTopBtn");
+const logoutBtn = document.getElementById("logoutBtn");
+const loginState = document.getElementById("loginState");
+const authTopBtn = document.getElementById("authTopBtn");
+const authStatusBar = document.getElementById("authStatusBar");
 
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: "select_account" });
@@ -1660,14 +1644,12 @@
   currentUser = user;
 
   if(user){
-    loginBtn.classList.add("hidden");
-    logoutBtn.classList.remove("hidden");
     loginState.textContent = `ログイン中：${user.email ?? ""}`;
+    authStatusBar.classList.remove("hidden");
     authTopBtn.textContent = "ログアウト";
   }else{
-    loginBtn.classList.remove("hidden");
-    logoutBtn.classList.add("hidden");
-    loginState.textContent = "未ログイン";
+    loginState.textContent = "";
+    authStatusBar.classList.add("hidden");
     authTopBtn.textContent = "ログイン";
   }
 
