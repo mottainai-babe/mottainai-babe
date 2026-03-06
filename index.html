@@ -177,12 +177,19 @@
     }
 
     .logo{
-      width:min(520px, 78vw);
-      height:auto;
-      display:block;
-      margin-left:auto;
-      margin-right:auto;
-    }
+  width:100%;
+  max-width:400px;
+  height:auto;
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+@media (max-width:520px){
+  .logo{
+    max-width:280px;
+  }
+}
 
     .jp-title{
       font-size:18px;
