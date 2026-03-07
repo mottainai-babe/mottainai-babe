@@ -792,28 +792,28 @@
 
     // ✅ Firebase init
     (function init(){
-      try{
-        if(!window.FIREBASE_CONFIG || !window.FIREBASE_CONFIG.apiKey){
-          alert("firebase-config.js の読み込みに失敗しました。index.html と同じフォルダ(ルート)に置いてください。");
-          return;
-        }
-        if (!firebase.apps.length) {
-          firebase.initializeApp(window.FIREBASE_CONFIG);
-        
+  try {
 
-  // App Check 추가
-  firebase.appCheck().activate(
-    "6Lemz4IsAAAAABUm7r4XFmly7y2d0V_yhP7E8ETr",
-    true
-  );
+    if (!window.FIREBASE_CONFIG || !window.FIREBASE_CONFIG.apiKey) {
+      alert("firebase-config.js の読み込みに失敗しました。");
+      return;
+    }
 
-}
-        }
-      }catch(e){
-        console.error(e);
-        alert("Firebase 初期化に失敗しました。firebase-config.js を確認してください。");
-      }
-    })();
+    if (!firebase.apps.length) {
+      firebase.initializeApp(window.FIREBASE_CONFIG);
+
+      // App Check
+      firebase.appCheck().activate(
+        "6Lemz4IsAAAAABUm7r4XFmly7y2d0V_yhP7E8ETr",
+        true
+      );
+    }
+
+  } catch (e) {
+    console.error(e);
+    alert("Firebase 初期化に失敗しました。");
+  }
+})();
 
     // ✅ redirect 로그인 결과 처리
     firebase.auth().getRedirectResult()
