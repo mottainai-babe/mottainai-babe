@@ -799,6 +799,15 @@
         }
         if (!firebase.apps.length) {
           firebase.initializeApp(window.FIREBASE_CONFIG);
+        
+
+  // App Check 추가
+  firebase.appCheck().activate(
+    "6Lemz4IsAAAAABUm7r4XFmly7y2d0V_yhP7E8ETr",
+    true
+  );
+
+}
         }
       }catch(e){
         console.error(e);
