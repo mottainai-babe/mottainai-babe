@@ -360,10 +360,10 @@ crossorigin="anonymous"></script>
 
   /* ===== Layout ===== */
   main.wrap{
-    max-width: var(--max);
+    max-width: 860px;
     margin: 0 auto;
     width:100%;
-    padding: 18px 14px 40px;
+    padding: 32px 22px 48px;
   }
 
   /* ===== Hero ===== */
@@ -415,8 +415,8 @@ crossorigin="anonymous"></script>
 
   /* ===== BAUM-like list ===== */
   .guideList{
-    max-width: var(--listMax);
-    margin: 34px auto 0;
+    max-width: 720px;
+    margin: 40px auto 0;
     border-top: 1px solid rgba(15,107,77,.18);
   }
 
@@ -425,7 +425,7 @@ crossorigin="anonymous"></script>
     align-items:flex-end;
     justify-content:space-between;
     gap: 24px;
-    padding: 28px 4px;
+    padding: 36px 2px;
     border-bottom: 1px solid rgba(15,107,77,.18);
     text-decoration:none;
     transition: background .15s ease, opacity .15s ease;
@@ -454,8 +454,8 @@ crossorigin="anonymous"></script>
     margin:10px 0 0;
     max-width: 560px;
     color: var(--muted);
-    font-size:14px;
-    line-height:1.85;
+    font-size:15px;
+    line-height:2;
   }
 
   .guideRead{
@@ -510,6 +510,17 @@ crossorigin="anonymous"></script>
     .guideText h2{ font-size:17px; }
     .guideText p{ font-size:14px; }
   }
+  @media (max-width:700px){
+
+main.wrap{
+padding:28px 20px 48px;
+}
+
+.guideItem{
+padding:30px 0;
+}
+
+}
 
   @media (prefers-reduced-motion: reduce){
     *{ transition:none !important; scroll-behavior:auto !important; animation:none !important; }
