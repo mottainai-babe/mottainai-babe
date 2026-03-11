@@ -1,32 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-<url>
-<loc>https://mottainai-babe.com/</loc>
-</url>
+  <url>
+    <loc>https://mottainai-babe.com/</loc>
+  </url>
 
-<url>
-<loc>https://mottainai-babe.com/app.html</loc>
-</url>
+  <url>
+    <loc>https://mottainai-babe.com/app.html</loc>
+  </url>
 
-<url>
-<loc>https://mottainai-babe.com/guide.html</loc>
-</url>
+  <url>
+    <loc>https://mottainai-babe.com/guide.html</loc>
+  </url>
 
-<url>
-<loc>https://mottainai-babe.com/brand.html</loc>
-</url>
+  <url>
+    <loc>https://mottainai-babe.com/safety.html</loc>
+  </url>
 
-<url>
-<loc>https://mottainai-babe.com/about.html</loc>
-</url>
+  <url>
+    <loc>https://mottainai-babe.com/eco.html</loc>
+  </url>
 
-<url>
-<loc>https://mottainai-babe.com/privacy.html</loc>
-</url>
+  <url>
+    <loc>https://mottainai-babe.com/baby-clothes-reuse.html</loc>
+  </url>
 
-<url>
-<loc>https://mottainai-babe.com/terms.html</loc>
-</url>
+  <url>
+    <loc>https://mottainai-babe.com/brand.html</loc>
+  </url>
+
+  <url>
+    <loc>https://mottainai-babe.com/about.html</loc>
+  </url>
+
+  <url>
+    <loc>https://mottainai-babe.com/privacy.html</loc>
+  </url>
+
+  <url>
+    <loc>https://mottainai-babe.com/terms.html</loc>
+  </url>
 
 </urlset>
