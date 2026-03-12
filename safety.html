@@ -73,22 +73,22 @@ crossorigin="anonymous"></script>
 
     --green:#0f6b4d;
     --green2:#0b513b;
-    --line: rgba(15,107,77,.22);
-    --blackline: rgba(0,0,0,.16);
+    --line:rgba(15,107,77,.22);
+    --blackline:rgba(0,0,0,.16);
 
-    --max: 1200px;
-    --article: 760px;
-    --pad: 22px;
+    --max:1200px;
+    --article:760px;
+    --pad:22px;
 
-    --sans: ui-sans-serif, system-ui, -apple-system, "Hiragino Kaku Gothic ProN",
+    --sans:ui-sans-serif, system-ui, -apple-system, "Hiragino Kaku Gothic ProN",
             "Yu Gothic", "Noto Sans JP", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
-    --menuBack: rgba(0,0,0,.35);
-    --menuPanelBg: #ffffff;
-    --menuLine: rgba(0,0,0,.12);
+    --menuBack:rgba(0,0,0,.35);
+    --menuPanelBg:#ffffff;
+    --menuLine:rgba(0,0,0,.12);
 
-    --safeL: env(safe-area-inset-left);
-    --safeR: env(safe-area-inset-right);
+    --safeL:env(safe-area-inset-left);
+    --safeR:env(safe-area-inset-right);
   }
 
   *{ box-sizing:border-box; }
@@ -363,7 +363,7 @@ crossorigin="anonymous"></script>
   /* ===== Hero ===== */
   .pageHero{
     max-width:var(--article);
-    margin:28px auto 0;
+    margin:24px auto 0;
     text-align:center;
     padding:18px 0 8px;
   }
@@ -381,9 +381,9 @@ crossorigin="anonymous"></script>
     font-weight:700;
   }
   .pageTitle{
-    margin:22px 0 0;
-    font-size:54px;
-    line-height:1.24;
+    margin:18px 0 0;
+    font-size:44px;
+    line-height:1.35;
     letter-spacing:.01em;
     font-weight:500;
     color:var(--ink);
@@ -398,18 +398,18 @@ crossorigin="anonymous"></script>
     opacity:.45;
   }
   .pageLead{
-    margin:30px auto 0;
-    max-width:720px;
+    margin:24px auto 0;
+    max-width:760px;
     color:var(--muted);
-    font-size:20px;
-    line-height:2;
+    font-size:17px;
+    line-height:1.95;
     text-align:center;
   }
 
   /* ===== Article ===== */
   .article{
     max-width:var(--article);
-    margin:60px auto 0;
+    margin:56px auto 0;
   }
 
   .sectionBlock{
@@ -426,24 +426,24 @@ crossorigin="anonymous"></script>
     left:0;
     top:8px;
     width:1px;
-    height:52px;
-    background:rgba(0,0,0,.35);
+    height:56px;
+    background:rgba(15,107,77,.45);
   }
 
   .sectionHeading{
     margin:0;
-    font-size:28px;
-    line-height:1.55;
-    font-weight:500;
-    letter-spacing:.02em;
+    font-size:24px;
+    line-height:1.6;
+    font-weight:600;
+    letter-spacing:.01em;
     color:var(--ink);
   }
 
   .sectionIntro{
-    margin:20px 0 0;
+    margin:18px 0 0;
     color:var(--muted);
-    font-size:18px;
-    line-height:2;
+    font-size:16px;
+    line-height:1.95;
   }
 
   .pointList{
@@ -461,7 +461,7 @@ crossorigin="anonymous"></script>
   .pointLabel{
     display:inline-block;
     margin:0 0 10px;
-    color:var(--green2);
+    color:var(--green);
     font-size:13px;
     letter-spacing:.12em;
     font-weight:700;
@@ -470,16 +470,16 @@ crossorigin="anonymous"></script>
   .pointItem p{
     margin:0 0 10px;
     color:var(--muted);
-    font-size:18px;
-    line-height:2;
+    font-size:16px;
+    line-height:1.95;
   }
   .pointItem p:last-child{
     margin-bottom:0;
   }
 
   .pointItem strong{
-    color:var(--ink);
-    font-weight:600;
+    color:var(--green2);
+    font-weight:700;
   }
 
   .tip{
@@ -487,12 +487,12 @@ crossorigin="anonymous"></script>
     padding-top:18px;
     border-top:1px solid var(--blackline);
     color:var(--muted);
-    font-size:17px;
-    line-height:2;
+    font-size:16px;
+    line-height:1.95;
   }
   .tip strong{
-    color:var(--ink);
-    font-weight:600;
+    color:var(--green2);
+    font-weight:700;
   }
 
   .actionsRow{
@@ -548,11 +548,12 @@ crossorigin="anonymous"></script>
   }
 
   @media (max-width: 900px){
-    .pageTitle{ font-size:42px; }
-    .pageLead{ font-size:18px; }
-    .sectionHeading{ font-size:24px; }
+    .pageTitle{ font-size:38px; }
+    .pageLead{ font-size:16px; }
+    .sectionHeading{ font-size:22px; }
     .sectionIntro,
-    .pointItem p{ font-size:17px; }
+    .pointItem p,
+    .tip{ font-size:15px; }
   }
 
   @media (max-width: 700px){
@@ -566,14 +567,14 @@ crossorigin="anonymous"></script>
     }
 
     .pageTitle{
-      font-size:28px;
-      line-height:1.35;
+      font-size:34px;
+      line-height:1.4;
     }
 
     .pageLead{
-      margin-top:22px;
-      font-size:14px;
-      line-height:2;
+      margin-top:20px;
+      font-size:15px;
+      line-height:1.9;
       max-width:100%;
     }
 
@@ -592,14 +593,14 @@ crossorigin="anonymous"></script>
     }
 
     .sectionHeading{
-      font-size:18px;
-      line-height:1.7;
+      font-size:20px;
+      line-height:1.65;
     }
 
     .sectionIntro{
       margin-top:14px;
-      font-size:14px;
-      line-height:2;
+      font-size:15px;
+      line-height:1.95;
     }
 
     .pointList{
@@ -610,11 +611,16 @@ crossorigin="anonymous"></script>
     .pointLabel{
       font-size:11px;
       margin-bottom:8px;
+      color:var(--green);
     }
 
     .pointItem p{
-      font-size:14px;
-      line-height:2;
+      font-size:15px;
+      line-height:1.95;
+    }
+
+    .pointItem strong{
+      color:var(--green2);
     }
 
     .tip{
