@@ -24,7 +24,7 @@ gtag('js', new Date());
 gtag('config', 'G-QVWCBQZP1T');
 </script>
 
-<!-- Structured Data -->
+<!-- 구조화 데이터 -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -62,77 +62,64 @@ crossorigin="anonymous"></script>
 
 <style>
   :root{
-    --bg:#fbfaf7;
-    --surface:#ffffff;
+    --bg:#ffffff;
     --ink:#111111;
-    --muted:#555555;
+    --muted:#444444;
 
     --green:#0f6b4d;
     --green2:#0b513b;
-    --line:rgba(15,107,77,.22);
-    --softLine:rgba(0,0,0,.10);
+    --line: rgba(15,107,77,.28);
 
-    --cream:#F6F2EA;
-    --wood:#D8C7A3;
-    --sage:#8FAF8C;
-    --beige:#E9E1D6;
+    --max: 820px;
+    --pad: 22px;
 
-    --max:1200px;
-    --content:1180px;
-    --text:760px;
-    --pad:22px;
-
-    --sans:ui-sans-serif, system-ui, -apple-system, "Hiragino Kaku Gothic ProN",
+    --sans: ui-sans-serif, system-ui, -apple-system, "Hiragino Kaku Gothic ProN",
             "Yu Gothic", "Noto Sans JP", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
-    --menuBack:rgba(0,0,0,.35);
-    --menuPanelBg:#ffffff;
-    --menuLine:rgba(0,0,0,.12);
+    --menuBack: rgba(0,0,0,.35);
+    --menuPanelBg: #ffffff;
+    --menuLine: rgba(0,0,0,.12);
 
-    --safeL:env(safe-area-inset-left);
-    --safeR:env(safe-area-inset-right);
+    --safeL: env(safe-area-inset-left);
+    --safeR: env(safe-area-inset-right);
   }
 
   *{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
   html,body{ height:100%; }
-
   body{
     margin:0;
-    font-family:var(--sans);
-    background:var(--bg);
-    color:var(--ink);
-    line-height:1.95;
-    letter-spacing:.02em;
-    overflow-x:hidden;
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    letter-spacing: .2px;
+    line-height: 1.95;
   }
 
-  img{ max-width:100%; display:block; }
   a{ color:inherit; text-decoration:none; }
   a:hover{ text-decoration:underline; }
 
   /* ===== Header ===== */
   header{
-    position:sticky;
-    top:0;
-    z-index:60;
+    position: sticky;
+    top: 0;
+    z-index: 50;
     width:100%;
-    background:rgba(255,255,255,.88);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);
+    background: rgba(255,255,255,.90);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
   }
 
   .topbar{
-    max-width:1200px;
-    margin:0 auto;
-    padding-top:12px;
-    padding-bottom:12px;
-    padding-left:calc(var(--pad) + var(--safeL));
-    padding-right:calc(var(--pad) + var(--safeR));
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: calc(var(--pad) + var(--safeL));
+    padding-right: calc(var(--pad) + var(--safeR));
     display:grid;
-    grid-template-columns:1fr auto 1fr;
+    grid-template-columns: 1fr auto 1fr;
     align-items:center;
-    gap:14px;
+    gap: 14px;
   }
 
   .leftSlot{
@@ -150,8 +137,8 @@ crossorigin="anonymous"></script>
   }
 
   .menuBtn{
-    width:44px;
-    height:44px;
+    width: 44px;
+    height: 44px;
     display:grid;
     place-items:center;
     border:none;
@@ -159,7 +146,6 @@ crossorigin="anonymous"></script>
     cursor:pointer;
     padding:0;
   }
-
   .hamburger{
     width:22px;
     height:12px;
@@ -170,10 +156,9 @@ crossorigin="anonymous"></script>
   .hamburger span{
     content:"";
     position:absolute;
-    left:0;
-    right:0;
+    left:0; right:0;
     height:1px;
-    background:var(--green);
+    background: var(--green);
     opacity:.95;
   }
   .hamburger::before{ top:0; }
@@ -189,729 +174,319 @@ crossorigin="anonymous"></script>
     text-decoration:none;
   }
   .brandLogo img{
-    height:50px;
-    width:auto;
+    height: 50px;
+    width: auto;
     display:block;
   }
 
   .cta{
-    font-family:inherit;
-    font-size:12px;
-    letter-spacing:.08em;
-    padding:10px 12px;
-    border:1px solid var(--line);
-    background:transparent;
-    border-radius:999px;
-    color:var(--green);
-    white-space:nowrap;
-    text-decoration:none;
-    cursor:pointer;
-    appearance:none;
-    -webkit-appearance:none;
+    font-family: inherit;
+    font-size: 12px;
+    letter-spacing: .08em;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    background: transparent;
+    border-radius: 999px;
+    color: var(--green);
+    white-space: nowrap;
+    text-decoration: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
   }
   .cta:hover{
-    background:rgba(15,107,77,.06);
+    background: rgba(15,107,77,.06);
     text-decoration:none;
   }
 
   /* ===== Fullscreen Menu ===== */
   .menuOverlay{
-    position:fixed;
-    inset:0;
-    background:var(--menuBack);
-    opacity:0;
-    pointer-events:none;
-    transition:opacity .18s ease;
-    z-index:100;
+    position: fixed;
+    inset: 0;
+    background: var(--menuBack);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .18s ease;
+    z-index: 100;
   }
   .menuOverlay.open{
-    opacity:1;
-    pointer-events:auto;
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .menuPanel{
-    position:fixed;
-    inset:0;
-    background:var(--menuPanelBg);
-    transform:translateY(-8px);
-    opacity:0;
-    pointer-events:none;
-    transition:opacity .18s ease, transform .18s ease;
-    z-index:110;
-    padding-top:22px;
-    padding-bottom:28px;
-    padding-left:calc(var(--pad) + var(--safeL));
-    padding-right:calc(var(--pad) + var(--safeR));
-    overflow:auto;
-    -webkit-overflow-scrolling:touch;
+    position: fixed;
+    inset: 0;
+    background: var(--menuPanelBg);
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .18s ease, transform .18s ease;
+    z-index: 110;
+
+    padding-top: 22px;
+    padding-bottom: 28px;
+    padding-left: calc(var(--pad) + var(--safeL));
+    padding-right: calc(var(--pad) + var(--safeR));
+
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .menuPanel.open{
-    opacity:1;
-    pointer-events:auto;
-    transform:translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
   }
 
   .menuTop{
-    max-width:780px;
-    margin:0 auto;
+    max-width: 780px;
+    margin: 0 auto;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:12px;
-    padding:6px 0 18px;
-    border-bottom:1px solid var(--menuLine);
+    gap: 12px;
+    padding: 6px 0 18px;
+    border-bottom: 1px solid var(--menuLine);
   }
   .menuTitle{
-    font-weight:600;
-    letter-spacing:.22em;
-    font-size:18px;
-    color:#111;
+    font-weight: 600;
+    letter-spacing: .22em;
+    font-size: 18px;
+    color: #111;
     white-space:nowrap;
   }
   .menuClose{
-    width:44px;
-    height:44px;
-    border:none;
-    background:transparent;
-    cursor:pointer;
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
     display:grid;
     place-items:center;
-    position:relative;
+    position: relative;
     padding:0;
   }
   .menuClose::before,
   .menuClose::after{
     content:"";
-    width:22px;
-    height:1px;
-    background:#111;
+    width: 22px;
+    height: 1px;
+    background: #111;
     position:absolute;
   }
-  .menuClose::before{ transform:rotate(45deg); }
-  .menuClose::after{ transform:rotate(-45deg); }
+  .menuClose::before{ transform: rotate(45deg); }
+  .menuClose::after{ transform: rotate(-45deg); }
 
   .menuBody{
-    max-width:780px;
-    margin:0 auto;
-    padding:18px 0 0;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 18px 0 0;
   }
 
   .menuCtas{
     display:flex;
     flex-direction:column;
-    gap:12px;
-    padding-bottom:18px;
-    border-bottom:1px solid var(--menuLine);
+    gap: 12px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--menuLine);
   }
   .menuBtnPrimary,
   .menuBtnGhost{
     display:flex;
     align-items:center;
     justify-content:center;
-    height:56px;
-    border-radius:999px;
-    font-size:15px;
-    letter-spacing:.06em;
-    text-decoration:none;
-    border:1px solid var(--line);
+    height: 56px;
+    border-radius: 999px;
+    font-size: 15px;
+    letter-spacing: .06em;
+    text-decoration: none;
+    border: 1px solid var(--line);
   }
   .menuBtnPrimary{
-    background:rgba(15,107,77,.10);
-    color:var(--green2);
-    border-color:rgba(15,107,77,.30);
-    font-weight:600;
+    background: rgba(15,107,77,.10);
+    color: var(--green2);
+    border-color: rgba(15,107,77,.30);
+    font-weight: 600;
   }
   .menuBtnGhost{
-    background:transparent;
-    color:var(--green);
-    border-color:rgba(15,107,77,.26);
-    font-weight:600;
+    background: transparent;
+    color: var(--green);
+    border-color: rgba(15,107,77,.26);
+    font-weight: 600;
   }
   .menuBtnPrimary:hover,
   .menuBtnGhost:hover{
     text-decoration:none;
-    background:rgba(15,107,77,.06);
+    background: rgba(15,107,77,.06);
   }
 
-  .menuLinks{ padding:10px 0 0; }
+  .menuLinks{ padding: 10px 0 0; }
   .menuLink{
     display:flex;
     flex-direction:column;
     align-items:flex-start;
     justify-content:center;
-    padding:24px 6px;
-    gap:4px;
-    border-bottom:1px solid var(--menuLine);
+    padding: 24px 6px;
+    gap: 4px;
+    border-bottom: 1px solid var(--menuLine);
     text-decoration:none;
   }
   .menuLink:last-child{ border-bottom:none; }
+
   .menuLink strong{
-    font-size:18px;
-    font-weight:500;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    color:#111;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #111;
   }
   .menuLink span{
-    font-size:12px;
-    opacity:.7;
-    letter-spacing:.06em;
-    color:#111;
-    margin-top:2px;
+    font-size: 12px;
+    opacity: .7;
+    letter-spacing: .06em;
+    color: #111;
+    margin-top: 2px;
   }
   .menuLink:hover{
-    background:rgba(15,107,77,.04);
+    background: rgba(15,107,77,.04);
     text-decoration:none;
   }
 
-  /* ===== Hero ===== */
-  .hero{
-    position:relative;
-    min-height:120svh;
-    background:linear-gradient(180deg, #faf8f3 0%, #f6f2ea 100%);
-    overflow:hidden;
+  /* ===== Page Content ===== */
+  .section{ padding: 64px 0; }
+  .section--tight{ padding: 44px 0; }
+
+  .center{
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 var(--pad);
+    text-align: center;
   }
 
-  .heroStage{
-    position:sticky;
-    top:73px;
-    min-height:calc(100svh - 73px);
-    display:grid;
-    place-items:center;
-    padding:40px 0 56px;
+  .kicker{
+    font-size: 12px;
+    letter-spacing: .14em;
+    color: var(--green);
+    margin-bottom: 14px;
   }
 
-  .heroInner{
-    width:min(100%, 1380px);
-    margin:0 auto;
-    padding:0 24px;
-    display:grid;
-    grid-template-columns:1.1fr .95fr;
-    gap:44px;
-    align-items:center;
+  h1{
+    margin: 0;
+    font-size: 34px;
+    letter-spacing: .08em;
+    font-weight: 600;
+    color: var(--green);
   }
 
-  .heroCopy{
-    position:relative;
-    z-index:2;
-    max-width:620px;
-    opacity:0;
-    transform:translateY(30px);
-    transition:opacity .9s ease, transform .9s ease;
-  }
-  .hero.is-in .heroCopy{
-    opacity:1;
-    transform:none;
+  .lead{
+    margin: 22px auto 0;
+    max-width: 46ch;
+    font-size: 16px;
+    color: var(--muted);
   }
 
-  .heroKicker{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    padding:8px 14px;
-    border:1px solid rgba(15,107,77,.18);
-    border-radius:999px;
-    background:rgba(15,107,77,.06);
-    color:var(--green2);
-    font-size:12px;
-    font-weight:700;
-    letter-spacing:.12em;
+  .rule{
+    width: 1px;
+    height: 42px;
+    background: var(--line);
+    margin: 34px auto 0;
   }
 
-  .heroTitle{
-    margin:18px 0 0;
-    font-size:clamp(34px, 5.4vw, 72px);
-    line-height:1.18;
-    letter-spacing:.02em;
-    font-weight:600;
-    color:#151515;
+  .bleed{
+    width: 100%;
+    height: min(54vh, 520px);
+    min-height: 280px;
+    background:
+      linear-gradient(180deg, rgba(15,107,77,.06), rgba(15,107,77,.06)),
+      radial-gradient(900px 500px at 30% 30%, rgba(15,107,77,.10), transparent 60%),
+      #eef5f1;
+    background-size: cover;
+    background-position: center;
+    margin: 0;
   }
 
-  .heroTitle .accent{
-    color:var(--green2);
+  .blockTitle{
+    font-size: 28px;
+    letter-spacing: .06em;
+    font-weight: 600;
+    margin: 0;
+    color: var(--green);
+    text-align:center;
   }
-
-  .heroLead{
-    margin:22px 0 0;
-    max-width:34ch;
-    color:var(--muted);
-    font-size:17px;
-    line-height:2;
-  }
-
-  .heroActions{
-    margin-top:28px;
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-  }
-
-  .heroBtn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    min-height:48px;
-    padding:12px 18px;
-    border-radius:999px;
-    border:1px solid var(--line);
-    background:#fff;
-    color:var(--green2);
-    font-size:13px;
-    font-weight:700;
-    letter-spacing:.08em;
-    text-decoration:none;
-  }
-  .heroBtn:hover{
-    background:rgba(15,107,77,.06);
-    text-decoration:none;
-  }
-
-  .heroVisual{
-    position:relative;
-    z-index:1;
-    display:grid;
-    place-items:center;
-    min-height:660px;
-  }
-
-  .heroPhotoWrap{
-    position:relative;
-    width:min(100%, 760px);
-    aspect-ratio: 16 / 11;
-    transform:translateY(20px) scale(.94);
-    opacity:0;
-    transition:opacity 1s ease, transform 1s ease;
-    will-change:transform;
-  }
-  .hero.is-in .heroPhotoWrap{
-    opacity:1;
-    transform:translateY(0) scale(1);
-  }
-
-  .heroPhotoMain{
-    position:absolute;
-    inset:0;
-    border-radius:28px;
-    overflow:hidden;
-    box-shadow:0 30px 70px rgba(0,0,0,.12);
-    background:#eee;
-  }
-  .heroPhotoMain img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-  }
-
-  .floatCard{
-    position:absolute;
-    background:rgba(255,255,255,.84);
-    backdrop-filter:blur(10px);
-    border:1px solid rgba(255,255,255,.6);
-    box-shadow:0 20px 40px rgba(0,0,0,.08);
-    border-radius:22px;
-    overflow:hidden;
-  }
-
-  .floatCard.smallA{
-    width:32%;
-    left:-7%;
-    bottom:8%;
-    transform:rotate(-6deg);
-  }
-  .floatCard.smallB{
-    width:34%;
-    right:-7%;
-    top:10%;
-    transform:rotate(5deg);
-  }
-  .floatCard img{
-    width:100%;
-    aspect-ratio:1 / 1;
-    object-fit:cover;
-  }
-
-  .scrollHint{
-    position:absolute;
-    left:50%;
-    bottom:22px;
-    transform:translateX(-50%);
-    color:rgba(15,107,77,.72);
-    font-size:11px;
-    letter-spacing:.18em;
-    text-transform:uppercase;
-  }
-
-  /* ===== Shared Sections ===== */
-  .storySection{
-    padding:120px 0;
-    position:relative;
-  }
-
-  .storyWrap{
-    width:min(100%, var(--content));
-    margin:0 auto;
-    padding:0 24px;
-  }
-
-  .split{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:64px;
-    align-items:center;
-  }
-
-  .split.reverse .storyImage{
-    order:2;
-  }
-  .split.reverse .storyText{
-    order:1;
-  }
-
-  .storyImage{
-    opacity:0;
-    transform:translateY(34px);
-    transition:opacity .9s ease, transform .9s ease;
-  }
-  .storyText{
-    opacity:0;
-    transform:translateY(34px);
-    transition:opacity .9s ease, transform .9s ease;
-  }
-  .reveal.is-in{
-    opacity:1;
-    transform:none;
-  }
-
-  .imageCard{
-    position:relative;
-    border-radius:28px;
-    overflow:hidden;
-    background:#eee;
-    box-shadow:0 22px 50px rgba(0,0,0,.08);
-  }
-  .imageCard img{
-    width:100%;
-    aspect-ratio: 4 / 5;
-    object-fit:cover;
-  }
-
-  .imageBadge{
-    position:absolute;
-    left:18px;
-    bottom:18px;
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:10px 14px;
-    border-radius:999px;
-    background:rgba(255,255,255,.90);
-    backdrop-filter:blur(8px);
-    color:var(--green2);
-    font-size:11px;
-    font-weight:700;
-    letter-spacing:.12em;
-  }
-
-  .storyKicker{
-    font-size:12px;
-    letter-spacing:.14em;
-    color:var(--green);
-    margin-bottom:14px;
-    font-weight:700;
-  }
-
-  .storyTitle{
-    margin:0;
-    font-size:clamp(28px, 3vw, 42px);
-    line-height:1.38;
-    letter-spacing:.04em;
-    font-weight:600;
-    color:#171717;
-  }
-
-  .storySub{
-    margin-top:10px;
-    font-size:13px;
-    letter-spacing:.08em;
-    color:rgba(15,107,77,.78);
-  }
-
-  .storyBody{
-    margin-top:26px;
-    color:var(--muted);
-    font-size:16px;
-    line-height:2;
-  }
-  .storyBody p{
-    margin:0 0 18px;
-  }
-  .storyBody p:last-child{
-    margin-bottom:0;
-  }
-
-  .lineAccent{
-    width:42px;
-    height:2px;
-    margin:18px 0 0;
-    background:var(--green);
-    opacity:.45;
-  }
-
-  /* ===== Quote Band ===== */
-  .quoteBand{
-    padding:120px 24px;
-    background:linear-gradient(180deg, rgba(143,175,140,.07), rgba(246,242,234,.7));
-    border-top:1px solid rgba(15,107,77,.08);
-    border-bottom:1px solid rgba(15,107,77,.08);
-  }
-
-  .quoteInner{
-    width:min(100%, 980px);
-    margin:0 auto;
+  .sub{
+    margin-top: 10px;
+    font-size: 13px;
+    letter-spacing: .08em;
+    color: rgba(15,107,77,.75);
     text-align:center;
   }
 
-  .quote{
-    margin:0;
-    font-size:clamp(24px, 4vw, 48px);
-    line-height:1.6;
-    letter-spacing:.06em;
-    color:#1a1a1a;
-    font-weight:500;
-  }
-
-  .quoteNote{
-    margin-top:18px;
-    font-size:13px;
-    letter-spacing:.14em;
-    color:rgba(15,107,77,.72);
-  }
-
-  /* ===== Join ===== */
-  .joinSection{
-    padding:120px 0 110px;
-  }
-
-  .joinCard{
-    width:min(100%, 980px);
-    margin:0 auto;
-    padding:56px 28px;
-    border:1px solid var(--line);
-    border-radius:34px;
-    background:linear-gradient(180deg, rgba(246,242,234,.9), rgba(255,255,255,.96));
+  .text{
     text-align:center;
-    box-shadow:0 18px 38px rgba(0,0,0,.05);
+    margin: 28px auto 0;
+    max-width: 70ch;
+    color: var(--muted);
+    font-size: 15px;
   }
+  .text p{ margin: 0 0 18px; }
+  .text p:last-child{ margin-bottom: 0; }
 
-  .joinTitle{
-    margin:0;
-    font-size:clamp(28px, 3.4vw, 42px);
-    line-height:1.45;
-    letter-spacing:.05em;
-    color:#171717;
-  }
-
-  .joinLead{
-    margin:18px auto 0;
-    max-width:34ch;
-    color:var(--muted);
-    font-size:16px;
-    line-height:2;
-  }
-
-  .joinActions{
-    margin-top:28px;
+  .anchors{
     display:flex;
     justify-content:center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 26px;
+    padding: 0;
+    list-style:none;
+  }
+  .anchors a{
+    font-size: 12px;
+    letter-spacing: .08em;
+    color: rgba(15,107,77,.85);
+    padding: 10px 12px;
+    border-bottom: 1px solid transparent;
+  }
+  .anchors a:hover{
+    border-bottom-color: var(--line);
+    text-decoration:none;
+    color: var(--green);
   }
 
-  /* ===== Footer ===== */
   .footer{
-    border-top:1px solid var(--line);
-    padding:22px var(--pad) 34px;
-    max-width:1200px;
-    margin:0 auto;
-    color:rgba(15,107,77,.85);
-    font-size:12px;
-    line-height:1.7;
+    border-top: 1px solid var(--line);
+    padding: 22px var(--pad) 34px;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: rgba(15,107,77,.85);
+    font-size: 12px;
+    line-height: 1.7;
     text-align:center;
   }
   .footer a{
-    color:rgba(15,107,77,.92);
+    color: rgba(15,107,77,.92);
     text-decoration:none;
     border-bottom:1px solid transparent;
     padding-bottom:2px;
   }
   .footer a:hover{
-    border-bottom-color:var(--line);
+    border-bottom-color: var(--line);
     text-decoration:none;
   }
 
-  @media (max-width: 980px){
-    .heroInner{
-      grid-template-columns:1fr;
-      gap:34px;
-      text-align:center;
-    }
-
-    .heroCopy{
-      max-width:700px;
-      margin:0 auto;
-    }
-
-    .heroLead{
-      max-width:40ch;
-      margin-left:auto;
-      margin-right:auto;
-    }
-
-    .heroActions{
-      justify-content:center;
-    }
-
-    .heroVisual{
-      min-height:auto;
-    }
-
-    .heroPhotoWrap{
-      width:min(100%, 720px);
-      aspect-ratio: 16 / 10;
-    }
-
-    .split{
-      grid-template-columns:1fr;
-      gap:30px;
-    }
-
-    .split.reverse .storyImage,
-    .split.reverse .storyText{
-      order:unset;
-    }
-
-    .storySection{
-      padding:90px 0;
-    }
-
-    .storyText{
-      text-align:center;
-    }
-
-    .lineAccent{
-      margin-left:auto;
-      margin-right:auto;
-    }
-  }
-
   @media (max-width: 560px){
-    .brandLogo img{ height:45px; }
-
-    .cta{
-      padding:9px 10px;
-      font-size:12px;
-    }
-
-    .hero{
-      min-height:112svh;
-    }
-
-    .heroStage{
-      top:73px;
-      min-height:calc(100svh - 73px);
-      padding:22px 0 44px;
-    }
-
-    .heroInner{
-      padding:0 18px;
-      gap:24px;
-    }
-
-    .heroTitle{
-      font-size:34px;
-      line-height:1.3;
-    }
-
-    .heroLead{
-      font-size:15px;
-      line-height:1.9;
-    }
-
-    .heroPhotoWrap{
-      aspect-ratio: 4 / 5;
-      width:100%;
-    }
-
-    .heroPhotoMain{
-      border-radius:24px;
-    }
-
-    .floatCard.smallA{
-      width:34%;
-      left:-2%;
-      bottom:-4%;
-    }
-
-    .floatCard.smallB{
-      width:36%;
-      right:-2%;
-      top:-3%;
-    }
-
-    .storyWrap{
-      padding:0 18px;
-    }
-
-    .storySection{
-      padding:72px 0;
-    }
-
-    .storyTitle{
-      font-size:27px;
-      line-height:1.5;
-    }
-
-    .storyBody{
-      font-size:15px;
-      line-height:1.95;
-      text-align:left;
-    }
-
-    .quoteBand{
-      padding:84px 18px;
-    }
-
-    .quote{
-      font-size:28px;
-      line-height:1.75;
-    }
-
-    .joinSection{
-      padding:78px 18px 84px;
-    }
-
-    .joinCard{
-      padding:42px 20px;
-      border-radius:28px;
-    }
-
-    .joinLead{
-      font-size:15px;
-      line-height:1.9;
-    }
+    h1{ font-size: 28px; }
+    .blockTitle{ font-size: 24px; }
+    .lead{ font-size: 15px; }
+    .section{ padding: 52px 0; }
+    .bleed{ height: 44vh; min-height: 240px; }
+    .text{ font-size: 14.5px; }
+    .cta{ padding: 9px 10px; font-size: 12px; }
+    .brandLogo img{ height: 45px; }
   }
 
   @media (prefers-reduced-motion: reduce){
-    html{ scroll-behavior:auto; }
-    *{
-      transition:none !important;
-      animation:none !important;
-    }
-    .heroCopy,
-    .heroPhotoWrap,
-    .storyImage,
-    .storyText{
-      opacity:1 !important;
-      transform:none !important;
-    }
+    *{ transition:none !important; scroll-behavior:auto !important; }
   }
 </style>
 </head>
@@ -926,7 +501,7 @@ crossorigin="anonymous"></script>
       </div>
 
       <a class="brandLogo" href="./index.html" aria-label="Mottainai Babe ホーム">
-        <img src="./logo-design-02.png" alt="Mottainai Babe">
+        <img src="./logo-design-02.png" alt="Mottainai Babe" />
       </a>
 
       <div class="rightSlot">
@@ -974,180 +549,107 @@ crossorigin="anonymous"></script>
     </div>
   </aside>
 
-  <main>
-    <section class="hero js-hero" id="top">
-      <div class="heroStage">
-        <div class="heroInner">
-          <div class="heroCopy">
-            <div class="heroKicker">BRAND STORY</div>
-            <h1 class="heroTitle">
-              「もったいない」から、<br>
-              <span class="accent">やさしい循環</span>を。
-            </h1>
-            <p class="heroLead">
-              使わなくなったベビー用品を、次の家族へ。<br>
-              小さなシェアと交換を積み重ねて、無駄を減らし、
-              家族同士が自然につながる場所をつくります。
-            </p>
-            <div class="heroActions">
-              <a class="heroBtn" href="#roots">ストーリーを見る</a>
-              <a class="heroBtn" href="./app.html">交換を始める</a>
-            </div>
-          </div>
+  <section class="section" id="top">
+    <div class="center">
+      <div class="kicker">BRAND STORY</div>
+      <h1>「もったいない」から、やさしい循環を。</h1>
+      <p class="lead">
+        使わなくなったベビー用品を、次の家族へ。<br>
+        小さなシェアと交換を積み重ねて、無駄を減らし、家族同士がつながる場所をつくります。
+      </p>
 
-          <div class="heroVisual">
-            <div class="heroPhotoWrap js-parallax">
-              <div class="heroPhotoMain">
-                <img src="./brand-hero-01.png" alt="やわらかな光の中でベビー用品を囲む家族のイメージ">
-              </div>
+      <div class="rule" aria-hidden="true"></div>
 
-              <div class="floatCard smallA">
-                <img src="./brand-hero-02.png" alt="やさしい雰囲気のベビー用品交換イメージ">
-              </div>
+      <ul class="anchors" aria-label="sections">
+        <li><a href="#roots">OUR ROOTS</a></li>
+        <li><a href="#community">COMMUNITY</a></li>
+        <li><a href="#vision">VISION</a></li>
+      </ul>
+    </div>
+  </section>
 
-              <div class="floatCard smallB">
-                <img src="./brand-hero-03.png" alt="ぬいぐるみを抱える赤ちゃんのイメージ">
-              </div>
-            </div>
-          </div>
-        </div>
+  <figure class="bleed" style="background-image:url('');" aria-label="image placeholder 1"></figure>
 
-        <div class="scrollHint">SCROLL</div>
-      </div>
-    </section>
+  <section class="section section--tight" id="roots">
+    <div class="center">
+      <h2 class="blockTitle">OUR ROOTS</h2>
+      <div class="sub">私たちのルーツ</div>
 
-    <section class="storySection" id="roots">
-      <div class="storyWrap">
-        <div class="split">
-          <div class="storyImage reveal">
-            <div class="imageCard">
-              <img src="./brand-hero-03.png" alt="やわらかな光の中でぬいぐるみを抱く赤ちゃん">
-              <div class="imageBadge">OUR ROOTS</div>
-            </div>
-          </div>
-
-          <div class="storyText reveal">
-            <div class="storyKicker">OUR ROOTS</div>
-            <h2 class="storyTitle">私たちのルーツ</h2>
-            <div class="storySub">“もったいない”という感覚から始まりました</div>
-            <div class="lineAccent"></div>
-
-            <div class="storyBody">
-              <p>
-                「もったいない」という言葉には、まだ使えるものを無駄にしない気持ちと、
-                物に込められた価値や想いを大切にする、日本ならではの感覚が宿っています。
-              </p>
-              <p>
-                私は日本で二人の子どもを育てるなかで、短い期間しか使わない物の多さに気づきました。
-                ベビー服、おもちゃ、さまざまな育児用品。まだきれいで十分に使えるのに、
-                役目を終えてしまうものが本当に多いのです。
-              </p>
-              <p>
-                だからこそ、必要なくなった物が次の家族へ自然につながっていく仕組みをつくりたい。
-                Mottainai Babe は、そんな日々の実感から生まれました。
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="quoteBand">
-      <div class="quoteInner">
-        <p class="quote">
-          まだ使えるものを、<br>
-          もう一度だれかの“うれしい”へ。
+      <div class="text">
+        <p>
+          「もったいない」という言葉には、まだ使えるものを無駄にしないという気持ちと、
+          物に込められた価値や想いを大切にする、日本ならではの文化が込められています。
         </p>
-        <div class="quoteNote">MOTTAINAI BABE</div>
+        <p>
+          私は日本で二人の子どもを育てるなかで、短い期間しか使わない物の多さに気づきました。
+          ベビー服、おもちゃ、さまざまな育児用品。まだきれいで十分に使えるのに、役目を終えてしまうものが多いのです。
+        </p>
+        <p>
+          だからこそ、必要なくなった物が次の家族へ自然につながっていく仕組みをつくりたい。
+          Mottainai Babe は、そんな小さな問いから始まりました。
+        </p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="storySection" id="community">
-      <div class="storyWrap">
-        <div class="split reverse">
-          <div class="storyImage reveal">
-            <div class="imageCard">
-              <img src="./brand-hero-02.png" alt="ベビー用品の交換を通じてつながる家族のイメージ">
-              <div class="imageBadge">COMMUNITY</div>
-            </div>
-          </div>
+  <figure class="bleed" style="background-image:url('');" aria-label="image placeholder 2"></figure>
 
-          <div class="storyText reveal">
-            <div class="storyKicker">COMMUNITY</div>
-            <h2 class="storyTitle">交換だけではなく、<br>つながりの場へ</h2>
-            <div class="storySub">暮らしを少し軽くし、社会を少し温かくする</div>
-            <div class="lineAccent"></div>
+  <section class="section section--tight" id="community">
+    <div class="center">
+      <h2 class="blockTitle">COMMUNITY</h2>
+      <div class="sub">交換だけではなく、つながりの場へ</div>
 
-            <div class="storyBody">
-              <p>
-                ある家族にとって不要になった物が、別の家族にとって必要な物になる。
-                その瞬間に生まれる「助け合い」が、暮らしを少し軽くし、社会を少し温かくすると信じています。
-              </p>
-              <p>
-                Mottainai Babe は、物の受け渡しだけで終わらないコミュニティを目指します。
-                ベビー用品の交換をきっかけに、子育ての経験や情報も、やさしく循環していく場所へ。
-              </p>
-              <p>
-                モノと気持ちが自然につながることで、子育ての時間が少しでも心地よくなることを願っています。
-              </p>
-            </div>
-          </div>
-        </div>
+      <div class="text">
+        <p>
+          ある家族にとって不要になった物が、別の家族にとって必要な物になる。
+          その瞬間に生まれる「助け合い」が、暮らしを少し軽くし、社会を少し温かくすると信じています。
+        </p>
+        <p>
+          Mottainai Babe は、物の受け渡しだけで終わらないコミュニティを目指します。
+          いつかは、子育ての経験や情報も自然に循環していく場所へ。
+        </p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="storySection" id="vision">
-      <div class="storyWrap">
-        <div class="split">
-          <div class="storyImage reveal">
-            <div class="imageCard">
-              <img src="./brand-hero-01.png" alt="あたたかな光の中で家族と赤ちゃんが向き合うイメージ">
-              <div class="imageBadge">VISION</div>
-            </div>
-          </div>
+  <figure class="bleed" style="background-image:url('');" aria-label="image placeholder 3"></figure>
 
-          <div class="storyText reveal">
-            <div class="storyKicker">VISION</div>
-            <h2 class="storyTitle">小さな循環を、未来へ</h2>
-            <div class="storySub">ベビー用品のシェアから、文化へ</div>
-            <div class="lineAccent"></div>
+  <section class="section section--tight" id="vision">
+    <div class="center">
+      <h2 class="blockTitle">VISION</h2>
+      <div class="sub">小さな循環を、未来へ</div>
 
-            <div class="storyBody">
-              <p>
-                Mottainai Babe は、ベビー用品のシェアと交換から始まります。
-                無駄になりやすい一方で、必要とする人も多い領域だからです。
-              </p>
-              <p>
-                そして将来的には、まだ使えるものを大切にする文化が、日本だけでなく
-                もっと広い場所へ自然に広がっていくことを願っています。
-                国や文化が違っても、子どもを思う気持ちはきっと同じだから。
-              </p>
-              <p>
-                <strong style="color:var(--green2); font-weight:700;">まだ使えるものを、無駄にしない。</strong><br>
-                その当たり前を、日常の中で続けられる形にしていきたいと考えています。
-              </p>
-            </div>
-          </div>
-        </div>
+      <div class="text">
+        <p>
+          Mottainai Babe は、ベビー用品のシェアと交換から始まります。
+          無駄になりやすい一方で、必要とする人も多い領域だからです。
+        </p>
+        <p>
+          そして将来的には、まだ使えるものを大切にする文化が、日本だけでなく世界へ広がっていくことを願っています。
+          国や文化が違っても、子どもを思う気持ちは同じだから。
+        </p>
+        <p>
+          <strong style="color:var(--green); font-weight:600;">まだ使えるものを、無駄にしない。</strong><br>
+          その当たり前を、日常の中で続けられる形に。
+        </p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="joinSection" id="join">
-      <div class="storyWrap">
-        <div class="joinCard">
-          <div class="storyKicker">JOIN</div>
-          <h2 class="joinTitle">今日から、シェアを。</h2>
-          <p class="joinLead">
-            ベビー用品に“次の物語”を。<br>
-            小さな循環を積み重ねて、より持続可能で温かい未来へ。
-          </p>
-          <div class="joinActions">
-            <a class="heroBtn" href="./app.html">交換を始める</a>
-          </div>
-        </div>
+  <section class="section" id="join">
+    <div class="center">
+      <div class="kicker">JOIN</div>
+      <h2 class="blockTitle">今日から、シェアを。</h2>
+      <p class="lead" style="max-width:52ch;">
+        ベビー用品に“次の物語”を。<br>
+        小さな循環を積み重ねて、より持続可能で温かい未来へ。
+      </p>
+      <div style="margin-top:26px;">
+        <a class="cta" href="./app.html" style="display:inline-block;">交換を始める</a>
       </div>
-    </section>
-  </main>
+      <div class="rule" aria-hidden="true"></div>
+    </div>
+  </section>
 
   <footer class="footer">
     <div>Mottainai Babeは、ベビー用品を必要な人へつなぐ交換プラットフォームです。</div>
@@ -1207,39 +709,6 @@ crossorigin="anonymous"></script>
     document.addEventListener("keydown", (e) => {
       if(e.key === "Escape") closeMenu();
     });
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if(entry.isIntersecting){
-          entry.target.classList.add("is-in");
-        }
-      });
-    }, {
-      threshold: 0.18
-    });
-
-    document.querySelectorAll(".reveal, .js-hero").forEach((el) => {
-      observer.observe(el);
-    });
-
-    const parallaxTarget = document.querySelector(".js-parallax");
-    const heroSection = document.querySelector(".js-hero");
-
-    function updateParallax(){
-      if(!parallaxTarget || !heroSection) return;
-
-      const rect = heroSection.getBoundingClientRect();
-      const viewH = window.innerHeight;
-      const progress = Math.max(0, Math.min(1, (viewH - rect.top) / (viewH + rect.height)));
-      const y = (progress - 0.5) * 26;
-      const scale = 1 + (progress * 0.04);
-
-      parallaxTarget.style.transform = `translateY(${y}px) scale(${scale})`;
-    }
-
-    updateParallax();
-    window.addEventListener("scroll", updateParallax, { passive:true });
-    window.addEventListener("resize", updateParallax);
   </script>
 </body>
 </html>
