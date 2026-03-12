@@ -396,12 +396,9 @@ crossorigin="anonymous"></script>
     width: 100%;
     height: min(54vh, 520px);
     min-height: 280px;
-    background:
-      linear-gradient(180deg, rgba(15,107,77,.06), rgba(15,107,77,.06)),
-      radial-gradient(900px 500px at 30% 30%, rgba(15,107,77,.10), transparent 60%),
-      #eef5f1;
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     margin: 0;
   }
 
@@ -479,7 +476,11 @@ crossorigin="anonymous"></script>
     .blockTitle{ font-size: 24px; }
     .lead{ font-size: 15px; }
     .section{ padding: 52px 0; }
-    .bleed{ height: 44vh; min-height: 240px; }
+    .bleed{
+      height: 44vh;
+      min-height: 240px;
+      background-position: center center;
+    }
     .text{ font-size: 14.5px; }
     .cta{ padding: 9px 10px; font-size: 12px; }
     .brandLogo img{ height: 45px; }
@@ -568,7 +569,7 @@ crossorigin="anonymous"></script>
     </div>
   </section>
 
-  <figure class="bleed" style="background-image:url('');" aria-label="image placeholder 1"></figure>
+  <figure class="bleed" style="background-image:url('./brand-hero-01.jpg');" aria-label="brand hero image 1"></figure>
 
   <section class="section section--tight" id="roots">
     <div class="center">
@@ -592,7 +593,7 @@ crossorigin="anonymous"></script>
     </div>
   </section>
 
-  <figure class="bleed" style="background-image:url('');" aria-label="image placeholder 2"></figure>
+  <figure class="bleed" style="background-image:url('./brand-hero-02.jpg');" aria-label="brand hero image 2"></figure>
 
   <section class="section section--tight" id="community">
     <div class="center">
@@ -612,7 +613,7 @@ crossorigin="anonymous"></script>
     </div>
   </section>
 
-  <figure class="bleed" style="background-image:url('');" aria-label="image placeholder 3"></figure>
+  <figure class="bleed" style="background-image:url('./brand-hero-03.jpg');" aria-label="brand hero image 3"></figure>
 
   <section class="section section--tight" id="vision">
     <div class="center">
