@@ -1,16 +1,13 @@
 <!doctype html>
 <html lang="ja">
 <head>
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>安全ガイド | もったいないベビー</title>
 
 <meta name="description" content="ベビー用品を安全にリユースするためのチェックポイント、受け渡し時の注意点、保管のポイントをまとめた安全ガイドです。">
-
 <meta name="robots" content="index, follow">
-
 <link rel="canonical" href="https://mottainai-babe.com/safety.html">
 
 <meta property="og:title" content="安全ガイド | Mottainai Babe">
@@ -68,523 +65,583 @@ gtag('config', 'G-QVWCBQZP1T');
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5865479939175622"
 crossorigin="anonymous"></script>
 
-
-
 <style>
-    :root{
-      --bg:#ffffff;
-      --ink:#111111;
-      --muted:#444444;
+  :root{
+    --bg:#ffffff;
+    --ink:#111111;
+    --muted:#4b4b4b;
 
-      --green:#0f6b4d;
-      --green2:#0b513b;
-      --line: rgba(15,107,77,.28);
+    --green:#0f6b4d;
+    --green2:#0b513b;
+    --line: rgba(15,107,77,.22);
+    --blackline: rgba(0,0,0,.16);
 
-      --max: 1040px;
-      --content: 820px;
-      --pad: 22px;
+    --max: 1200px;
+    --article: 760px;
+    --pad: 22px;
 
-      --sans: ui-sans-serif, system-ui, -apple-system, "Hiragino Kaku Gothic ProN",
-              "Yu Gothic", "Noto Sans JP", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --sans: ui-sans-serif, system-ui, -apple-system, "Hiragino Kaku Gothic ProN",
+            "Yu Gothic", "Noto Sans JP", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
-      --menuBack: rgba(0,0,0,.35);
-      --menuPanelBg: #ffffff;
-      --menuLine: rgba(0,0,0,.12);
+    --menuBack: rgba(0,0,0,.35);
+    --menuPanelBg: #ffffff;
+    --menuLine: rgba(0,0,0,.12);
 
-      --safeL: env(safe-area-inset-left);
-      --safeR: env(safe-area-inset-right);
-    }
-
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      font-family: var(--sans);
-      background: var(--bg);
-      color: var(--ink);
-      letter-spacing: .2px;
-      line-height: 1.95;
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      align-items:stretch;
-      justify-content:flex-start;
-    }
-
-    a{ color:inherit; text-decoration:none; }
-    a:hover{ text-decoration:underline; }
-
-    /* ===== Header ===== */
-    header{
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      width:100%;
-      background: rgba(255,255,255,.90);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .topbar{
-      max-width: 1200px;
-      margin: 0 auto;
-      padding-top: 12px;
-      padding-bottom: 12px;
-      padding-left: calc(var(--pad) + var(--safeL));
-      padding-right: calc(var(--pad) + var(--safeR));
-      display:grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items:center;
-      gap: 14px;
-    }
-
-    .leftSlot{
-      display:flex;
-      align-items:center;
-      justify-content:flex-start;
-      min-width:0;
-    }
-    .rightSlot{
-      display:flex;
-      align-items:center;
-      justify-content:flex-end;
-      min-width:0;
-      gap:10px;
-    }
-
-    .menuBtn{
-      width: 44px;
-      height: 44px;
-      display:grid;
-      place-items:center;
-      border:none;
-      background:transparent;
-      cursor:pointer;
-      padding:0;
-    }
-    .hamburger{
-      width:22px;
-      height:12px;
-      position:relative;
-    }
-    .hamburger::before,
-    .hamburger::after,
-    .hamburger span{
-      content:"";
-      position:absolute;
-      left:0; right:0;
-      height:1px;
-      background:var(--green);
-      opacity:.95;
-    }
-    .hamburger::before{ top:0; }
-    .hamburger span{ top:50%; transform:translateY(-50%); }
-    .hamburger::after{ bottom:0; }
-
-    .brandLogo{
-      justify-self:center;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-width:0;
-      text-decoration:none;
-    }
-    .brandLogo img{
-      height:50px;
-      width:auto;
-      display:block;
-    }
-    @media (max-width:520px){
-  .brandLogo img,
-  .logoWrap img,
-  .brandTop img{
-    height:45px !important;
-    width:auto;
+    --safeL: env(safe-area-inset-left);
+    --safeR: env(safe-area-inset-right);
   }
-}
 
-    .cta{
-      font-family: inherit;
-      font-size: 12px;
-      letter-spacing: .08em;
-      padding: 10px 12px;
-      border: 1px solid var(--line);
-      background: transparent;
-      border-radius: 999px;
-      color: var(--green);
-      white-space: nowrap;
-      text-decoration: none;
-      cursor: pointer;
-      appearance: none;
-      -webkit-appearance: none;
-    }
-    .cta:hover{
-      background: rgba(15,107,77,.06);
-      text-decoration:none;
-    }
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; }
+  body{
+    margin:0;
+    font-family:var(--sans);
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.95;
+    letter-spacing:.02em;
+  }
 
-    /* ===== Menu Overlay ===== */
-    .menuOverlay{
-      position: fixed;
-      inset: 0;
-      background: var(--menuBack);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .18s ease;
-      z-index: 100;
-    }
-    .menuOverlay.open{
-      opacity: 1;
-      pointer-events: auto;
-    }
+  a{ color:inherit; text-decoration:none; }
+  a:hover{ text-decoration:underline; }
 
-    .menuPanel{
-      position: fixed;
-      inset: 0;
-      background: var(--menuPanelBg);
-      transform: translateY(-8px);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .18s ease, transform .18s ease;
-      z-index: 110;
-      padding-top: 22px;
-      padding-bottom: 28px;
-      padding-left: calc(var(--pad) + var(--safeL));
-      padding-right: calc(var(--pad) + var(--safeR));
-      overflow: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    .menuPanel.open{
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0);
-    }
+  /* ===== Header ===== */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    width:100%;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
 
-    .menuTop{
-      max-width: 780px;
-      margin: 0 auto;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 12px;
-      padding: 6px 0 18px;
-      border-bottom: 1px solid var(--menuLine);
-    }
-    .menuTitle{
-      font-weight: 600;
-      letter-spacing: .22em;
-      font-size: 18px;
-      color: #111;
-      white-space:nowrap;
-    }
-    .menuClose{
-      width: 44px;
-      height: 44px;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      display:grid;
-      place-items:center;
-      position: relative;
-      padding:0;
-    }
-    .menuClose::before,
-    .menuClose::after{
-      content:"";
-      width: 22px;
-      height: 1px;
-      background: #111;
-      position:absolute;
-    }
-    .menuClose::before{ transform: rotate(45deg); }
-    .menuClose::after{ transform: rotate(-45deg); }
+  .topbar{
+    max-width:1200px;
+    margin:0 auto;
+    padding-top:12px;
+    padding-bottom:12px;
+    padding-left:calc(var(--pad) + var(--safeL));
+    padding-right:calc(var(--pad) + var(--safeR));
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    gap:14px;
+  }
 
-    .menuBody{
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 18px 0 0;
-    }
+  .leftSlot,
+  .rightSlot{
+    display:flex;
+    align-items:center;
+    min-width:0;
+  }
+  .leftSlot{ justify-content:flex-start; }
+  .rightSlot{ justify-content:flex-end; gap:10px; }
 
-    .menuCtas{
-      display:flex;
-      flex-direction:column;
-      gap: 12px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid var(--menuLine);
-    }
-    .menuBtnPrimary,
-    .menuBtnGhost{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      height: 56px;
-      border-radius: 999px;
-      font-size: 15px;
-      letter-spacing: .06em;
-      text-decoration: none;
-      border: 1px solid var(--line);
-    }
-    .menuBtnPrimary{
-      background: rgba(15,107,77,.10);
-      color: var(--green2);
-      border-color: rgba(15,107,77,.30);
-      font-weight: 600;
-    }
-    .menuBtnGhost{
-      background: transparent;
-      color: var(--green);
-      border-color: rgba(15,107,77,.26);
-      font-weight: 600;
-    }
-    .menuBtnPrimary:hover,
-    .menuBtnGhost:hover{
-      text-decoration:none;
-      background: rgba(15,107,77,.06);
-    }
+  .menuBtn{
+    width:44px;
+    height:44px;
+    display:grid;
+    place-items:center;
+    border:none;
+    background:transparent;
+    cursor:pointer;
+    padding:0;
+  }
+  .hamburger{
+    width:22px;
+    height:12px;
+    position:relative;
+  }
+  .hamburger::before,
+  .hamburger::after,
+  .hamburger span{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    height:1px;
+    background:var(--green);
+    opacity:.95;
+  }
+  .hamburger::before{ top:0; }
+  .hamburger span{ top:50%; transform:translateY(-50%); }
+  .hamburger::after{ bottom:0; }
 
-    .menuLinks{ padding: 10px 0 0; }
-    .menuLink{
-      display:flex;
-      flex-direction:column;
-      align-items:flex-start;
-      justify-content:center;
-      padding: 24px 6px;
-      gap: 4px;
-      border-bottom: 1px solid var(--menuLine);
-      text-decoration:none;
-    }
-    .menuLink:last-child{ border-bottom:none; }
-    .menuLink strong{
-      font-size: 18px;
-      font-weight: 500;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: #111;
-    }
-    .menuLink span{
-      font-size: 12px;
-      opacity: .7;
-      letter-spacing: .06em;
-      color: #111;
-      margin-top: 2px;
-    }
-    .menuLink:hover{
-      background: rgba(15,107,77,.04);
-      text-decoration:none;
-    }
+  .brandLogo{
+    justify-self:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-width:0;
+    text-decoration:none;
+  }
+  .brandLogo img{
+    height:50px;
+    width:auto;
+    display:block;
+  }
 
-    /* ===== Layout ===== */
+  .cta{
+    font-family:inherit;
+    font-size:12px;
+    letter-spacing:.08em;
+    padding:10px 12px;
+    border:1px solid var(--line);
+    background:transparent;
+    border-radius:999px;
+    color:var(--green);
+    white-space:nowrap;
+    text-decoration:none;
+    cursor:pointer;
+    appearance:none;
+    -webkit-appearance:none;
+  }
+  .cta:hover{
+    background:rgba(15,107,77,.06);
+    text-decoration:none;
+  }
+
+  /* ===== Menu Overlay ===== */
+  .menuOverlay{
+    position:fixed;
+    inset:0;
+    background:var(--menuBack);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .18s ease;
+    z-index:100;
+  }
+  .menuOverlay.open{
+    opacity:1;
+    pointer-events:auto;
+  }
+
+  .menuPanel{
+    position:fixed;
+    inset:0;
+    background:var(--menuPanelBg);
+    transform:translateY(-8px);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .18s ease, transform .18s ease;
+    z-index:110;
+    padding-top:22px;
+    padding-bottom:28px;
+    padding-left:calc(var(--pad) + var(--safeL));
+    padding-right:calc(var(--pad) + var(--safeR));
+    overflow:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  .menuPanel.open{
+    opacity:1;
+    pointer-events:auto;
+    transform:translateY(0);
+  }
+
+  .menuTop{
+    max-width:780px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:6px 0 18px;
+    border-bottom:1px solid var(--menuLine);
+  }
+  .menuTitle{
+    font-weight:600;
+    letter-spacing:.22em;
+    font-size:18px;
+    color:#111;
+    white-space:nowrap;
+  }
+  .menuClose{
+    width:44px;
+    height:44px;
+    border:none;
+    background:transparent;
+    cursor:pointer;
+    display:grid;
+    place-items:center;
+    position:relative;
+    padding:0;
+  }
+  .menuClose::before,
+  .menuClose::after{
+    content:"";
+    width:22px;
+    height:1px;
+    background:#111;
+    position:absolute;
+  }
+  .menuClose::before{ transform:rotate(45deg); }
+  .menuClose::after{ transform:rotate(-45deg); }
+
+  .menuBody{
+    max-width:780px;
+    margin:0 auto;
+    padding:18px 0 0;
+  }
+
+  .menuCtas{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    padding-bottom:18px;
+    border-bottom:1px solid var(--menuLine);
+  }
+  .menuBtnPrimary,
+  .menuBtnGhost{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:56px;
+    border-radius:999px;
+    font-size:15px;
+    letter-spacing:.06em;
+    text-decoration:none;
+    border:1px solid var(--line);
+  }
+  .menuBtnPrimary{
+    background:rgba(15,107,77,.10);
+    color:var(--green2);
+    border-color:rgba(15,107,77,.30);
+    font-weight:600;
+  }
+  .menuBtnGhost{
+    background:transparent;
+    color:var(--green);
+    border-color:rgba(15,107,77,.26);
+    font-weight:600;
+  }
+  .menuBtnPrimary:hover,
+  .menuBtnGhost:hover{
+    text-decoration:none;
+    background:rgba(15,107,77,.06);
+  }
+
+  .menuLinks{ padding:10px 0 0; }
+  .menuLink{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:center;
+    padding:24px 6px;
+    gap:4px;
+    border-bottom:1px solid var(--menuLine);
+    text-decoration:none;
+  }
+  .menuLink:last-child{ border-bottom:none; }
+  .menuLink strong{
+    font-size:18px;
+    font-weight:500;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:#111;
+  }
+  .menuLink span{
+    font-size:12px;
+    opacity:.7;
+    letter-spacing:.06em;
+    color:#111;
+    margin-top:2px;
+  }
+  .menuLink:hover{
+    background:rgba(15,107,77,.04);
+    text-decoration:none;
+  }
+
+  /* ===== Layout ===== */
+  main.wrap{
+    max-width:var(--max);
+    margin:0 auto;
+    width:100%;
+    padding:28px 24px 56px;
+  }
+
+  /* ===== Hero ===== */
+  .pageHero{
+    max-width:var(--article);
+    margin:28px auto 0;
+    text-align:center;
+    padding:18px 0 8px;
+  }
+  .kicker{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:8px 14px;
+    border-radius:999px;
+    border:1px solid rgba(15,107,77,.18);
+    background:rgba(15,107,77,.06);
+    color:var(--green2);
+    font-size:12px;
+    letter-spacing:.12em;
+    font-weight:700;
+  }
+  .pageTitle{
+    margin:22px 0 0;
+    font-size:54px;
+    line-height:1.24;
+    letter-spacing:.01em;
+    font-weight:500;
+    color:var(--ink);
+  }
+  .pageTitle::after{
+    content:"";
+    display:block;
+    width:54px;
+    height:2px;
+    margin:18px auto 0;
+    background:var(--green);
+    opacity:.45;
+  }
+  .pageLead{
+    margin:30px auto 0;
+    max-width:720px;
+    color:var(--muted);
+    font-size:20px;
+    line-height:2;
+    text-align:center;
+  }
+
+  /* ===== Article ===== */
+  .article{
+    max-width:var(--article);
+    margin:60px auto 0;
+  }
+
+  .sectionBlock{
+    position:relative;
+    margin-top:56px;
+    padding-left:34px;
+  }
+  .sectionBlock:first-child{
+    margin-top:0;
+  }
+  .sectionBlock::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:8px;
+    width:1px;
+    height:52px;
+    background:rgba(0,0,0,.35);
+  }
+
+  .sectionHeading{
+    margin:0;
+    font-size:28px;
+    line-height:1.55;
+    font-weight:500;
+    letter-spacing:.02em;
+    color:var(--ink);
+  }
+
+  .sectionIntro{
+    margin:20px 0 0;
+    color:var(--muted);
+    font-size:18px;
+    line-height:2;
+  }
+
+  .pointList{
+    list-style:none;
+    margin:28px 0 0;
+    padding:0;
+    display:grid;
+    gap:28px;
+  }
+
+  .pointItem{
+    padding:0;
+  }
+
+  .pointLabel{
+    display:inline-block;
+    margin:0 0 10px;
+    color:var(--green2);
+    font-size:13px;
+    letter-spacing:.12em;
+    font-weight:700;
+  }
+
+  .pointItem p{
+    margin:0 0 10px;
+    color:var(--muted);
+    font-size:18px;
+    line-height:2;
+  }
+  .pointItem p:last-child{
+    margin-bottom:0;
+  }
+
+  .pointItem strong{
+    color:var(--ink);
+    font-weight:600;
+  }
+
+  .tip{
+    margin-top:26px;
+    padding-top:18px;
+    border-top:1px solid var(--blackline);
+    color:var(--muted);
+    font-size:17px;
+    line-height:2;
+  }
+  .tip strong{
+    color:var(--ink);
+    font-weight:600;
+  }
+
+  .actionsRow{
+    max-width:var(--article);
+    margin:62px auto 0;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    justify-content:flex-start;
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    min-height:48px;
+    padding:10px 18px;
+    border:1px solid rgba(0,0,0,.18);
+    background:#fff;
+    color:var(--ink);
+    font-size:13px;
+    letter-spacing:.08em;
+    text-decoration:none;
+    transition:.15s ease;
+    white-space:nowrap;
+  }
+  .btn:hover{
+    background:rgba(0,0,0,.03);
+    text-decoration:none;
+  }
+
+  /* ===== Footer ===== */
+  .footer{
+    max-width:var(--article);
+    margin:58px auto 0;
+    padding-top:22px;
+    border-top:1px solid var(--line);
+    color:rgba(15,107,77,.85);
+    font-size:12px;
+    line-height:1.8;
+    text-align:center;
+  }
+  .footer a{
+    color:rgba(15,107,77,.92);
+    text-decoration:none;
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+  }
+  .footer a:hover{
+    border-bottom-color:var(--line);
+    text-decoration:none;
+  }
+
+  @media (max-width: 900px){
+    .pageTitle{ font-size:42px; }
+    .pageLead{ font-size:18px; }
+    .sectionHeading{ font-size:24px; }
+    .sectionIntro,
+    .pointItem p{ font-size:17px; }
+  }
+
+  @media (max-width: 700px){
     main.wrap{
-      max-width: var(--max);
-      margin: 0 auto;
-      width:100%;
-      padding: 18px 14px 40px;
+      padding:24px 20px 48px;
     }
 
-    /* ===== Hero ===== */
     .pageHero{
-      margin-top:10px;
-      text-align:center;
-      padding: 10px 0 4px;
+      margin-top:18px;
+      padding-top:14px;
     }
-    .kicker{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(15,107,77,.18);
-      background: rgba(15,107,77,.06);
-      color: var(--green2);
-      font-size: 12px;
-      letter-spacing: .08em;
-      font-weight: 700;
-    }
+
     .pageTitle{
-      margin:16px 0 0;
-      font-size: 32px;
-      line-height:1.2;
-      letter-spacing: .02em;
-      color: var(--ink);
-      position:relative;
-      padding-bottom:10px;
-    }
-    .pageTitle::after{
-      content:"";
-      display:block;
-      width:40px;
-      height:2px;
-      margin:10px auto 0;
-      background: var(--green);
-      opacity:.55;
-      border-radius:2px;
-    }
-    .pageLead{
-      margin: 12px auto 0;
-      max-width: 60ch;
-      color: var(--muted);
-      font-size: 15px;
-      line-height:1.8;
-      text-align:center;
-    }
-
-    /* ===== Article ===== */
-    .article{
-      max-width: var(--content);
-      margin: 24px auto 0;
-    }
-    .sectionCard{
-      background:#fff;
-      border:1px solid rgba(15,107,77,.18);
-      border-radius:18px;
-      box-shadow: 0 8px 24px rgba(17,24,39,.06);
-      padding: 18px;
-      margin-top: 16px;
-    }
-    .sectionCard:first-child{ margin-top:0; }
-
-    .sectionCard h2{
-      margin:0 0 10px;
-      font-size:20px;
+      font-size:28px;
       line-height:1.35;
-      color:var(--ink);
-      letter-spacing:.01em;
-    }
-    .sectionCard p{
-      margin:0 0 12px;
-      color:var(--muted);
-      font-size:15px;
-      line-height:1.9;
-    }
-    .sectionCard p:last-child{ margin-bottom:0; }
-
-    .list{
-      list-style:none;
-      margin: 12px 0 0;
-      padding:0;
-      display:grid;
-      gap:12px;
-    }
-    .list li{
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      padding:14px;
-      border:1px solid rgba(15,107,77,.12);
-      border-radius:16px;
-      background: linear-gradient(180deg, rgba(15,107,77,.03), rgba(15,107,77,.01));
     }
 
-    .badge{
-      flex:0 0 auto;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:5px 10px;
-      border-radius:999px;
-      border:1px solid rgba(15,107,77,.18);
-      background:#fff;
-      color:var(--green2);
-      font-size:12px;
-      font-weight:700;
-      letter-spacing:.04em;
-      white-space:nowrap;
-      margin-top:2px;
+    .pageLead{
+      margin-top:22px;
+      font-size:14px;
+      line-height:2;
+      max-width:100%;
     }
 
-    .list p{
-      margin:0 0 8px;
+    .article{
+      margin-top:42px;
     }
-    .list p:last-child{ margin-bottom:0; }
+
+    .sectionBlock{
+      margin-top:40px;
+      padding-left:20px;
+    }
+
+    .sectionBlock::before{
+      top:6px;
+      height:42px;
+    }
+
+    .sectionHeading{
+      font-size:18px;
+      line-height:1.7;
+    }
+
+    .sectionIntro{
+      margin-top:14px;
+      font-size:14px;
+      line-height:2;
+    }
+
+    .pointList{
+      margin-top:22px;
+      gap:20px;
+    }
+
+    .pointLabel{
+      font-size:11px;
+      margin-bottom:8px;
+    }
+
+    .pointItem p{
+      font-size:14px;
+      line-height:2;
+    }
 
     .tip{
-      margin-top: 14px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      border:1px solid rgba(15,107,77,.18);
-      background: rgba(15,107,77,.06);
-      color: var(--muted);
+      margin-top:20px;
+      padding-top:14px;
       font-size:14px;
-      line-height:1.85;
-    }
-    .tip strong{
-      color: var(--green2);
-      font-weight: 800;
+      line-height:2;
     }
 
     .actionsRow{
-      max-width: var(--content);
-      margin: 18px auto 0;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:center;
+      margin-top:44px;
+      justify-content:space-between;
     }
+
     .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding:10px 16px;
-      border-radius:999px;
-      border:1px solid rgba(15,107,77,.26);
-      background:transparent;
-      color:var(--green);
-      font-weight:800;
-      cursor:pointer;
-      text-decoration:none;
-      transition:.15s ease;
-      white-space:nowrap;
-    }
-    .btn:hover{
-      background: rgba(15,107,77,.06);
-      text-decoration:none;
-      transform: translateY(-1px);
-    }
-    .btnPrimary{
-      background: rgba(15,107,77,.10);
-      color: var(--green2);
-      border-color: rgba(15,107,77,.30);
-    }
-
-    /* ===== Footer ===== */
-    .footer{
-      margin-top: 34px;
-      padding-top: 18px;
-      border-top:1px solid var(--line);
-      color: rgba(15,107,77,.85);
       font-size:12px;
-      line-height:1.7;
-      text-align:center;
-    }
-    .footer a{
-      color: rgba(15,107,77,.92);
-      text-decoration:none;
-      border-bottom:1px solid transparent;
-      padding-bottom:2px;
-    }
-    .footer a:hover{
-      border-bottom-color: var(--line);
-      text-decoration:none;
+      padding:10px 14px;
     }
 
-    @media (max-width:520px){
-      .brandLogo img{ height:34px; }
-      .cta{ padding: 9px 10px; font-size: 12px; }
-      .pageTitle{ font-size:28px; }
-      .pageLead{ font-size:14px; }
-      .sectionCard{ padding:16px; }
-      .sectionCard h2{ font-size:18px; }
-      .list li{
-        flex-direction:column;
-        gap:10px;
-      }
-    }
+    .brandLogo img{ height:45px; }
+    .cta{ padding:9px 10px; font-size:12px; }
+  }
 
-    @media (prefers-reduced-motion: reduce){
-      *{ transition:none !important; scroll-behavior:auto !important; animation:none !important; }
-    }
-  </style>
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; scroll-behavior:auto !important; animation:none !important; }
+  }
+</style>
 </head>
 
 <body>
@@ -656,37 +713,32 @@ crossorigin="anonymous"></script>
     </section>
 
     <article class="article" aria-label="安全ガイド本文">
-      <section class="sectionCard">
-        <h2>まず確認したい3つのチェックポイント</h2>
-        <p>
+
+      <section class="sectionBlock">
+        <h2 class="sectionHeading">まず確認したい3つのチェックポイント</h2>
+        <p class="sectionIntro">
           「見た目がきれい」だけでは判断できない項目があります。特に次の3点は、必ず確認しましょう。
         </p>
 
-        <ul class="list">
-          <li>
-            <span class="badge">使用年数</span>
-            <div>
-              <p><strong>製造年・購入時期</strong>を確認し、古すぎる製品は避けましょう。</p>
-              <p>プラスチックの劣化、クッション材のへたり、ベルトの伸びなどが起こりやすくなります。</p>
-            </div>
-          </li>
+        <div class="pointList">
+          <div class="pointItem">
+            <div class="pointLabel">使用年数</div>
+            <p><strong>製造年・購入時期</strong>を確認し、古すぎる製品は避けましょう。</p>
+            <p>プラスチックの劣化、クッション材のへたり、ベルトの伸びなどが起こりやすくなります。</p>
+          </div>
 
-          <li>
-            <span class="badge">リコール</span>
-            <div>
-              <p><strong>メーカー名・型番</strong>でリコール情報をチェックします。</p>
-              <p>海外ブランドの場合もあるので、公式サイトや公的機関の情報が確実です。</p>
-            </div>
-          </li>
+          <div class="pointItem">
+            <div class="pointLabel">リコール</div>
+            <p><strong>メーカー名・型番</strong>でリコール情報をチェックします。</p>
+            <p>海外ブランドの場合もあるので、公式サイトや公的機関の情報が確実です。</p>
+          </div>
 
-          <li>
-            <span class="badge">破損</span>
-            <div>
-              <p><strong>ロック・留め具・ネジ</strong>など可動部を重点的に確認します。</p>
-              <p>小さなヒビでも、荷重がかかると一気に割れることがあります。</p>
-            </div>
-          </li>
-        </ul>
+          <div class="pointItem">
+            <div class="pointLabel">破損</div>
+            <p><strong>ロック・留め具・ネジ</strong>など可動部を重点的に確認します。</p>
+            <p>小さなヒビでも、荷重がかかると一気に割れることがあります。</p>
+          </div>
+        </div>
 
         <div class="tip">
           <strong>ワンポイント：</strong>
@@ -695,103 +747,85 @@ crossorigin="anonymous"></script>
         </div>
       </section>
 
-      <section class="sectionCard">
-        <h2>受け渡し時にチェックすると安心なこと</h2>
-        <p>
+      <section class="sectionBlock">
+        <h2 class="sectionHeading">受け渡し時にチェックすると安心なこと</h2>
+        <p class="sectionIntro">
           受け渡しの瞬間は、状態を確かめる最後のチャンスです。時間が限られていても、以下の点だけは確認しましょう。
         </p>
 
-        <ul class="list">
-          <li>
-            <span class="badge">動作</span>
-            <div>
-              <p><strong>開閉・ロック・固定</strong>がスムーズに動くか。</p>
-              <p>例：ベビーカーの折りたたみ、ハイチェアの固定、ゲートのロック。</p>
-            </div>
-          </li>
+        <div class="pointList">
+          <div class="pointItem">
+            <div class="pointLabel">動作</div>
+            <p><strong>開閉・ロック・固定</strong>がスムーズに動くか。</p>
+            <p>例：ベビーカーの折りたたみ、ハイチェアの固定、ゲートのロック。</p>
+          </div>
 
-          <li>
-            <span class="badge">付属品</span>
-            <div>
-              <p><strong>説明書・アダプター・パーツ</strong>が揃っているか。</p>
-              <p>欠品があると安全に使えない場合があるため、事前にリスト化しておくのがおすすめです。</p>
-            </div>
-          </li>
+          <div class="pointItem">
+            <div class="pointLabel">付属品</div>
+            <p><strong>説明書・アダプター・パーツ</strong>が揃っているか。</p>
+            <p>欠品があると安全に使えない場合があるため、事前にリスト化しておくのがおすすめです。</p>
+          </div>
 
-          <li>
-            <span class="badge">清潔</span>
-            <div>
-              <p><strong>におい・カビ・汚れ</strong>がないか。</p>
-              <p>洗える素材かどうかもセットで確認すると、持ち帰ってからの手間が減ります。</p>
-            </div>
-          </li>
-        </ul>
+          <div class="pointItem">
+            <div class="pointLabel">清潔</div>
+            <p><strong>におい・カビ・汚れ</strong>がないか。</p>
+            <p>洗える素材かどうかもセットで確認すると、持ち帰ってからの手間が減ります。</p>
+          </div>
+        </div>
       </section>
 
-      <section class="sectionCard">
-        <h2>洗浄・消毒の基本（素材別の目安）</h2>
-        <p>
+      <section class="sectionBlock">
+        <h2 class="sectionHeading">洗浄・消毒の基本（素材別の目安）</h2>
+        <p class="sectionIntro">
           まずは「落とせる汚れを落とす」→「乾燥させる」→「必要なら消毒」の順番が基本です。
         </p>
 
-        <ul class="list">
-          <li>
-            <span class="badge">布</span>
-            <div>
-              <p><strong>洗濯表示</strong>に従い、可能なら取り外して洗濯。</p>
-              <p>乾燥不足はにおい・カビの原因。風通しの良い場所でしっかり乾かします。</p>
-            </div>
-          </li>
+        <div class="pointList">
+          <div class="pointItem">
+            <div class="pointLabel">布</div>
+            <p><strong>洗濯表示</strong>に従い、可能なら取り外して洗濯。</p>
+            <p>乾燥不足はにおい・カビの原因。風通しの良い場所でしっかり乾かします。</p>
+          </div>
 
-          <li>
-            <span class="badge">樹脂</span>
-            <div>
-              <p>中性洗剤で拭き取り、よくすすいで乾燥。</p>
-              <p>アルコールの使用は、素材によって白化・割れの原因になることがあります。</p>
-            </div>
-          </li>
+          <div class="pointItem">
+            <div class="pointLabel">樹脂</div>
+            <p>中性洗剤で拭き取り、よくすすいで乾燥。</p>
+            <p>アルコールの使用は、素材によって白化・割れの原因になることがあります。</p>
+          </div>
 
-          <li>
-            <span class="badge">金属</span>
-            <div>
-              <p>水分が残るとサビの原因。<strong>最後に乾拭き</strong>を。</p>
-              <p>ネジ周りは特に水分が残りやすいので注意しましょう。</p>
-            </div>
-          </li>
-        </ul>
+          <div class="pointItem">
+            <div class="pointLabel">金属</div>
+            <p>水分が残るとサビの原因。<strong>最後に乾拭き</strong>を。</p>
+            <p>ネジ周りは特に水分が残りやすいので注意しましょう。</p>
+          </div>
+        </div>
       </section>
 
-      <section class="sectionCard">
-        <h2>保管方法（長持ちさせるコツ）</h2>
-        <p>
+      <section class="sectionBlock">
+        <h2 class="sectionHeading">保管方法（長持ちさせるコツ）</h2>
+        <p class="sectionIntro">
           使わない期間があるなら、保管の仕方で状態が大きく変わります。
         </p>
 
-        <ul class="list">
-          <li>
-            <span class="badge">湿気</span>
-            <div>
-              <p>湿気の少ない場所で保管し、<strong>床に直置きしない</strong>のが理想です。</p>
-              <p>収納箱に入れる場合は、乾燥剤を一緒に入れると安心です。</p>
-            </div>
-          </li>
+        <div class="pointList">
+          <div class="pointItem">
+            <div class="pointLabel">湿気</div>
+            <p>湿気の少ない場所で保管し、<strong>床に直置きしない</strong>のが理想です。</p>
+            <p>収納箱に入れる場合は、乾燥剤を一緒に入れると安心です。</p>
+          </div>
 
-          <li>
-            <span class="badge">日光</span>
-            <div>
-              <p>直射日光は色あせ・素材劣化の原因。<strong>遮光できる場所</strong>を選びます。</p>
-              <p>窓際やベランダ付近は避けるのが無難です。</p>
-            </div>
-          </li>
+          <div class="pointItem">
+            <div class="pointLabel">日光</div>
+            <p>直射日光は色あせ・素材劣化の原因。<strong>遮光できる場所</strong>を選びます。</p>
+            <p>窓際やベランダ付近は避けるのが無難です。</p>
+          </div>
 
-          <li>
-            <span class="badge">形</span>
-            <div>
-              <p>変形しやすいものは、重ね置きせず<strong>形を保てる収納</strong>を。</p>
-              <p>例：ヘルメット、クッション類、ベルト付き製品。</p>
-            </div>
-          </li>
-        </ul>
+          <div class="pointItem">
+            <div class="pointLabel">形</div>
+            <p>変形しやすいものは、重ね置きせず<strong>形を保てる収納</strong>を。</p>
+            <p>例：ヘルメット、クッション類、ベルト付き製品。</p>
+          </div>
+        </div>
 
         <div class="tip">
           <strong>安全の最終ルール：</strong>
@@ -799,11 +833,12 @@ crossorigin="anonymous"></script>
           Mottainai Babeでは、安心して循環できる取引を応援しています。
         </div>
       </section>
+
     </article>
 
     <div class="actionsRow">
       <a class="btn" href="./guide.html">← ガイド一覧へ</a>
-      <a class="btn btnPrimary" href="./eco.html">次：エコの考え方 →</a>
+      <a class="btn" href="./eco.html">次：エコの考え方 →</a>
     </div>
 
     <footer class="footer">
