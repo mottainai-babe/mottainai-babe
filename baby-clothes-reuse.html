@@ -1,16 +1,13 @@
 <!doctype html>
 <html lang="ja">
 <head>
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>ベビー服を捨てない方法 | もったいないベビー</title>
 
 <meta name="description" content="サイズアウトしたベビー服を捨てずにリユースする方法を紹介します。ベビー服を次の家族へつなぐアイデアや保管方法をわかりやすく解説します。">
-
 <meta name="robots" content="index, follow">
-
 <link rel="canonical" href="https://mottainai-babe.com/baby-clothes-reuse.html">
 
 <meta property="og:title" content="ベビー服を捨てない方法 | Mottainai Babe">
@@ -27,7 +24,6 @@ gtag('js', new Date());
 gtag('config', 'G-QVWCBQZP1T');
 </script>
 
-<!-- 구조화 데이터 -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -73,41 +69,37 @@ crossorigin="anonymous"></script>
   :root{
     --bg:#ffffff;
     --ink:#111111;
-    --muted:#444444;
+    --muted:#4b4b4b;
 
     --green:#0f6b4d;
     --green2:#0b513b;
-    --line: rgba(15,107,77,.28);
+    --line:rgba(15,107,77,.22);
+    --blackline:rgba(0,0,0,.16);
 
-    --max: 1040px;
-    --content: 820px;
-    --pad: 22px;
+    --max:1200px;
+    --article:760px;
+    --pad:22px;
 
-    --sans: ui-sans-serif, system-ui, -apple-system, "Hiragino Kaku Gothic ProN",
+    --sans:ui-sans-serif, system-ui, -apple-system, "Hiragino Kaku Gothic ProN",
             "Yu Gothic", "Noto Sans JP", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
-    --menuBack: rgba(0,0,0,.35);
-    --menuPanelBg: #ffffff;
-    --menuLine: rgba(0,0,0,.12);
+    --menuBack:rgba(0,0,0,.35);
+    --menuPanelBg:#ffffff;
+    --menuLine:rgba(0,0,0,.12);
 
-    --safeL: env(safe-area-inset-left);
-    --safeR: env(safe-area-inset-right);
+    --safeL:env(safe-area-inset-left);
+    --safeR:env(safe-area-inset-right);
   }
 
   *{ box-sizing:border-box; }
   html,body{ height:100%; }
   body{
     margin:0;
-    font-family: var(--sans);
-    background: var(--bg);
-    color: var(--ink);
-    letter-spacing: .2px;
-    line-height: 1.95;
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    align-items:stretch;
-    justify-content:flex-start;
+    font-family:var(--sans);
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.95;
+    letter-spacing:.02em;
   }
 
   a{ color:inherit; text-decoration:none; }
@@ -115,45 +107,40 @@ crossorigin="anonymous"></script>
 
   /* ===== Header ===== */
   header{
-    position: sticky;
-    top: 0;
-    z-index: 50;
+    position:sticky;
+    top:0;
+    z-index:50;
     width:100%;
-    background: rgba(255,255,255,.90);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line);
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
   }
 
   .topbar{
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    padding-left: calc(var(--pad) + var(--safeL));
-    padding-right: calc(var(--pad) + var(--safeR));
+    max-width:1200px;
+    margin:0 auto;
+    padding-top:12px;
+    padding-bottom:12px;
+    padding-left:calc(var(--pad) + var(--safeL));
+    padding-right:calc(var(--pad) + var(--safeR));
     display:grid;
-    grid-template-columns: 1fr auto 1fr;
+    grid-template-columns:1fr auto 1fr;
     align-items:center;
-    gap: 14px;
+    gap:14px;
   }
 
-  .leftSlot{
-    display:flex;
-    align-items:center;
-    justify-content:flex-start;
-    min-width:0;
-  }
+  .leftSlot,
   .rightSlot{
     display:flex;
     align-items:center;
-    justify-content:flex-end;
     min-width:0;
-    gap:10px;
   }
+  .leftSlot{ justify-content:flex-start; }
+  .rightSlot{ justify-content:flex-end; gap:10px; }
 
   .menuBtn{
-    width: 44px;
-    height: 44px;
+    width:44px;
+    height:44px;
     display:grid;
     place-items:center;
     border:none;
@@ -171,7 +158,8 @@ crossorigin="anonymous"></script>
   .hamburger span{
     content:"";
     position:absolute;
-    left:0; right:0;
+    left:0;
+    right:0;
     height:1px;
     background:var(--green);
     opacity:.95;
@@ -194,391 +182,467 @@ crossorigin="anonymous"></script>
     display:block;
   }
 
-  @media (max-width:520px){
-    .brandLogo img,
-    .logoWrap img,
-    .brandTop img{
-      height:45px !important;
-      width:auto;
-    }
-  }
-
   .cta{
-    font-family: inherit;
-    font-size: 12px;
-    letter-spacing: .08em;
-    padding: 10px 12px;
-    border: 1px solid var(--line);
-    background: transparent;
-    border-radius: 999px;
-    color: var(--green);
-    white-space: nowrap;
-    text-decoration: none;
-    cursor: pointer;
-    appearance: none;
-    -webkit-appearance: none;
+    font-family:inherit;
+    font-size:12px;
+    letter-spacing:.08em;
+    padding:10px 12px;
+    border:1px solid var(--line);
+    background:transparent;
+    border-radius:999px;
+    color:var(--green);
+    white-space:nowrap;
+    text-decoration:none;
+    cursor:pointer;
+    appearance:none;
+    -webkit-appearance:none;
   }
   .cta:hover{
-    background: rgba(15,107,77,.06);
+    background:rgba(15,107,77,.06);
     text-decoration:none;
   }
 
   /* ===== Menu Overlay ===== */
   .menuOverlay{
-    position: fixed;
-    inset: 0;
-    background: var(--menuBack);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .18s ease;
-    z-index: 100;
+    position:fixed;
+    inset:0;
+    background:var(--menuBack);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .18s ease;
+    z-index:100;
   }
   .menuOverlay.open{
-    opacity: 1;
-    pointer-events: auto;
+    opacity:1;
+    pointer-events:auto;
   }
 
   .menuPanel{
-    position: fixed;
-    inset: 0;
-    background: var(--menuPanelBg);
-    transform: translateY(-8px);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .18s ease, transform .18s ease;
-    z-index: 110;
-    padding-top: 22px;
-    padding-bottom: 28px;
-    padding-left: calc(var(--pad) + var(--safeL));
-    padding-right: calc(var(--pad) + var(--safeR));
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
+    position:fixed;
+    inset:0;
+    background:var(--menuPanelBg);
+    transform:translateY(-8px);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .18s ease, transform .18s ease;
+    z-index:110;
+    padding-top:22px;
+    padding-bottom:28px;
+    padding-left:calc(var(--pad) + var(--safeL));
+    padding-right:calc(var(--pad) + var(--safeR));
+    overflow:auto;
+    -webkit-overflow-scrolling:touch;
   }
   .menuPanel.open{
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0);
+    opacity:1;
+    pointer-events:auto;
+    transform:translateY(0);
   }
 
   .menuTop{
-    max-width: 780px;
-    margin: 0 auto;
+    max-width:780px;
+    margin:0 auto;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap: 12px;
-    padding: 6px 0 18px;
-    border-bottom: 1px solid var(--menuLine);
+    gap:12px;
+    padding:6px 0 18px;
+    border-bottom:1px solid var(--menuLine);
   }
   .menuTitle{
-    font-weight: 600;
-    letter-spacing: .22em;
-    font-size: 18px;
-    color: #111;
+    font-weight:600;
+    letter-spacing:.22em;
+    font-size:18px;
+    color:#111;
     white-space:nowrap;
   }
   .menuClose{
-    width: 44px;
-    height: 44px;
-    border: none;
-    background: transparent;
-    cursor: pointer;
+    width:44px;
+    height:44px;
+    border:none;
+    background:transparent;
+    cursor:pointer;
     display:grid;
     place-items:center;
-    position: relative;
+    position:relative;
     padding:0;
   }
   .menuClose::before,
   .menuClose::after{
     content:"";
-    width: 22px;
-    height: 1px;
-    background: #111;
+    width:22px;
+    height:1px;
+    background:#111;
     position:absolute;
   }
-  .menuClose::before{ transform: rotate(45deg); }
-  .menuClose::after{ transform: rotate(-45deg); }
+  .menuClose::before{ transform:rotate(45deg); }
+  .menuClose::after{ transform:rotate(-45deg); }
 
   .menuBody{
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 18px 0 0;
+    max-width:780px;
+    margin:0 auto;
+    padding:18px 0 0;
   }
 
   .menuCtas{
     display:flex;
     flex-direction:column;
-    gap: 12px;
-    padding-bottom: 18px;
-    border-bottom: 1px solid var(--menuLine);
+    gap:12px;
+    padding-bottom:18px;
+    border-bottom:1px solid var(--menuLine);
   }
   .menuBtnPrimary,
   .menuBtnGhost{
     display:flex;
     align-items:center;
     justify-content:center;
-    height: 56px;
-    border-radius: 999px;
-    font-size: 15px;
-    letter-spacing: .06em;
-    text-decoration: none;
-    border: 1px solid var(--line);
+    height:56px;
+    border-radius:999px;
+    font-size:15px;
+    letter-spacing:.06em;
+    text-decoration:none;
+    border:1px solid var(--line);
   }
   .menuBtnPrimary{
-    background: rgba(15,107,77,.10);
-    color: var(--green2);
-    border-color: rgba(15,107,77,.30);
-    font-weight: 600;
+    background:rgba(15,107,77,.10);
+    color:var(--green2);
+    border-color:rgba(15,107,77,.30);
+    font-weight:600;
   }
   .menuBtnGhost{
-    background: transparent;
-    color: var(--green);
-    border-color: rgba(15,107,77,.26);
-    font-weight: 600;
+    background:transparent;
+    color:var(--green);
+    border-color:rgba(15,107,77,.26);
+    font-weight:600;
   }
   .menuBtnPrimary:hover,
   .menuBtnGhost:hover{
     text-decoration:none;
-    background: rgba(15,107,77,.06);
+    background:rgba(15,107,77,.06);
   }
 
-  .menuLinks{ padding: 10px 0 0; }
+  .menuLinks{ padding:10px 0 0; }
   .menuLink{
     display:flex;
     flex-direction:column;
     align-items:flex-start;
     justify-content:center;
-    padding: 24px 6px;
-    gap: 4px;
-    border-bottom: 1px solid var(--menuLine);
+    padding:24px 6px;
+    gap:4px;
+    border-bottom:1px solid var(--menuLine);
     text-decoration:none;
   }
   .menuLink:last-child{ border-bottom:none; }
   .menuLink strong{
-    font-size: 18px;
-    font-weight: 500;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: #111;
+    font-size:18px;
+    font-weight:500;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:#111;
   }
   .menuLink span{
-    font-size: 12px;
-    opacity: .7;
-    letter-spacing: .06em;
-    color: #111;
-    margin-top: 2px;
+    font-size:12px;
+    opacity:.7;
+    letter-spacing:.06em;
+    color:#111;
+    margin-top:2px;
   }
   .menuLink:hover{
-    background: rgba(15,107,77,.04);
+    background:rgba(15,107,77,.04);
     text-decoration:none;
   }
 
   /* ===== Layout ===== */
   main.wrap{
-    max-width: var(--max);
-    margin: 0 auto;
+    max-width:var(--max);
+    margin:0 auto;
     width:100%;
-    padding: 18px 14px 40px;
+    padding:28px 24px 56px;
   }
 
   /* ===== Hero ===== */
   .pageHero{
-    margin-top:10px;
+    max-width:var(--article);
+    margin:24px auto 0;
     text-align:center;
-    padding: 10px 0 4px;
+    padding:18px 0 8px;
   }
   .kicker{
     display:inline-flex;
     align-items:center;
     justify-content:center;
-    padding: 8px 12px;
-    border-radius: 999px;
-    border: 1px solid rgba(15,107,77,.18);
-    background: rgba(15,107,77,.06);
-    color: var(--green2);
-    font-size: 12px;
-    letter-spacing: .08em;
-    font-weight: 700;
+    padding:8px 14px;
+    border-radius:999px;
+    border:1px solid rgba(15,107,77,.18);
+    background:rgba(15,107,77,.06);
+    color:var(--green2);
+    font-size:12px;
+    letter-spacing:.12em;
+    font-weight:700;
   }
   .pageTitle{
-    margin:16px 0 0;
-    font-size: 32px;
-    line-height:1.2;
-    letter-spacing: .02em;
-    color: var(--ink);
-    position:relative;
-    padding-bottom:10px;
+    margin:18px 0 0;
+    font-size:44px;
+    line-height:1.35;
+    letter-spacing:.01em;
+    font-weight:500;
+    color:var(--ink);
   }
   .pageTitle::after{
     content:"";
     display:block;
-    width:40px;
+    width:54px;
     height:2px;
-    margin:10px auto 0;
-    background: var(--green);
-    opacity:.55;
-    border-radius:2px;
+    margin:18px auto 0;
+    background:var(--green);
+    opacity:.45;
   }
   .pageLead{
-    margin: 12px auto 0;
-    max-width: 60ch;
-    color: var(--muted);
-    font-size: 15px;
-    line-height:1.8;
+    margin:24px auto 0;
+    max-width:760px;
+    color:var(--muted);
+    font-size:17px;
+    line-height:1.95;
     text-align:center;
   }
 
   /* ===== Article ===== */
   .article{
-    max-width: var(--content);
-    margin: 24px auto 0;
+    max-width:var(--article);
+    margin:56px auto 0;
   }
-  .sectionCard{
-    background:#fff;
-    border:1px solid rgba(15,107,77,.18);
-    border-radius:18px;
-    box-shadow: 0 8px 24px rgba(17,24,39,.06);
-    padding: 18px;
-    margin-top: 16px;
-  }
-  .sectionCard:first-child{ margin-top:0; }
 
-  .sectionCard h2{
-    margin:0 0 10px;
-    font-size:20px;
-    line-height:1.35;
-    color:var(--ink);
+  .sectionBlock{
+    position:relative;
+    margin-top:72px;
+    padding-left:34px;
+    padding-bottom:6px;
+  }
+  .sectionBlock:first-child{
+    margin-top:0;
+  }
+  .sectionBlock::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:8px;
+    width:1px;
+    height:56px;
+    background:rgba(15,107,77,.45);
+  }
+
+  .sectionHeading{
+    margin:0;
+    font-size:24px;
+    line-height:1.6;
+    font-weight:600;
     letter-spacing:.01em;
+    color:var(--ink);
   }
-  .sectionCard p{
-    margin:0 0 12px;
-    color:var(--muted);
-    font-size:15px;
-    line-height:1.9;
-  }
-  .sectionCard p:last-child{ margin-bottom:0; }
 
-  .list{
+  .sectionIntro{
+    margin:18px 0 0;
+    color:var(--muted);
+    font-size:16px;
+    line-height:1.95;
+  }
+
+  .pointList{
     list-style:none;
-    margin: 12px 0 0;
+    margin:28px 0 0;
     padding:0;
     display:grid;
-    gap:12px;
-  }
-  .list li{
-    display:flex;
-    gap:12px;
-    align-items:flex-start;
-    padding:14px;
-    border:1px solid rgba(15,107,77,.12);
-    border-radius:16px;
-    background: linear-gradient(180deg, rgba(15,107,77,.03), rgba(15,107,77,.01));
+    gap:28px;
   }
 
-  .badge{
-    flex:0 0 auto;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    padding:5px 10px;
-    border-radius:999px;
-    border:1px solid rgba(15,107,77,.18);
-    background:#fff;
-    color:var(--green2);
-    font-size:12px;
+  .pointItem{
+    padding:0;
+  }
+
+  .pointLabel{
+    display:inline-block;
+    margin:0 0 10px;
+    color:var(--green);
+    font-size:13px;
+    letter-spacing:.12em;
     font-weight:700;
-    letter-spacing:.04em;
-    white-space:nowrap;
-    margin-top:2px;
   }
 
-  .list p{
-    margin:0 0 8px;
+  .pointItem p{
+    margin:0 0 10px;
+    color:var(--muted);
+    font-size:16px;
+    line-height:1.95;
   }
-  .list p:last-child{ margin-bottom:0; }
+  .pointItem p:last-child{
+    margin-bottom:0;
+  }
+
+  .pointItem strong{
+    color:var(--green2);
+    font-weight:700;
+  }
 
   .tip{
-    margin-top: 14px;
-    padding: 14px 16px;
-    border-radius: 16px;
-    border:1px solid rgba(15,107,77,.18);
-    background: rgba(15,107,77,.06);
-    color: var(--muted);
-    font-size:14px;
-    line-height:1.85;
+    margin-top:26px;
+    padding-top:18px;
+    border-top:1px solid var(--blackline);
+    color:var(--muted);
+    font-size:16px;
+    line-height:1.95;
   }
   .tip strong{
-    color: var(--green2);
-    font-weight: 800;
+    color:var(--green2);
+    font-weight:700;
   }
 
   .actionsRow{
-    max-width: var(--content);
-    margin: 18px auto 0;
+    max-width:var(--article);
+    margin:62px auto 0;
     display:flex;
-    gap:10px;
+    gap:12px;
     flex-wrap:wrap;
     justify-content:center;
   }
+
   .btn{
     display:inline-flex;
     align-items:center;
     justify-content:center;
     gap:8px;
-    padding:10px 16px;
-    border-radius:999px;
-    border:1px solid rgba(15,107,77,.26);
-    background:transparent;
-    color:var(--green);
-    font-weight:800;
-    cursor:pointer;
+    min-height:48px;
+    padding:10px 18px;
+    border:1px solid rgba(0,0,0,.18);
+    background:#fff;
+    color:var(--ink);
+    font-size:13px;
+    letter-spacing:.08em;
     text-decoration:none;
     transition:.15s ease;
     white-space:nowrap;
   }
   .btn:hover{
-    background: rgba(15,107,77,.06);
+    background:rgba(0,0,0,.03);
     text-decoration:none;
-    transform: translateY(-1px);
-  }
-  .btnPrimary{
-    background: rgba(15,107,77,.10);
-    color: var(--green2);
-    border-color: rgba(15,107,77,.30);
   }
 
   /* ===== Footer ===== */
   .footer{
-    margin-top: 34px;
-    padding-top: 18px;
+    max-width:var(--article);
+    margin:58px auto 0;
+    padding-top:22px;
     border-top:1px solid var(--line);
-    color: rgba(15,107,77,.85);
+    color:rgba(15,107,77,.85);
     font-size:12px;
-    line-height:1.7;
+    line-height:1.8;
     text-align:center;
   }
   .footer a{
-    color: rgba(15,107,77,.92);
+    color:rgba(15,107,77,.92);
     text-decoration:none;
     border-bottom:1px solid transparent;
     padding-bottom:2px;
   }
   .footer a:hover{
-    border-bottom-color: var(--line);
+    border-bottom-color:var(--line);
     text-decoration:none;
   }
 
-  @media (max-width:520px){
-    .brandLogo img{ height:34px; }
-    .cta{ padding: 9px 10px; font-size: 12px; }
-    .pageTitle{ font-size:28px; }
-    .pageLead{ font-size:14px; }
-    .sectionCard{ padding:16px; }
-    .sectionCard h2{ font-size:18px; }
-    .list li{
-      flex-direction:column;
-      gap:10px;
+  @media (max-width: 900px){
+    .pageTitle{ font-size:38px; }
+    .pageLead{ font-size:16px; }
+    .sectionHeading{ font-size:22px; }
+    .sectionIntro,
+    .pointItem p,
+    .tip{ font-size:15px; }
+  }
+
+  @media (max-width: 700px){
+    main.wrap{
+      padding:24px 20px 48px;
     }
+
+    .pageHero{
+      margin-top:18px;
+      padding-top:14px;
+    }
+
+    .pageTitle{
+      font-size:34px;
+      line-height:1.4;
+    }
+
+    .pageLead{
+      margin-top:20px;
+      font-size:15px;
+      line-height:1.9;
+      max-width:100%;
+    }
+
+    .article{
+      margin-top:42px;
+    }
+
+    .sectionBlock{
+      margin-top:48px;
+      padding-left:20px;
+    }
+
+    .sectionBlock::before{
+      top:6px;
+      height:42px;
+    }
+
+    .sectionHeading{
+      font-size:20px;
+      line-height:1.65;
+    }
+
+    .sectionIntro{
+      margin-top:14px;
+      font-size:15px;
+      line-height:1.95;
+    }
+
+    .pointList{
+      margin-top:22px;
+      gap:20px;
+    }
+
+    .pointLabel{
+      font-size:11px;
+      margin-bottom:8px;
+      color:var(--green);
+    }
+
+    .pointItem p{
+      font-size:15px;
+      line-height:1.95;
+    }
+
+    .pointItem strong{
+      color:var(--green2);
+    }
+
+    .tip{
+      margin-top:20px;
+      padding-top:14px;
+      font-size:14px;
+      line-height:2;
+    }
+
+    .actionsRow{
+      margin-top:44px;
+      justify-content:center;
+    }
+
+    .btn{
+      font-size:12px;
+      padding:10px 14px;
+    }
+
+    .brandLogo img{ height:45px; }
+    .cta{ padding:9px 10px; font-size:12px; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -656,161 +720,149 @@ crossorigin="anonymous"></script>
     </section>
 
     <article class="article" aria-label="ベビー服リユースガイド本文">
-      <section class="sectionCard">
-        <h2>なぜベビー服は捨てずに済むことが多いのか</h2>
-        <p>
+
+      <section class="sectionBlock">
+        <h2 class="sectionHeading">なぜベビー服は捨てずに済むことが多いのか</h2>
+        <p class="sectionIntro">
           ベビー服は使う期間が短く、成長とともにすぐサイズアウトしてしまいます。
           そのため、着用回数が少ないまま役目を終える服も多く、状態の良いまま残ることが少なくありません。
         </p>
 
-        <ul class="list">
-          <li>
-            <span class="badge">短期間</span>
-            <div>
-              <p><strong>数ヶ月しか使わない服が多い</strong>のがベビー服の特徴です。</p>
-              <p>新生児期や季節限定の服は特に使用期間が短く、きれいな状態のまま残りやすくなります。</p>
-            </div>
-          </li>
+        <div class="pointList">
+          <div class="pointItem">
+            <div class="pointLabel">短期間</div>
+            <p><strong>数ヶ月しか使わない服が多い</strong>のがベビー服の特徴です。</p>
+            <p>新生児期や季節限定の服は特に使用期間が短く、きれいな状態のまま残りやすくなります。</p>
+          </div>
 
-          <li>
-            <span class="badge">状態良好</span>
-            <div>
-              <p><strong>まだ十分に着られる服が多い</strong>ため、リユースとの相性が良いです。</p>
-              <p>少しの毛羽立ちや使用感があっても、日常使いとしては十分役立つことがあります。</p>
-            </div>
-          </li>
+          <div class="pointItem">
+            <div class="pointLabel">状態良好</div>
+            <p><strong>まだ十分に着られる服が多い</strong>ため、リユースとの相性が良いです。</p>
+            <p>少しの毛羽立ちや使用感があっても、日常使いとしては十分役立つことがあります。</p>
+          </div>
 
-          <li>
-            <span class="badge">次に必要</span>
-            <div>
-              <p><strong>必要としている家庭が多い</strong>のもベビー服ならではです。</p>
-              <p>成長が早い時期だからこそ、気軽に受け取れる服は助かる存在になります。</p>
-            </div>
-          </li>
-        </ul>
+          <div class="pointItem">
+            <div class="pointLabel">次に必要</div>
+            <p><strong>必要としている家庭が多い</strong>のもベビー服ならではです。</p>
+            <p>成長が早い時期だからこそ、気軽に受け取れる服は助かる存在になります。</p>
+          </div>
+        </div>
       </section>
 
-      <section class="sectionCard">
-        <h2>ベビー服を次につなぐ前にしておきたいこと</h2>
-        <p>
+      <section class="sectionBlock">
+        <h2 class="sectionHeading">ベビー服を次につなぐ前にしておきたいこと</h2>
+        <p class="sectionIntro">
           気持ちよくリユースしてもらうためには、少しの準備が大切です。
           完璧でなくても、次の人が使いやすい状態に近づけるだけで印象が変わります。
         </p>
 
-        <ul class="list">
-          <li>
-            <span class="badge">洗濯</span>
-            <div>
-              <p><strong>受け渡し前に一度洗っておく</strong>と安心感があります。</p>
-              <p>香りが強すぎる洗剤や柔軟剤は避け、できるだけやさしい仕上がりにすると親切です。</p>
-            </div>
-          </li>
+        <div class="pointList">
+          <div class="pointItem">
+            <div class="pointLabel">洗濯</div>
+            <p><strong>受け渡し前に一度洗っておく</strong>と安心感があります。</p>
+            <p>香りが強すぎる洗剤や柔軟剤は避け、できるだけやさしい仕上がりにすると親切です。</p>
+          </div>
 
-          <li>
-            <span class="badge">確認</span>
-            <div>
-              <p><strong>シミ・ほつれ・毛玉などは事前に確認</strong>しておきましょう。</p>
-              <p>小さなダメージでも、正直に伝えることで受け取る側も安心しやすくなります。</p>
-            </div>
-          </li>
+          <div class="pointItem">
+            <div class="pointLabel">確認</div>
+            <p><strong>シミ・ほつれ・毛玉などは事前に確認</strong>しておきましょう。</p>
+            <p>小さなダメージでも、正直に伝えることで受け取る側も安心しやすくなります。</p>
+          </div>
 
-          <li>
-            <span class="badge">分類</span>
-            <div>
-              <p><strong>サイズや季節ごとに分けておく</strong>と渡しやすくなります。</p>
-              <p>50〜60、70〜80などの目安が分かるだけでも、相手にとって選びやすくなります。</p>
-            </div>
-          </li>
-        </ul>
+          <div class="pointItem">
+            <div class="pointLabel">分類</div>
+            <p><strong>サイズや季節ごとに分けておく</strong>と渡しやすくなります。</p>
+            <p>50〜60、70〜80などの目安が分かるだけでも、相手にとって選びやすくなります。</p>
+          </div>
+        </div>
       </section>
 
-      <section class="sectionCard">
-        <h2>ベビー服をリユースする方法</h2>
-        <p>
+      <section class="sectionBlock">
+        <h2 class="sectionHeading">ベビー服をリユースする方法</h2>
+        <p class="sectionIntro">
           身近な人に譲るだけでなく、交換やゆずりあいサービスを活用する方法もあります。
           無理のない方法を選ぶことが、続けやすいリユースにつながります。
         </p>
 
-        <ul class="list">
-          <li>
-            <span class="badge">家族友人</span>
-            <div>
-              <p><strong>まずは身近な人に声をかける</strong>方法があります。</p>
-              <p>必要な時期が合えば、もっとも自然で手軽なリユースになります。</p>
-            </div>
-          </li>
+        <div class="pointList">
+          <div class="pointItem">
+            <div class="pointLabel">家族友人</div>
+            <p><strong>まずは身近な人に声をかける</strong>方法があります。</p>
+            <p>必要な時期が合えば、もっとも自然で手軽なリユースになります。</p>
+          </div>
 
-          <li>
-            <span class="badge">交換</span>
-            <div>
-              <p><strong>他の育児用品と交換する</strong>のもひとつの方法です。</p>
-              <p>サイズアウトした服を、今必要な別のアイテムへつなげることができます。</p>
-            </div>
-          </li>
+          <div class="pointItem">
+            <div class="pointLabel">交換</div>
+            <p><strong>他の育児用品と交換する</strong>のもひとつの方法です。</p>
+            <p>サイズアウトした服を、今必要な別のアイテムへつなげることができます。</p>
+          </div>
 
-          <li>
-            <span class="badge">地域</span>
-            <div>
-              <p><strong>地域の譲渡会やコミュニティを活用する</strong>方法もあります。</p>
-              <p>近くで受け渡しできると、送料や手間を減らしながら循環を作れます。</p>
-            </div>
-          </li>
-        </ul>
+          <div class="pointItem">
+            <div class="pointLabel">地域</div>
+            <p><strong>地域の譲渡会やコミュニティを活用する</strong>方法もあります。</p>
+            <p>近くで受け渡しできると、送料や手間を減らしながら循環を作れます。</p>
+          </div>
+        </div>
       </section>
 
-      <section class="sectionCard">
-        <h2>保管のしかたで“次につなぎやすさ”が変わる</h2>
-        <p>
+      <section class="sectionBlock">
+        <h2 class="sectionHeading">保管のしかたで“次につなぎやすさ”が変わる</h2>
+        <p class="sectionIntro">
           すぐに渡す予定がなくても、少し意識して保管しておくだけで次に使いやすくなります。
         </p>
 
-        <ul class="list">
-          <li>
-            <span class="badge">乾燥</span>
-            <div>
-              <p><strong>湿気を避けて保管する</strong>ことが大切です。</p>
-              <p>カビやにおいを防ぐため、しっかり乾いた状態でしまうようにしましょう。</p>
-            </div>
-          </li>
+        <div class="pointList">
+          <div class="pointItem">
+            <div class="pointLabel">乾燥</div>
+            <p><strong>湿気を避けて保管する</strong>ことが大切です。</p>
+            <p>カビやにおいを防ぐため、しっかり乾いた状態でしまうようにしましょう。</p>
+          </div>
 
-          <li>
-            <span class="badge">整理</span>
-            <div>
-              <p><strong>サイズ・季節・種類ごとに分ける</strong>と後で見返しやすくなります。</p>
-              <p>ロンパース、肌着、アウターなどに分けるだけでも管理しやすくなります。</p>
-            </div>
-          </li>
+          <div class="pointItem">
+            <div class="pointLabel">整理</div>
+            <p><strong>サイズ・季節・種類ごとに分ける</strong>と後で見返しやすくなります。</p>
+            <p>ロンパース、肌着、アウターなどに分けるだけでも管理しやすくなります。</p>
+          </div>
 
-          <li>
-            <span class="badge">清潔</span>
-            <div>
-              <p><strong>収納ケースや袋もきれいに保つ</strong>と安心です。</p>
-              <p>服そのものだけでなく、保管環境を整えることも次につなぐ準備のひとつです。</p>
-            </div>
-          </li>
-        </ul>
+          <div class="pointItem">
+            <div class="pointLabel">清潔</div>
+            <p><strong>収納ケースや袋もきれいに保つ</strong>と安心です。</p>
+            <p>服そのものだけでなく、保管環境を整えることも次につなぐ準備のひとつです。</p>
+          </div>
+        </div>
       </section>
 
-      <section class="sectionCard">
-        <h2>小さな一着でも、やさしい循環になる</h2>
-        <p>
+      <section class="sectionBlock">
+        <h2 class="sectionHeading">小さな一着でも、やさしい循環になる</h2>
+        <p class="sectionIntro">
           ベビー服は一着ごとの値段は大きくなくても、枚数が増えると負担になります。
           だからこそ、まだ使える服が次の家庭へ渡ることには大きな意味があります。
         </p>
-        <p>
-          捨てる前に「誰かに役立つかもしれない」と考えることが、やさしい循環の第一歩です。
-        </p>
+
+        <div class="pointList">
+          <div class="pointItem">
+            <div class="pointLabel">やさしい循環</div>
+            <p><strong>捨てる前に「誰かに役立つかもしれない」と考える</strong>ことが第一歩です。</p>
+            <p>一着ごとの積み重ねが、家計にも環境にもやさしい循環につながっていきます。</p>
+          </div>
+
+          <div class="pointItem">
+            <div class="pointLabel">次の家族へ</div>
+            <p><strong>状態の良い服は、次の暮らしでまた役立つ</strong>可能性があります。</p>
+            <p>無理なく手放し、無理なく受け取れることが、続けやすいリユースの形です。</p>
+          </div>
+        </div>
 
         <div class="tip">
           <strong>もったいないを、ありがとうへ。</strong>
           Mottainai Babeは、ベビー服や育児用品を次の家族へつなぐ、無理のないリユースを応援しています。
         </div>
       </section>
+
     </article>
 
     <div class="actionsRow">
-      <a class="btn" href="./guide.html">← ガイド一覧へ</a>
-      <a class="btn btnPrimary" href="./app.html">アプリを見る →</a>
+      <a class="btn" href="./guide.html">ガイド一覧へ</a>
     </div>
 
     <footer class="footer">
