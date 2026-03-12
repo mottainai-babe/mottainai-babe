@@ -1,16 +1,13 @@
 <!doctype html>
 <html lang="ja">
 <head>
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>エコとリユース | もったいないベビー</title>
 
 <meta name="description" content="ベビー用品をリユースすることで環境にやさしい育児を。もったいないベビーは、家庭で使われなくなったベビー用品を次の家族へつなぐプラットフォームです。">
-
 <meta name="robots" content="index, follow">
-
 <link rel="canonical" href="https://mottainai-babe.com/eco.html">
 
 <meta property="og:title" content="エコとリユース | Mottainai Babe">
@@ -27,7 +24,6 @@ gtag('js', new Date());
 gtag('config', 'G-QVWCBQZP1T');
 </script>
 
-<!-- 구조화 데이터 -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -69,523 +65,590 @@ gtag('config', 'G-QVWCBQZP1T');
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5865479939175622"
 crossorigin="anonymous"></script>
 
+<style>
+  :root{
+    --bg:#ffffff;
+    --ink:#111111;
+    --muted:#4b4b4b;
 
+    --green:#0f6b4d;
+    --green2:#0b513b;
+    --line:rgba(15,107,77,.22);
+    --blackline:rgba(0,0,0,.16);
 
-  <style>
-    :root{
-      --bg:#ffffff;
-      --ink:#111111;
-      --muted:#444444;
+    --max:1200px;
+    --article:760px;
+    --pad:22px;
 
-      --green:#0f6b4d;
-      --green2:#0b513b;
-      --line: rgba(15,107,77,.28);
+    --sans:ui-sans-serif, system-ui, -apple-system, "Hiragino Kaku Gothic ProN",
+            "Yu Gothic", "Noto Sans JP", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
-      --max: 1040px;
-      --content: 820px;
-      --pad: 22px;
+    --menuBack:rgba(0,0,0,.35);
+    --menuPanelBg:#ffffff;
+    --menuLine:rgba(0,0,0,.12);
 
-      --sans: ui-sans-serif, system-ui, -apple-system, "Hiragino Kaku Gothic ProN",
-              "Yu Gothic", "Noto Sans JP", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-
-      --menuBack: rgba(0,0,0,.35);
-      --menuPanelBg: #ffffff;
-      --menuLine: rgba(0,0,0,.12);
-
-      --safeL: env(safe-area-inset-left);
-      --safeR: env(safe-area-inset-right);
-    }
-
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      font-family: var(--sans);
-      background: var(--bg);
-      color: var(--ink);
-      letter-spacing: .2px;
-      line-height: 1.95;
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      align-items:stretch;
-      justify-content:flex-start;
-    }
-
-    a{ color:inherit; text-decoration:none; }
-    a:hover{ text-decoration:underline; }
-
-    /* ===== Header ===== */
-    header{
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      width:100%;
-      background: rgba(255,255,255,.90);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .topbar{
-      max-width: 1200px;
-      margin: 0 auto;
-      padding-top: 12px;
-      padding-bottom: 12px;
-      padding-left: calc(var(--pad) + var(--safeL));
-      padding-right: calc(var(--pad) + var(--safeR));
-      display:grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items:center;
-      gap: 14px;
-    }
-
-    .leftSlot{
-      display:flex;
-      align-items:center;
-      justify-content:flex-start;
-      min-width:0;
-    }
-    .rightSlot{
-      display:flex;
-      align-items:center;
-      justify-content:flex-end;
-      min-width:0;
-      gap:10px;
-    }
-
-    .menuBtn{
-      width: 44px;
-      height: 44px;
-      display:grid;
-      place-items:center;
-      border:none;
-      background:transparent;
-      cursor:pointer;
-      padding:0;
-    }
-    .hamburger{
-      width:22px;
-      height:12px;
-      position:relative;
-    }
-    .hamburger::before,
-    .hamburger::after,
-    .hamburger span{
-      content:"";
-      position:absolute;
-      left:0; right:0;
-      height:1px;
-      background:var(--green);
-      opacity:.95;
-    }
-    .hamburger::before{ top:0; }
-    .hamburger span{ top:50%; transform:translateY(-50%); }
-    .hamburger::after{ bottom:0; }
-
-    .brandLogo{
-      justify-self:center;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-width:0;
-      text-decoration:none;
-    }
-    .brandLogo img{
-      height:50px;
-      width:auto;
-      display:block;
-    }
-    @media (max-width:520px){
-  .brandLogo img,
-  .logoWrap img,
-  .brandTop img{
-    height:45px !important;
-    width:auto;
+    --safeL:env(safe-area-inset-left);
+    --safeR:env(safe-area-inset-right);
   }
-}
 
-    .cta{
-      font-family: inherit;
-      font-size: 12px;
-      letter-spacing: .08em;
-      padding: 10px 12px;
-      border: 1px solid var(--line);
-      background: transparent;
-      border-radius: 999px;
-      color: var(--green);
-      white-space: nowrap;
-      text-decoration: none;
-      cursor: pointer;
-      appearance: none;
-      -webkit-appearance: none;
-    }
-    .cta:hover{
-      background: rgba(15,107,77,.06);
-      text-decoration:none;
-    }
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; }
+  body{
+    margin:0;
+    font-family:var(--sans);
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.95;
+    letter-spacing:.02em;
+  }
 
-    /* ===== Menu Overlay ===== */
-    .menuOverlay{
-      position: fixed;
-      inset: 0;
-      background: var(--menuBack);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .18s ease;
-      z-index: 100;
-    }
-    .menuOverlay.open{
-      opacity: 1;
-      pointer-events: auto;
-    }
+  a{ color:inherit; text-decoration:none; }
+  a:hover{ text-decoration:underline; }
 
-    .menuPanel{
-      position: fixed;
-      inset: 0;
-      background: var(--menuPanelBg);
-      transform: translateY(-8px);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .18s ease, transform .18s ease;
-      z-index: 110;
-      padding-top: 22px;
-      padding-bottom: 28px;
-      padding-left: calc(var(--pad) + var(--safeL));
-      padding-right: calc(var(--pad) + var(--safeR));
-      overflow: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    .menuPanel.open{
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0);
-    }
+  /* ===== Header ===== */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    width:100%;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
 
-    .menuTop{
-      max-width: 780px;
-      margin: 0 auto;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 12px;
-      padding: 6px 0 18px;
-      border-bottom: 1px solid var(--menuLine);
-    }
-    .menuTitle{
-      font-weight: 600;
-      letter-spacing: .22em;
-      font-size: 18px;
-      color: #111;
-      white-space:nowrap;
-    }
-    .menuClose{
-      width: 44px;
-      height: 44px;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      display:grid;
-      place-items:center;
-      position: relative;
-      padding:0;
-    }
-    .menuClose::before,
-    .menuClose::after{
-      content:"";
-      width: 22px;
-      height: 1px;
-      background: #111;
-      position:absolute;
-    }
-    .menuClose::before{ transform: rotate(45deg); }
-    .menuClose::after{ transform: rotate(-45deg); }
+  .topbar{
+    max-width:1200px;
+    margin:0 auto;
+    padding-top:12px;
+    padding-bottom:12px;
+    padding-left:calc(var(--pad) + var(--safeL));
+    padding-right:calc(var(--pad) + var(--safeR));
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    gap:14px;
+  }
 
-    .menuBody{
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 18px 0 0;
-    }
+  .leftSlot,
+  .rightSlot{
+    display:flex;
+    align-items:center;
+    min-width:0;
+  }
+  .leftSlot{ justify-content:flex-start; }
+  .rightSlot{ justify-content:flex-end; gap:10px; }
 
-    .menuCtas{
-      display:flex;
-      flex-direction:column;
-      gap: 12px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid var(--menuLine);
-    }
-    .menuBtnPrimary,
-    .menuBtnGhost{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      height: 56px;
-      border-radius: 999px;
-      font-size: 15px;
-      letter-spacing: .06em;
-      text-decoration: none;
-      border: 1px solid var(--line);
-    }
-    .menuBtnPrimary{
-      background: rgba(15,107,77,.10);
-      color: var(--green2);
-      border-color: rgba(15,107,77,.30);
-      font-weight: 600;
-    }
-    .menuBtnGhost{
-      background: transparent;
-      color: var(--green);
-      border-color: rgba(15,107,77,.26);
-      font-weight: 600;
-    }
-    .menuBtnPrimary:hover,
-    .menuBtnGhost:hover{
-      text-decoration:none;
-      background: rgba(15,107,77,.06);
-    }
+  .menuBtn{
+    width:44px;
+    height:44px;
+    display:grid;
+    place-items:center;
+    border:none;
+    background:transparent;
+    cursor:pointer;
+    padding:0;
+  }
+  .hamburger{
+    width:22px;
+    height:12px;
+    position:relative;
+  }
+  .hamburger::before,
+  .hamburger::after,
+  .hamburger span{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    height:1px;
+    background:var(--green);
+    opacity:.95;
+  }
+  .hamburger::before{ top:0; }
+  .hamburger span{ top:50%; transform:translateY(-50%); }
+  .hamburger::after{ bottom:0; }
 
-    .menuLinks{ padding: 10px 0 0; }
-    .menuLink{
-      display:flex;
-      flex-direction:column;
-      align-items:flex-start;
-      justify-content:center;
-      padding: 24px 6px;
-      gap: 4px;
-      border-bottom: 1px solid var(--menuLine);
-      text-decoration:none;
-    }
-    .menuLink:last-child{ border-bottom:none; }
-    .menuLink strong{
-      font-size: 18px;
-      font-weight: 500;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: #111;
-    }
-    .menuLink span{
-      font-size: 12px;
-      opacity: .7;
-      letter-spacing: .06em;
-      color: #111;
-      margin-top: 2px;
-    }
-    .menuLink:hover{
-      background: rgba(15,107,77,.04);
-      text-decoration:none;
-    }
+  .brandLogo{
+    justify-self:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-width:0;
+    text-decoration:none;
+  }
+  .brandLogo img{
+    height:50px;
+    width:auto;
+    display:block;
+  }
 
-    /* ===== Layout ===== */
+  .cta{
+    font-family:inherit;
+    font-size:12px;
+    letter-spacing:.08em;
+    padding:10px 12px;
+    border:1px solid var(--line);
+    background:transparent;
+    border-radius:999px;
+    color:var(--green);
+    white-space:nowrap;
+    text-decoration:none;
+    cursor:pointer;
+    appearance:none;
+    -webkit-appearance:none;
+  }
+  .cta:hover{
+    background:rgba(15,107,77,.06);
+    text-decoration:none;
+  }
+
+  /* ===== Menu Overlay ===== */
+  .menuOverlay{
+    position:fixed;
+    inset:0;
+    background:var(--menuBack);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .18s ease;
+    z-index:100;
+  }
+  .menuOverlay.open{
+    opacity:1;
+    pointer-events:auto;
+  }
+
+  .menuPanel{
+    position:fixed;
+    inset:0;
+    background:var(--menuPanelBg);
+    transform:translateY(-8px);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .18s ease, transform .18s ease;
+    z-index:110;
+    padding-top:22px;
+    padding-bottom:28px;
+    padding-left:calc(var(--pad) + var(--safeL));
+    padding-right:calc(var(--pad) + var(--safeR));
+    overflow:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  .menuPanel.open{
+    opacity:1;
+    pointer-events:auto;
+    transform:translateY(0);
+  }
+
+  .menuTop{
+    max-width:780px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:6px 0 18px;
+    border-bottom:1px solid var(--menuLine);
+  }
+  .menuTitle{
+    font-weight:600;
+    letter-spacing:.22em;
+    font-size:18px;
+    color:#111;
+    white-space:nowrap;
+  }
+  .menuClose{
+    width:44px;
+    height:44px;
+    border:none;
+    background:transparent;
+    cursor:pointer;
+    display:grid;
+    place-items:center;
+    position:relative;
+    padding:0;
+  }
+  .menuClose::before,
+  .menuClose::after{
+    content:"";
+    width:22px;
+    height:1px;
+    background:#111;
+    position:absolute;
+  }
+  .menuClose::before{ transform:rotate(45deg); }
+  .menuClose::after{ transform:rotate(-45deg); }
+
+  .menuBody{
+    max-width:780px;
+    margin:0 auto;
+    padding:18px 0 0;
+  }
+
+  .menuCtas{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    padding-bottom:18px;
+    border-bottom:1px solid var(--menuLine);
+  }
+  .menuBtnPrimary,
+  .menuBtnGhost{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:56px;
+    border-radius:999px;
+    font-size:15px;
+    letter-spacing:.06em;
+    text-decoration:none;
+    border:1px solid var(--line);
+  }
+  .menuBtnPrimary{
+    background:rgba(15,107,77,.10);
+    color:var(--green2);
+    border-color:rgba(15,107,77,.30);
+    font-weight:600;
+  }
+  .menuBtnGhost{
+    background:transparent;
+    color:var(--green);
+    border-color:rgba(15,107,77,.26);
+    font-weight:600;
+  }
+  .menuBtnPrimary:hover,
+  .menuBtnGhost:hover{
+    text-decoration:none;
+    background:rgba(15,107,77,.06);
+  }
+
+  .menuLinks{ padding:10px 0 0; }
+  .menuLink{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:center;
+    padding:24px 6px;
+    gap:4px;
+    border-bottom:1px solid var(--menuLine);
+    text-decoration:none;
+  }
+  .menuLink:last-child{ border-bottom:none; }
+  .menuLink strong{
+    font-size:18px;
+    font-weight:500;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:#111;
+  }
+  .menuLink span{
+    font-size:12px;
+    opacity:.7;
+    letter-spacing:.06em;
+    color:#111;
+    margin-top:2px;
+  }
+  .menuLink:hover{
+    background:rgba(15,107,77,.04);
+    text-decoration:none;
+  }
+
+  /* ===== Layout ===== */
+  main.wrap{
+    max-width:var(--max);
+    margin:0 auto;
+    width:100%;
+    padding:28px 24px 56px;
+  }
+
+  /* ===== Hero ===== */
+  .pageHero{
+    max-width:var(--article);
+    margin:24px auto 0;
+    text-align:center;
+    padding:18px 0 8px;
+  }
+  .kicker{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:8px 14px;
+    border-radius:999px;
+    border:1px solid rgba(15,107,77,.18);
+    background:rgba(15,107,77,.06);
+    color:var(--green2);
+    font-size:12px;
+    letter-spacing:.12em;
+    font-weight:700;
+  }
+  .pageTitle{
+    margin:18px 0 0;
+    font-size:44px;
+    line-height:1.35;
+    letter-spacing:.01em;
+    font-weight:500;
+    color:var(--ink);
+  }
+  .pageTitle::after{
+    content:"";
+    display:block;
+    width:54px;
+    height:2px;
+    margin:18px auto 0;
+    background:var(--green);
+    opacity:.45;
+  }
+  .pageLead{
+    margin:24px auto 0;
+    max-width:760px;
+    color:var(--muted);
+    font-size:17px;
+    line-height:1.95;
+    text-align:center;
+  }
+
+  /* ===== Article ===== */
+  .article{
+    max-width:var(--article);
+    margin:56px auto 0;
+  }
+
+  .sectionBlock{
+    position:relative;
+    margin-top:72px;
+    padding-left:34px;
+    padding-bottom:6px;
+  }
+  .sectionBlock:first-child{
+    margin-top:0;
+  }
+  .sectionBlock::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:8px;
+    width:1px;
+    height:56px;
+    background:rgba(15,107,77,.45);
+  }
+
+  .sectionHeading{
+    margin:0;
+    font-size:24px;
+    line-height:1.6;
+    font-weight:600;
+    letter-spacing:.01em;
+    color:var(--ink);
+  }
+
+  .sectionIntro{
+    margin:18px 0 0;
+    color:var(--muted);
+    font-size:16px;
+    line-height:1.95;
+  }
+
+  .pointList{
+    list-style:none;
+    margin:28px 0 0;
+    padding:0;
+    display:grid;
+    gap:28px;
+  }
+
+  .pointItem{
+    padding:0;
+  }
+
+  .pointLabel{
+    display:inline-block;
+    margin:0 0 10px;
+    color:var(--green);
+    font-size:13px;
+    letter-spacing:.12em;
+    font-weight:700;
+  }
+
+  .pointItem p{
+    margin:0 0 10px;
+    color:var(--muted);
+    font-size:16px;
+    line-height:1.95;
+  }
+  .pointItem p:last-child{
+    margin-bottom:0;
+  }
+
+  .pointItem strong{
+    color:var(--green2);
+    font-weight:700;
+  }
+
+  .tip{
+    margin-top:26px;
+    padding-top:18px;
+    border-top:1px solid var(--blackline);
+    color:var(--muted);
+    font-size:16px;
+    line-height:1.95;
+  }
+  .tip strong{
+    color:var(--green2);
+    font-weight:700;
+  }
+
+  .actionsRow{
+    max-width:var(--article);
+    margin:62px auto 0;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    min-height:48px;
+    padding:10px 18px;
+    border:1px solid rgba(0,0,0,.18);
+    background:#fff;
+    color:var(--ink);
+    font-size:13px;
+    letter-spacing:.08em;
+    text-decoration:none;
+    transition:.15s ease;
+    white-space:nowrap;
+  }
+  .btn:hover{
+    background:rgba(0,0,0,.03);
+    text-decoration:none;
+  }
+
+  /* ===== Footer ===== */
+  .footer{
+    max-width:var(--article);
+    margin:58px auto 0;
+    padding-top:22px;
+    border-top:1px solid var(--line);
+    color:rgba(15,107,77,.85);
+    font-size:12px;
+    line-height:1.8;
+    text-align:center;
+  }
+  .footer a{
+    color:rgba(15,107,77,.92);
+    text-decoration:none;
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+  }
+  .footer a:hover{
+    border-bottom-color:var(--line);
+    text-decoration:none;
+  }
+
+  @media (max-width: 900px){
+    .pageTitle{ font-size:38px; }
+    .pageLead{ font-size:16px; }
+    .sectionHeading{ font-size:22px; }
+    .sectionIntro,
+    .pointItem p,
+    .tip{ font-size:15px; }
+  }
+
+  @media (max-width: 700px){
     main.wrap{
-      max-width: var(--max);
-      margin: 0 auto;
-      width:100%;
-      padding: 18px 14px 40px;
+      padding:24px 20px 48px;
     }
 
-    /* ===== Hero ===== */
     .pageHero{
-      margin-top:10px;
-      text-align:center;
-      padding: 10px 0 4px;
+      margin-top:18px;
+      padding-top:14px;
     }
-    .kicker{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(15,107,77,.18);
-      background: rgba(15,107,77,.06);
-      color: var(--green2);
-      font-size: 12px;
-      letter-spacing: .08em;
-      font-weight: 700;
-    }
+
     .pageTitle{
-      margin:16px 0 0;
-      font-size: 32px;
-      line-height:1.2;
-      letter-spacing: .02em;
-      color: var(--ink);
-      position:relative;
-      padding-bottom:10px;
+      font-size:34px;
+      line-height:1.4;
     }
-    .pageTitle::after{
-      content:"";
-      display:block;
-      width:40px;
-      height:2px;
-      margin:10px auto 0;
-      background: var(--green);
-      opacity:.55;
-      border-radius:2px;
-    }
+
     .pageLead{
-      margin: 12px auto 0;
-      max-width: 60ch;
-      color: var(--muted);
-      font-size: 15px;
-      line-height:1.8;
-      text-align:center;
-    }
-
-    /* ===== Article ===== */
-    .article{
-      max-width: var(--content);
-      margin: 24px auto 0;
-    }
-    .sectionCard{
-      background:#fff;
-      border:1px solid rgba(15,107,77,.18);
-      border-radius:18px;
-      box-shadow: 0 8px 24px rgba(17,24,39,.06);
-      padding: 18px;
-      margin-top: 16px;
-    }
-    .sectionCard:first-child{ margin-top:0; }
-
-    .sectionCard h2{
-      margin:0 0 10px;
-      font-size:20px;
-      line-height:1.35;
-      color:var(--ink);
-      letter-spacing:.01em;
-    }
-    .sectionCard p{
-      margin:0 0 12px;
-      color:var(--muted);
+      margin-top:20px;
       font-size:15px;
       line-height:1.9;
-    }
-    .sectionCard p:last-child{ margin-bottom:0; }
-
-    .list{
-      list-style:none;
-      margin: 12px 0 0;
-      padding:0;
-      display:grid;
-      gap:12px;
-    }
-    .list li{
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      padding:14px;
-      border:1px solid rgba(15,107,77,.12);
-      border-radius:16px;
-      background: linear-gradient(180deg, rgba(15,107,77,.03), rgba(15,107,77,.01));
+      max-width:100%;
     }
 
-    .badge{
-      flex:0 0 auto;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:5px 10px;
-      border-radius:999px;
-      border:1px solid rgba(15,107,77,.18);
-      background:#fff;
+    .article{
+      margin-top:42px;
+    }
+
+    .sectionBlock{
+      margin-top:48px;
+      padding-left:20px;
+    }
+
+    .sectionBlock::before{
+      top:6px;
+      height:42px;
+    }
+
+    .sectionHeading{
+      font-size:20px;
+      line-height:1.65;
+    }
+
+    .sectionIntro{
+      margin-top:14px;
+      font-size:15px;
+      line-height:1.95;
+    }
+
+    .pointList{
+      margin-top:22px;
+      gap:20px;
+    }
+
+    .pointLabel{
+      font-size:11px;
+      margin-bottom:8px;
+      color:var(--green);
+    }
+
+    .pointItem p{
+      font-size:15px;
+      line-height:1.95;
+    }
+
+    .pointItem strong{
       color:var(--green2);
-      font-size:12px;
-      font-weight:700;
-      letter-spacing:.04em;
-      white-space:nowrap;
-      margin-top:2px;
     }
-
-    .list p{
-      margin:0 0 8px;
-    }
-    .list p:last-child{ margin-bottom:0; }
 
     .tip{
-      margin-top: 14px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      border:1px solid rgba(15,107,77,.18);
-      background: rgba(15,107,77,.06);
-      color: var(--muted);
+      margin-top:20px;
+      padding-top:14px;
       font-size:14px;
-      line-height:1.85;
-    }
-    .tip strong{
-      color: var(--green2);
-      font-weight: 800;
+      line-height:2;
     }
 
     .actionsRow{
-      max-width: var(--content);
-      margin: 18px auto 0;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
+      margin-top:44px;
       justify-content:center;
     }
+
     .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding:10px 16px;
-      border-radius:999px;
-      border:1px solid rgba(15,107,77,.26);
-      background:transparent;
-      color:var(--green);
-      font-weight:800;
-      cursor:pointer;
-      text-decoration:none;
-      transition:.15s ease;
-      white-space:nowrap;
-    }
-    .btn:hover{
-      background: rgba(15,107,77,.06);
-      text-decoration:none;
-      transform: translateY(-1px);
-    }
-    .btnPrimary{
-      background: rgba(15,107,77,.10);
-      color: var(--green2);
-      border-color: rgba(15,107,77,.30);
-    }
-
-    /* ===== Footer ===== */
-    .footer{
-      margin-top: 34px;
-      padding-top: 18px;
-      border-top:1px solid var(--line);
-      color: rgba(15,107,77,.85);
       font-size:12px;
-      line-height:1.7;
-      text-align:center;
-    }
-    .footer a{
-      color: rgba(15,107,77,.92);
-      text-decoration:none;
-      border-bottom:1px solid transparent;
-      padding-bottom:2px;
-    }
-    .footer a:hover{
-      border-bottom-color: var(--line);
-      text-decoration:none;
+      padding:10px 14px;
     }
 
-    @media (max-width:520px){
-      .brandLogo img{ height:34px; }
-      .cta{ padding: 9px 10px; font-size: 12px; }
-      .pageTitle{ font-size:28px; }
-      .pageLead{ font-size:14px; }
-      .sectionCard{ padding:16px; }
-      .sectionCard h2{ font-size:18px; }
-      .list li{
-        flex-direction:column;
-        gap:10px;
-      }
-    }
+    .brandLogo img{ height:45px; }
+    .cta{ padding:9px 10px; font-size:12px; }
+  }
 
-    @media (prefers-reduced-motion: reduce){
-      *{ transition:none !important; scroll-behavior:auto !important; animation:none !important; }
-    }
-  </style>
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; scroll-behavior:auto !important; animation:none !important; }
+  }
+</style>
 </head>
 
 <body>
@@ -657,125 +720,120 @@ crossorigin="anonymous"></script>
     </section>
 
     <article class="article" aria-label="エコガイド本文">
-      <section class="sectionCard">
-        <h2>なぜリユースがエコにつながるのか</h2>
-        <p>
+
+      <section class="sectionBlock">
+        <h2 class="sectionHeading">なぜリユースがエコにつながるのか</h2>
+        <p class="sectionIntro">
           ベビー用品は使う期間が短いものが多く、まだ十分に使える状態で役目を終えることがあります。
           そのまま捨ててしまうのではなく、次の家庭へつなぐことで、モノの寿命を自然に伸ばすことができます。
         </p>
 
-        <ul class="list">
-          <li>
-            <span class="badge">ごみ削減</span>
-            <div>
-              <p><strong>まだ使えるものを捨てない</strong>ことで、廃棄量を減らせます。</p>
-              <p>特に大型の育児用品は、ごみとして処分する負担も大きいため、再利用の価値があります。</p>
-            </div>
-          </li>
+        <div class="pointList">
+          <div class="pointItem">
+            <div class="pointLabel">ごみ削減</div>
+            <p><strong>まだ使えるものを捨てない</strong>ことで、廃棄量を減らせます。</p>
+            <p>特に大型の育児用品は、ごみとして処分する負担も大きいため、再利用の価値があります。</p>
+          </div>
 
-          <li>
-            <span class="badge">資源節約</span>
-            <div>
-              <p><strong>新しく作る量を少し減らす</strong>ことにつながります。</p>
-              <p>プラスチック、布、金属などの資源を無駄にせずに済むという意味でも、リユースはやさしい選択です。</p>
-            </div>
-          </li>
+          <div class="pointItem">
+            <div class="pointLabel">資源節約</div>
+            <p><strong>新しく作る量を少し減らす</strong>ことにつながります。</p>
+            <p>プラスチック、布、金属などの資源を無駄にせずに済むという意味でも、リユースはやさしい選択です。</p>
+          </div>
 
-          <li>
-            <span class="badge">家計にも</span>
-            <div>
-              <p><strong>必要な人にとっても負担が軽くなる</strong>のが特徴です。</p>
-              <p>環境だけでなく、子育て家庭どうしの助け合いにもつながります。</p>
-            </div>
-          </li>
-        </ul>
+          <div class="pointItem">
+            <div class="pointLabel">家計にも</div>
+            <p><strong>必要な人にとっても負担が軽くなる</strong>のが特徴です。</p>
+            <p>環境だけでなく、子育て家庭どうしの助け合いにもつながります。</p>
+          </div>
+        </div>
       </section>
 
-      <section class="sectionCard">
-        <h2>“買う前に考える”こともエコの一部</h2>
-        <p>
+      <section class="sectionBlock">
+        <h2 class="sectionHeading">“買う前に考える”こともエコの一部</h2>
+        <p class="sectionIntro">
           エコというと「使い終わった後」の話に見えますが、実は選び方の段階から始まっています。
         </p>
 
-        <ul class="list">
-          <li>
-            <span class="badge">期間</span>
-            <div>
-              <p><strong>使用期間が短いものほど、リユース向き</strong>です。</p>
-              <p>ベビーバス、ハイローチェア、サイズの限られた衣類などは、特に循環しやすいアイテムです。</p>
-            </div>
-          </li>
+        <div class="pointList">
+          <div class="pointItem">
+            <div class="pointLabel">期間</div>
+            <p><strong>使用期間が短いものほど、リユース向き</strong>です。</p>
+            <p>ベビーバス、ハイローチェア、サイズの限られた衣類などは、特に循環しやすいアイテムです。</p>
+          </div>
 
-          <li>
-            <span class="badge">耐久</span>
-            <div>
-              <p><strong>丈夫で長く使えるもの</strong>は、次の人にも渡しやすくなります。</p>
-              <p>買うときに「自分の後にも使えるか」を少し意識すると、選び方が変わります。</p>
-            </div>
-          </li>
+          <div class="pointItem">
+            <div class="pointLabel">耐久</div>
+            <p><strong>丈夫で長く使えるもの</strong>は、次の人にも渡しやすくなります。</p>
+            <p>買うときに「自分の後にも使えるか」を少し意識すると、選び方が変わります。</p>
+          </div>
 
-          <li>
-            <span class="badge">保守</span>
-            <div>
-              <p><strong>洗いやすい・手入れしやすい</strong>ものは循環に向いています。</p>
-              <p>清潔に保ちやすい素材や構造だと、気持ちよく次へつなげられます。</p>
-            </div>
-          </li>
-        </ul>
+          <div class="pointItem">
+            <div class="pointLabel">保守</div>
+            <p><strong>洗いやすい・手入れしやすい</strong>ものは循環に向いています。</p>
+            <p>清潔に保ちやすい素材や構造だと、気持ちよく次へつなげられます。</p>
+          </div>
+        </div>
       </section>
 
-      <section class="sectionCard">
-        <h2>やさしい取引マナーが循環を続けやすくする</h2>
-        <p>
+      <section class="sectionBlock">
+        <h2 class="sectionHeading">やさしい取引マナーが循環を続けやすくする</h2>
+        <p class="sectionIntro">
           リユースは、モノだけでなく人とのやりとりも大切です。小さな気配りが、安心して続けられる循環につながります。
         </p>
 
-        <ul class="list">
-          <li>
-            <span class="badge">正直</span>
-            <div>
-              <p><strong>傷や使用感は正直に伝える</strong>のが基本です。</p>
-              <p>期待との差が少ないほど、気持ちの良い受け渡しになります。</p>
-            </div>
-          </li>
+        <div class="pointList">
+          <div class="pointItem">
+            <div class="pointLabel">正直</div>
+            <p><strong>傷や使用感は正直に伝える</strong>のが基本です。</p>
+            <p>期待との差が少ないほど、気持ちの良い受け渡しになります。</p>
+          </div>
 
-          <li>
-            <span class="badge">清潔</span>
-            <div>
-              <p><strong>簡単なお手入れをしてから渡す</strong>と印象が大きく変わります。</p>
-              <p>完璧でなくても、「次の人のことを考えたひと手間」が安心感につながります。</p>
-            </div>
-          </li>
+          <div class="pointItem">
+            <div class="pointLabel">清潔</div>
+            <p><strong>簡単なお手入れをしてから渡す</strong>と印象が大きく変わります。</p>
+            <p>完璧でなくても、「次の人のことを考えたひと手間」が安心感につながります。</p>
+          </div>
 
-          <li>
-            <span class="badge">配慮</span>
-            <div>
-              <p><strong>受け渡し方法や日時を丁寧に相談する</strong>ことも大切です。</p>
-              <p>子育て中の家庭同士だからこそ、無理のないやりとりが続きやすさにつながります。</p>
-            </div>
-          </li>
-        </ul>
+          <div class="pointItem">
+            <div class="pointLabel">配慮</div>
+            <p><strong>受け渡し方法や日時を丁寧に相談する</strong>ことも大切です。</p>
+            <p>子育て中の家庭同士だからこそ、無理のないやりとりが続きやすさにつながります。</p>
+          </div>
+        </div>
       </section>
 
-      <section class="sectionCard">
-        <h2>小さな循環を続けることが大事</h2>
-        <p>
+      <section class="sectionBlock">
+        <h2 class="sectionHeading">小さな循環を続けることが大事</h2>
+        <p class="sectionIntro">
           大きなことを一度にする必要はありません。ひとつの服、ひとつのおもちゃ、ひとつの育児用品でも、次につながれば十分価値があります。
         </p>
-        <p>
-          リユースは「完璧なエコ」ではなくても、暮らしの中で無理なく続けられるやさしい選択です。
-        </p>
+
+        <div class="pointList">
+          <div class="pointItem">
+            <div class="pointLabel">小さな一歩</div>
+            <p><strong>無理なく続けられること</strong>が、いちばん大切です。</p>
+            <p>すべてを完璧にしなくても、暮らしの中で少しずつ循環を増やしていくことに意味があります。</p>
+          </div>
+
+          <div class="pointItem">
+            <div class="pointLabel">暮らしの中で</div>
+            <p><strong>リユースは日常に取り入れやすい選択</strong>です。</p>
+            <p>家計にもやさしく、必要な人へつながることで、気持ちの良い循環が自然に生まれます。</p>
+          </div>
+        </div>
 
         <div class="tip">
           <strong>もったいないを、ありがとうへ。</strong>
           Mottainai Babeは、モノを大切にしながら、家庭どうしがやさしくつながる循環を応援しています。
         </div>
       </section>
+
     </article>
 
     <div class="actionsRow">
       <a class="btn" href="./safety.html">← 前：安全ガイド</a>
-      <a class="btn btnPrimary" href="./guide.html">ガイド一覧へ →</a>
+      <a class="btn" href="./guide.html">ガイド一覧へ</a>
     </div>
 
     <footer class="footer">
