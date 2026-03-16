@@ -16,7 +16,6 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://mottainai-babe.com/app.html">
 
-<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-QVWCBQZP1T"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -25,7 +24,6 @@ gtag('js', new Date());
 gtag('config', 'G-QVWCBQZP1T');
 </script>
 
-<!-- 구조화 데이터 -->
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -37,7 +35,6 @@ gtag('config', 'G-QVWCBQZP1T');
 }
 </script>
 
-<!-- AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5865479939175622"
 crossorigin="anonymous"></script>
 
@@ -75,11 +72,8 @@ crossorigin="anonymous"></script>
     --safeL:env(safe-area-inset-left);
     --safeR:env(safe-area-inset-right);
 
-    --sticky-offset:120px;
     --shadow:0 10px 30px rgba(0,0,0,.06);
     --radius-xl:28px;
-    --radius-lg:22px;
-    --radius-md:16px;
   }
 
   *{ box-sizing:border-box; }
@@ -97,7 +91,6 @@ crossorigin="anonymous"></script>
 
   a{ color:inherit; text-decoration:none; }
   a:hover{ text-decoration:none; }
-
   img{ max-width:100%; display:block; }
 
   header{
@@ -123,8 +116,7 @@ crossorigin="anonymous"></script>
     gap:14px;
   }
 
-  .leftSlot,
-  .rightSlot{
+  .leftSlot,.rightSlot{
     display:flex;
     align-items:center;
     min-width:0;
@@ -168,12 +160,10 @@ crossorigin="anonymous"></script>
     align-items:center;
     justify-content:center;
     min-width:0;
-    text-decoration:none;
   }
   .brandLogo img{
     height:50px;
     width:auto;
-    display:block;
   }
 
   .cta{
@@ -186,14 +176,11 @@ crossorigin="anonymous"></script>
     border-radius:999px;
     color:var(--green);
     white-space:nowrap;
-    text-decoration:none;
     cursor:pointer;
     appearance:none;
     -webkit-appearance:none;
   }
-  .cta:hover{
-    background:rgba(15,107,77,.06);
-  }
+  .cta:hover{ background:rgba(15,107,77,.06); }
 
   .menuOverlay{
     position:fixed;
@@ -292,7 +279,6 @@ crossorigin="anonymous"></script>
     border-radius:999px;
     font-size:15px;
     letter-spacing:.06em;
-    text-decoration:none;
     border:1px solid var(--line);
   }
   .menuBtnPrimary{
@@ -307,10 +293,6 @@ crossorigin="anonymous"></script>
     border-color:rgba(15,107,77,.26);
     font-weight:600;
   }
-  .menuBtnPrimary:hover,
-  .menuBtnGhost:hover{
-    background:rgba(15,107,77,.06);
-  }
 
   .menuLinks{ padding:10px 0 0; }
   .menuLink{
@@ -321,7 +303,6 @@ crossorigin="anonymous"></script>
     padding:24px 6px;
     gap:4px;
     border-bottom:1px solid var(--menuLine);
-    text-decoration:none;
   }
   .menuLink:last-child{ border-bottom:none; }
   .menuLink strong{
@@ -337,9 +318,6 @@ crossorigin="anonymous"></script>
     letter-spacing:.06em;
     color:#111;
     margin-top:2px;
-  }
-  .menuLink:hover{
-    background:rgba(15,107,77,.04);
   }
 
   main.wrap{
@@ -380,9 +358,7 @@ crossorigin="anonymous"></script>
     color:var(--ink);
     padding:0;
   }
-  .searchInput::placeholder{
-    color:#8a8a8a;
-  }
+  .searchInput::placeholder{ color:#8a8a8a; }
 
   .searchBtn{
     width:46px;
@@ -429,13 +405,8 @@ crossorigin="anonymous"></script>
     gap:22px;
     align-items:start;
   }
-
-  .catalogSection{
-    order:1;
-  }
-  .uploadPanel{
-    order:2;
-  }
+  .catalogSection{ order:1; display:grid; gap:18px; }
+  .uploadPanel{ order:2; }
 
   @media (min-width:980px){
     .topLayout{
@@ -510,7 +481,6 @@ crossorigin="anonymous"></script>
     cursor:pointer;
     transition:.15s ease;
   }
-  .tab:hover{ background:rgba(15,107,77,.04); }
   .tab.active{
     background:rgba(15,107,77,.10);
     border-color:rgba(15,107,77,.30);
@@ -545,9 +515,8 @@ crossorigin="anonymous"></script>
     margin-top:8px;
   }
 
-  button{
-    font-family:inherit;
-  }
+  button{ font-family:inherit; }
+
   .btn{
     border:none;
     cursor:pointer;
@@ -562,7 +531,6 @@ crossorigin="anonymous"></script>
     user-select:none;
     white-space:nowrap;
   }
-  .btn:active{ transform:translateY(1px); }
 
   .btnPrimary{
     background:rgba(15,107,77,.10);
@@ -570,16 +538,12 @@ crossorigin="anonymous"></script>
     color:var(--green2);
     font-weight:800;
   }
-  .btnPrimary:hover{ background:rgba(15,107,77,.14); }
-
   .btnGhost{
     background:#fff;
     border:1px solid rgba(0,0,0,.14);
     color:var(--ink);
     font-weight:700;
   }
-  .btnGhost:hover{ background:#f8f8f8; }
-
   .btnDanger{
     background:#ef4444;
     color:#fff;
@@ -607,11 +571,6 @@ crossorigin="anonymous"></script>
     color:rgba(15,107,77,.82);
     line-height:1.7;
     word-break:break-all;
-  }
-
-  .catalogSection{
-    display:grid;
-    gap:18px;
   }
 
   .sectionTitleRow{
@@ -643,11 +602,6 @@ crossorigin="anonymous"></script>
     .itemsGrid{
       grid-template-columns:repeat(3, minmax(0,1fr));
       gap:18px;
-    }
-  }
-  @media (min-width:1140px){
-    .itemsGrid{
-      grid-template-columns:repeat(4, minmax(0,1fr));
     }
   }
 
@@ -696,7 +650,6 @@ crossorigin="anonymous"></script>
   .tileBody{
     padding:10px 2px 2px;
   }
-
   .tileTitle{
     margin:0;
     font-size:16px;
@@ -704,14 +657,12 @@ crossorigin="anonymous"></script>
     font-weight:700;
     color:var(--ink);
   }
-
   .tileMeta{
     margin-top:5px;
     font-size:13px;
     line-height:1.6;
     color:var(--muted);
   }
-
   .tileRow{
     margin-top:7px;
     display:flex;
@@ -746,15 +697,44 @@ crossorigin="anonymous"></script>
     grid-column:1 / -1;
   }
 
-  .detailDrawer{
+  .pagination{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:8px;
+  }
+  .pageBtn{
+    min-width:38px;
+    height:38px;
+    padding:0 12px;
+    border-radius:999px;
+    border:1px solid rgba(0,0,0,.14);
+    background:#fff;
+    color:var(--ink);
+    font-size:13px;
+    cursor:pointer;
+  }
+  .pageBtn.active{
+    background:rgba(15,107,77,.10);
+    border-color:rgba(15,107,77,.30);
+    color:var(--green2);
+    font-weight:700;
+  }
+  .pageBtn:disabled{
+    opacity:.45;
+    cursor:not-allowed;
+  }
+  
+  
+    .detailDrawer{
     position:fixed;
     inset:0;
     z-index:300;
     display:none;
   }
-  .detailDrawer.open{
-    display:block;
-  }
+  .detailDrawer.open{ display:block; }
 
   .drawerBack{
     position:absolute;
@@ -781,7 +761,6 @@ crossorigin="anonymous"></script>
     background:var(--soft);
     overflow:hidden;
   }
-
   .drawerHero img{
     width:100%;
     height:100%;
@@ -831,14 +810,12 @@ crossorigin="anonymous"></script>
     font-weight:800;
     color:var(--ink);
   }
-
   .drawerLead{
     margin-top:8px;
     color:var(--muted);
     font-size:14px;
     line-height:1.7;
   }
-
   .drawerInfoRow{
     margin-top:14px;
     display:flex;
@@ -851,7 +828,6 @@ crossorigin="anonymous"></script>
     padding-top:22px;
     border-top:1px solid rgba(0,0,0,.08);
   }
-
   .drawerSection h3{
     margin:0 0 12px;
     font-size:18px;
@@ -872,7 +848,6 @@ crossorigin="anonymous"></script>
     margin-top:12px;
     background:#fff;
   }
-
   .offerTop{
     display:flex;
     gap:12px;
@@ -880,7 +855,6 @@ crossorigin="anonymous"></script>
     justify-content:space-between;
     flex-wrap:wrap;
   }
-
   .offerThumb{
     width:100%;
     max-width:220px;
@@ -891,7 +865,6 @@ crossorigin="anonymous"></script>
     background:#fafafa;
     overflow:hidden;
   }
-
   .offerNote{
     margin-top:8px;
     font-size:12px;
@@ -919,10 +892,7 @@ crossorigin="anonymous"></script>
     color:var(--modalText);
     text-align:left;
   }
-  .modal h3{
-    margin:0 0 8px;
-    font-size:16px;
-  }
+  .modal h3{ margin:0 0 8px; font-size:16px; }
   .modal p{
     margin:0 0 12px;
     color:var(--modalMuted);
@@ -972,12 +942,8 @@ crossorigin="anonymous"></script>
   }
   .footer a{
     color:rgba(15,107,77,.92);
-    text-decoration:none;
     border-bottom:1px solid transparent;
     padding-bottom:2px;
-  }
-  .footer a:hover{
-    border-bottom-color:var(--line);
   }
 
   @media (max-width:860px){
@@ -994,12 +960,8 @@ crossorigin="anonymous"></script>
       padding:10px 12px 10px 16px;
     }
     .searchInput{ font-size:16px; }
-    .panelHead{
-      padding:18px 18px 14px;
-    }
-    .uploadBody{
-      padding:16px 18px 18px;
-    }
+    .panelHead{ padding:18px 18px 14px; }
+    .uploadBody{ padding:16px 18px 18px; }
     .panelTitle{ font-size:21px; }
     .itemsGrid{
       grid-template-columns:repeat(2, minmax(0,1fr));
@@ -1023,7 +985,6 @@ crossorigin="anonymous"></script>
 
 <script src="./firebase-config.js"></script>
 </head>
-
 <body>
 
   <header>
@@ -1091,18 +1052,11 @@ crossorigin="anonymous"></script>
       </section>
 
       <button id="loginBtn" class="hidden" type="button">Googleでログイン</button>
-      <button id="logoutBtn" class="hidden" type="button">ログアウト</button>
 
       <section class="appHero">
         <div class="searchHero">
           <div class="searchBar">
-            <input
-              id="itemSearchInput"
-              class="searchInput"
-              type="text"
-              placeholder="アイテムを検索"
-              aria-label="アイテムを検索"
-            />
+            <input id="itemSearchInput" class="searchInput" type="text" placeholder="アイテムを検索" aria-label="アイテムを検索" />
             <button id="itemSearchBtn" class="searchBtn" type="button" aria-label="search">⌕</button>
           </div>
 
@@ -1124,6 +1078,7 @@ crossorigin="anonymous"></script>
           </div>
 
           <div id="list" class="itemsGrid"></div>
+          <div id="listPagination" class="pagination"></div>
         </section>
 
         <section class="panel uploadPanel">
@@ -1191,7 +1146,6 @@ crossorigin="anonymous"></script>
         </div>
         <div>© 2026 Mottainai Babe. All rights reserved.</div>
       </footer>
-
     </section>
   </main>
 
@@ -1201,7 +1155,6 @@ crossorigin="anonymous"></script>
     <div class="drawerPanel" role="dialog" aria-modal="true" aria-label="item detail">
       <div class="drawerHero">
         <img id="detailImage" alt="" />
-
         <div class="drawerTopBtns">
           <button id="closeDetailBtn" class="circleUi" type="button" aria-label="close detail">✕</button>
           <div></div>
@@ -1221,6 +1174,12 @@ crossorigin="anonymous"></script>
         </p>
 
         <div id="detailOwnerActions" class="ownerActions"></div>
+
+        <div class="drawerSection">
+          <h3>交換提案一覧</h3>
+          <div id="offersList"></div>
+          <div id="offersPagination" class="pagination"></div>
+        </div>
 
         <div class="drawerSection">
           <h3>この商品に交換提案する</h3>
@@ -1259,11 +1218,6 @@ crossorigin="anonymous"></script>
             ※提案内容（写真 / 状態 / タイトル / 進行状況）は公開されます。<br>
             ※連絡先は accepted 後に当事者のみ表示されます。
           </div>
-        </div>
-
-        <div class="drawerSection">
-          <h3>交換提案一覧</h3>
-          <div id="offersList"></div>
         </div>
       </div>
     </div>
@@ -1330,9 +1284,6 @@ crossorigin="anonymous"></script>
       deleteObject
     } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
-    /* =========================
-       Menu
-    ========================= */
     const menuBtn = document.getElementById("menuBtn");
     const menuPanel = document.getElementById("menuPanel");
     const menuOverlay = document.getElementById("menuOverlay");
@@ -1371,11 +1322,7 @@ crossorigin="anonymous"></script>
     menuOverlay.addEventListener("click", closeMenu);
     menuClose.addEventListener("click", closeMenu);
 
-    /* =========================
-       Firebase
-    ========================= */
     const firebaseConfig = window.FIREBASE_CONFIG;
-
     if (!firebaseConfig || !firebaseConfig.apiKey) {
       alert("firebase-config.js を読み込めませんでした。app.html と同じフォルダ(ルート)に置いてください。");
       throw new Error("Missing FIREBASE_CONFIG");
@@ -1390,9 +1337,6 @@ crossorigin="anonymous"></script>
       console.error("setPersistence error", e);
     });
 
-    /* =========================
-       Auth / In-app browser modal
-    ========================= */
     const loginBtn = document.getElementById("loginBtn");
     const loginState = document.getElementById("loginState");
     const authTopBtn = document.getElementById("authTopBtn");
@@ -1489,14 +1433,12 @@ crossorigin="anonymous"></script>
       console.error("getRedirectResult error", e);
     }
 
-    /* =========================
-       DOM refs
-    ========================= */
     const uploadItemBtn = document.getElementById("uploadItemBtn");
     const fileItem = document.getElementById("fileItem");
     const titleItem = document.getElementById("titleItem");
     const descItem = document.getElementById("descItem");
     const listEl = document.getElementById("list");
+    const listPagination = document.getElementById("listPagination");
 
     const detailDrawer = document.getElementById("detailDrawer");
     const drawerBack = document.getElementById("drawerBack");
@@ -1511,6 +1453,7 @@ crossorigin="anonymous"></script>
     const detailOwnerActions = document.getElementById("detailOwnerActions");
 
     const offersList = document.getElementById("offersList");
+    const offersPagination = document.getElementById("offersPagination");
     const fileOffer = document.getElementById("fileOffer");
     const titleOffer = document.getElementById("titleOffer");
     const msgOffer = document.getElementById("msgOffer");
@@ -1526,11 +1469,14 @@ crossorigin="anonymous"></script>
     let selectedItemData = null;
     let currentSearchKeyword = "";
 
+    let itemCurrentPage = 1;
+    const ITEMS_PER_PAGE = 6;
+
+    let offersCurrentPage = 1;
+    const OFFERS_PER_PAGE = 4;
+
     const MAX_BYTES = 2 * 1024 * 1024;
 
-    /* =========================
-       Helpers
-    ========================= */
     function escapeHtml(str){
       return String(str ?? "")
         .replaceAll("&","&amp;")
@@ -1568,6 +1514,20 @@ crossorigin="anonymous"></script>
 
       const w = window.open(url, "_blank");
       if (!w) window.location.href = url;
+    }
+
+    function renderPagination(container, currentPage, totalPages, onChange){
+      container.innerHTML = "";
+      if(totalPages <= 1) return;
+
+      for(let i = 1; i <= totalPages; i++){
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = `pageBtn${i === currentPage ? " active" : ""}`;
+        btn.textContent = i;
+        btn.addEventListener("click", () => onChange(i));
+        container.appendChild(btn);
+      }
     }
 
     async function compressImage(file, { maxSide = 1280, quality = 0.8 } = {}) {
@@ -1616,7 +1576,6 @@ crossorigin="anonymous"></script>
       if (!file) throw new Error("画像ファイルが見つかりません。");
 
       let current = file;
-
       if (current.size <= 1 * 1024 * 1024) return current;
 
       let quality = 0.82;
@@ -1624,14 +1583,9 @@ crossorigin="anonymous"></script>
 
       for (let i = 0; i < 6; i++) {
         current = await compressImage(current, { maxSide, quality });
-
-        if (current.size <= MAX_BYTES) {
-          return current;
-        }
-
+        if (current.size <= MAX_BYTES) return current;
         quality -= 0.1;
         maxSide -= 200;
-
         if (quality < 0.4) quality = 0.4;
         if (maxSide < 900) maxSide = 900;
       }
@@ -1639,16 +1593,13 @@ crossorigin="anonymous"></script>
       throw new Error("画像サイズを小さくできませんでした。別の画像でお試しください。");
     }
 
-    /* =========================
-       Search
-    ========================= */
     function runItemSearch(){
       currentSearchKeyword = itemSearchInput.value || "";
+      itemCurrentPage = 1;
       loadItems();
     }
 
     itemSearchBtn.addEventListener("click", runItemSearch);
-
     itemSearchInput.addEventListener("keydown", (e) => {
       if(e.key === "Enter"){
         e.preventDefault();
@@ -1656,9 +1607,6 @@ crossorigin="anonymous"></script>
       }
     });
 
-    /* =========================
-       Tabs
-    ========================= */
     document.querySelectorAll("#conditionTabs .tab").forEach(btn => {
       btn.onclick = () => {
         document.querySelectorAll("#conditionTabs .tab").forEach(b => b.classList.remove("active"));
@@ -1677,9 +1625,6 @@ crossorigin="anonymous"></script>
       };
     });
 
-    /* =========================
-       Detail drawer
-    ========================= */
     function openDetailDrawer(){
       detailDrawer.classList.add("open");
       detailDrawer.setAttribute("aria-hidden", "false");
@@ -1690,6 +1635,7 @@ crossorigin="anonymous"></script>
     function closeDetail(){
       selectedItemId = null;
       selectedItemData = null;
+      offersCurrentPage = 1;
       detailDrawer.classList.remove("open");
       detailDrawer.setAttribute("aria-hidden", "true");
       document.documentElement.style.overflow = "";
@@ -1706,9 +1652,6 @@ crossorigin="anonymous"></script>
       }
     });
 
-    /* =========================
-       Firestore helpers
-    ========================= */
     async function countOffers(itemId){
       try{
         const snap = await getDocs(collection(db, "items", itemId, "offers"));
@@ -1718,9 +1661,6 @@ crossorigin="anonymous"></script>
       }
     }
 
-    /* =========================
-       Item actions
-    ========================= */
     async function deleteItem(itemId){
       if(!currentUser){
         alert("ログインしてください。");
@@ -1734,7 +1674,6 @@ crossorigin="anonymous"></script>
           alert("対象が見つかりません");
           return;
         }
-
         const data = snap.data();
         if(data.ownerUid !== currentUser.uid){
           alert("権限がありません（出品者のみ）");
@@ -1758,9 +1697,7 @@ crossorigin="anonymous"></script>
         }
 
         alert("削除しました。");
-        if(selectedItemId === itemId){
-          closeDetail();
-        }
+        if(selectedItemId === itemId) closeDetail();
         await loadItems();
       }catch(e){
         console.error("DELETE_ITEM_ERROR", e);
@@ -1812,9 +1749,6 @@ crossorigin="anonymous"></script>
       }
     }
 
-    /* =========================
-       Create item
-    ========================= */
     uploadItemBtn.onclick = async () => {
       if(!currentUser){
         alert("先にログインしてください。");
@@ -1835,7 +1769,6 @@ crossorigin="anonymous"></script>
         f = await ensureUnderLimit(file);
       }catch(e){
         alert(e?.message || "画像の処理に失敗しました。別の画像でお試しください。");
-        console.error("IMAGE_PROCESS_ERROR", e);
         return;
       }
 
@@ -1868,6 +1801,7 @@ crossorigin="anonymous"></script>
         fileItem.value = "";
         titleItem.value = "";
         descItem.value = "";
+        itemCurrentPage = 1;
 
         await loadItems();
         await openDetail(itemRef.id);
@@ -1877,11 +1811,9 @@ crossorigin="anonymous"></script>
       }
     };
 
-    /* =========================
-       Load item list
-    ========================= */
     async function loadItems(){
       listEl.innerHTML = "";
+      listPagination.innerHTML = "";
 
       let snap;
       try{
@@ -1892,12 +1824,7 @@ crossorigin="anonymous"></script>
       }
 
       if(snap.empty){
-        listEl.innerHTML = `
-          <div class="emptyBox">
-            まだ出品がありません。<br>
-            最初のアイテムを出品してみてください。
-          </div>
-        `;
+        listEl.innerHTML = `<div class="emptyBox">まだ出品がありません。<br>最初のアイテムを出品してみてください。</div>`;
         return;
       }
 
@@ -1910,24 +1837,21 @@ crossorigin="anonymous"></script>
         const description = String(data.description ?? "").toLowerCase();
         const condition = String(data.condition ?? "").toLowerCase();
 
-        return (
-          title.includes(keyword) ||
-          description.includes(keyword) ||
-          condition.includes(keyword)
-        );
+        return title.includes(keyword) || description.includes(keyword) || condition.includes(keyword);
       });
 
       if(filteredDocs.length === 0){
-        listEl.innerHTML = `
-          <div class="emptyBox">
-            検索結果がありません。<br>
-            別のキーワードでお試しください。
-          </div>
-        `;
+        listEl.innerHTML = `<div class="emptyBox">検索結果がありません。<br>別のキーワードでお試しください。</div>`;
         return;
       }
 
-      for(const docSnap of filteredDocs){
+      const totalPages = Math.ceil(filteredDocs.length / ITEMS_PER_PAGE);
+      if(itemCurrentPage > totalPages) itemCurrentPage = totalPages;
+
+      const start = (itemCurrentPage - 1) * ITEMS_PER_PAGE;
+      const pagedDocs = filteredDocs.slice(start, start + ITEMS_PER_PAGE);
+
+      for(const docSnap of pagedDocs){
         const id = docSnap.id;
         const data = docSnap.data();
         const st = statusLabel(data.status);
@@ -1962,13 +1886,16 @@ crossorigin="anonymous"></script>
       document.querySelectorAll("[data-open]").forEach(btn => {
         btn.onclick = () => openDetail(btn.dataset.open);
       });
+
+      renderPagination(listPagination, itemCurrentPage, totalPages, (page) => {
+        itemCurrentPage = page;
+        loadItems();
+      });
     }
 
-    /* =========================
-       Open detail
-    ========================= */
     async function openDetail(itemId){
       selectedItemId = itemId;
+      offersCurrentPage = 1;
 
       try{
         const itemDocSnap = await getDoc(doc(db, "items", itemId));
@@ -2010,9 +1937,6 @@ crossorigin="anonymous"></script>
       }
     }
 
-    /* =========================
-       Accept offer
-    ========================= */
     async function acceptOffer(offerId){
       if(!currentUser || !selectedItemId || !selectedItemData){
         alert("ログイン状態または選択状態を確認してください。");
@@ -2029,7 +1953,6 @@ crossorigin="anonymous"></script>
         const itemRef = doc(db, "items", selectedItemId);
 
         const batch = writeBatch(db);
-
         batch.update(offerRef, { status: "accepted" });
         batch.update(itemRef, {
           status: "done",
@@ -2048,9 +1971,6 @@ crossorigin="anonymous"></script>
       }
     }
 
-    /* =========================
-       Submit offer
-    ========================= */
     submitOfferBtn.onclick = async () => {
       if(!currentUser){
         alert("先にログインしてください。");
@@ -2079,7 +1999,6 @@ crossorigin="anonymous"></script>
         f = await ensureUnderLimit(raw);
       }catch(e){
         alert(e?.message || "画像の処理に失敗しました。別の画像でお試しください。");
-        console.error("OFFER_IMAGE_PROCESS_ERROR", e);
         return;
       }
 
@@ -2119,6 +2038,7 @@ crossorigin="anonymous"></script>
         fileOffer.value = "";
         titleOffer.value = "";
         msgOffer.value = "";
+        offersCurrentPage = 1;
 
         await openDetail(selectedItemId);
         await loadItems();
@@ -2128,11 +2048,9 @@ crossorigin="anonymous"></script>
       }
     };
 
-    /* =========================
-       Load offers
-    ========================= */
     async function loadOffers(){
       offersList.innerHTML = "";
+      offersPagination.innerHTML = "";
 
       let snap;
       try{
@@ -2149,9 +2067,16 @@ crossorigin="anonymous"></script>
       }
 
       const isOwner = !!(currentUser && selectedItemData && currentUser.uid === selectedItemData.ownerUid);
+      const docs = snap.docs;
+      const totalPages = Math.ceil(docs.length / OFFERS_PER_PAGE);
+      if(offersCurrentPage > totalPages) offersCurrentPage = totalPages;
+
+      const start = (offersCurrentPage - 1) * OFFERS_PER_PAGE;
+      const pagedDocs = docs.slice(start, start + OFFERS_PER_PAGE);
+
       const mailMap = {};
 
-      for(const docSnap of snap.docs){
+      for(const docSnap of pagedDocs){
         const offerId = docSnap.id;
         const d = docSnap.data();
 
@@ -2195,9 +2120,7 @@ crossorigin="anonymous"></script>
           <div class="offerActions" style="margin-top:10px;">
             <button class="btn btnPrimary" data-mail="${offerId}">Gmailで連絡</button>
           </div>
-          <div class="offerNote">
-            ※Gmailの作成画面が開きます。内容をご確認のうえ送信してください。
-          </div>
+          <div class="offerNote">※Gmailの作成画面が開きます。内容をご確認のうえ送信してください。</div>
         ` : "";
 
         if(canContact){
@@ -2215,13 +2138,10 @@ crossorigin="anonymous"></script>
               <div>
                 ${statusPill}
                 <h4 style="margin:8px 0 6px;">${escapeHtml(d.offerTitle ?? "")}</h4>
-                <p class="muted" style="margin:0;">
-                  提案アイテム状態：<b>${escapeHtml(d.offerCondition ?? "未設定")}</b>
-                </p>
+                <p class="muted" style="margin:0;">提案アイテム状態：<b>${escapeHtml(d.offerCondition ?? "未設定")}</b></p>
               </div>
               <div>${acceptBtn}</div>
             </div>
-
             ${d.offerImage ? `<img class="offerThumb" src="${d.offerImage}" alt="">` : ""}
             ${contactButtons}
           </div>
@@ -2245,11 +2165,13 @@ crossorigin="anonymous"></script>
       });
 
       detailOffersPill.textContent = `提案 ${snap.size}件`;
+
+      renderPagination(offersPagination, offersCurrentPage, totalPages, (page) => {
+        offersCurrentPage = page;
+        loadOffers();
+      });
     }
 
-    /* =========================
-       Auth state
-    ========================= */
     onAuthStateChanged(auth, async (user) => {
       currentUser = user;
 
@@ -2264,8 +2186,10 @@ crossorigin="anonymous"></script>
       }
 
       await loadItems();
+      if(selectedItemId) await openDetail(selectedItemId);
     });
   </script>
 
 </body>
 </html>
+  
