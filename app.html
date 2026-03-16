@@ -551,6 +551,32 @@ crossorigin="anonymous"></script>
     font-weight:800;
   }
 
+  .btn:disabled,
+  .pageBtn:disabled,
+  .cta:disabled{
+    opacity:.7;
+    cursor:not-allowed;
+    pointer-events:none;
+  }
+
+  .btn.loading{
+    position:relative;
+  }
+
+  .btnSpinner{
+    width:16px;
+    height:16px;
+    border:2px solid rgba(15,107,77,.20);
+    border-top-color:var(--green2);
+    border-radius:50%;
+    animation:spin .8s linear infinite;
+    flex-shrink:0;
+  }
+
+  @keyframes spin{
+    to{ transform:rotate(360deg); }
+  }
+
   .fullBtn{
     width:100%;
     justify-content:center;
@@ -722,12 +748,6 @@ crossorigin="anonymous"></script>
     color:var(--green2);
     font-weight:700;
   }
-  .pageBtn:disabled{
-    opacity:.45;
-    cursor:not-allowed;
-  }
-  
-  
     .detailDrawer{
     position:fixed;
     inset:0;
@@ -870,6 +890,54 @@ crossorigin="anonymous"></script>
     font-size:12px;
     line-height:1.6;
     color:var(--muted);
+  }
+
+  .loadingOverlay{
+    position:fixed;
+    inset:0;
+    background:rgba(255,255,255,.72);
+    backdrop-filter:blur(4px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:1200;
+    padding:20px;
+  }
+  .loadingOverlay.show{
+    display:flex;
+  }
+
+  .loadingCard{
+    width:min(320px, 92vw);
+    background:#fff;
+    border:1px solid rgba(0,0,0,.10);
+    border-radius:24px;
+    box-shadow:0 18px 40px rgba(0,0,0,.10);
+    padding:24px 22px;
+    text-align:center;
+  }
+
+  .loadingSpinner{
+    width:36px;
+    height:36px;
+    margin:0 auto 14px;
+    border:3px solid rgba(15,107,77,.16);
+    border-top-color:var(--green);
+    border-radius:50%;
+    animation:spin .8s linear infinite;
+  }
+
+  .loadingTitle{
+    font-size:17px;
+    font-weight:700;
+    color:var(--ink);
+    line-height:1.5;
+  }
+  .loadingText{
+    margin-top:6px;
+    font-size:13px;
+    color:var(--muted);
+    line-height:1.6;
   }
 
   .modalBack{
@@ -1223,6 +1291,14 @@ crossorigin="anonymous"></script>
     </div>
   </section>
 
+  <div id="loadingOverlay" class="loadingOverlay" aria-hidden="true">
+    <div class="loadingCard">
+      <div class="loadingSpinner"></div>
+      <div id="loadingTitle" class="loadingTitle">アップロード中…</div>
+      <div id="loadingText" class="loadingText">しばらくお待ちください</div>
+    </div>
+  </div>
+
   <div id="inAppModalBack" class="modalBack" role="dialog" aria-modal="true">
     <div class="modal">
       <h3>LINEなどのアプリ内ブラウザではログインできない場合があります</h3>
@@ -1245,7 +1321,6 @@ crossorigin="anonymous"></script>
       </p>
     </div>
   </div>
-  
     <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import {
@@ -1356,6 +1431,57 @@ crossorigin="anonymous"></script>
     const closeModalBtn = document.getElementById("closeModalBtn");
     const tryOpenNewTabBtn = document.getElementById("tryOpenNewTabBtn");
 
+    const uploadItemBtn = document.getElementById("uploadItemBtn");
+    const fileItem = document.getElementById("fileItem");
+    const titleItem = document.getElementById("titleItem");
+    const descItem = document.getElementById("descItem");
+    const listEl = document.getElementById("list");
+    const listPagination = document.getElementById("listPagination");
+
+    const detailDrawer = document.getElementById("detailDrawer");
+    const drawerBack = document.getElementById("drawerBack");
+    const closeDetailBtn = document.getElementById("closeDetailBtn");
+
+    const detailTitle = document.getElementById("detailTitle");
+    const detailCondition = document.getElementById("detailCondition");
+    const detailImage = document.getElementById("detailImage");
+    const detailDesc = document.getElementById("detailDesc");
+    const detailStatusPill = document.getElementById("detailStatusPill");
+    const detailOffersPill = document.getElementById("detailOffersPill");
+    const detailOwnerActions = document.getElementById("detailOwnerActions");
+
+    const offersList = document.getElementById("offersList");
+    const offersPagination = document.getElementById("offersPagination");
+    const fileOffer = document.getElementById("fileOffer");
+    const titleOffer = document.getElementById("titleOffer");
+    const msgOffer = document.getElementById("msgOffer");
+    const submitOfferBtn = document.getElementById("submitOfferBtn");
+
+    const itemSearchInput = document.getElementById("itemSearchInput");
+    const itemSearchBtn = document.getElementById("itemSearchBtn");
+
+    const loadingOverlay = document.getElementById("loadingOverlay");
+    const loadingTitle = document.getElementById("loadingTitle");
+    const loadingText = document.getElementById("loadingText");
+
+    let currentUser = null;
+    let selectedCondition = "新品に近い";
+    let selectedOfferCondition = "新品に近い";
+    let selectedItemId = null;
+    let selectedItemData = null;
+    let currentSearchKeyword = "";
+
+    let itemCurrentPage = 1;
+    const ITEMS_PER_PAGE = 6;
+
+    let offersCurrentPage = 1;
+    const OFFERS_PER_PAGE = 4;
+
+    let isUploadingItem = false;
+    let isSubmittingOffer = false;
+
+    const MAX_BYTES = 2 * 1024 * 1024;
+
     function canonicalUrl(){
       return new URL(location.pathname, location.origin).toString();
     }
@@ -1433,50 +1559,6 @@ crossorigin="anonymous"></script>
       console.error("getRedirectResult error", e);
     }
 
-    const uploadItemBtn = document.getElementById("uploadItemBtn");
-    const fileItem = document.getElementById("fileItem");
-    const titleItem = document.getElementById("titleItem");
-    const descItem = document.getElementById("descItem");
-    const listEl = document.getElementById("list");
-    const listPagination = document.getElementById("listPagination");
-
-    const detailDrawer = document.getElementById("detailDrawer");
-    const drawerBack = document.getElementById("drawerBack");
-    const closeDetailBtn = document.getElementById("closeDetailBtn");
-
-    const detailTitle = document.getElementById("detailTitle");
-    const detailCondition = document.getElementById("detailCondition");
-    const detailImage = document.getElementById("detailImage");
-    const detailDesc = document.getElementById("detailDesc");
-    const detailStatusPill = document.getElementById("detailStatusPill");
-    const detailOffersPill = document.getElementById("detailOffersPill");
-    const detailOwnerActions = document.getElementById("detailOwnerActions");
-
-    const offersList = document.getElementById("offersList");
-    const offersPagination = document.getElementById("offersPagination");
-    const fileOffer = document.getElementById("fileOffer");
-    const titleOffer = document.getElementById("titleOffer");
-    const msgOffer = document.getElementById("msgOffer");
-    const submitOfferBtn = document.getElementById("submitOfferBtn");
-
-    const itemSearchInput = document.getElementById("itemSearchInput");
-    const itemSearchBtn = document.getElementById("itemSearchBtn");
-
-    let currentUser = null;
-    let selectedCondition = "新品に近い";
-    let selectedOfferCondition = "新品に近い";
-    let selectedItemId = null;
-    let selectedItemData = null;
-    let currentSearchKeyword = "";
-
-    let itemCurrentPage = 1;
-    const ITEMS_PER_PAGE = 6;
-
-    let offersCurrentPage = 1;
-    const OFFERS_PER_PAGE = 4;
-
-    const MAX_BYTES = 2 * 1024 * 1024;
-
     function escapeHtml(str){
       return String(str ?? "")
         .replaceAll("&","&amp;")
@@ -1528,6 +1610,38 @@ crossorigin="anonymous"></script>
         btn.addEventListener("click", () => onChange(i));
         container.appendChild(btn);
       }
+    }
+
+    function showLoadingOverlay(title = "アップロード中…", text = "しばらくお待ちください"){
+      loadingTitle.textContent = title;
+      loadingText.textContent = text;
+      loadingOverlay.classList.add("show");
+      loadingOverlay.setAttribute("aria-hidden", "false");
+    }
+
+    function hideLoadingOverlay(){
+      loadingOverlay.classList.remove("show");
+      loadingOverlay.setAttribute("aria-hidden", "true");
+    }
+
+    function setButtonLoading(button, isLoading, defaultText, loadingText){
+      if(isLoading){
+        button.disabled = true;
+        button.classList.add("loading");
+        button.innerHTML = `<span class="btnSpinner"></span><span>${loadingText}</span>`;
+      }else{
+        button.disabled = false;
+        button.classList.remove("loading");
+        button.textContent = defaultText;
+      }
+    }
+
+    function setUploadItemLoading(isLoading){
+      setButtonLoading(uploadItemBtn, isLoading, "出品する", "出品中…");
+    }
+
+    function setSubmitOfferLoading(isLoading){
+      setButtonLoading(submitOfferBtn, isLoading, "交換提案を送る", "送信中…");
     }
 
     async function compressImage(file, { maxSide = 1280, quality = 0.8 } = {}) {
@@ -1750,6 +1864,8 @@ crossorigin="anonymous"></script>
     }
 
     uploadItemBtn.onclick = async () => {
+      if(isUploadingItem) return;
+
       if(!currentUser){
         alert("先にログインしてください。");
         return;
@@ -1764,15 +1880,13 @@ crossorigin="anonymous"></script>
         return;
       }
 
-      let f;
-      try{
-        f = await ensureUnderLimit(file);
-      }catch(e){
-        alert(e?.message || "画像の処理に失敗しました。別の画像でお試しください。");
-        return;
-      }
+      isUploadingItem = true;
+      setUploadItemLoading(true);
+      showLoadingOverlay("出品中…", "画像をアップロードしています");
 
       try{
+        const f = await ensureUnderLimit(file);
+
         const imagePath = `items/${currentUser.uid}/${Date.now()}-${f.name}`;
         const storageRef = ref(storage, imagePath);
         await uploadBytes(storageRef, f, { contentType: f.type });
@@ -1808,6 +1922,10 @@ crossorigin="anonymous"></script>
       }catch(e){
         console.error("CREATE_ITEM_ERROR", e);
         alert("出品に失敗しました。Storage / Firestore ルールをご確認ください。");
+      }finally{
+        isUploadingItem = false;
+        setUploadItemLoading(false);
+        hideLoadingOverlay();
       }
     };
 
@@ -1972,6 +2090,8 @@ crossorigin="anonymous"></script>
     }
 
     submitOfferBtn.onclick = async () => {
+      if(isSubmittingOffer) return;
+
       if(!currentUser){
         alert("先にログインしてください。");
         return;
@@ -1994,23 +2114,21 @@ crossorigin="anonymous"></script>
         return;
       }
 
-      let f;
-      try{
-        f = await ensureUnderLimit(raw);
-      }catch(e){
-        alert(e?.message || "画像の処理に失敗しました。別の画像でお試しください。");
-        return;
-      }
-
-      let ownerEmail = "";
-      try{
-        const privSnap = await getDoc(doc(db, "itemsPrivate", selectedItemId));
-        if(privSnap.exists()) ownerEmail = privSnap.data().ownerEmail ?? "";
-      }catch(e){
-        ownerEmail = "";
-      }
+      isSubmittingOffer = true;
+      setSubmitOfferLoading(true);
+      showLoadingOverlay("提案を送信中…", "画像と提案内容を保存しています");
 
       try{
+        const f = await ensureUnderLimit(raw);
+
+        let ownerEmail = "";
+        try{
+          const privSnap = await getDoc(doc(db, "itemsPrivate", selectedItemId));
+          if(privSnap.exists()) ownerEmail = privSnap.data().ownerEmail ?? "";
+        }catch(e){
+          ownerEmail = "";
+        }
+
         const path = `offers/${currentUser.uid}/${Date.now()}-${f.name}`;
         const storageRef = ref(storage, path);
         await uploadBytes(storageRef, f, { contentType: f.type });
@@ -2045,6 +2163,10 @@ crossorigin="anonymous"></script>
       }catch(e){
         console.error("SUBMIT_OFFER_ERROR", e);
         alert("提案に失敗しました。Storage / Firestore ルールをご確認ください。");
+      }finally{
+        isSubmittingOffer = false;
+        setSubmitOfferLoading(false);
+        hideLoadingOverlay();
       }
     };
 
@@ -2192,4 +2314,5 @@ crossorigin="anonymous"></script>
 
 </body>
 </html>
+  
   
