@@ -8,11 +8,9 @@
 <title>ベビー用品ゆずりあい | もったいないベビー</title>
 
 <meta name="description" content="もったいないベビーはベビー用品を次の家族へつなぐプラットフォームです。不要になったベビー用品をゆずり合い、やさしい循環をつくります。">
-
 <meta name="robots" content="index, follow">
- <link rel="canonical" href="https://mottainai-babe.com/app.html">
+<link rel="canonical" href="https://mottainai-babe.com/app.html">
 
-<!-- OGP -->
 <meta property="og:title" content="ベビー用品ゆずりあい | Mottainai Babe">
 <meta property="og:description" content="ベビー用品を次の家族へつなぐプラットフォーム">
 <meta property="og:type" content="website">
@@ -43,636 +41,994 @@ gtag('config', 'G-QVWCBQZP1T');
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5865479939175622"
 crossorigin="anonymous"></script>
 
+<style>
+  :root{
+    --bg:#ffffff;
+    --surface:#fcfcfa;
+    --panel:#ffffff;
+    --ink:#161616;
+    --muted:#666666;
 
-  
-  <style>
-    :root{
-      --bg:#ffffff;
-      --ink:#111111;
-      --muted:#444444;
+    --green:#0f6b4d;
+    --green2:#0b513b;
+    --line:rgba(15,107,77,.22);
+    --line-dark:rgba(0,0,0,.14);
+    --soft:#f6f5f1;
+    --soft2:#f2f6f3;
 
-      --green:#0f6b4d;
-      --green2:#0b513b;
-      --line: rgba(15,107,77,.28);
+    --max:1240px;
+    --pad:22px;
 
-      --max: 1040px;
-      --pad: 22px;
+    --sans:ui-sans-serif, system-ui, -apple-system, "Hiragino Kaku Gothic ProN",
+            "Yu Gothic", "Noto Sans JP", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
-      --sans: ui-sans-serif, system-ui, -apple-system, "Hiragino Kaku Gothic ProN",
-              "Yu Gothic", "Noto Sans JP", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --menuBack:rgba(0,0,0,.35);
+    --menuPanelBg:#ffffff;
+    --menuLine:rgba(0,0,0,.12);
 
-      --menuBack: rgba(0,0,0,.35);
-      --menuPanelBg: #ffffff;
-      --menuLine: rgba(0,0,0,.12);
+    --modalBack:rgba(0,0,0,.55);
+    --modalCard:#ffffff;
+    --modalText:#111827;
+    --modalMuted:#6b7280;
+    --modalLine:#e5e7eb;
 
-      --modalBack: rgba(0,0,0,.55);
-      --modalCard: #ffffff;
-      --modalText: #111827;
-      --modalMuted: #6b7280;
-      --modalLine: #e5e7eb;
+    --safeL:env(safe-area-inset-left);
+    --safeR:env(safe-area-inset-right);
 
-      --safeL: env(safe-area-inset-left);
-      --safeR: env(safe-area-inset-right);
-
-      --sticky-offset: 140px;
-    }
-
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      font-family: var(--sans);
-      background: var(--bg);
-      color: var(--ink);
-      letter-spacing: .2px;
-      line-height: 1.95;
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      align-items:stretch;
-      justify-content:flex-start;
-    }
-
-    a{ color:inherit; text-decoration:none; }
-    a:hover{ text-decoration:underline; }
-
-    header{
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      width:100%;
-      background: rgba(255,255,255,.90);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .topbar{
-      max-width: 1200px;
-      margin: 0 auto;
-      padding-top: 12px;
-      padding-bottom: 12px;
-      padding-left: calc(var(--pad) + var(--safeL));
-      padding-right: calc(var(--pad) + var(--safeR));
-      display:grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items:center;
-      gap: 14px;
-    }
-
-    .leftSlot{
-      display:flex;
-      align-items:center;
-      justify-content:flex-start;
-      min-width:0;
-    }
-    .rightSlot{
-      display:flex;
-      align-items:center;
-      justify-content:flex-end;
-      min-width:0;
-      gap:10px;
-    }
-
-    .menuBtn{
-      width: 44px;
-      height: 44px;
-      display:grid;
-      place-items:center;
-      border: none;
-      background: transparent;
-      cursor:pointer;
-      padding:0;
-    }
-    .hamburger{
-      width: 22px;
-      height: 12px;
-      position: relative;
-    }
-    .hamburger::before,
-    .hamburger::after,
-    .hamburger span{
-      content:"";
-      position:absolute;
-      left:0; right:0;
-      height: 1px;
-      background: var(--green);
-      opacity: .95;
-    }
-    .hamburger::before{ top:0; }
-    .hamburger span{ top:50%; transform:translateY(-50%); }
-    .hamburger::after{ bottom:0; }
-
-    .brandLogo{
-      justify-self:center;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      min-width:0;
-      text-decoration:none;
-    }
-    .brandLogo img{
-      height: 50px;
-      width: auto;
-      display:block;
-    }
-    @media (max-width:520px){
-  .brandLogo img,
-  .logoWrap img,
-  .brandTop img{
-    height:45px !important;
-    width:auto;
+    --sticky-offset:120px;
+    --shadow:0 10px 30px rgba(0,0,0,.06);
+    --radius-xl:28px;
+    --radius-lg:22px;
+    --radius-md:16px;
   }
-}
 
-    .cta{
-      font-family: inherit;
-      font-size: 12px;
-      letter-spacing: .08em;
-      padding: 10px 12px;
-      border: 1px solid var(--line);
-      background: transparent;
-      border-radius: 999px;
-      color: var(--green);
-      white-space: nowrap;
-      text-decoration: none;
-      cursor: pointer;
-      appearance: none;
-      -webkit-appearance: none;
-    }
-    .cta:hover{
-      background: rgba(15,107,77,.06);
-      text-decoration:none;
-    }
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    font-family:var(--sans);
+    background:var(--bg);
+    color:var(--ink);
+    letter-spacing:.02em;
+    line-height:1.75;
+    min-height:100vh;
+  }
 
-    .menuOverlay{
-      position: fixed;
-      inset: 0;
-      background: var(--menuBack);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .18s ease;
-      z-index: 100;
-    }
-    .menuOverlay.open{
-      opacity: 1;
-      pointer-events: auto;
-    }
+  a{ color:inherit; text-decoration:none; }
+  a:hover{ text-decoration:none; }
 
-    .menuPanel{
-      position: fixed;
-      inset: 0;
-      background: var(--menuPanelBg);
-      transform: translateY(-8px);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .18s ease, transform .18s ease;
-      z-index: 110;
-      padding-top: 22px;
-      padding-bottom: 28px;
-      padding-left: calc(var(--pad) + var(--safeL));
-      padding-right: calc(var(--pad) + var(--safeR));
-      overflow: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    .menuPanel.open{
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0);
-    }
+  img{ max-width:100%; display:block; }
 
-    .menuTop{
-      max-width: 780px;
-      margin: 0 auto;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 12px;
-      padding: 6px 0 18px;
-      border-bottom: 1px solid var(--menuLine);
-    }
-    .menuTitle{
-      font-weight: 600;
-      letter-spacing: .22em;
-      font-size: 18px;
-      color: #111;
-      white-space:nowrap;
-    }
-    .menuClose{
-      width: 44px;
-      height: 44px;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      display:grid;
-      place-items:center;
-      position: relative;
-      padding:0;
-    }
-    .menuClose::before,
-    .menuClose::after{
-      content:"";
-      width: 22px;
-      height: 1px;
-      background: #111;
-      position:absolute;
-    }
-    .menuClose::before{ transform: rotate(45deg); }
-    .menuClose::after{ transform: rotate(-45deg); }
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    width:100%;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
 
-    .menuBody{
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 18px 0 0;
-    }
+  .topbar{
+    max-width:1200px;
+    margin:0 auto;
+    padding-top:12px;
+    padding-bottom:12px;
+    padding-left:calc(var(--pad) + var(--safeL));
+    padding-right:calc(var(--pad) + var(--safeR));
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    gap:14px;
+  }
 
-    .menuCtas{
-      display:flex;
-      flex-direction:column;
-      gap: 12px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid var(--menuLine);
-    }
-    .menuBtnPrimary,
-    .menuBtnGhost{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      height: 56px;
-      border-radius: 999px;
-      font-size: 15px;
-      letter-spacing: .06em;
-      text-decoration: none;
-      border: 1px solid var(--line);
-    }
-    .menuBtnPrimary{
-      background: rgba(15,107,77,.10);
-      color: var(--green2);
-      border-color: rgba(15,107,77,.30);
-      font-weight: 600;
-    }
-    .menuBtnGhost{
-      background: transparent;
-      color: var(--green);
-      border-color: rgba(15,107,77,.26);
-      font-weight: 600;
-    }
-    .menuBtnPrimary:hover,
-    .menuBtnGhost:hover{
-      text-decoration:none;
-      background: rgba(15,107,77,.06);
-    }
+  .leftSlot,
+  .rightSlot{
+    display:flex;
+    align-items:center;
+    min-width:0;
+  }
+  .leftSlot{ justify-content:flex-start; }
+  .rightSlot{ justify-content:flex-end; gap:10px; }
 
-    .menuLinks{ padding: 10px 0 0; }
-    .menuLink{
-      display:flex;
-      flex-direction:column;
-      align-items:flex-start;
-      justify-content:center;
-      padding: 24px 6px;
-      gap: 4px;
-      border-bottom: 1px solid var(--menuLine);
-      text-decoration:none;
-    }
-    .menuLink:last-child{ border-bottom:none; }
-    .menuLink strong{
-      font-size: 18px;
-      font-weight: 500;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: #111;
-    }
-    .menuLink span{
-      font-size: 12px;
-      opacity: .7;
-      letter-spacing: .06em;
-      color: #111;
-      margin-top: 2px;
-    }
-    .menuLink:hover{
-      background: rgba(15,107,77,.04);
-      text-decoration:none;
-    }
+  .menuBtn{
+    width:44px;
+    height:44px;
+    display:grid;
+    place-items:center;
+    border:none;
+    background:transparent;
+    cursor:pointer;
+    padding:0;
+  }
+  .hamburger{
+    width:22px;
+    height:12px;
+    position:relative;
+  }
+  .hamburger::before,
+  .hamburger::after,
+  .hamburger span{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    height:1px;
+    background:var(--green);
+    opacity:.95;
+  }
+  .hamburger::before{ top:0; }
+  .hamburger span{ top:50%; transform:translateY(-50%); }
+  .hamburger::after{ bottom:0; }
 
-    main.wrap{
-      max-width: var(--max);
-      margin: 0 auto;
-      width:100%;
-      padding: 18px 14px 40px;
-    }
-    @media (min-width:860px){
-      main.wrap{ padding: 8px 14px 40px; }
-    }
+  .brandLogo{
+    justify-self:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-width:0;
+    text-decoration:none;
+  }
+  .brandLogo img{
+    height:50px;
+    width:auto;
+    display:block;
+  }
 
-    .card{
-      background:#fff;
-      border:1px solid rgba(15,107,77,.18);
-      border-radius:18px;
-      box-shadow: 0 8px 24px rgba(17,24,39,.06);
-    }
-    .cardPad{ padding:14px; }
-    @media (min-width:860px){ .cardPad{ padding:16px; } }
+  .cta{
+    font-family:inherit;
+    font-size:12px;
+    letter-spacing:.08em;
+    padding:10px 14px;
+    border:1px solid var(--line);
+    background:transparent;
+    border-radius:999px;
+    color:var(--green);
+    white-space:nowrap;
+    text-decoration:none;
+    cursor:pointer;
+    appearance:none;
+    -webkit-appearance:none;
+  }
+  .cta:hover{
+    background:rgba(15,107,77,.06);
+  }
 
-    .hero{
-      margin-top:10px;
-      display:grid;
-      gap:10px;
-      text-align:center;
-      background: linear-gradient(180deg, rgba(15,107,77,.03), rgba(15,107,77,.01));
-    }
-    .heroTop{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-    }
-    .heroTitle{
-      margin:0;
-      font-size:22px;
-      line-height:1.3;
-      letter-spacing:.2px;
-      color: var(--ink);
-      position:relative;
-      padding-bottom:10px;
-    }
+  .menuOverlay{
+    position:fixed;
+    inset:0;
+    background:var(--menuBack);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .18s ease;
+    z-index:100;
+  }
+  .menuOverlay.open{
+    opacity:1;
+    pointer-events:auto;
+  }
 
-    .heroTitle::after{
-      content:"";
-      display:block;
-      width:40px;
-      height:2px;
-      margin:10px auto 0;
-      background: var(--green);
-      opacity:.55;
-      border-radius:2px;
-    }
-    @media (min-width:860px){ .heroTitle{ font-size:26px; } }
-    .heroDesc{
-      margin:6px 0 0;
-      color: var(--muted);
-      line-height:1.7;
-      text-align:center;
-    }
+  .menuPanel{
+    position:fixed;
+    inset:0;
+    background:var(--menuPanelBg);
+    transform:translateY(-8px);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .18s ease, transform .18s ease;
+    z-index:110;
+    padding-top:22px;
+    padding-bottom:28px;
+    padding-left:calc(var(--pad) + var(--safeL));
+    padding-right:calc(var(--pad) + var(--safeR));
+    overflow:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  .menuPanel.open{
+    opacity:1;
+    pointer-events:auto;
+    transform:translateY(0);
+  }
 
-    .heroMeta{
-      margin-top:12px;
-      padding-top:12px;
-      border-top:1px solid rgba(15,107,77,.12);
-      font-size:12px;
-      letter-spacing:.08em;
-      color:rgba(15,107,77,.75);
-      text-align:center;
-    }
+  .menuTop{
+    max-width:780px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:6px 0 18px;
+    border-bottom:1px solid var(--menuLine);
+  }
+  .menuTitle{
+    font-weight:600;
+    letter-spacing:.22em;
+    font-size:18px;
+    color:#111;
+    white-space:nowrap;
+  }
+  .menuClose{
+    width:44px;
+    height:44px;
+    border:none;
+    background:transparent;
+    cursor:pointer;
+    display:grid;
+    place-items:center;
+    position:relative;
+    padding:0;
+  }
+  .menuClose::before,
+  .menuClose::after{
+    content:"";
+    width:22px;
+    height:1px;
+    background:#111;
+    position:absolute;
+  }
+  .menuClose::before{ transform:rotate(45deg); }
+  .menuClose::after{ transform:rotate(-45deg); }
 
-    .helpBox{
-      margin-top:8px;
-      padding:10px 12px;
-      border-radius:14px;
-      background: rgba(15,107,77,.06);
-      border:1px solid rgba(15,107,77,.22);
-      color: rgba(15,107,77,.92);
-      font-size:12px;
-      line-height:1.45;
-    }
-    .warn{ color:#b91c1c; font-size:12px; margin-top:6px; }
+  .menuBody{
+    max-width:780px;
+    margin:0 auto;
+    padding:18px 0 0;
+  }
 
-    .grid{
-      margin-top:14px;
-      display:grid;
+  .menuCtas{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    padding-bottom:18px;
+    border-bottom:1px solid var(--menuLine);
+  }
+  .menuBtnPrimary,
+  .menuBtnGhost{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:56px;
+    border-radius:999px;
+    font-size:15px;
+    letter-spacing:.06em;
+    text-decoration:none;
+    border:1px solid var(--line);
+  }
+  .menuBtnPrimary{
+    background:rgba(15,107,77,.10);
+    color:var(--green2);
+    border-color:rgba(15,107,77,.30);
+    font-weight:600;
+  }
+  .menuBtnGhost{
+    background:transparent;
+    color:var(--green);
+    border-color:rgba(15,107,77,.26);
+    font-weight:600;
+  }
+  .menuBtnPrimary:hover,
+  .menuBtnGhost:hover{
+    background:rgba(15,107,77,.06);
+  }
+
+  .menuLinks{ padding:10px 0 0; }
+  .menuLink{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:center;
+    padding:24px 6px;
+    gap:4px;
+    border-bottom:1px solid var(--menuLine);
+    text-decoration:none;
+  }
+  .menuLink:last-child{ border-bottom:none; }
+  .menuLink strong{
+    font-size:18px;
+    font-weight:500;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:#111;
+  }
+  .menuLink span{
+    font-size:12px;
+    opacity:.7;
+    letter-spacing:.06em;
+    color:#111;
+    margin-top:2px;
+  }
+  .menuLink:hover{
+    background:rgba(15,107,77,.04);
+  }
+
+  main.wrap{
+    max-width:var(--max);
+    margin:0 auto;
+    width:100%;
+    padding:18px 16px 48px;
+  }
+
+  .appHero{
+    padding:18px 0 24px;
+  }
+
+  .searchHero{
+    display:grid;
+    gap:18px;
+  }
+
+  .searchBar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    min-height:72px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    background:#fff;
+    box-shadow:var(--shadow);
+    padding:10px 14px 10px 20px;
+  }
+
+  .searchMeta{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:2px;
+    min-width:0;
+  }
+  .searchMeta span:first-child{
+    font-size:12px;
+    color:rgba(15,107,77,.85);
+    letter-spacing:.10em;
+  }
+  .searchMeta strong{
+    font-size:20px;
+    line-height:1.3;
+    font-weight:700;
+    color:var(--ink);
+  }
+
+  .searchActions{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-shrink:0;
+  }
+
+  .roundBtn{
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:#fff;
+    cursor:pointer;
+    display:grid;
+    place-items:center;
+    color:var(--green);
+    font-size:18px;
+  }
+
+  .heroSub{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    align-items:center;
+    color:var(--muted);
+    font-size:13px;
+    letter-spacing:.06em;
+  }
+
+  .chip{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:30px;
+    padding:5px 10px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    background:#fff;
+    color:var(--green2);
+    font-size:12px;
+    line-height:1.2;
+  }
+
+  .topLayout{
+    display:grid;
+    gap:22px;
+    align-items:start;
+  }
+  @media (min-width:980px){
+    .topLayout{
+      grid-template-columns:420px minmax(0,1fr);
+      gap:26px;
+    }
+  }
+
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius-xl);
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+
+  .panelHead{
+    padding:22px 22px 16px;
+    border-bottom:1px solid rgba(0,0,0,.06);
+  }
+  .panelKicker{
+    font-size:11px;
+    letter-spacing:.14em;
+    color:rgba(15,107,77,.72);
+    margin-bottom:8px;
+  }
+  .panelTitle{
+    margin:0;
+    font-size:28px;
+    line-height:1.3;
+    letter-spacing:.01em;
+    color:var(--ink);
+    font-weight:700;
+  }
+  .panelDesc{
+    margin:10px 0 0;
+    font-size:14px;
+    line-height:1.8;
+    color:var(--muted);
+  }
+
+  .uploadBody{
+    padding:18px 22px 22px;
+  }
+
+  .field{
+    margin-top:14px;
+  }
+  .field:first-child{ margin-top:0; }
+
+  .fieldLabel{
+    display:block;
+    margin:0 0 8px;
+    font-size:12px;
+    color:rgba(15,107,77,.82);
+    letter-spacing:.08em;
+  }
+
+  .tabs{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin:0 0 10px;
+  }
+  .tab{
+    border:1px solid rgba(15,107,77,.18);
+    background:#fff;
+    color:var(--ink);
+    border-radius:999px;
+    padding:9px 12px;
+    font-size:13px;
+    cursor:pointer;
+    transition:.15s ease;
+  }
+  .tab:hover{ background:rgba(15,107,77,.04); }
+  .tab.active{
+    background:rgba(15,107,77,.10);
+    border-color:rgba(15,107,77,.30);
+    color:var(--green2);
+    font-weight:700;
+  }
+
+  input,textarea{
+    width:100%;
+    border:1px solid rgba(0,0,0,.12);
+    border-radius:14px;
+    padding:12px 13px;
+    font-size:14px;
+    background:#fff;
+    outline:none;
+    font-family:inherit;
+    color:var(--ink);
+  }
+  input:focus,textarea:focus{
+    border-color:rgba(15,107,77,.45);
+    box-shadow:0 0 0 4px rgba(15,107,77,.10);
+  }
+  textarea{
+    min-height:92px;
+    resize:vertical;
+  }
+
+  .warn{
+    color:#b91c1c;
+    font-size:12px;
+    line-height:1.55;
+    margin-top:8px;
+  }
+
+  button{
+    font-family:inherit;
+  }
+  .btn{
+    border:none;
+    cursor:pointer;
+    border-radius:999px;
+    padding:11px 16px;
+    font-size:14px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    transition:.15s ease;
+    user-select:none;
+    white-space:nowrap;
+  }
+  .btn:active{ transform:translateY(1px); }
+
+  .btnPrimary{
+    background:rgba(15,107,77,.10);
+    border:1px solid rgba(15,107,77,.30);
+    color:var(--green2);
+    font-weight:800;
+  }
+  .btnPrimary:hover{ background:rgba(15,107,77,.14); }
+
+  .btnGhost{
+    background:#fff;
+    border:1px solid rgba(0,0,0,.14);
+    color:var(--ink);
+    font-weight:700;
+  }
+  .btnGhost:hover{ background:#f8f8f8; }
+
+  .btnDanger{
+    background:#ef4444;
+    color:#fff;
+    border:1px solid rgba(0,0,0,.06);
+    font-weight:800;
+  }
+
+  .fullBtn{
+    width:100%;
+    justify-content:center;
+    min-height:48px;
+  }
+
+  .muted{ color:var(--muted); }
+  .small{ font-size:12px; }
+  .hidden{ display:none !important; }
+
+  .authStatusBar{
+    margin:4px 0 10px;
+    text-align:center;
+  }
+  .authStatusText{
+    font-size:13px;
+    letter-spacing:.03em;
+    color:rgba(15,107,77,.82);
+    line-height:1.7;
+    word-break:break-all;
+  }
+
+  .catalogSection{
+    display:grid;
+    gap:18px;
+  }
+
+  .sectionTitleRow{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:4px;
+  }
+  .sectionTitle{
+    margin:0;
+    font-size:18px;
+    line-height:1.35;
+    font-weight:700;
+    color:var(--ink);
+  }
+  .sectionSub{
+    font-size:13px;
+    color:var(--muted);
+  }
+
+  .itemsGrid{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0,1fr));
+    gap:16px;
+  }
+  @media (min-width:760px){
+    .itemsGrid{
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:18px;
+    }
+  }
+  @media (min-width:1140px){
+    .itemsGrid{
+      grid-template-columns:repeat(4, minmax(0,1fr));
+    }
+  }
+
+  .itemTile{
+    display:block;
+    background:transparent;
+    border:none;
+    padding:0;
+    margin:0;
+    text-align:left;
+    cursor:pointer;
+    color:inherit;
+  }
+
+  .tileImageWrap{
+    position:relative;
+    overflow:hidden;
+    border-radius:22px;
+    background:var(--soft);
+    aspect-ratio:1 / 1;
+    border:1px solid rgba(0,0,0,.06);
+  }
+
+  .tileImage{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+
+  .tileBadge{
+    position:absolute;
+    top:10px;
+    left:10px;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:5px 10px;
+    border-radius:999px;
+    background:rgba(255,255,255,.92);
+    border:1px solid rgba(0,0,0,.08);
+    font-size:11px;
+    color:var(--ink);
+    backdrop-filter:blur(4px);
+  }
+
+  .tileBody{
+    padding:10px 2px 2px;
+  }
+
+  .tileTitle{
+    margin:0;
+    font-size:16px;
+    line-height:1.4;
+    font-weight:700;
+    color:var(--ink);
+  }
+
+  .tileMeta{
+    margin-top:5px;
+    font-size:13px;
+    line-height:1.6;
+    color:var(--muted);
+  }
+
+  .tileRow{
+    margin-top:7px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+
+  .pill{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:4px 10px;
+    border-radius:999px;
+    font-size:12px;
+    border:1px solid rgba(15,107,77,.18);
+    background:#fff;
+    color:var(--ink);
+  }
+  .pill.gray{ background:#f3f4f6; border-color:#e5e7eb; color:#374151; }
+  .pill.blue{ background:#eff6ff; border-color:#bfdbfe; color:#1d4ed8; }
+  .pill.green{ background:#ecfdf5; border-color:#a7f3d0; color:#047857; }
+
+  .emptyBox{
+    background:var(--soft);
+    border:1px dashed rgba(0,0,0,.14);
+    border-radius:22px;
+    padding:36px 18px;
+    text-align:center;
+    color:var(--muted);
+  }
+
+  .detailDrawer{
+    position:fixed;
+    inset:0;
+    z-index:300;
+    display:none;
+  }
+  .detailDrawer.open{
+    display:block;
+  }
+
+  .drawerBack{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.34);
+    backdrop-filter:blur(3px);
+  }
+
+  .drawerPanel{
+    position:absolute;
+    right:0;
+    top:0;
+    height:100%;
+    width:min(740px, 100%);
+    background:#fff;
+    overflow:auto;
+    box-shadow:-10px 0 34px rgba(0,0,0,.12);
+    -webkit-overflow-scrolling:touch;
+  }
+
+  .drawerHero{
+    position:relative;
+    aspect-ratio:16 / 10;
+    background:var(--soft);
+    overflow:hidden;
+  }
+
+  .drawerHero img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+
+  .drawerTopBtns{
+    position:absolute;
+    top:16px;
+    left:16px;
+    right:16px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+  }
+
+  .circleUi{
+    width:46px;
+    height:46px;
+    border:none;
+    border-radius:50%;
+    background:rgba(255,255,255,.90);
+    backdrop-filter:blur(6px);
+    box-shadow:0 6px 20px rgba(0,0,0,.12);
+    display:grid;
+    place-items:center;
+    cursor:pointer;
+    font-size:18px;
+    color:#111;
+  }
+
+  .drawerSheet{
+    margin-top:-22px;
+    position:relative;
+    z-index:2;
+    background:#fff;
+    border-radius:28px 28px 0 0;
+    padding:22px 22px 30px;
+    min-height:calc(100% - 40px);
+  }
+
+  .drawerTitle{
+    margin:0;
+    font-size:22px;
+    line-height:1.35;
+    font-weight:800;
+    color:var(--ink);
+  }
+
+  .drawerLead{
+    margin-top:8px;
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.7;
+  }
+
+  .drawerInfoRow{
+    margin-top:14px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+
+  .drawerSection{
+    margin-top:22px;
+    padding-top:22px;
+    border-top:1px solid rgba(0,0,0,.08);
+  }
+
+  .drawerSection h3{
+    margin:0 0 12px;
+    font-size:18px;
+    line-height:1.4;
+  }
+
+  .ownerActions,
+  .offerActions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+
+  .offerBox{
+    border:1px solid rgba(0,0,0,.10);
+    border-radius:18px;
+    padding:14px;
+    margin-top:12px;
+    background:#fff;
+  }
+
+  .offerTop{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    justify-content:space-between;
+    flex-wrap:wrap;
+  }
+
+  .offerThumb{
+    width:100%;
+    max-width:220px;
+    border-radius:16px;
+    margin-top:10px;
+    display:block;
+    border:1px solid rgba(0,0,0,.08);
+    background:#fafafa;
+    overflow:hidden;
+  }
+
+  .offerNote{
+    margin-top:8px;
+    font-size:12px;
+    line-height:1.6;
+    color:var(--muted);
+  }
+
+  #detailBox, .inlineDetailMount{
+    scroll-margin-top:var(--sticky-offset);
+  }
+
+  .modalBack{
+    position:fixed;
+    inset:0;
+    background:var(--modalBack);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    padding:16px;
+  }
+  .modal{
+    width:min(520px, 96vw);
+    background:var(--modalCard);
+    border:1px solid var(--modalLine);
+    border-radius:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+    padding:16px;
+    color:var(--modalText);
+    text-align:left;
+  }
+  .modal h3{
+    margin:0 0 8px;
+    font-size:16px;
+  }
+  .modal p{
+    margin:0 0 12px;
+    color:var(--modalMuted);
+    line-height:1.5;
+    font-size:13px;
+  }
+  .modal .row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .modal .url{
+    font-size:12px;
+    background:#f3f4f6;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:10px;
+    word-break:break-all;
+    margin:10px 0 12px;
+  }
+  .modalBtn{
+    flex:1;
+    border:none;
+    cursor:pointer;
+    border-radius:999px;
+    padding:10px 14px;
+    font-size:14px;
+    font-weight:700;
+  }
+  .modalBtn.ghost{
+    background:#f3f4f6;
+    color:#111827;
+  }
+  .modalBtn.primary{
+    background:#1f8f5a;
+    color:#fff;
+  }
+
+  .footer{
+    margin-top:38px;
+    padding-top:18px;
+    border-top:1px solid var(--line);
+    color:rgba(15,107,77,.85);
+    font-size:12px;
+    line-height:1.7;
+    text-align:center;
+  }
+  .footer a{
+    color:rgba(15,107,77,.92);
+    text-decoration:none;
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+  }
+  .footer a:hover{
+    border-bottom-color:var(--line);
+  }
+
+  @media (max-width:860px){
+    .panelTitle{ font-size:24px; }
+    .searchMeta strong{ font-size:18px; }
+    .drawerTitle{ font-size:20px; }
+  }
+
+  @media (max-width:520px){
+    .cta{ padding:9px 10px; font-size:12px; }
+    .brandLogo img{ height:45px; }
+    main.wrap{ padding:14px 12px 40px; }
+    .searchBar{
+      min-height:64px;
+      padding:10px 12px 10px 16px;
+    }
+    .searchMeta strong{ font-size:16px; }
+    .panelHead{
+      padding:18px 18px 14px;
+    }
+    .uploadBody{
+      padding:16px 18px 18px;
+    }
+    .panelTitle{ font-size:21px; }
+    .itemsGrid{
+      grid-template-columns:repeat(2, minmax(0,1fr));
       gap:14px;
     }
-    @media (min-width:980px){
-      .grid{ grid-template-columns: 1.05fr .95fr; align-items:start; }
+    .tileTitle{ font-size:15px; }
+    .drawerSheet{
+      padding:18px 16px 26px;
+      border-radius:24px 24px 0 0;
     }
+  }
 
-    .secTitle{ margin:0 0 10px; font-size:16px; color: var(--ink); }
-    .divider{ height:1px; background: rgba(15,107,77,.18); margin:14px 0; }
+  @media (prefers-reduced-motion: reduce){
+    *{
+      transition:none !important;
+      scroll-behavior:auto !important;
+      animation:none !important;
+    }
+  }
+</style>
 
-    .tabs{ display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 8px; }
-    .tab{
-      border:1px solid rgba(15,107,77,.18);
-      background:#fff;
-      color: var(--ink);
-      border-radius:999px;
-      padding:9px 12px;
-      font-size:13px;
-      cursor:pointer;
-      transition:.15s ease;
-    }
-    .tab:hover{ background: rgba(15,107,77,.04); }
-    .tab.active{
-      background: rgba(15,107,77,.10);
-      border-color: rgba(15,107,77,.30);
-      color: var(--green2);
-      font-weight:700;
-    }
-
-    input,textarea{
-      width:100%;
-      border:1px solid rgba(15,107,77,.18);
-      border-radius:14px;
-      padding:11px 12px;
-      font-size:14px;
-      background:#fff;
-      outline:none;
-      font-family: inherit;
-    }
-    input:focus,textarea:focus{
-      border-color:rgba(15,107,77,.45);
-      box-shadow:0 0 0 4px rgba(15,107,77,.12);
-    }
-    textarea{ min-height:84px; resize:vertical; }
-
-    button{ font-family:inherit; }
-    .btn{
-      border:none; cursor:pointer;
-      border-radius:999px;
-      padding:10px 14px;
-      font-size:14px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      transition:.15s ease;
-      user-select:none;
-      white-space:nowrap;
-    }
-    .btn:active{ transform:translateY(1px); }
-    .btnPrimary{
-      background: rgba(15,107,77,.10);
-      border:1px solid rgba(15,107,77,.30);
-      color: var(--green2);
-      font-weight: 800;
-    }
-    .btnPrimary:hover{ background: rgba(15,107,77,.14); }
-    .btnGhost{
-      background: transparent;
-      border:1px solid rgba(15,107,77,.26);
-      color: var(--green);
-      font-weight: 800;
-    }
-    .btnGhost:hover{ background: rgba(15,107,77,.06); }
-    .btnDanger{
-      background:#ef4444; color:#fff; border:1px solid rgba(0,0,0,.06);
-      font-weight:800;
-    }
-    .btnDanger:hover{ filter:brightness(.95); }
-    .hidden{ display:none; }
-
-    .pill{
-      display:inline-flex;align-items:center;gap:6px;
-      padding:4px 10px;border-radius:999px;
-      font-size:12px;border:1px solid rgba(15,107,77,.18);
-      background:#fff;color:var(--ink);
-    }
-    .pill.gray{ background:#f3f4f6; border-color:#e5e7eb; color:#374151; }
-    .pill.blue{ background:#eff6ff; border-color:#bfdbfe; color:#1d4ed8; }
-    .pill.green{ background:#ecfdf5; border-color:#a7f3d0; color:#047857; }
-
-    .muted{ color: var(--muted); }
-    .small{ font-size:12px; }
-
-    .itemsWrap{ margin-top:12px; }
-    .itemCard{ border-top:1px solid rgba(15,107,77,.18); padding-top:14px; margin-top:14px; }
-    .itemHead{
-      display:flex;align-items:center;justify-content:space-between;
-      gap:10px;flex-wrap:wrap;
-    }
-    .itemTitle{ margin:10px 0 6px; font-size:16px; line-height:1.25; }
-    .thumb{
-      width:180px;max-width:100%;
-      border-radius:16px;
-      margin-top:10px;
-      display:block;
-      border:1px solid rgba(15,107,77,.12);
-      background:#fafafa;
-      overflow:hidden;
-    }
-
-    .detailTitle{ margin:10px 0 6px; font-size:18px; line-height:1.25; }
-    .offerBox{
-      border:1px solid rgba(15,107,77,.12);
-      border-radius:16px;
-      padding:12px;
-      margin-top:12px;
-      background:#fff;
-    }
-    .offerTop{ display:flex; gap:12px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; }
-    .twoBtns{ display:flex; gap:10px; flex-wrap:wrap; }
-    .right{ text-align:right; }
-
-    #detailBox, .inlineDetailMount{ scroll-margin-top: var(--sticky-offset); }
-
-    .detailTopBar{
-      display:flex; gap:10px;
-      align-items:center; justify-content:space-between;
-      flex-wrap:wrap;
-    }
-    .detailTopLeft{
-      display:flex; gap:8px;
-      flex-wrap:wrap; align-items:center;
-    }
-    @media (max-width: 900px){
-      #closeDetailBtn{ width:100%; }
-    }
-
-    .inlineDetailMount{
-      margin-top: 12px;
-      border: 1px solid rgba(15,107,77,.18);
-      border-radius: 16px;
-      padding: 14px;
-      background: #fff;
-    }
-
-    .authStatusBar{
-      margin-top: 4px;
-      margin-bottom: 6px;
-      text-align: center;
-    }
-    .authStatusText{
-      font-size: 13px;
-      letter-spacing: .04em;
-      color: rgba(15,107,77,.82);
-      line-height: 1.7;
-      word-break: break-all;
-    }
-
-    .modalBack{
-      position:fixed; inset:0;
-      background:var(--modalBack);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:9999;
-      padding:16px;
-    }
-    .modal{
-      width:min(520px, 96vw);
-      background:var(--modalCard);
-      border:1px solid var(--modalLine);
-      border-radius:18px;
-      box-shadow:0 10px 30px rgba(0,0,0,.25);
-      padding:16px;
-      color:var(--modalText);
-      text-align:left;
-    }
-    .modal h3{margin:0 0 8px;font-size:16px}
-    .modal p{margin:0 0 12px;color:var(--modalMuted);line-height:1.5;font-size:13px}
-    .modal .row{display:flex;gap:10px;flex-wrap:wrap}
-    .modal .url{
-      font-size:12px;
-      background:#f3f4f6;
-      border:1px solid #e5e7eb;
-      border-radius:12px;
-      padding:10px;
-      word-break:break-all;
-      margin:10px 0 12px;
-    }
-    .modalBtn{
-      flex:1;
-      border:none;
-      cursor:pointer;
-      border-radius:999px;
-      padding:10px 14px;
-      font-size:14px;
-      font-weight:700;
-    }
-    .modalBtn.ghost{background:#f3f4f6;color:#111827}
-    .modalBtn.primary{background:#1f8f5a;color:#fff}
-
-    .footer{
-      margin-top: 34px;
-      padding-top: 18px;
-      border-top:1px solid var(--line);
-      color: rgba(15,107,77,.85);
-      font-size:12px;
-      line-height:1.7;
-      text-align:center;
-    }
-    .footer a{
-      color: rgba(15,107,77,.92);
-      text-decoration:none;
-      border-bottom:1px solid transparent;
-      padding-bottom:2px;
-    }
-    .footer a:hover{
-      border-bottom-color: var(--line);
-      text-decoration:none;
-    }
-
-    @media (max-width:520px){
-      .cta{ padding: 9px 10px; font-size: 12px; }
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      *{ transition:none !important; scroll-behavior:auto !important; }
-    }
-  </style>
-
-  <script src="./firebase-config.js"></script>
+<script src="./firebase-config.js"></script>
 </head>
-
 <body>
 
   <header>
@@ -742,111 +1098,87 @@ crossorigin="anonymous"></script>
       <button id="loginBtn" class="hidden" type="button">Googleでログイン</button>
       <button id="logoutBtn" class="hidden" type="button">ログアウト</button>
 
-      <section class="card cardPad hero">
-        <div class="heroTop">
-          <div style="min-width:0;">
-            <h1 class="heroTitle">ベビー用品を、次の家族へ。</h1>
+      <section class="appHero">
+        <div class="searchHero">
+          <div class="searchBar">
+            <div class="searchMeta">
+              <span>BABY REUSE MARKET</span>
+              <strong>写真から見て、気になるアイテムをひらく</strong>
+            </div>
+            <div class="searchActions">
+              <button class="roundBtn" type="button" aria-label="browse">⌕</button>
+            </div>
+          </div>
 
-            <p class="heroDesc">
-              使わなくなったものを、必要な人へつなぐ。<br>
-              出品と交換提案は、ログイン後に利用できます。
+          <div class="heroSub">
+            <span class="chip">閲覧自由</span>
+            <span class="chip">出品・交換提案はログイン後</span>
+            <span class="chip">画像は自動圧縮</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="topLayout">
+        <section class="panel">
+          <div class="panelHead">
+            <div class="panelKicker">LIST YOUR ITEM</div>
+            <h1 class="panelTitle">出品する</h1>
+            <p class="panelDesc">
+              まだ使えるベビー用品を、次の家族へ。<br>
+              写真・タイトル・状態を入力して出品できます。
             </p>
           </div>
 
-          <div class="pill green">BETA</div>
-        </div>
+          <div class="uploadBody">
+            <div class="field">
+              <label class="fieldLabel">状態を選ぶ</label>
 
-        <div class="heroMeta">
-          閲覧自由　/　出品・提案はログイン後　/　画像は自動圧縮してアップロード
-        </div>
-      </section>
-
-      <section class="grid">
-        <div class="card cardPad">
-          <h2 class="secTitle">出品する</h2>
-
-          <div class="tabs" id="conditionTabs">
-            <button type="button" class="tab active" data-value="新品に近い">新品に近い</button>
-            <button type="button" class="tab" data-value="きれい">きれい</button>
-            <button type="button" class="tab" data-value="使用感あり">使用感あり</button>
-          </div>
-
-          <p class="muted" style="margin:0 0 10px;">状態：<b id="conditionLabel">新品に近い</b></p>
-
-          <input type="file" id="fileItem" accept="image/*" />
-          <div class="warn">※画像は自動で圧縮されます。大きすぎる画像はアップロードできない場合があります。</div>
-
-          <div style="height:10px"></div>
-
-          <input id="titleItem" placeholder="例：ベビーカー（無料）" />
-          <div style="height:10px"></div>
-          <textarea id="descItem" placeholder="説明（任意）例：受け渡し希望エリア、使用期間など"></textarea>
-
-          <div style="height:12px"></div>
-          <button id="uploadItemBtn" class="btn btnPrimary" style="width:100%;">出品する</button>
-
-          <p class="small muted" style="margin:10px 0 0;">
-            出品すると「交換提案」を受け取れます。
-          </p>
-
-          <div class="divider"></div>
-
-          <h2 class="secTitle" style="margin-bottom:6px;">出品一覧（全体）</h2>
-          <div id="list" class="itemsWrap"></div>
-        </div>
-
-        <div class="card cardPad">
-          <h2 class="secTitle">選択した出品（詳細）</h2>
-          <div id="detailEmpty" class="muted">左の「出品一覧」から商品を選んでください。</div>
-
-          <div id="detailBox" class="hidden">
-            <div class="detailTopBar">
-              <div class="detailTopLeft">
-                <div class="pill gray" id="detailStatusPill">出品中</div>
-                <div class="pill blue" id="detailOffersPill">提案 0件</div>
+              <div class="tabs" id="conditionTabs">
+                <button type="button" class="tab active" data-value="新品に近い">新品に近い</button>
+                <button type="button" class="tab" data-value="きれい">きれい</button>
+                <button type="button" class="tab" data-value="使用感あり">使用感あり</button>
               </div>
-              <button id="closeDetailBtn" class="btn btnGhost">閉じる</button>
+
+              <p class="muted small" style="margin:0;">状態：<b id="conditionLabel">新品に近い</b></p>
             </div>
 
-            <h3 id="detailTitle" class="detailTitle"></h3>
-            <p class="muted" style="margin:0;">状態：<b id="detailCondition"></b></p>
-            <img id="detailImage" class="thumb" alt="" />
-            <p class="muted" id="detailDesc" style="margin-top:10px;line-height:1.6;"></p>
-
-            <div class="divider"></div>
-
-            <h2 class="secTitle">この商品に交換提案する</h2>
-
-            <div class="tabs" id="offerConditionTabs">
-              <button type="button" class="tab active" data-value="新品に近い">新品に近い</button>
-              <button type="button" class="tab" data-value="きれい">きれい</button>
-              <button type="button" class="tab" data-value="使用感あり">使用感あり</button>
+            <div class="field">
+              <label class="fieldLabel" for="fileItem">画像</label>
+              <input type="file" id="fileItem" accept="image/*" />
+              <div class="warn">※画像は自動で圧縮されます。大きすぎる画像はアップロードできない場合があります。</div>
             </div>
 
-            <p class="muted" style="margin:0 0 10px;">提案アイテムの状態：<b id="offerConditionLabel">新品に近い</b></p>
-
-            <input type="file" id="fileOffer" accept="image/*" />
-            <div class="warn">※画像は自動で圧縮されます。大きすぎる画像はアップロードできない場合があります。</div>
-
-            <div style="height:10px"></div>
-            <input id="titleOffer" placeholder="例：ベビーゲート（きれい）" />
-            <div style="height:10px"></div>
-            <textarea id="msgOffer" placeholder="ひとこと（任意）例：こちらと交換いかがですか？"></textarea>
-
-            <div style="height:12px"></div>
-            <button id="submitOfferBtn" class="btn btnPrimary" style="width:100%;">交換提案を送る</button>
-
-            <div class="divider"></div>
-
-            <h2 class="secTitle" style="margin-bottom:6px;">交換提案一覧（公開）</h2>
-            <div class="muted small" style="line-height:1.5;margin-bottom:10px;">
-              ※提案内容（写真/状態/タイトル/進行状況）は公開。<br>
-              ※連絡先は「accepted」後に当事者のみ表示（Gmail作成画面を開きます）
+            <div class="field">
+              <label class="fieldLabel" for="titleItem">タイトル</label>
+              <input id="titleItem" placeholder="例：ベビーカー（無料）" />
             </div>
-            <div id="offersList"></div>
+
+            <div class="field">
+              <label class="fieldLabel" for="descItem">説明</label>
+              <textarea id="descItem" placeholder="説明（任意）例：受け渡し希望エリア、使用期間など"></textarea>
+            </div>
+
+            <div class="field">
+              <button id="uploadItemBtn" class="btn btnPrimary fullBtn">出品する</button>
+            </div>
+
+            <div class="field">
+              <div class="chip">交換提案を受け取れます</div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        <section class="catalogSection">
+          <div class="sectionTitleRow">
+            <div>
+              <h2 class="sectionTitle">アイテム一覧</h2>
+              <div class="sectionSub">写真またはタイトルを押すと詳細が開きます</div>
+            </div>
+          </div>
+
+          <div id="list" class="itemsGrid"></div>
+        </section>
+      </div>
 
       <footer class="footer">
         <div>Mottainai Babeは、ベビー用品を必要な人へつなぐ交換プラットフォームです。</div>
@@ -867,6 +1199,82 @@ crossorigin="anonymous"></script>
     </section>
   </main>
 
+  <!-- Detail Drawer -->
+  <section id="detailDrawer" class="detailDrawer" aria-hidden="true">
+    <div id="drawerBack" class="drawerBack"></div>
+
+    <div class="drawerPanel" role="dialog" aria-modal="true" aria-label="item detail">
+      <div class="drawerHero">
+        <img id="detailImage" alt="" />
+
+        <div class="drawerTopBtns">
+          <button id="closeDetailBtn" class="circleUi" type="button" aria-label="close detail">✕</button>
+          <div></div>
+        </div>
+      </div>
+
+      <div id="detailBox" class="drawerSheet">
+        <div class="drawerInfoRow">
+          <div class="pill gray" id="detailStatusPill">出品中</div>
+          <div class="pill blue" id="detailOffersPill">提案 0件</div>
+        </div>
+
+        <h3 id="detailTitle" class="drawerTitle"></h3>
+        <p class="drawerLead">
+          状態：<b id="detailCondition"></b><br>
+          <span id="detailDesc"></span>
+        </p>
+
+        <div id="detailOwnerActions" class="ownerActions"></div>
+
+        <div class="drawerSection">
+          <h3>この商品に交換提案する</h3>
+
+          <div class="tabs" id="offerConditionTabs">
+            <button type="button" class="tab active" data-value="新品に近い">新品に近い</button>
+            <button type="button" class="tab" data-value="きれい">きれい</button>
+            <button type="button" class="tab" data-value="使用感あり">使用感あり</button>
+          </div>
+
+          <p class="muted small" style="margin:0 0 10px;">
+            提案アイテムの状態：<b id="offerConditionLabel">新品に近い</b>
+          </p>
+
+          <div class="field">
+            <label class="fieldLabel" for="fileOffer">提案画像</label>
+            <input type="file" id="fileOffer" accept="image/*" />
+            <div class="warn">※画像は自動で圧縮されます。大きすぎる画像はアップロードできない場合があります。</div>
+          </div>
+
+          <div class="field">
+            <label class="fieldLabel" for="titleOffer">提案タイトル</label>
+            <input id="titleOffer" placeholder="例：ベビーゲート（きれい）" />
+          </div>
+
+          <div class="field">
+            <label class="fieldLabel" for="msgOffer">ひとこと</label>
+            <textarea id="msgOffer" placeholder="ひとこと（任意）例：こちらと交換いかがですか？"></textarea>
+          </div>
+
+          <div class="field">
+            <button id="submitOfferBtn" class="btn btnPrimary fullBtn">交換提案を送る</button>
+          </div>
+
+          <div class="offerNote">
+            ※提案内容（写真 / 状態 / タイトル / 進行状況）は公開されます。<br>
+            ※連絡先は accepted 後に当事者のみ表示されます。
+          </div>
+        </div>
+
+        <div class="drawerSection">
+          <h3>交換提案一覧</h3>
+          <div id="offersList"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- In-app modal -->
   <div id="inAppModalBack" class="modalBack" role="dialog" aria-modal="true">
     <div class="modal">
       <h3>LINEなどのアプリ内ブラウザではログインできない場合があります</h3>
@@ -889,8 +1297,7 @@ crossorigin="anonymous"></script>
       </p>
     </div>
   </div>
-
-  <script type="module">
+    <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import {
       getAuth,
@@ -905,8 +1312,19 @@ crossorigin="anonymous"></script>
     } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
     import {
-      getFirestore, collection, doc, addDoc, setDoc, getDoc, getDocs, query, orderBy,
-      updateDoc, deleteDoc, serverTimestamp, writeBatch
+      getFirestore,
+      collection,
+      doc,
+      addDoc,
+      setDoc,
+      getDoc,
+      getDocs,
+      query,
+      orderBy,
+      updateDoc,
+      deleteDoc,
+      serverTimestamp,
+      writeBatch
     } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
     import {
@@ -917,6 +1335,9 @@ crossorigin="anonymous"></script>
       deleteObject
     } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
+    /* =========================
+       Menu
+    ========================= */
     const menuBtn = document.getElementById("menuBtn");
     const menuPanel = document.getElementById("menuPanel");
     const menuOverlay = document.getElementById("menuOverlay");
@@ -931,6 +1352,7 @@ crossorigin="anonymous"></script>
       document.documentElement.style.overflow = "hidden";
       document.body.style.overflow = "hidden";
     }
+
     function closeMenu(){
       menuPanel.classList.remove("open");
       menuOverlay.classList.remove("open");
@@ -940,15 +1362,23 @@ crossorigin="anonymous"></script>
       document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
     }
+
     function toggleMenu(){
       const isOpen = menuPanel.classList.contains("open");
       isOpen ? closeMenu() : openMenu();
     }
-    menuBtn.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); toggleMenu(); });
+
+    menuBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleMenu();
+    });
     menuOverlay.addEventListener("click", closeMenu);
     menuClose.addEventListener("click", closeMenu);
-    document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeMenu(); });
 
+    /* =========================
+       Firebase
+    ========================= */
     const firebaseConfig = window.FIREBASE_CONFIG;
 
     if (!firebaseConfig || !firebaseConfig.apiKey) {
@@ -961,12 +1391,14 @@ crossorigin="anonymous"></script>
     const db = getFirestore(app);
     const storage = getStorage(app);
 
-    await setPersistence(auth, browserLocalPersistence).catch((e)=>{
+    await setPersistence(auth, browserLocalPersistence).catch((e) => {
       console.error("setPersistence error", e);
     });
 
+    /* =========================
+       Auth / In-app browser modal
+    ========================= */
     const loginBtn = document.getElementById("loginBtn");
-    const logoutBtn = document.getElementById("logoutBtn");
     const loginState = document.getElementById("loginState");
     const authTopBtn = document.getElementById("authTopBtn");
     const authStatusBar = document.getElementById("authStatusBar");
@@ -1029,11 +1461,11 @@ crossorigin="anonymous"></script>
         console.error("Login error", e);
         const code = e?.code || "";
 
-        if(
+        if (
           code.includes("popup-blocked") ||
           code.includes("popup-closed") ||
           code.includes("operation-not-supported")
-        ){
+        ) {
           await signInWithRedirect(auth, provider);
           return;
         }
@@ -1056,34 +1488,32 @@ crossorigin="anonymous"></script>
       }
     };
 
-    try{ await getRedirectResult(auth); }catch(e){ console.error("getRedirectResult error", e); }
+    try{
+      await getRedirectResult(auth);
+    }catch(e){
+      console.error("getRedirectResult error", e);
+    }
 
+    /* =========================
+       DOM refs
+    ========================= */
     const uploadItemBtn = document.getElementById("uploadItemBtn");
     const fileItem = document.getElementById("fileItem");
     const titleItem = document.getElementById("titleItem");
     const descItem = document.getElementById("descItem");
     const listEl = document.getElementById("list");
 
-    const detailEmpty = document.getElementById("detailEmpty");
-    const detailBox = document.getElementById("detailBox");
-
-    const detailHomeMarker = document.createElement("div");
-    detailHomeMarker.id = "detailHomeMarker";
-    detailBox.parentElement.insertBefore(detailHomeMarker, detailBox);
-
-    function moveDetailHome(){
-      if(detailHomeMarker && detailHomeMarker.parentElement){
-        detailHomeMarker.parentElement.insertBefore(detailBox, detailHomeMarker.nextSibling);
-      }
-    }
-
+    const detailDrawer = document.getElementById("detailDrawer");
+    const drawerBack = document.getElementById("drawerBack");
     const closeDetailBtn = document.getElementById("closeDetailBtn");
+
     const detailTitle = document.getElementById("detailTitle");
     const detailCondition = document.getElementById("detailCondition");
     const detailImage = document.getElementById("detailImage");
     const detailDesc = document.getElementById("detailDesc");
     const detailStatusPill = document.getElementById("detailStatusPill");
     const detailOffersPill = document.getElementById("detailOffersPill");
+    const detailOwnerActions = document.getElementById("detailOwnerActions");
 
     const offersList = document.getElementById("offersList");
     const fileOffer = document.getElementById("fileOffer");
@@ -1099,6 +1529,9 @@ crossorigin="anonymous"></script>
 
     const MAX_BYTES = 2 * 1024 * 1024;
 
+    /* =========================
+       Helpers
+    ========================= */
     function escapeHtml(str){
       return String(str ?? "")
         .replaceAll("&","&amp;")
@@ -1109,9 +1542,9 @@ crossorigin="anonymous"></script>
     }
 
     function statusLabel(status){
-      if(status === "done") return {text:"成立", cls:"green"};
-      if(status === "dealing") return {text:"交渉中", cls:"blue"};
-      return {text:"出品中", cls:"gray"};
+      if(status === "done") return { text:"成立", cls:"green" };
+      if(status === "dealing") return { text:"交渉中", cls:"blue" };
+      return { text:"出品中", cls:"gray" };
     }
 
     function isMobileDevice(){
@@ -1207,6 +1640,9 @@ crossorigin="anonymous"></script>
       throw new Error("画像サイズを小さくできませんでした。別の画像でお試しください。");
     }
 
+    /* =========================
+       Tabs
+    ========================= */
     document.querySelectorAll("#conditionTabs .tab").forEach(btn => {
       btn.onclick = () => {
         document.querySelectorAll("#conditionTabs .tab").forEach(b => b.classList.remove("active"));
@@ -1225,20 +1661,38 @@ crossorigin="anonymous"></script>
       };
     });
 
-    closeDetailBtn.onclick = () => {
+    /* =========================
+       Detail drawer
+    ========================= */
+    function openDetailDrawer(){
+      detailDrawer.classList.add("open");
+      detailDrawer.setAttribute("aria-hidden", "false");
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeDetail(){
       selectedItemId = null;
       selectedItemData = null;
+      detailDrawer.classList.remove("open");
+      detailDrawer.setAttribute("aria-hidden", "true");
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+    }
 
-      document.querySelectorAll(".inlineDetailMount").forEach(el => {
-        el.classList.add("hidden");
-        el.innerHTML = "";
-      });
+    closeDetailBtn.onclick = closeDetail;
+    drawerBack.onclick = closeDetail;
 
-      moveDetailHome();
-      detailBox.classList.add("hidden");
-      detailEmpty.classList.remove("hidden");
-    };
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape"){
+        closeMenu();
+        closeDetail();
+      }
+    });
 
+    /* =========================
+       Firestore helpers
+    ========================= */
     async function countOffers(itemId){
       try{
         const snap = await getDocs(collection(db, "items", itemId, "offers"));
@@ -1248,30 +1702,48 @@ crossorigin="anonymous"></script>
       }
     }
 
+    /* =========================
+       Item actions
+    ========================= */
     async function deleteItem(itemId){
-      if(!currentUser){ alert("ログインしてください。"); return; }
+      if(!currentUser){
+        alert("ログインしてください。");
+        return;
+      }
       if(!confirm("本当に削除しますか？（画像も削除します）")) return;
 
       try{
         const snap = await getDoc(doc(db, "items", itemId));
-        if(!snap.exists()){ alert("対象が見つかりません"); return; }
+        if(!snap.exists()){
+          alert("対象が見つかりません");
+          return;
+        }
+
         const data = snap.data();
-        if(data.ownerUid !== currentUser.uid){ alert("権限がありません（出品者のみ）"); return; }
+        if(data.ownerUid !== currentUser.uid){
+          alert("権限がありません（出品者のみ）");
+          return;
+        }
 
         await deleteDoc(doc(db, "items", itemId));
 
         if(data.imagePath){
-          try{ await deleteObject(ref(storage, data.imagePath)); }catch(e){ console.error("DELETE_STORAGE_WARNING", e); }
+          try{
+            await deleteObject(ref(storage, data.imagePath));
+          }catch(e){
+            console.error("DELETE_STORAGE_WARNING", e);
+          }
         }
 
-        try{ await deleteDoc(doc(db, "itemsPrivate", itemId)); }catch(e){ console.error("DELETE_ITEMS_PRIVATE_WARNING", e); }
+        try{
+          await deleteDoc(doc(db, "itemsPrivate", itemId));
+        }catch(e){
+          console.error("DELETE_ITEMS_PRIVATE_WARNING", e);
+        }
 
         alert("削除しました。");
         if(selectedItemId === itemId){
-          selectedItemId = null;
-          selectedItemData = null;
-          detailBox.classList.add("hidden");
-          detailEmpty.classList.remove("hidden");
+          closeDetail();
         }
         await loadItems();
       }catch(e){
@@ -1281,23 +1753,40 @@ crossorigin="anonymous"></script>
     }
 
     async function editItem(itemId){
-      if(!currentUser){ alert("ログインしてください。"); return; }
+      if(!currentUser){
+        alert("ログインしてください。");
+        return;
+      }
+
       const snap = await getDoc(doc(db, "items", itemId));
-      if(!snap.exists()){ alert("対象が見つかりません"); return; }
+      if(!snap.exists()){
+        alert("対象が見つかりません");
+        return;
+      }
+
       const data = snap.data();
-      if(data.ownerUid !== currentUser.uid){ alert("権限がありません（出品者のみ）"); return; }
+      if(data.ownerUid !== currentUser.uid){
+        alert("権限がありません（出品者のみ）");
+        return;
+      }
 
       const newTitle = prompt("新しいタイトル", data.title ?? "");
       if(newTitle == null) return;
       const t = newTitle.trim();
-      if(!t){ alert("タイトルは空にできません"); return; }
+      if(!t){
+        alert("タイトルは空にできません");
+        return;
+      }
 
       const newDesc = prompt("新しい説明（空OK）", data.description ?? "");
       if(newDesc == null) return;
       const d = newDesc.trim();
 
       try{
-        await updateDoc(doc(db, "items", itemId), { title: t, description: d });
+        await updateDoc(doc(db, "items", itemId), {
+          title: t,
+          description: d
+        });
         alert("更新しました。");
         await loadItems();
         if(selectedItemId === itemId) await openDetail(itemId);
@@ -1307,8 +1796,14 @@ crossorigin="anonymous"></script>
       }
     }
 
+    /* =========================
+       Create item
+    ========================= */
     uploadItemBtn.onclick = async () => {
-      if(!currentUser){ alert("先にログインしてください。"); return; }
+      if(!currentUser){
+        alert("先にログインしてください。");
+        return;
+      }
 
       const file = fileItem.files[0];
       const titleText = titleItem.value.trim();
@@ -1366,8 +1861,10 @@ crossorigin="anonymous"></script>
       }
     };
 
+    /* =========================
+       Load item list
+    ========================= */
     async function loadItems(){
-      moveDetailHome();
       listEl.innerHTML = "";
 
       let snap;
@@ -1379,7 +1876,12 @@ crossorigin="anonymous"></script>
       }
 
       if(snap.empty){
-        listEl.innerHTML = `<p class="muted">まだ出品がありません。</p>`;
+        listEl.innerHTML = `
+          <div class="emptyBox">
+            まだ出品がありません。<br>
+            最初のアイテムを出品してみてください。
+          </div>
+        `;
         return;
       }
 
@@ -1391,35 +1893,38 @@ crossorigin="anonymous"></script>
         const offersCount = await countOffers(id);
 
         listEl.innerHTML += `
-          <div class="itemCard">
-            <div class="itemHead">
-              <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-                <span class="pill ${st.cls}">${st.text}</span>
-                <span class="pill blue">提案 ${offersCount}件</span>
+          <article>
+            <button class="itemTile" type="button" data-open="${id}">
+              <div class="tileImageWrap">
+                ${data.image
+                  ? `<img class="tileImage" src="${data.image}" alt="${escapeHtml(data.title ?? "")}">`
+                  : `<div class="tileImage" style="display:flex;align-items:center;justify-content:center;color:#888;background:#f4f4f4;">No image</div>`
+                }
+                <div class="tileBadge">${st.text}</div>
               </div>
-              <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                <button class="btn btnGhost" data-open="${id}">詳細</button>
-                ${isOwner ? `
-                  <button class="btn btnGhost" data-edit="${id}">編集</button>
-                  <button class="btn btnDanger" data-delete="${id}">削除</button>
-                ` : ``}
+
+              <div class="tileBody">
+                <h3 class="tileTitle">${escapeHtml(data.title ?? "")}</h3>
+                <div class="tileMeta">状態：${escapeHtml(data.condition ?? "未設定")}</div>
+
+                <div class="tileRow">
+                  <span class="pill blue">提案 ${offersCount}件</span>
+                  ${isOwner ? `<span class="pill gray">あなたの出品</span>` : ``}
+                </div>
               </div>
-            </div>
-
-            <div class="inlineDetailMount hidden" id="mount-${id}"></div>
-
-            <h3 class="itemTitle">${escapeHtml(data.title ?? "")}</h3>
-            <p class="muted" style="margin:0;">状態：<b>${escapeHtml(data.condition ?? "未設定")}</b></p>
-            ${data.image ? `<img class="thumb" src="${data.image}" alt="">` : ""}
-          </div>
+            </button>
+          </article>
         `;
       }
 
-      document.querySelectorAll("[data-open]").forEach(btn => btn.onclick = () => openDetail(btn.dataset.open));
-      document.querySelectorAll("[data-delete]").forEach(btn => btn.onclick = () => deleteItem(btn.dataset.delete));
-      document.querySelectorAll("[data-edit]").forEach(btn => btn.onclick = () => editItem(btn.dataset.edit));
+      document.querySelectorAll("[data-open]").forEach(btn => {
+        btn.onclick = () => openDetail(btn.dataset.open);
+      });
     }
 
+    /* =========================
+       Open detail
+    ========================= */
     async function openDetail(itemId){
       selectedItemId = itemId;
 
@@ -1431,9 +1936,6 @@ crossorigin="anonymous"></script>
         }
 
         selectedItemData = itemDocSnap.data();
-
-        detailBox.classList.add("hidden");
-        detailEmpty.classList.add("hidden");
 
         detailTitle.textContent = selectedItemData.title ?? "";
         detailCondition.textContent = selectedItemData.condition ?? "未設定";
@@ -1447,42 +1949,28 @@ crossorigin="anonymous"></script>
         const offersCount = await countOffers(itemId);
         detailOffersPill.textContent = `提案 ${offersCount}件`;
 
-        await loadOffers();
+        const isOwner = currentUser && currentUser.uid === selectedItemData.ownerUid;
+        detailOwnerActions.innerHTML = isOwner ? `
+          <button class="btn btnGhost" id="detailEditBtn" type="button">編集</button>
+          <button class="btn btnDanger" id="detailDeleteBtn" type="button">削除</button>
+        ` : "";
 
-        const isMobile = window.matchMedia("(max-width: 900px)").matches;
-
-        if(isMobile){
-          document.querySelectorAll(".inlineDetailMount").forEach(el => {
-            el.classList.add("hidden");
-            el.innerHTML = "";
-          });
-
-          const mount = document.getElementById(`mount-${itemId}`);
-          if(mount){
-            mount.classList.remove("hidden");
-            mount.appendChild(detailBox);
-
-            detailBox.classList.remove("hidden");
-
-            requestAnimationFrame(() => {
-              offersList.scrollIntoView({ behavior: "smooth", block: "start" });
-              window.scrollBy({ top: -20, left: 0, behavior: "smooth" });
-            });
-          }
-        }else{
-          moveDetailHome();
-          detailBox.classList.remove("hidden");
-          requestAnimationFrame(() => {
-            detailBox.scrollIntoView({ behavior: "smooth", block: "start" });
-          });
+        if(isOwner){
+          document.getElementById("detailEditBtn").onclick = () => editItem(itemId);
+          document.getElementById("detailDeleteBtn").onclick = () => deleteItem(itemId);
         }
 
+        await loadOffers();
+        openDetailDrawer();
       }catch(e){
         console.error("OPEN_DETAIL_ERROR", e);
         alert("詳細の取得に失敗しました。");
       }
     }
 
+    /* =========================
+       Accept offer
+    ========================= */
     async function acceptOffer(offerId){
       if(!currentUser || !selectedItemId || !selectedItemData){
         alert("ログイン状態または選択状態を確認してください。");
@@ -1496,7 +1984,7 @@ crossorigin="anonymous"></script>
 
       try{
         const offerRef = doc(db, "items", selectedItemId, "offers", offerId);
-        const itemRef  = doc(db, "items", selectedItemId);
+        const itemRef = doc(db, "items", selectedItemId);
 
         const batch = writeBatch(db);
 
@@ -1518,10 +2006,19 @@ crossorigin="anonymous"></script>
       }
     }
 
+    /* =========================
+       Submit offer
+    ========================= */
     submitOfferBtn.onclick = async () => {
-      if (!currentUser) { alert("先にログインしてください。"); return; }
-      if (!selectedItemId || !selectedItemData) { alert("出品を選択してください。"); return; }
-      if (selectedItemData.ownerUid && selectedItemData.ownerUid === currentUser.uid) {
+      if(!currentUser){
+        alert("先にログインしてください。");
+        return;
+      }
+      if(!selectedItemId || !selectedItemData){
+        alert("出品を選択してください。");
+        return;
+      }
+      if(selectedItemData.ownerUid && selectedItemData.ownerUid === currentUser.uid){
         alert("自分の出品には提案できません。");
         return;
       }
@@ -1530,7 +2027,7 @@ crossorigin="anonymous"></script>
       const offerTitleText = titleOffer.value.trim();
       const offerMsgText = msgOffer.value.trim();
 
-      if (!raw || !offerTitleText) {
+      if(!raw || !offerTitleText){
         alert("提案アイテムの画像とタイトルを入力してください。");
         return;
       }
@@ -1552,7 +2049,7 @@ crossorigin="anonymous"></script>
         ownerEmail = "";
       }
 
-      try {
+      try{
         const path = `offers/${currentUser.uid}/${Date.now()}-${f.name}`;
         const storageRef = ref(storage, path);
         await uploadBytes(storageRef, f, { contentType: f.type });
@@ -1583,12 +2080,15 @@ crossorigin="anonymous"></script>
 
         await openDetail(selectedItemId);
         await loadItems();
-      } catch (e) {
+      }catch(e){
         console.error("SUBMIT_OFFER_ERROR", e);
         alert("提案に失敗しました。Storage / Firestore ルールをご確認ください。");
       }
     };
 
+    /* =========================
+       Load offers
+    ========================= */
     async function loadOffers(){
       offersList.innerHTML = "";
 
@@ -1624,6 +2124,7 @@ crossorigin="anonymous"></script>
 
         let proposerEmail = "";
         let ownerEmail = "";
+
         if(canContact){
           try{
             const priv = await getDoc(doc(db, "items", selectedItemId, "offersPrivate", offerId));
@@ -1649,10 +2150,10 @@ crossorigin="anonymous"></script>
         ` : "";
 
         const contactButtons = canContact ? `
-          <div class="twoBtns" style="margin-top:10px;">
+          <div class="offerActions" style="margin-top:10px;">
             <button class="btn btnPrimary" data-mail="${offerId}">Gmailで連絡</button>
           </div>
-          <div class="muted small" style="margin-top:6px;">
+          <div class="offerNote">
             ※Gmailの作成画面が開きます。内容をご確認のうえ送信してください。
           </div>
         ` : "";
@@ -1672,11 +2173,14 @@ crossorigin="anonymous"></script>
               <div>
                 ${statusPill}
                 <h4 style="margin:8px 0 6px;">${escapeHtml(d.offerTitle ?? "")}</h4>
-                <p class="muted" style="margin:0;">提案アイテム状態：<b>${escapeHtml(d.offerCondition ?? "未設定")}</b></p>
+                <p class="muted" style="margin:0;">
+                  提案アイテム状態：<b>${escapeHtml(d.offerCondition ?? "未設定")}</b>
+                </p>
               </div>
-              <div class="right">${acceptBtn}</div>
+              <div>${acceptBtn}</div>
             </div>
-            ${d.offerImage ? `<img class="thumb" src="${d.offerImage}" alt="">` : ""}
+
+            ${d.offerImage ? `<img class="offerThumb" src="${d.offerImage}" alt="">` : ""}
             ${contactButtons}
           </div>
         `;
@@ -1701,6 +2205,9 @@ crossorigin="anonymous"></script>
       detailOffersPill.textContent = `提案 ${snap.size}件`;
     }
 
+    /* =========================
+       Auth state
+    ========================= */
     onAuthStateChanged(auth, async (user) => {
       currentUser = user;
 
@@ -1715,9 +2222,9 @@ crossorigin="anonymous"></script>
       }
 
       await loadItems();
-      if(selectedItemId) await openDetail(selectedItemId);
     });
   </script>
 
 </body>
 </html>
+
