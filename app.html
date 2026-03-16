@@ -1911,14 +1911,20 @@ crossorigin="anonymous"></script>
           createdAt: serverTimestamp()
         });
 
-        alert("出品が完了しました。");
-        fileItem.value = "";
-        titleItem.value = "";
-        descItem.value = "";
-        itemCurrentPage = 1;
+        if (document.activeElement) {
+  document.activeElement.blur();
+}
 
-        await loadItems();
-        await openDetail(itemRef.id);
+fileItem.value = "";
+titleItem.value = "";
+descItem.value = "";
+itemCurrentPage = 1;
+
+alert("出品が完了しました。");
+
+await loadItems();
+await openDetail(itemRef.id);
+
       }catch(e){
         console.error("CREATE_ITEM_ERROR", e);
         alert("出品に失敗しました。Storage / Firestore ルールをご確認ください。");
