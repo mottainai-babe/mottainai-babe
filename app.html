@@ -361,43 +361,30 @@ crossorigin="anonymous"></script>
   .searchBar{
     display:flex;
     align-items:center;
-    justify-content:space-between;
     gap:12px;
     min-height:72px;
     border:1px solid var(--line);
     border-radius:999px;
     background:#fff;
     box-shadow:var(--shadow);
-    padding:10px 14px 10px 20px;
+    padding:10px 14px 10px 18px;
   }
 
-  .searchMeta{
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    gap:2px;
-    min-width:0;
-  }
-  .searchMeta span:first-child{
-    font-size:12px;
-    color:rgba(15,107,77,.85);
-    letter-spacing:.10em;
-  }
-  .searchMeta strong{
-    font-size:20px;
-    line-height:1.3;
-    font-weight:700;
+  .searchInput{
+    flex:1;
+    border:none;
+    background:transparent;
+    outline:none;
+    box-shadow:none !important;
+    font-size:17px;
     color:var(--ink);
+    padding:0;
+  }
+  .searchInput::placeholder{
+    color:#8a8a8a;
   }
 
-  .searchActions{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    flex-shrink:0;
-  }
-
-  .roundBtn{
+  .searchBtn{
     width:46px;
     height:46px;
     border-radius:50%;
@@ -408,6 +395,7 @@ crossorigin="anonymous"></script>
     place-items:center;
     color:var(--green);
     font-size:18px;
+    flex-shrink:0;
   }
 
   .heroSub{
@@ -415,9 +403,11 @@ crossorigin="anonymous"></script>
     flex-wrap:wrap;
     gap:10px;
     align-items:center;
+    justify-content:center;
     color:var(--muted);
     font-size:13px;
     letter-spacing:.06em;
+    text-align:center;
   }
 
   .chip{
@@ -439,9 +429,17 @@ crossorigin="anonymous"></script>
     gap:22px;
     align-items:start;
   }
+
+  .catalogSection{
+    order:1;
+  }
+  .uploadPanel{
+    order:2;
+  }
+
   @media (min-width:980px){
     .topLayout{
-      grid-template-columns:420px minmax(0,1fr);
+      grid-template-columns:minmax(0,1fr) 420px;
       gap:26px;
     }
   }
@@ -622,7 +620,7 @@ crossorigin="anonymous"></script>
     justify-content:space-between;
     gap:12px;
     flex-wrap:wrap;
-    margin-bottom:4px;
+    margin-bottom:10px;
   }
   .sectionTitle{
     margin:0;
@@ -745,6 +743,7 @@ crossorigin="anonymous"></script>
     padding:36px 18px;
     text-align:center;
     color:var(--muted);
+    grid-column:1 / -1;
   }
 
   .detailDrawer{
@@ -900,10 +899,6 @@ crossorigin="anonymous"></script>
     color:var(--muted);
   }
 
-  #detailBox, .inlineDetailMount{
-    scroll-margin-top:var(--sticky-offset);
-  }
-
   .modalBack{
     position:fixed;
     inset:0;
@@ -987,7 +982,6 @@ crossorigin="anonymous"></script>
 
   @media (max-width:860px){
     .panelTitle{ font-size:24px; }
-    .searchMeta strong{ font-size:18px; }
     .drawerTitle{ font-size:20px; }
   }
 
@@ -999,7 +993,7 @@ crossorigin="anonymous"></script>
       min-height:64px;
       padding:10px 12px 10px 16px;
     }
-    .searchMeta strong{ font-size:16px; }
+    .searchInput{ font-size:16px; }
     .panelHead{
       padding:18px 18px 14px;
     }
@@ -1029,6 +1023,7 @@ crossorigin="anonymous"></script>
 
 <script src="./firebase-config.js"></script>
 </head>
+
 <body>
 
   <header>
@@ -1101,13 +1096,14 @@ crossorigin="anonymous"></script>
       <section class="appHero">
         <div class="searchHero">
           <div class="searchBar">
-            <div class="searchMeta">
-              <span>BABY REUSE MARKET</span>
-              <strong>写真から見て、気になるアイテムをひらく</strong>
-            </div>
-            <div class="searchActions">
-              <button class="roundBtn" type="button" aria-label="browse">⌕</button>
-            </div>
+            <input
+              id="itemSearchInput"
+              class="searchInput"
+              type="text"
+              placeholder="アイテムを検索"
+              aria-label="アイテムを検索"
+            />
+            <button id="itemSearchBtn" class="searchBtn" type="button" aria-label="search">⌕</button>
           </div>
 
           <div class="heroSub">
@@ -1119,7 +1115,18 @@ crossorigin="anonymous"></script>
       </section>
 
       <div class="topLayout">
-        <section class="panel">
+        <section class="catalogSection">
+          <div class="sectionTitleRow">
+            <div>
+              <h2 class="sectionTitle">アイテム一覧</h2>
+              <div class="sectionSub">写真またはタイトルを押すと詳細が開きます</div>
+            </div>
+          </div>
+
+          <div id="list" class="itemsGrid"></div>
+        </section>
+
+        <section class="panel uploadPanel">
           <div class="panelHead">
             <div class="panelKicker">LIST YOUR ITEM</div>
             <h1 class="panelTitle">出品する</h1>
@@ -1167,17 +1174,6 @@ crossorigin="anonymous"></script>
             </div>
           </div>
         </section>
-
-        <section class="catalogSection">
-          <div class="sectionTitleRow">
-            <div>
-              <h2 class="sectionTitle">アイテム一覧</h2>
-              <div class="sectionSub">写真またはタイトルを押すと詳細が開きます</div>
-            </div>
-          </div>
-
-          <div id="list" class="itemsGrid"></div>
-        </section>
       </div>
 
       <footer class="footer">
@@ -1199,7 +1195,6 @@ crossorigin="anonymous"></script>
     </section>
   </main>
 
-  <!-- Detail Drawer -->
   <section id="detailDrawer" class="detailDrawer" aria-hidden="true">
     <div id="drawerBack" class="drawerBack"></div>
 
@@ -1274,7 +1269,6 @@ crossorigin="anonymous"></script>
     </div>
   </section>
 
-  <!-- In-app modal -->
   <div id="inAppModalBack" class="modalBack" role="dialog" aria-modal="true">
     <div class="modal">
       <h3>LINEなどのアプリ内ブラウザではログインできない場合があります</h3>
@@ -1297,6 +1291,7 @@ crossorigin="anonymous"></script>
       </p>
     </div>
   </div>
+  
     <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import {
@@ -1521,11 +1516,15 @@ crossorigin="anonymous"></script>
     const msgOffer = document.getElementById("msgOffer");
     const submitOfferBtn = document.getElementById("submitOfferBtn");
 
+    const itemSearchInput = document.getElementById("itemSearchInput");
+    const itemSearchBtn = document.getElementById("itemSearchBtn");
+
     let currentUser = null;
     let selectedCondition = "新品に近い";
     let selectedOfferCondition = "新品に近い";
     let selectedItemId = null;
     let selectedItemData = null;
+    let currentSearchKeyword = "";
 
     const MAX_BYTES = 2 * 1024 * 1024;
 
@@ -1639,6 +1638,23 @@ crossorigin="anonymous"></script>
 
       throw new Error("画像サイズを小さくできませんでした。別の画像でお試しください。");
     }
+
+    /* =========================
+       Search
+    ========================= */
+    function runItemSearch(){
+      currentSearchKeyword = itemSearchInput.value || "";
+      loadItems();
+    }
+
+    itemSearchBtn.addEventListener("click", runItemSearch);
+
+    itemSearchInput.addEventListener("keydown", (e) => {
+      if(e.key === "Enter"){
+        e.preventDefault();
+        runItemSearch();
+      }
+    });
 
     /* =========================
        Tabs
@@ -1885,7 +1901,33 @@ crossorigin="anonymous"></script>
         return;
       }
 
-      for(const docSnap of snap.docs){
+      const keyword = currentSearchKeyword.trim().toLowerCase();
+      const filteredDocs = snap.docs.filter((docSnap) => {
+        const data = docSnap.data();
+        if (!keyword) return true;
+
+        const title = String(data.title ?? "").toLowerCase();
+        const description = String(data.description ?? "").toLowerCase();
+        const condition = String(data.condition ?? "").toLowerCase();
+
+        return (
+          title.includes(keyword) ||
+          description.includes(keyword) ||
+          condition.includes(keyword)
+        );
+      });
+
+      if(filteredDocs.length === 0){
+        listEl.innerHTML = `
+          <div class="emptyBox">
+            検索結果がありません。<br>
+            別のキーワードでお試しください。
+          </div>
+        `;
+        return;
+      }
+
+      for(const docSnap of filteredDocs){
         const id = docSnap.id;
         const data = docSnap.data();
         const st = statusLabel(data.status);
@@ -2227,4 +2269,3 @@ crossorigin="anonymous"></script>
 
 </body>
 </html>
-
