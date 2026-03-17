@@ -1175,7 +1175,7 @@ crossorigin="anonymous"></script>
             <div class="field">
               <label class="fieldLabel" for="fileItem">画像</label>
               <input type="file" id="fileItem" accept="image/*" />
-              <div class="warn">※画像は自動で圧縮されます。大きすぎる画像はアップロードできない場合があります。</div>
+              <div class="warn">※画像はアップロード時に自動で圧縮・変換されます。極端に大きい画像はアップロードできない場合があります。</div>
             </div>
 
             <div class="field">
@@ -1687,25 +1687,36 @@ crossorigin="anonymous"></script>
     }
 
     async function ensureUnderLimit(file) {
-      if (!file) throw new Error("画像ファイルが見つかりません。");
+  if (!file) throw new Error("画像ファイルが見つかりません。");
 
-      let current = file;
-      if (current.size <= 1 * 1024 * 1024) return current;
+  let current = await compressImage(file, {
+    maxSide: 1280,
+    quality: 0.78
+  });
 
-      let quality = 0.82;
-      let maxSide = 1600;
+  if (current.size <= MAX_BYTES) {
+    return current;
+  }
 
-      for (let i = 0; i < 6; i++) {
-        current = await compressImage(current, { maxSide, quality });
-        if (current.size <= MAX_BYTES) return current;
-        quality -= 0.1;
-        maxSide -= 200;
-        if (quality < 0.4) quality = 0.4;
-        if (maxSide < 900) maxSide = 900;
-      }
+  let quality = 0.72;
+  let maxSide = 1180;
 
-      throw new Error("画像サイズを小さくできませんでした。別の画像でお試しください。");
+  for (let i = 0; i < 6; i++) {
+    current = await compressImage(current, { maxSide, quality });
+
+    if (current.size <= MAX_BYTES) {
+      return current;
     }
+
+    quality -= 0.08;
+    maxSide -= 120;
+
+    if (quality < 0.42) quality = 0.42;
+    if (maxSide < 720) maxSide = 720;
+  }
+
+  throw new Error("画像サイズを小さくできませんでした。別の画像でお試しください。");
+}
 
     function runItemSearch(){
       currentSearchKeyword = itemSearchInput.value || "";
