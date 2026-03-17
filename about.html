@@ -500,6 +500,41 @@ crossorigin="anonymous"></script>
     line-height:2;
   }
 
+.operatorSplit{
+  display:grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 42px;
+  align-items:center;
+}
+
+.operatorIllust{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.operatorIllust img{
+  width:100%;
+  max-width:320px;
+  height:auto;
+  display:block;
+}
+
+@media (max-width: 900px){
+  .operatorSplit{
+    grid-template-columns:1fr;
+    gap:28px;
+  }
+
+  .operatorIllust{
+    order:-1;
+  }
+
+  .operatorIllust img{
+    max-width:280px;
+  }
+}
+  
   .infoGrid{
     max-width:58ch;
     margin-top:8px;
@@ -755,32 +790,36 @@ crossorigin="anonymous"></script>
 
     <div class="heroRule" aria-hidden="true"></div>
 
-    <div class="heroIllust">
-      <img src="./about-illust-01.PNG" alt="手をあげて笑うベビーのイラスト">
-    </div>
+    
 
     <article class="content">
       <section class="section">
-        <div class="sectionLabel">OPERATOR INFORMATION</div>
-        <h2 class="sectionTitle">運営者情報</h2>
+  <div class="sectionLabel">OPERATOR INFORMATION</div>
+  <h2 class="sectionTitle">運営者情報</h2>
 
-        <div class="infoGrid">
-          <div class="infoRow">
-            <div class="infoLabel">Operator</div>
-            <div class="infoValue">Haejin Kishishita</div>
-          </div>
-          <div class="infoRow">
-            <div class="infoLabel">Service</div>
-            <div class="infoValue">もったいないベビー / Mottainai Babe</div>
-          </div>
-          <div class="infoRow">
-            <div class="infoLabel">Mail</div>
-            <div class="infoValue">
-              <a class="mailLink" href="mailto:ainazmum2624@gmail.com">ainazmum2624@gmail.com</a>
-            </div>
-          </div>
+  <div class="operatorSplit">
+    <div class="infoGrid">
+      <div class="infoRow">
+        <div class="infoLabel">Operator</div>
+        <div class="infoValue">Haejin Kishishita</div>
+      </div>
+      <div class="infoRow">
+        <div class="infoLabel">Service</div>
+        <div class="infoValue">もったいないベビー / Mottainai Babe</div>
+      </div>
+      <div class="infoRow">
+        <div class="infoLabel">Mail</div>
+        <div class="infoValue">
+          <a class="mailLink" href="mailto:ainazmum2624@gmail.com">ainazmum2624@gmail.com</a>
         </div>
-      </section>
+      </div>
+    </div>
+
+    <div class="operatorIllust">
+      <img src="./about-illust-01.PNG" alt="手をあげて笑うベビーのイラスト">
+    </div>
+  </div>
+</section>
 
       <section class="section">
         <div class="sectionLabel">HOW TO CONTACT</div>
@@ -805,9 +844,7 @@ crossorigin="anonymous"></script>
         </div>
       </section>
 
-      <div class="middleIllust">
-        <img src="./about-illust-02.PNG" alt="帽子をかぶって笑うベビーのイラスト">
-      </div>
+    
 
       <section class="section">
         <div class="sectionLabel">RESPONSE TIME</div>
