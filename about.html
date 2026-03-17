@@ -8,6 +8,7 @@
 <title>お問い合わせ・運営者情報 | もったいないベビー</title>
 
 <meta name="description" content="もったいないベビー（Mottainai Babe）のお問い合わせ・運営者情報ページです。サービスに関するご連絡先や運営情報をご案内します。">
+
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://mottainai-babe.com/about.html">
 
@@ -63,79 +64,78 @@ crossorigin="anonymous"></script>
 <style>
   :root{
     --bg:#ffffff;
-    --surface:#fbfbf8;
-    --ink:#151515;
+    --ink:#111111;
     --muted:#5f5f5f;
 
     --green:#0f6b4d;
     --green2:#0b513b;
-    --line:rgba(15,107,77,.24);
-    --line-soft:rgba(15,107,77,.14);
+    --line: rgba(15,107,77,.24);
+    --line-soft: rgba(15,107,77,.12);
 
-    --max:1200px;
-    --content:860px;
-    --pad:22px;
+    --max: 1040px;
+    --content: 820px;
+    --pad: 22px;
 
-    --sans:ui-sans-serif, system-ui, -apple-system, "Hiragino Kaku Gothic ProN",
+    --sans: ui-sans-serif, system-ui, -apple-system, "Hiragino Kaku Gothic ProN",
             "Yu Gothic", "Noto Sans JP", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
-    --menuBack:rgba(0,0,0,.35);
-    --menuPanelBg:#ffffff;
-    --menuLine:rgba(0,0,0,.12);
+    --menuBack: rgba(0,0,0,.35);
+    --menuPanelBg: #ffffff;
+    --menuLine: rgba(0,0,0,.12);
 
-    --safeL:env(safe-area-inset-left);
-    --safeR:env(safe-area-inset-right);
+    --safeL: env(safe-area-inset-left);
+    --safeR: env(safe-area-inset-right);
   }
 
   *{ box-sizing:border-box; }
   html,body{ height:100%; }
   body{
     margin:0;
-    font-family:var(--sans);
-    background:var(--bg);
-    color:var(--ink);
-    letter-spacing:.02em;
-    line-height:1.95;
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    letter-spacing: .02em;
+    line-height: 1.95;
   }
 
   a{ color:inherit; text-decoration:none; }
-  a:hover{ text-decoration:none; }
+  a:hover{ text-decoration:underline; }
 
-  /* ===== Header ===== */
   header{
-    position:sticky;
-    top:0;
-    z-index:50;
+    position: sticky;
+    top: 0;
+    z-index: 50;
     width:100%;
-    background:rgba(255,255,255,.92);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
   }
 
   .topbar{
-    max-width:1200px;
-    margin:0 auto;
-    padding-top:12px;
-    padding-bottom:12px;
-    padding-left:calc(var(--pad) + var(--safeL));
-    padding-right:calc(var(--pad) + var(--safeR));
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: calc(var(--pad) + var(--safeL));
+    padding-right: calc(var(--pad) + var(--safeR));
     display:grid;
-    grid-template-columns:1fr auto 1fr;
+    grid-template-columns: 1fr auto 1fr;
     align-items:center;
     gap:14px;
   }
 
-  .leftSlot,
+  .leftSlot{
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    min-width:0;
+  }
   .rightSlot{
     display:flex;
     align-items:center;
+    justify-content:flex-end;
     min-width:0;
   }
-  .leftSlot{ justify-content:flex-start; }
-  .rightSlot{ justify-content:flex-end; gap:10px; }
 
   .menuBtn{
     width:44px;
@@ -147,7 +147,6 @@ crossorigin="anonymous"></script>
     cursor:pointer;
     padding:0;
   }
-
   .hamburger{
     width:22px;
     height:12px;
@@ -158,8 +157,7 @@ crossorigin="anonymous"></script>
   .hamburger span{
     content:"";
     position:absolute;
-    left:0;
-    right:0;
+    left:0; right:0;
     height:1px;
     background:var(--green);
     opacity:.95;
@@ -174,6 +172,7 @@ crossorigin="anonymous"></script>
     align-items:center;
     justify-content:center;
     min-width:0;
+    text-decoration:none;
   }
   .brandLogo img{
     height:50px;
@@ -182,79 +181,75 @@ crossorigin="anonymous"></script>
   }
 
   .cta{
-    font-family:inherit;
-    font-size:12px;
-    letter-spacing:.08em;
-    padding:10px 14px;
-    border:1px solid var(--line);
-    background:transparent;
-    border-radius:999px;
-    color:var(--green);
-    white-space:nowrap;
-    cursor:pointer;
-    appearance:none;
-    -webkit-appearance:none;
+    font-family: inherit;
+    font-size: 12px;
+    letter-spacing: .08em;
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+    background: transparent;
+    border-radius: 999px;
+    color: var(--green);
+    white-space: nowrap;
+    text-decoration: none;
   }
   .cta:hover{
-    background:rgba(15,107,77,.05);
+    background: rgba(15,107,77,.05);
+    text-decoration:none;
   }
 
-  /* ===== Menu ===== */
   .menuOverlay{
-    position:fixed;
-    inset:0;
-    background:var(--menuBack);
-    opacity:0;
-    pointer-events:none;
-    transition:opacity .18s ease;
-    z-index:100;
+    position: fixed;
+    inset: 0;
+    background: var(--menuBack);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .18s ease;
+    z-index: 100;
   }
   .menuOverlay.open{
-    opacity:1;
-    pointer-events:auto;
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .menuPanel{
-    position:fixed;
-    inset:0;
-    background:var(--menuPanelBg);
-    transform:translateY(-8px);
-    opacity:0;
-    pointer-events:none;
-    transition:opacity .18s ease, transform .18s ease;
-    z-index:110;
-    padding-top:22px;
-    padding-bottom:28px;
-    padding-left:calc(var(--pad) + var(--safeL));
-    padding-right:calc(var(--pad) + var(--safeR));
-    overflow:auto;
-    -webkit-overflow-scrolling:touch;
+    position: fixed;
+    inset: 0;
+    background: var(--menuPanelBg);
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .18s ease, transform .18s ease;
+    z-index: 110;
+    padding-top: 22px;
+    padding-bottom: 28px;
+    padding-left: calc(var(--pad) + var(--safeL));
+    padding-right: calc(var(--pad) + var(--safeR));
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .menuPanel.open{
-    opacity:1;
-    pointer-events:auto;
-    transform:translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
   }
 
   .menuTop{
-    max-width:780px;
-    margin:0 auto;
+    max-width: 780px;
+    margin: 0 auto;
     display:flex;
     align-items:center;
     justify-content:space-between;
     gap:12px;
-    padding:6px 0 18px;
-    border-bottom:1px solid var(--menuLine);
+    padding: 6px 0 18px;
+    border-bottom: 1px solid var(--menuLine);
   }
-
   .menuTitle{
-    font-weight:600;
-    letter-spacing:.22em;
-    font-size:18px;
-    color:#111;
+    font-weight: 600;
+    letter-spacing: .22em;
+    font-size: 18px;
+    color: #111;
     white-space:nowrap;
   }
-
   .menuClose{
     width:44px;
     height:44px;
@@ -274,8 +269,8 @@ crossorigin="anonymous"></script>
     background:#111;
     position:absolute;
   }
-  .menuClose::before{ transform:rotate(45deg); }
-  .menuClose::after{ transform:rotate(-45deg); }
+  .menuClose::before{ transform: rotate(45deg); }
+  .menuClose::after{ transform: rotate(-45deg); }
 
   .menuBody{
     max-width:780px;
@@ -288,9 +283,8 @@ crossorigin="anonymous"></script>
     flex-direction:column;
     gap:12px;
     padding-bottom:18px;
-    border-bottom:1px solid var(--menuLine);
+    border-bottom: 1px solid var(--menuLine);
   }
-
   .menuBtnPrimary,
   .menuBtnGhost{
     display:flex;
@@ -303,28 +297,20 @@ crossorigin="anonymous"></script>
     text-decoration:none;
     border:1px solid var(--line);
   }
-
   .menuBtnPrimary{
-    background:rgba(15,107,77,.10);
-    color:var(--green2);
-    border-color:rgba(15,107,77,.30);
-    font-weight:600;
+    background: rgba(15,107,77,.10);
+    color: var(--green2);
+    border-color: rgba(15,107,77,.30);
+    font-weight: 600;
   }
-
   .menuBtnGhost{
-    background:transparent;
-    color:var(--green);
-    border-color:rgba(15,107,77,.26);
-    font-weight:600;
-  }
-
-  .menuBtnPrimary:hover,
-  .menuBtnGhost:hover{
-    background:rgba(15,107,77,.06);
+    background: transparent;
+    color: var(--green);
+    border-color: rgba(15,107,77,.26);
+    font-weight: 600;
   }
 
   .menuLinks{ padding:10px 0 0; }
-
   .menuLink{
     display:flex;
     flex-direction:column;
@@ -333,6 +319,7 @@ crossorigin="anonymous"></script>
     padding:24px 6px;
     gap:4px;
     border-bottom:1px solid var(--menuLine);
+    text-decoration:none;
   }
   .menuLink:last-child{ border-bottom:none; }
 
@@ -351,288 +338,241 @@ crossorigin="anonymous"></script>
     margin-top:2px;
   }
 
-  /* ===== Layout ===== */
   main.wrap{
-    max-width:var(--max);
+    max-width: var(--max);
+    margin: 0 auto;
     width:100%;
-    margin:0 auto;
-    padding:0 14px 48px;
+    padding: 28px 20px 54px;
   }
 
-  /* ===== BAUM-like hero ===== */
-  .hero{
-    max-width:var(--content);
-    margin:0 auto;
-    padding:72px 0 30px;
+  .pageHero{
+    max-width: var(--content);
+    margin: 18px auto 0;
     text-align:center;
+  }
+
+  .heroKicker{
+    display:inline-block;
+    color: var(--green);
+    font-size: 12px;
+    letter-spacing: .20em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .pageTitle{
+    margin:0;
+    font-size: 40px;
+    line-height: 1.28;
+    font-weight: 500;
+    letter-spacing: .04em;
+    color: var(--ink);
   }
 
   .heroLine{
     width:1px;
-    height:44px;
-    background:var(--line);
-    margin:0 auto 22px;
+    height:54px;
+    background: var(--line);
+    margin: 24px auto 0;
   }
 
-  .heroKicker{
-    font-size:13px;
-    letter-spacing:.22em;
-    color:var(--green);
-    margin:0 0 16px;
+  .pageLead{
+    max-width: 620px;
+    margin: 28px auto 0;
+    font-size: 16px;
+    line-height: 2.05;
+    color: var(--muted);
   }
 
-  .heroTitle{
+  .heroIllust{
+    max-width: var(--content);
+    margin: 42px auto 0;
+    padding: 0 0 10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+
+  .heroIllust img{
+    width: min(420px, 72vw);
+    height:auto;
+    display:block;
+  }
+
+  .sectionDivider{
+    max-width: var(--content);
+    margin: 54px auto 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .article{
+    max-width: var(--content);
+    margin: 0 auto;
+  }
+
+  .sectionBlock{
+    padding: 54px 0 0;
+  }
+
+  .sectionHeading{
+    text-align:center;
     margin:0;
-    font-size:44px;
-    line-height:1.24;
-    letter-spacing:.02em;
-    font-weight:600;
-    color:var(--ink);
-  }
-
-  .heroSub{
-    margin:18px auto 0;
-    max-width:42ch;
-    font-size:17px;
-    line-height:1.95;
-    color:var(--muted);
-  }
-
-  .heroRule{
-    width:100%;
-    max-width:var(--content);
-    height:1px;
-    background:var(--line);
-    margin:34px auto 0;
-  }
-
-  /* ===== Content ===== */
-  .content{
-    max-width:var(--content);
-    margin:0 auto;
-    padding-top:42px;
-  }
-
-  .section{
-    padding:42px 0;
-    border-top:1px solid var(--line-soft);
-  }
-  .section:first-child{
-    border-top:none;
-    padding-top:0;
-  }
-
-  .sectionLabel{
-    font-size:12px;
-    letter-spacing:.18em;
-    color:rgba(15,107,77,.78);
-    margin-bottom:12px;
-  }
-
-  .sectionTitle{
-    margin:0 0 20px;
-    font-size:30px;
+    font-size: 34px;
     line-height:1.35;
-    font-weight:600;
-    color:var(--ink);
+    font-weight: 500;
+    letter-spacing: .05em;
+    color: var(--green);
   }
 
-  .sectionText{
-    max-width:58ch;
-    color:var(--muted);
-    font-size:16px;
-    line-height:2;
+  .sectionSub{
+    margin: 14px 0 0;
+    text-align:center;
+    color: rgba(15,107,77,.68);
+    font-size: 13px;
+    letter-spacing: .12em;
   }
 
-  .sectionText p{
-    margin:0 0 16px;
+  .textBlock{
+    max-width: 700px;
+    margin: 28px auto 0;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 2.05;
   }
-  .sectionText p:last-child{
+
+  .textBlock p{
+    margin: 0 0 18px;
+  }
+  .textBlock p:last-child{
     margin-bottom:0;
   }
 
-  .contactGrid{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:18px;
-    margin-top:24px;
-  }
-
-  .contactRow{
-    display:grid;
-    grid-template-columns:120px 1fr;
-    gap:18px;
-    align-items:start;
-    padding:18px 0;
+  .infoGrid{
+    max-width: 700px;
+    margin: 34px auto 0;
     border-top:1px solid var(--line-soft);
   }
-  .contactRow:first-child{
-    border-top:1px solid var(--line);
-  }
-  .contactRow:last-child{
-    border-bottom:1px solid var(--line);
+
+  .infoRow{
+    display:grid;
+    grid-template-columns: 160px 1fr;
+    gap: 18px;
+    padding: 20px 0;
+    border-bottom:1px solid var(--line-soft);
   }
 
-  .contactKey{
-    font-size:12px;
-    letter-spacing:.16em;
-    color:var(--green2);
-    line-height:1.7;
-    text-transform:uppercase;
+  .infoLabel{
+    color: var(--green);
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
   }
 
-  .contactValue{
-    font-size:16px;
-    line-height:2;
-    color:var(--ink);
-    word-break:break-word;
+  .infoValue{
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.95;
+    word-break: break-word;
   }
 
-  .contactValue a{
-    color:var(--green2);
-    border-bottom:1px solid rgba(15,107,77,.24);
-    padding-bottom:1px;
+  .mailLink{
+    color: var(--green2);
+    border-bottom: 1px solid rgba(15,107,77,.28);
+    padding-bottom: 1px;
   }
-  .contactValue a:hover{
-    border-bottom-color:var(--green2);
-  }
-
-  .bulletList{
-    margin:18px 0 0;
-    padding-left:1.2em;
-    color:var(--muted);
-    font-size:16px;
-    line-height:2;
-  }
-  .bulletList li{
-    margin:0 0 8px;
-  }
-  .bulletList li:last-child{
-    margin-bottom:0;
+  .mailLink:hover{
+    text-decoration:none;
+    border-bottom-color: var(--green2);
   }
 
   .noteBox{
-    margin-top:22px;
-    padding:20px 0 0;
-    border-top:1px solid var(--line-soft);
-    max-width:58ch;
-    color:var(--muted);
-    font-size:15px;
-    line-height:1.95;
-  }
-  .noteBox strong{
-    color:var(--green2);
-    font-weight:700;
+    max-width: 700px;
+    margin: 30px auto 0;
+    padding: 22px 0 0;
+    border-top: 1px solid var(--line-soft);
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 2;
   }
 
-  /* ===== Footer ===== */
+  .noteBox strong{
+    color: var(--green2);
+    font-weight: 700;
+  }
+
+  .middleIllust{
+    max-width: var(--content);
+    margin: 54px auto 0;
+    display:flex;
+    justify-content:center;
+  }
+
+  .middleIllust img{
+    width: min(440px, 76vw);
+    height:auto;
+    display:block;
+  }
+
   .footer{
-    margin-top:36px;
-    padding-top:18px;
+    max-width: var(--content);
+    margin: 58px auto 0;
+    padding-top: 22px;
     border-top:1px solid var(--line);
-    color:rgba(15,107,77,.85);
+    color: rgba(15,107,77,.85);
     font-size:12px;
-    line-height:1.8;
+    line-height:1.9;
     text-align:center;
   }
 
   .footer a{
-    color:rgba(15,107,77,.92);
+    color: rgba(15,107,77,.92);
+    text-decoration:none;
     border-bottom:1px solid transparent;
     padding-bottom:2px;
   }
   .footer a:hover{
-    border-bottom-color:var(--line);
+    border-bottom-color: var(--line);
+    text-decoration:none;
   }
 
-  @media (max-width:760px){
-    .hero{
-      padding:56px 0 24px;
+  @media (max-width: 720px){
+    .pageTitle{
+      font-size: 32px;
+      line-height: 1.36;
     }
-
-    .heroTitle{
-      font-size:34px;
-      line-height:1.3;
+    .pageLead{
+      font-size: 15px;
+      line-height: 1.95;
     }
-
-    .heroSub{
-      font-size:15px;
-      line-height:1.9;
-      max-width:34ch;
+    .sectionHeading{
+      font-size: 28px;
     }
-
-    .content{
-      padding-top:34px;
-    }
-
-    .section{
-      padding:34px 0;
-    }
-
-    .sectionTitle{
-      font-size:25px;
-    }
-
-    .sectionText,
-    .contactValue,
-    .bulletList{
-      font-size:15px;
-      line-height:1.95;
-    }
-
-    .contactRow{
-      grid-template-columns:1fr;
-      gap:6px;
-      padding:16px 0;
-    }
-
-    .contactKey{
-      font-size:11px;
-      letter-spacing:.14em;
+    .infoRow{
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding: 18px 0;
     }
   }
 
-  @media (max-width:520px){
-    .brandLogo img{ height:34px; }
-    .cta{ padding:9px 10px; font-size:12px; }
-
-    .heroLine{
-      height:34px;
-      margin-bottom:18px;
-    }
-
-    .heroKicker{
-      font-size:11px;
-      letter-spacing:.18em;
-    }
-
-    .heroTitle{
-      font-size:29px;
-    }
-
-    .heroSub{
-      font-size:14px;
-      max-width:30ch;
-    }
-
-    .sectionTitle{
-      font-size:22px;
-    }
-
-    .sectionText,
-    .contactValue,
-    .bulletList,
-    .noteBox{
-      font-size:14px;
-    }
+  @media (max-width: 520px){
+    .brandLogo img{ height:45px; }
+    .cta{ padding: 9px 10px; font-size: 12px; }
+    main.wrap{ padding: 24px 20px 48px; }
+    .heroKicker{ margin-bottom: 18px; }
+    .pageTitle{ font-size: 28px; }
+    .heroLine{ height: 48px; margin-top: 22px; }
+    .pageLead{ margin-top: 24px; font-size: 14px; }
+    .sectionDivider{ margin-top: 44px; }
+    .sectionBlock{ padding-top: 44px; }
+    .sectionHeading{ font-size: 24px; }
+    .sectionSub{ font-size: 12px; }
+    .textBlock{ font-size: 14px; }
+    .heroIllust img{ width:min(340px, 78vw); }
+    .middleIllust img{ width:min(350px, 80vw); }
   }
 
   @media (prefers-reduced-motion: reduce){
-    *{
-      transition:none !important;
-      scroll-behavior:auto !important;
-      animation:none !important;
-    }
+    *{ transition:none !important; scroll-behavior:auto !important; animation:none !important; }
   }
 </style>
 </head>
@@ -696,60 +636,63 @@ crossorigin="anonymous"></script>
   </aside>
 
   <main class="wrap">
-    <section class="hero">
-      <div class="heroLine" aria-hidden="true"></div>
+    <section class="pageHero">
       <div class="heroKicker">CONTACT / ABOUT</div>
-      <h1 class="heroTitle">お問い合わせ</h1>
-      <p class="heroSub">
-        サービスに関するご質問、ご意見、不具合のご連絡は、
-        下記の連絡先よりお気軽にお問い合わせください。
+      <h1 class="pageTitle">お問い合わせ・運営者情報</h1>
+      <div class="heroLine" aria-hidden="true"></div>
+      <p class="pageLead">
+        もったいないベビーは、まだ使えるベビー用品を次の家族へつなぐための場所です。<br>
+        サービスに関するご質問、ご意見、不具合のご連絡は、下記の連絡先よりお気軽にお問い合わせください。
       </p>
     </section>
 
-    <div class="heroRule" aria-hidden="true"></div>
+    <div class="heroIllust">
+      <img src="./about-illust-01.png" alt="手をあげて笑うベビーのイラスト">
+    </div>
 
-    <article class="content">
-      <section class="section">
-        <div class="sectionLabel">OPERATOR INFORMATION</div>
-        <h2 class="sectionTitle">運営者情報</h2>
+    <div class="sectionDivider" aria-hidden="true"></div>
 
-        <div class="contactGrid">
-          <div class="contactRow">
-            <div class="contactKey">Operator</div>
-            <div class="contactValue">Haejin Kishishita</div>
+    <article class="article">
+      <section class="sectionBlock">
+        <h2 class="sectionHeading">運営者情報</h2>
+        <div class="sectionSub">CONTACT INFORMATION</div>
+
+        <div class="infoGrid">
+          <div class="infoRow">
+            <div class="infoLabel">Operator</div>
+            <div class="infoValue">Haejin Kishishita</div>
           </div>
 
-          <div class="contactRow">
-            <div class="contactKey">Service</div>
-            <div class="contactValue">もったいないベビー / Mottainai Babe</div>
+          <div class="infoRow">
+            <div class="infoLabel">Service</div>
+            <div class="infoValue">もったいないベビー / Mottainai Babe</div>
           </div>
 
-          <div class="contactRow">
-            <div class="contactKey">E-mail</div>
-            <div class="contactValue">
-              <a href="mailto:ainazmum2624@gmail.com">ainazmum2624@gmail.com</a>
+          <div class="infoRow">
+            <div class="infoLabel">Mail</div>
+            <div class="infoValue">
+              <a class="mailLink" href="mailto:ainazmum2624@gmail.com">ainazmum2624@gmail.com</a>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section">
-        <div class="sectionLabel">CONTACT GUIDE</div>
-        <h2 class="sectionTitle">お問い合わせについて</h2>
+      <section class="sectionBlock">
+        <h2 class="sectionHeading">お問い合わせについて</h2>
+        <div class="sectionSub">HOW TO CONTACT</div>
 
-        <div class="sectionText">
+        <div class="textBlock">
           <p>
             以下のような内容についてご連絡いただけます。
           </p>
+          <p>
+            ・サービスの利用方法に関するご質問<br>
+            ・不具合や表示崩れに関するご報告<br>
+            ・出品・交換に関するご相談<br>
+            ・規約・プライバシーポリシーに関するご質問<br>
+            ・その他、運営へのご意見・ご要望
+          </p>
         </div>
-
-        <ul class="bulletList">
-          <li>サービスの利用方法に関するご質問</li>
-          <li>不具合や表示崩れに関するご報告</li>
-          <li>出品・交換に関するご相談</li>
-          <li>規約・プライバシーポリシーに関するご質問</li>
-          <li>その他、運営へのご意見・ご要望</li>
-        </ul>
 
         <div class="noteBox">
           <strong>お願い：</strong>
@@ -758,15 +701,17 @@ crossorigin="anonymous"></script>
         </div>
       </section>
 
-      <section class="section">
-        <div class="sectionLabel">RESPONSE</div>
-        <h2 class="sectionTitle">返信の目安</h2>
+      <div class="middleIllust">
+        <img src="./about-illust-02.png" alt="帽子をかぶって笑うベビーのイラスト">
+      </div>
 
-        <div class="sectionText">
+      <section class="sectionBlock">
+        <h2 class="sectionHeading">返信の目安</h2>
+        <div class="sectionSub">RESPONSE TIME</div>
+
+        <div class="textBlock">
           <p>
-            通常は数日以内の返信を目安としておりますが、
-            土日祝日やお問い合わせ内容によっては、
-            さらにお時間をいただくことがあります。
+            通常は数日以内の返信を目安としておりますが、土日祝日やお問い合わせ内容によっては、さらにお時間をいただくことがあります。
           </p>
         </div>
       </section>
@@ -828,7 +773,6 @@ crossorigin="anonymous"></script>
 
     menuOverlay.addEventListener("click", closeMenu);
     menuClose.addEventListener("click", closeMenu);
-
     document.addEventListener("keydown", (e) => {
       if(e.key === "Escape") closeMenu();
     });
